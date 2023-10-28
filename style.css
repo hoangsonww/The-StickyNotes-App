@@ -1,80 +1,455 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background-color: #534caf;
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     font-family: "Poppins", sans-serif;
-    margin: 0;
-    padding-top: 3rem;
+    padding-top: 1rem;
+    width: 100%;
 }
 
-.add {
-    background-color: #be62c8;
-    border-radius: 3px;
-    border: none;
+header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #534caf;
     color: white;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
+    border-radius: 10px;
+    max-width: 90vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    color: #f1b884;
+    margin-top: 0.5rem;
+}
+
+#searchBox {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 80%;
+    outline: none;
+    font-size: 1rem;
 }
 
 .note {
     background-color: #fff;
-    box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px;
-    height: 400px;
-    width: 400px;
+    max-width: 90vw;
+    transition: transform 0.2s;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
-.note .tools {
-    background-color: #be62c8;
-    display: flex;
-    justify-content: flex-end;
+.note:hover {
+    transform: scale(1.03);
+}
+
+.note textarea {
+    width: 100%;
+    min-height: 200px;
     padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 1rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.add {
+    background-color: #534caf;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+.add:hover {
+    background-color: #403890;
 }
 
 .note .tools button {
     background-color: transparent;
     border: none;
-    color: #fff;
+    color: #534caf;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-left: 0.5rem;
+    transition: color 0.3s;
 }
 
-.note .main {
-    background-color: #eee;
-    overflow: hidden;
-    height: 400px;
-    width: 100%;
+.note .tools button:hover {
+    color: #403890;
 }
 
-.note textarea {
-    outline: none;
-    font-family: inherit;
-    font-size: 1.2rem;
+.note .tools {
+    display: flex;
+    justify-content: space-between; /* Changed for spacing */
+    padding: 0.5rem; /* Added padding */
+}
+
+.note .tools button,
+.note .tools input {
     border: none;
-    height: 400px;
-    width: 100%;
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
 }
 
-.note .hidden {
+.note .tools button:hover {
+    background-color: #f2f2f2;
+}
+
+.note .tools input[type="color"] {
+    padding: 0;
+    border: none;
+    width: 30px;
+    height: 30px;
+    background: none;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        padding: 0.5rem;
+    }
+
+    #searchBox,
+    .add,
+    .note {
+        width: 95%;
+    }
+
+    .note textarea {
+        min-height: 150px;
+    }
+}
+
+.about-btn, .add {
+    background-color: #6c5ce7;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.about-btn:hover, .add:hover {
+    background-color: #5a51d6;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.note .tools .color-picker {
+    cursor: pointer;
+    margin: 0 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.note .tools .color-picker:hover::after {
+    content: 'Change Color for This Note';
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #666;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.note .tools .tag {
+    font-size: 1rem;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: auto;
+}
+
+body.dark-mode {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: #ecf0f1;
+}
+
+body.dark-mode header {
+    background-color: #34495e;
+}
+
+body.dark-mode .note {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+body.dark-mode .about-btn, body.dark-mode .add {
+    background-color: #e74c3c;
+}
+
+body.dark-mode .about-btn:hover, body.dark-mode .add:hover {
+    background-color: #c0392b;
+}
+
+body.dark-mode .note .tools button {
+    color: #e74c3c;
+}
+
+body.dark-mode .note .tools button:hover {
+    color: #c0392b;
+}
+
+.chatbot {
+    z-index: 1000;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.chat-messages {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+}
+
+.chat-messages div {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.chat-messages div:nth-child(odd) { /* User messages */
+    background-color: #e1e1e1;
+    align-self: flex-end;
+    margin-right: 10%;
+}
+
+.chat-messages div:nth-child(even) { /* Eliza messages */
+    background-color: #c4c4ff;
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #534caf;
+    color: white;
+    outline: none;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input::placeholder {
+    color: #c4c4c4;
+}
+
+.chat-header {
+    background-color: #534caf;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid #403890;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.chat-title {
+    font-weight: 400;
+    font-size: 16.5px;
+}
+
+/* Button Styles */
+button, input[type="button"], input[type="submit"], input[type="file"] {
+    background-color: #534caf;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 1rem;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+    outline: none;
+    display: inline-block;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+    background-color: #403890;
+}
+
+/* File Input Styling */
+input[type="file"] {
+    color: transparent;
+    position: relative;
+}
+
+input[type="file"]::before {
+    content: 'Choose Files';
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #534caf;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    display: inline-block;
+    transition: background-color 0.3s;
+    pointer-events: none;
+}
+
+input[type="file"]:hover::before {
+    background-color: #403890;
+}
+
+/* Styling for the notes container */
+.notes-container {
+    display: flex; /* Added this line */
+    flex-direction: column; /* Added this line */
+    align-items: center; /* Added this line */
+    width: 90%; /* Span most of the screen's width */
+    max-width: 1200px; /* Optional: Cap a maximum width for very wide screens */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding around notes for spacing */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for depth */
+    border-radius: 8px;
+}
+
+/* Styling for the date picker */
+input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+input[type="date"]:hover {
+    background-color: #f7f7f7;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: #007BFF; /* Change this color if you want a different focus color */
+}
+
+.toggle-chat {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px; /* Adjusted for better visibility */
+    height: 30px; /* Adjusted for better visibility */
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: -2.5px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.toggle-chat:hover {
+    background-color: #403890;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -50px; /* Use half of the width value */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.toggle-chat:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Style for both buttons */
+.sticky-button {
+    background-color: #534caf;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sticky-button:hover {
+    background-color: #403890;
+}
+
+/* Hide the actual input */
+#import-input {
     display: none;
 }
 
-h1 {
-    text-align: center;
-    color: orange;
+/* Style the import label as a button */
+#import-label {
+    background-color: #534caf;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-h4 {
-    text-align: center;
-    color: #f1b884;
+#import-label:hover {
+    background-color: #403890;
 }
