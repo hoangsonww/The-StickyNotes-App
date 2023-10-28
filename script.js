@@ -262,14 +262,21 @@ function getElizaResponse(question) {
         { pattern: /lost notes|recovery/, response: "If you've exported and backed up your notes, you can easily recover them using the import function." },
         { pattern: /fonts|text style/, response: "While the current version offers a standard font, we're considering font customization options in the future." },
         { pattern: /printing/, response: "Yes, you can print your notes directly from the app. Just open the note and click on the 'Print' option." },
+        { pattern: /create note titled (.*) with content (.*)/, response: "Creating note titled '{title}' with content '{content}'..." },
 
         // Default response
         { pattern: /.*/, response: "I'm not sure about that. Can you be more specific or ask another question?" }
     ];
 
-    for (const r of responses) {
-        if (question.match(r.pattern)) {
-            return r.response;
+    for (let i = 0; i < responses.length; i++) {
+        let match = question.match(responses[i].pattern);
+        if (match) {
+            if (match[1] && match[2]) {
+                // Handle creation of a new note if the pattern matches
+                addNewNote(match[2]); // Add the note with the captured content
+                return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]);
+            }
+            return responses[i].response;
         }
     }
 
