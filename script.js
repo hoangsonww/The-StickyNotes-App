@@ -146,8 +146,151 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceN
         playbackTooltip.classList.remove("visible");
     });
 
+    const moveUpButton = document.createElement('button');
+    moveUpButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    moveUpButton.className = 'move-up';
+    moveUpButton.addEventListener('click', () => moveUp(note));
+    note.querySelector('.tools').appendChild(moveUpButton);
+
+    const moveDownButton = document.createElement('button');
+    moveDownButton.innerHTML = '<i class="fas fa-arrow-down"></i>';
+    moveDownButton.className = 'move-down';
+    moveDownButton.addEventListener('click', () => moveDown(note));
+    note.querySelector('.tools').appendChild(moveDownButton);
+
+    // Drag and Drop
+    note.draggable = true;
+    note.addEventListener('dragstart', handleDragStart);
+    note.addEventListener('dragend', handleDragEnd);
+
+    notesContainer.addEventListener('dragover', handleDragOver);
+    notesContainer.addEventListener('drop', handleDrop);
+
     notesContainer.appendChild(note);
 }
+
+let autoScrollInterval;
+
+function handleWindowDragOver(e) {
+    const cursorY = e.clientY;
+    const triggerDistance = 50; // The distance from the edge at which scrolling should start
+
+    if (cursorY < triggerDistance) {
+        // Cursor is near the top of the viewport
+        startAutoScrolling(-5); // Negative for scrolling up
+    } else if (window.innerHeight - cursorY < triggerDistance) {
+        // Cursor is near the bottom of the viewport
+        startAutoScrolling(5); // Positive for scrolling down
+    } else {
+        stopAutoScrolling(); // Cursor is no longer near the top or bottom
+    }
+}
+
+function startAutoScrolling(amount) {
+    if (autoScrollInterval) return; // Already autoscrolling
+
+    autoScrollInterval = setInterval(() => {
+        window.scrollBy(0, amount);
+    }, 50); // Adjust the interval for faster or slower scrolling
+}
+
+function stopAutoScrolling() {
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+    }
+}
+
+document.addEventListener('dragover', handleWindowDragOver);
+document.addEventListener('dragend', stopAutoScrolling);
+
+
+function handleDragStart(e) {
+    e.target.classList.add('dragging');
+}
+
+function handleDragEnd(e) {
+    e.target.classList.remove('dragging');
+    const draggableElements = [...notesContainer.querySelectorAll('.note:not(.dragging)')];
+    draggableElements.forEach(child => child.style.borderTop = 'none');
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(notesContainer, e.clientY);
+    const draggable = document.querySelector('.dragging');
+    if (afterElement == null) {
+        notesContainer.appendChild(draggable);
+    } else {
+        notesContainer.insertBefore(draggable, afterElement);
+    }
+    draggable.classList.remove('dragging');
+}
+
+function handleDragEnter(e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(notesContainer, e.clientY);
+    if (afterElement) {
+        afterElement.style.borderTop = '2px dashed #666';
+    }
+}
+
+function handleDragLeave(e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(notesContainer, e.clientY);
+    if (afterElement) {
+        afterElement.style.borderTop = 'none';
+    }
+}
+
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.note:not(.dragging)')];
+
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function moveUp(noteElem) {
+    const prevNote = noteElem.previousElementSibling;
+    if (prevNote) {
+        notesContainer.insertBefore(noteElem, prevNote);
+    }
+}
+
+function moveDown(noteElem) {
+    const nextNote = noteElem.nextElementSibling;
+    if (nextNote) {
+        notesContainer.insertBefore(nextNote, noteElem);
+    }
+}
+
+function shakeAllNotes() {
+    const notes = document.querySelectorAll(".note");
+    notes.forEach((note) => {
+        note.classList.add("shake-it");
+
+        // Remove the shake-it class after the animation ends to avoid unwanted repetitions
+        note.addEventListener("animationend", () => {
+            note.classList.remove("shake-it");
+        });
+    });
+}
+
+const shakeButton = document.createElement("button");
+shakeButton.innerText = "Shake Notes!";
+document.body.appendChild(shakeButton);
+shakeButton.addEventListener("click", shakeAllNotes);
 
 const recordingStatus = document.createElement("div");
 recordingStatus.innerText = "Recording...";
@@ -208,7 +351,20 @@ document.body.appendChild(themeToggleButton);
 
 themeToggleButton.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark-mode");
+    } else {
+        localStorage.removeItem("theme");
+    }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark-mode") {
+        document.body.classList.add("dark-mode");
+    }
+});
+
 function exportNotes() {
     const notesToExport = localStorage.getItem("notes");
     const blob = new Blob([notesToExport], { type: "text/json" });
