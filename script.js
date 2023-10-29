@@ -9,7 +9,7 @@ const notes = JSON.parse(localStorage.getItem("notes"));
 
 if (notes) {
     notes.forEach((note) => {
-        addNewNote(note.text, note.color, note.tag, note.dueDate);
+        addNewNote(note.text, note.color, note.tag, note.dueDate, note.voiceNote);
     });
     sortNotesByDueDate();
 }
@@ -18,7 +18,7 @@ addBtn.addEventListener("click", () => {
     addNewNote();
 });
 
-function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "") {
+function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "") {
     const note = document.createElement("div");
     note.classList.add("note");
     note.style.backgroundColor = color;
@@ -30,6 +30,8 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "") {
                 <input type="date" class="due-date" min="${today}" value="${dueDate}">
                 <input type="text" class="tag" placeholder="Add tag..."/>
                 <button class="edit"><i class="fas fa-edit"></i></button>
+                <button class="mic"><i class="fas fa-microphone"></i></button>
+                <audio class="voice-note" controls></audio>
                 <button class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}">
             </div>
@@ -78,8 +80,79 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "") {
         updateLS();
     });
 
+    const micBtn = note.querySelector(".mic");
+    const voiceNotePlayer = note.querySelector(".voice-note");
+
+    let mediaRecorder;
+    let audioChunks = [];
+
+    micBtn.addEventListener("click", () => {
+        if (typeof mediaRecorder === 'undefined' || mediaRecorder.state === "inactive") {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        let audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        let audioUrl = URL.createObjectURL(audioBlob);
+                        voiceNotePlayer.src = audioUrl;
+                        updateLS();
+                    };
+
+                    audioChunks = [];
+                    mediaRecorder.start();
+                    micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>'; // Update icon to indicate recording
+                });
+            recordingStatus.style.display = "block";
+        }
+        else if (mediaRecorder.state === "recording") {
+            mediaRecorder.stop();
+            micBtn.innerHTML = '<i class="fas fa-microphone"></i>'; // Reset icon after recording
+            recordingStatus.style.display = "none";
+        }
+    });
+
+    // Create tooltips for both elements
+    const micTooltip = document.createElement("span");
+    micTooltip.classList.add("tooltip");
+    micTooltip.innerText = "Record a quick voice note instead of typing!";
+    micBtn.style.position = "relative"; // to position tooltip correctly
+    micBtn.appendChild(micTooltip);
+
+    const playbackTooltip = document.createElement("span");
+    playbackTooltip.classList.add("tooltip");
+    playbackTooltip.innerText = "Listen to your voice note!";
+    voiceNotePlayer.style.position = "relative"; // to position tooltip correctly
+    voiceNotePlayer.parentNode.insertBefore(playbackTooltip, voiceNotePlayer.nextSibling); // placing tooltip next to voiceNotePlayer
+
+    // Add event listeners to mic button
+    micBtn.addEventListener("mouseenter", () => {
+        micTooltip.classList.add("visible");
+    });
+
+    micBtn.addEventListener("mouseleave", () => {
+        micTooltip.classList.remove("visible");
+    });
+
+    // Add event listeners to voice note player
+    voiceNotePlayer.addEventListener("mouseenter", () => {
+        playbackTooltip.classList.add("visible");
+    });
+
+    voiceNotePlayer.addEventListener("mouseleave", () => {
+        playbackTooltip.classList.remove("visible");
+    });
+
     notesContainer.appendChild(note);
 }
+
+const recordingStatus = document.createElement("div");
+recordingStatus.innerText = "Recording...";
+recordingStatus.style.display = "none";
+document.body.appendChild(recordingStatus);
 
 function sortNotesByDueDate() {
     const notesArray = Array.from(document.querySelectorAll('.note'));
@@ -99,23 +172,12 @@ function updateLS() {
             text: note.querySelector("textarea").value,
             color: note.style.backgroundColor,
             tag: note.querySelector(".tag").value,
-            dueDate: note.querySelector(".due-date").value
+            dueDate: note.querySelector(".due-date").value,
+            voiceNote: note.querySelector(".voice-note").src
         });
     });
 
     localStorage.setItem("notes", JSON.stringify(notesArr));
-}
-
-function shareOnFacebook() {
-    let recipeUrl = encodeURIComponent('http://www.example.com/recipe');
-    let shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${recipeUrl}`;
-    window.open(shareUrl, '_blank');
-}
-
-function shareOnTwitter() {
-    let recipeUrl = encodeURIComponent('http://www.example.com/recipe');
-    let shareUrl = `https://twitter.com/intent/tweet?url=${recipeUrl}&text=Check%20out%20this%20recipe!`;
-    window.open(shareUrl, '_blank');
 }
 
 document.addEventListener("DOMContentLoaded", function() {

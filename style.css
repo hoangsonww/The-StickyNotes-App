@@ -169,10 +169,10 @@ h4 {
 
 .note .tools .color-picker {
     cursor: pointer;
-    margin: 0 8px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    margin-top: 10px;
 }
 
 .note .tools .color-picker:hover::after {
@@ -373,6 +373,10 @@ input[type="date"]:focus {
     border-color: #007BFF; /* Change this color if you want a different focus color */
 }
 
+.note.pinned {
+    border: 3px solid gold;
+}
+
 .toggle-chat {
     background-color: #534caf;
     color: white;
@@ -417,6 +421,25 @@ input[type="date"]:focus {
     opacity: 1;
 }
 
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+    pointer-events: none; /* ensure it doesn't interfere with other interactions */
+}
+
+.tooltip.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
 /* Style for both buttons */
 .sticky-button {
     background-color: #534caf;
@@ -452,4 +475,27 @@ input[type="date"]:focus {
 
 #import-label:hover {
     background-color: #403890;
+}
+
+.mic {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+}
+
+.mic:focus {
+    outline: none;
+}
+
+.recording-status {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
 }
