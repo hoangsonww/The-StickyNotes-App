@@ -21,7 +21,7 @@ The StickyNotes App is a dynamic, user-friendly web application that allows user
 
 ## Installation and Setup
 
-1. Clone the repository from [GitHub link].
+1. Clone the repository from https://github.com/hoangsonww/The-StickyNotes-App.
 2. Install necessary dependencies via `npm install` or a similar command, if applicable.
 3. Open `index.html` in a web browser to start the app.
 
