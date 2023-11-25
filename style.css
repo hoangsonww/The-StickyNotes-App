@@ -58,6 +58,7 @@ h4 {
     width: 100%;
     padding: 1rem;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .note:hover {
@@ -544,3 +545,82 @@ input[type="date"]:focus {
     margin-right: 5px;
 }
 
+.calculator {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 15vw;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.calc-header {
+    background-color: #534caf;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid #403890;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calc-title {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.toggle-calc {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.toggle-calc:hover {
+    background-color: #403890;
+}
+
+.calc-body {
+    padding: 10px;
+}
+
+.calc-screen {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: right;
+    font-size: 1.5rem;
+    cursor: text;
+}
+
+.calc-buttons button {
+    width: 20%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: black;
+}
+
+.calc-buttons button:hover {
+    background-color: #eaeaea;
+}

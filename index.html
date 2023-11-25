@@ -33,6 +33,34 @@
     <input type="text" placeholder="Ask Eliza..." class="chat-input">
 </div>
 
+<div class="calculator" id="calculator">
+    <div class="calc-header">
+        <span class="calc-title">Calculator</span>
+        <button class="toggle-calc" id="toggleCalc">-</button>
+    </div>
+    <div class="calc-body">
+        <input type="text" class="calc-screen" id="calcScreen" disabled>
+        <div class="calc-buttons">
+            <button class="button" onclick="press('1')">1</button>
+            <button class="button" onclick="press('2')">2</button>
+            <button class="button" onclick="press('3')">3</button>
+            <button class="button" onclick="press('/')">/</button>
+            <button class="button" onclick="press('4')">4</button>
+            <button class="button" onclick="press('5')">5</button>
+            <button class="button" onclick="press('6')">6</button>
+            <button class="button" onclick="press('*')">*</button>
+            <button class="button" onclick="press('7')">7</button>
+            <button class="button" onclick="press('8')">8</button>
+            <button class="button" onclick="press('9')">9</button>
+            <button class="button" onclick="press('-')">-</button>
+            <button class="button" onclick="press('0')">0</button>
+            <button class="button" onclick="press('.')">.</button>
+            <button class="button" onclick="calculate()">=</button>
+            <button class="button" onclick="press('+')">+</button>
+            <button onclick="clearScreen()">C</button>
+        </div>
+    </div>
+</div>
 
 <button onclick="location.href='about.html'" class="about-btn">About</button>
 

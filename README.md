@@ -61,5 +61,3 @@ The StickyNotes App is a dynamic, user-friendly web application that allows user
 For support, feedback, or contributions, please refer to the GitHub repository's issues section or contact the developer directly.
 
 ---
-
-**Note:** This README is subject to updates and modifications as the application evolves. For the latest information and updates, please refer to the official repository.

@@ -528,3 +528,93 @@ const chatMessagesElem = document.querySelector(".chat-messages");
 const chatInputElem = document.querySelector(".chat-input");
 chatMessagesElem.style.display = "none";
 chatInputElem.style.display = "none";
+
+// Function to enable or disable typing in the calculator screen
+function toggleTyping(enable) {
+    let screen = document.getElementById('calcScreen');
+    screen.disabled = !enable; // Enable or disable based on the parameter
+    if (enable) {
+        screen.focus(); // Focus on the screen if typing is enabled
+    }
+}
+
+// Call this function with 'true' to enable typing when the screen is clicked
+document.getElementById('calcScreen').addEventListener('click', function() {
+    toggleTyping(true);
+});
+
+// Call this function with 'false' to disable typing when focus is lost
+document.getElementById('calcScreen').addEventListener('blur', function() {
+    toggleTyping(false);
+});
+
+// Function to enable typing in the calculator screen
+function enableScreen() {
+    const screen = document.getElementById('calcScreen');
+    screen.disabled = false; // Make sure the screen is enabled
+    screen.focus(); // Focus on the screen for immediate typing
+}
+
+// Function to clear the calculator screen
+function clearScreen() {
+    document.getElementById('calcScreen').value = '';
+}
+
+// Function to append the pressed number or operator to the calculator screen
+function press(num) {
+    document.getElementById('calcScreen').value += num;
+    enableScreen(); // Ensure the screen is enabled and focused after a button press
+}
+
+// Function to calculate the result
+function calculate() {
+    try {
+        document.getElementById('calcScreen').value = eval(document.getElementById('calcScreen').value);
+    } catch (e) {
+        document.getElementById('calcScreen').value = 'Error';
+    }
+}
+
+// Event listener for the Enter key to calculate the result
+document.getElementById('calcScreen').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.key === '=') {
+        event.preventDefault(); // Prevent the default action of the Enter key
+        calculate();
+    }
+});
+
+// Event listener to enable the screen when it is clicked
+document.getElementById('calcScreen').addEventListener('click', enableScreen);
+
+// Event listener to filter out invalid characters
+document.getElementById('calcScreen').addEventListener('input', function(event) {
+    const allowedCharacters = /[0-9+\-*/.]/;
+    let value = event.target.value;
+    let newValue = value.split('').filter(char => allowedCharacters.test(char)).join('');
+    event.target.value = newValue;
+});
+
+// Function to toggle calculator visibility
+function toggleCalculator() {
+    const calcBody = document.querySelector('.calc-body');
+    const toggleCalcButton = document.getElementById('toggleCalc');
+
+    if (calcBody.style.display === 'none') {
+        calcBody.style.display = 'block';
+        toggleCalcButton.innerText = '-';
+        enableScreen(); // Enable the screen after showing the calculator
+    }
+    else {
+        calcBody.style.display = 'none';
+        toggleCalcButton.innerText = '+';
+    }
+}
+
+// Event listener for the toggle calculator button
+document.getElementById('toggleCalc').addEventListener('click', toggleCalculator);
+
+// Initial call to enable screen when the page loads
+enableScreen();
+
+// Always enable the screen when the page is clicked
+document.addEventListener('click', enableScreen);
