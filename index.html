@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The StickyNotes App</title>
@@ -30,39 +31,42 @@
 
 <div class="chatbot">
     <div class="chat-messages"></div>
-    <input type="text" placeholder="Ask Eliza..." class="chat-input">
+    <input type="text" placeholder="Ask your assistant..." class="chat-input">
 </div>
 
 <div class="calculator" id="calculator">
     <div class="calc-header">
         <span class="calc-title">Calculator</span>
-        <button class="toggle-calc" id="toggleCalc">-</button>
+        <button class="toggle-calc" id="toggleCalc" title="Maximize/Minimize The Calculator">-</button>
     </div>
     <div class="calc-body">
-        <input type="text" class="calc-screen" id="calcScreen" disabled>
+        <input type="text" class="calc-screen" id="calcScreen" title="Click on anywhere of the calculator to enable direct typing" disabled>
         <div class="calc-buttons">
-            <button class="button" onclick="press('1')">1</button>
-            <button class="button" onclick="press('2')">2</button>
-            <button class="button" onclick="press('3')">3</button>
-            <button class="button" onclick="press('/')">/</button>
-            <button class="button" onclick="press('4')">4</button>
-            <button class="button" onclick="press('5')">5</button>
-            <button class="button" onclick="press('6')">6</button>
-            <button class="button" onclick="press('*')">*</button>
-            <button class="button" onclick="press('7')">7</button>
-            <button class="button" onclick="press('8')">8</button>
-            <button class="button" onclick="press('9')">9</button>
-            <button class="button" onclick="press('-')">-</button>
-            <button class="button" onclick="press('0')">0</button>
-            <button class="button" onclick="press('.')">.</button>
-            <button class="button" onclick="calculate()">=</button>
-            <button class="button" onclick="press('+')">+</button>
-            <button onclick="clearScreen()">C</button>
+            <button class="button" onclick="press('1')" title="Press this button to enter 1">1</button>
+            <button class="button" onclick="press('2')" title="Press this button to enter 2">2</button>
+            <button class="button" onclick="press('3')" title="Press this button to enter 3">3</button>
+            <button class="button" onclick="press('/')" title="Divide a number by another">/</button>
+            <button class="button" onclick="press('4')" title="Press this button to enter 4">4</button>
+            <button class="button" onclick="press('5')" title="Press this button to enter 5">5</button>
+            <button class="button" onclick="press('6')" title="Press this button to enter 6">6</button>
+            <button class="button" onclick="press('*')" title="Multiply a number by another">*</button>
+            <button class="button" onclick="press('7')" title="Press this button to enter 7">7</button>
+            <button class="button" onclick="press('8')" title="Press this button to enter 8">8</button>
+            <button class="button" onclick="press('9')" title="Press this button to enter 9">9</button>
+            <button class="button" onclick="press('-')" title="Subtract a number by another">-</button>
+            <button class="button" onclick="press('0')" title="Press this button to enter 0">0</button>
+            <button class="button" onclick="press('.')" title="Enter a non-integer (e.g. 0.99)">.</button>
+            <button class="button" onclick="calculate()" title="Press this button to evaluate the entered expression">=</button>
+            <button class="button" onclick="press('+')" title="Sum a number with another">+</button>
+            <button onclick="press('%')" title="Convert any number to its percentage (choose a number then press this symbol)">%</button>
+            <button onclick="pressOperation('pow')" title="Raise to power (use ^ for exponentiation, e.g. 9^9)">^</button>
+            <button onclick="pressOperation('sqrt')" title="Calculate the square root of any number(choose a number then press this symbol)">√</button>
+            <button onclick="clearScreen()" title="Clear the calculator's screen">C</button>
         </div>
     </div>
 </div>
 
-<button onclick="location.href='about.html'" class="about-btn">About</button>
+<button onclick="location.href='about.html'" class="about-btn">About This App</button>
 
 </body>
 

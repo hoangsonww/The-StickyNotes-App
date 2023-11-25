@@ -291,6 +291,7 @@ const shakeButton = document.createElement("button");
 shakeButton.innerText = "Shake Notes!";
 document.body.appendChild(shakeButton);
 shakeButton.addEventListener("click", shakeAllNotes);
+shakeButton.className = "button";
 
 const recordingStatus = document.createElement("div");
 recordingStatus.innerText = "Recording...";
@@ -348,6 +349,7 @@ const themeToggleButton = document.createElement("button");
 themeToggleButton.innerText = "Toggle Dark Mode";
 themeToggleButton.id = "themeToggle";
 document.body.appendChild(themeToggleButton);
+themeToggleButton.className = "button";
 
 themeToggleButton.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
@@ -392,6 +394,7 @@ exportButton.innerText = "Export Notes";
 exportButton.className = "sticky-button"; // Add this line
 document.body.appendChild(exportButton);
 exportButton.addEventListener("click", exportNotes);
+exportButton.className = "button";
 
 // Create a label for the input for better styling
 const importLabel = document.createElement("label");
@@ -399,12 +402,20 @@ importLabel.innerText = "Import Notes";
 importLabel.setAttribute("for", "import-input");
 importLabel.className = "sticky-button"; // Using the same class for consistency
 document.body.appendChild(importLabel);
+importLabel.style.transition = "all 0.3s ease-in-out"; // Add a transition for the hover effect
+importLabel.addEventListener("mouseenter", () => {
+    importLabel.style.transform = "scale(1.1)"; // Scale up on hover
+});
+importLabel.addEventListener("mouseleave", () => {
+    importLabel.style.transform = "scale(1)"; // Scale back to normal on exit
+});
 
 const importInput = document.createElement("input");
 importInput.type = "file";
 importInput.id = "import-input"; // ID added for the label to recognize it
 document.body.appendChild(importInput);
 importInput.addEventListener("change", importNotes);
+importInput.className = "button";
 
 // Chat interaction with delay
 const chatInput = document.querySelector(".chat-input");
@@ -497,7 +508,6 @@ function getElizaResponse(question) {
             return responses[i].response;
         }
     }
-
     return "Sorry, I didn't get that. Could you please rephrase or ask another question?";
 }
 
@@ -505,6 +515,7 @@ function getElizaResponse(question) {
 const toggleButton = document.createElement("button");
 toggleButton.innerText = "-";
 toggleButton.className = "toggle-chat";
+toggleButton.title="Minimize/Maximize Chatbot";
 toggleButton.onclick = function() {
     const chatMessagesElem = document.querySelector(".chat-messages");
     const chatInputElem = document.querySelector(".chat-input");
@@ -562,14 +573,20 @@ function clearScreen() {
 
 // Function to append the pressed number or operator to the calculator screen
 function press(num) {
-    document.getElementById('calcScreen').value += num;
-    enableScreen(); // Ensure the screen is enabled and focused after a button press
+    const screen = document.getElementById('calcScreen');
+    if (num === '%') {
+        screen.value = (eval(screen.value) / 100).toString();
+    } else {
+        screen.value += num;
+    }
 }
 
 // Function to calculate the result
 function calculate() {
     try {
-        document.getElementById('calcScreen').value = eval(document.getElementById('calcScreen').value);
+        const expression = document.getElementById('calcScreen').value;
+        const result = expression.includes('**') ? eval(expression) : eval(expression.replace('^', '**'));
+        document.getElementById('calcScreen').value = result;
     } catch (e) {
         document.getElementById('calcScreen').value = 'Error';
     }
@@ -616,5 +633,24 @@ document.getElementById('toggleCalc').addEventListener('click', toggleCalculator
 // Initial call to enable screen when the page loads
 enableScreen();
 
-// Always enable the screen when the page is clicked
-document.addEventListener('click', enableScreen);
+// Always enable the screen when the calculator is clicked
+document.getElementById('calculator').addEventListener('click', enableScreen);
+
+// Operation function for square root and power
+function pressOperation(operation) {
+    const screen = document.getElementById('calcScreen');
+    const value = screen.value;
+
+    switch (operation) {
+        case 'sqrt':
+            screen.value = Math.sqrt(value);
+            break;
+        case 'pow':
+            if (value) {
+                screen.value += '^';
+            }
+            break;
+        default:
+            break;
+    }
+}
