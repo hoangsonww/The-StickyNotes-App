@@ -403,6 +403,7 @@ importLabel.setAttribute("for", "import-input");
 importLabel.className = "sticky-button"; // Using the same class for consistency
 document.body.appendChild(importLabel);
 importLabel.style.transition = "all 0.3s ease-in-out"; // Add a transition for the hover effect
+
 importLabel.addEventListener("mouseenter", () => {
     importLabel.style.transform = "scale(1.1)"; // Scale up on hover
 });
@@ -629,6 +630,17 @@ function toggleCalculator() {
 
 // Event listener for the toggle calculator button
 document.getElementById('toggleCalc').addEventListener('click', toggleCalculator);
+
+// Set the initial display state of the calculator to 'none' (minimized)
+document.querySelector('.calc-body').style.display = 'none';
+document.getElementById('toggleCalc').innerText = '+';
+
+// Initial call to enable screen when the page loads
+enableScreen();
+
+// Always enable the screen when the calculator is clicked
+document.getElementById('calculator').addEventListener('click', enableScreen);
+
 
 // Initial call to enable screen when the page loads
 enableScreen();
