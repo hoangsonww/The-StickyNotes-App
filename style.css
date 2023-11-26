@@ -691,3 +691,15 @@ button:hover .tooltip {
     visibility: visible;
     opacity: 1;
 }
+
+#calculator,
+.chatbot {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    #calculator,
+    .chatbot {
+        display: block;
+    }
+}
