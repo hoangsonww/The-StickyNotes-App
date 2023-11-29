@@ -645,6 +645,7 @@ input[type="date"]:focus {
     text-align: right;
     font-size: 1.5rem;
     cursor: text;
+    transform: translateX(5%);
 }
 
 .calc-buttons {
