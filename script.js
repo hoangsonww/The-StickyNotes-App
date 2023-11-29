@@ -33,7 +33,7 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceN
                 <button class="mic"><i class="fas fa-microphone"></i></button>
                 <audio class="voice-note" controls></audio>
                 <button class="delete"><i class="fas fa-trash-alt"></i></button>
-                <input type="color" class="color-picker" value="${color}">
+                <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;">
             </div>
             <div class="main ${text ? "" : "hidden"}"></div>
             <textarea class="${text ? "hidden" : ""}"></textarea>
@@ -54,6 +54,9 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceN
         main.classList.toggle("hidden");
         textArea.classList.toggle("hidden");
     });
+
+    editBtn.title = "Edit Note";
+    deleteBtn.title = "Delete Note";
 
     deleteBtn.addEventListener("click", () => {
         note.remove();
@@ -149,12 +152,14 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceN
     const moveUpButton = document.createElement('button');
     moveUpButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
     moveUpButton.className = 'move-up';
+    moveUpButton.title = "Move Note Up";
     moveUpButton.addEventListener('click', () => moveUp(note));
     note.querySelector('.tools').appendChild(moveUpButton);
 
     const moveDownButton = document.createElement('button');
     moveDownButton.innerHTML = '<i class="fas fa-arrow-down"></i>';
     moveDownButton.className = 'move-down';
+    moveDownButton.title = "Move Note Down";
     moveDownButton.addEventListener('click', () => moveDown(note));
     note.querySelector('.tools').appendChild(moveDownButton);
 
@@ -279,7 +284,6 @@ function shakeAllNotes() {
     const notes = document.querySelectorAll(".note");
     notes.forEach((note) => {
         note.classList.add("shake-it");
-
         // Remove the shake-it class after the animation ends to avoid unwanted repetitions
         note.addEventListener("animationend", () => {
             note.classList.remove("shake-it");
@@ -292,6 +296,7 @@ shakeButton.innerText = "Shake Notes!";
 document.body.appendChild(shakeButton);
 shakeButton.addEventListener("click", shakeAllNotes);
 shakeButton.className = "button";
+shakeButton.title = "Shake all notes!";
 
 const recordingStatus = document.createElement("div");
 recordingStatus.innerText = "Recording...";
@@ -373,6 +378,7 @@ function exportNotes() {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = "notes.json";
+    link.title = "Export all current notes in a single JSON file!";
     link.click();
 }
 
