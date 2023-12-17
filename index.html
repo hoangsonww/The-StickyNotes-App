@@ -29,6 +29,12 @@
 
 <body>
 
+<div class="quick-access-toolbar" title="Quick Access Buttons">
+    <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
+    <button onclick="document.body.classList.toggle('dark-mode')" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+    <button onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
+</div>
+
 <div class="chatbot">
     <div class="chat-messages"></div>
     <input type="text" placeholder="Ask your assistant..." class="chat-input">
