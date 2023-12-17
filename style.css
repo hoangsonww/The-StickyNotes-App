@@ -134,7 +134,6 @@ h4 {
     cursor: pointer;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     header {
         padding: 0.5rem;
@@ -738,4 +737,165 @@ button:hover .tooltip {
 
 .quick-access-toolbar i {
     color: #333;
+}
+
+.feedback-container {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+}
+
+.feedback-btn {
+    position: absolute;
+    right: 0;
+    top: -40px;
+    background: #534caf;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-title {
+    color: #534caf;
+}
+
+#feedbackText {
+    border-radius: 8px;
+}
+
+.feedback-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.feedback-form h4.feedback-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.feedback-form textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.feedback-form .feedback-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedback-form button {
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #534caf;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+    outline: none;
+    display: inline-block;
+}
+
+.feedback-form button:hover {
+    background-color: #403890;
+}
+
+/* Timer Styles */
+.timer-container {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+}
+
+.timer-toggle-btn {
+    position: absolute;
+    right: -10px;
+    top: -80px;
+    background-color: #534caf;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    right: -10px;
+}
+
+.timer-form h4.timer-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #534caf;
+}
+
+.timer-form .timer-display {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.timer-form button {
+    background: #534caf;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.timer-form button:hover {
+    background-color: #403890;
+}
+
+.timer-display {
+    cursor: pointer;
+}
+
+#closeTimerBtn, #setTimerBtn {
+    background: #534caf;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#closeTimerBtn:hover, #setTimerBtn:hover {
+    background-color: #403890;
 }

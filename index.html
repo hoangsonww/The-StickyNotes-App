@@ -35,6 +35,31 @@
     <button onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
 </div>
 
+<div class="feedback-container">
+    <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
+    <div class="feedback-form" id="feedbackForm">
+        <h4 class="feedback-title">Quick Feedback</h4>
+        <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
+        <div class="feedback-actions">
+            <button onclick="submitFeedback()">Submit</button>
+            <button onclick="toggleFeedbackForm()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="timer-container">
+    <button onclick="toggleTimer()" class="timer-toggle-btn"><i class="fas fa-clock"></i></button>
+    <div class="timer-form" id="timerForm">
+        <h4 class="timer-title">Focus Timer</h4>
+        <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
+        <button onclick="startTimer()" id="startTimerBtn">Start</button>
+        <button onclick="toggleTimer()" id="closeTimerBtn">Close</button>
+        <button onclick="pauseTimer()" id="pauseTimerBtn" style="display:none;">Pause</button>
+        <button onclick="resetTimer()">Reset</button>
+        <button onclick="setTimerManually()" id="setTimerBtn">Set Timer</button>
+    </div>
+</div>
+
 <div class="chatbot">
     <div class="chat-messages"></div>
     <input type="text" placeholder="Ask your assistant..." class="chat-input">

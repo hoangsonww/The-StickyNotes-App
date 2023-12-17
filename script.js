@@ -672,3 +672,136 @@ function pressOperation(operation) {
             break;
     }
 }
+
+function submitFeedback() {
+    const feedbackText = document.getElementById('feedbackText').value;
+    if(feedbackText) {
+        console.log('Feedback submitted:', feedbackText);
+        alert('Thank you for your feedback!');
+        document.getElementById('feedbackText').value = '';
+        toggleFeedbackForm();
+    }
+    else {
+        alert('Please enter some feedback before submitting.');
+    }
+}
+
+function toggleTimer() {
+    const timerForm = document.getElementById('timerForm');
+    const timerBtn = document.querySelector('.timer-toggle-btn');
+    const isTimerVisible = timerForm.style.display === 'block';
+
+    timerForm.style.display = isTimerVisible ? 'none' : 'block';
+    timerBtn.style.display = isTimerVisible ? 'flex' : 'none';
+
+    // Close feedback form if it's open
+    if (!isTimerVisible && document.getElementById('feedbackForm').style.display === 'block') {
+        toggleFeedbackForm();
+    }
+}
+
+function toggleFeedbackForm() {
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackBtn = document.querySelector('.feedback-btn');
+    const isFeedbackVisible = feedbackForm.style.display === 'block';
+
+    feedbackForm.style.display = isFeedbackVisible ? 'none' : 'block';
+    feedbackBtn.style.display = isFeedbackVisible ? 'flex' : 'none';
+
+    // Close timer form if it's open
+    if (!isFeedbackVisible && document.getElementById('timerForm').style.display === 'block') {
+        toggleTimer();
+    }
+}
+
+let countdownInterval;
+let defaultTimeInSeconds = 1500; // 25 minutes in seconds
+let totalTimeInSeconds = defaultTimeInSeconds; // Initialize to 25 minutes
+let isTimerPaused = false;
+
+function startTimer() {
+    if (!countdownInterval && totalTimeInSeconds > 0) {
+        updateCountdownDisplay();
+        countdownInterval = setInterval(updateCountdownDisplay, 1000);
+        document.getElementById('startTimerBtn').style.display = 'none';
+        document.getElementById('pauseTimerBtn').style.display = 'inline';
+        document.getElementById('stopTimerBtn').style.display = 'inline';
+        isTimerPaused = false;
+    }
+}
+
+function pauseTimer() {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+        document.getElementById('startTimerBtn').style.display = 'inline';
+        document.getElementById('pauseTimerBtn').style.display = 'none';
+        isTimerPaused = true;
+    }
+}
+
+function stopTimer() {
+    clearInterval(countdownInterval);
+    countdownInterval = null;
+    document.getElementById('startTimerBtn').style.display = 'inline';
+    document.getElementById('pauseTimerBtn').style.display = 'none';
+    document.getElementById('stopTimerBtn').style.display = 'none';
+    isTimerPaused = false;
+}
+
+function resetTimer() {
+    totalTimeInSeconds = defaultTimeInSeconds; // Reset to 25 minutes (1500 seconds)
+    updateTimerDisplay(); // Update the display after resetting
+    stopTimer(); // Stop the timer if it's running
+}
+
+function updateTimerDisplay() {
+    let hours = Math.floor(totalTimeInSeconds / 3600);
+    let minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
+    let seconds = totalTimeInSeconds % 60;
+
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    document.getElementById('timerDisplay').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+
+function setTimerManually() {
+    const timeInput = prompt("Set timer (in seconds)", "1800"); // 30 minutes as default
+    if (timeInput && !isNaN(timeInput) && Number(timeInput) >= 0) {
+        totalTimeInSeconds = Number(timeInput);
+        updateTimerDisplay();
+    }
+    else {
+        alert("Invalid input. Please enter the time in seconds.");
+    }
+}
+
+function updateCountdownDisplay() {
+    if (totalTimeInSeconds <= 0) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+        notifyTimerComplete();
+        resetTimer(); // Reset the timer to 25 minutes
+        return;
+    }
+
+    updateTimerDisplay();
+    if (!isTimerPaused) {
+        totalTimeInSeconds--;
+    }
+}
+
+function notifyTimerComplete() {
+    playSound('timer-sound.mp3');
+    setTimeout(function() {
+        alert("Timer complete!");
+    }, 100);
+}
+
+function playSound(filename) {
+    const audio = new Audio(filename);
+    audio.play();
+}
