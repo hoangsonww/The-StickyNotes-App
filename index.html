@@ -29,75 +29,92 @@
 
 <body>
 
-<div class="quick-access-toolbar" title="Quick Access Buttons">
-    <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
-    <button onclick="document.body.classList.toggle('dark-mode')" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
-    <button onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
-</div>
+    <div class="quick-access-toolbar" title="Quick Access Buttons">
+        <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
+        <button onclick="document.body.classList.toggle('dark-mode')" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+        <button onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
+        <button onclick="sortNotesByDueDate()" title="Sort Notes"><i class="fas fa-sort"></i></button>
+    </div>
 
-<div class="feedback-container">
-    <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
-    <div class="feedback-form" id="feedbackForm">
-        <h4 class="feedback-title">Quick Feedback</h4>
-        <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
-        <div class="feedback-actions">
-            <button onclick="submitFeedback()">Submit</button>
-            <button onclick="toggleFeedbackForm()">Cancel</button>
+    <div class="feedback-container">
+        <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
+        <div class="feedback-form" id="feedbackForm">
+            <h4 class="feedback-title">Quick Feedback</h4>
+            <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
+            <div class="feedback-actions">
+                <button onclick="submitFeedback()">Submit</button>
+                <button onclick="toggleFeedbackForm()">Cancel</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="timer-container">
-    <button onclick="toggleTimer()" class="timer-toggle-btn"><i class="fas fa-clock"></i></button>
-    <div class="timer-form" id="timerForm">
-        <h4 class="timer-title">Focus Timer</h4>
-        <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
-        <button onclick="startTimer()" id="startTimerBtn">Start</button>
-        <button onclick="toggleTimer()" id="closeTimerBtn">Close</button>
-        <button onclick="pauseTimer()" id="pauseTimerBtn" style="display:none;">Pause</button>
-        <button onclick="resetTimer()">Reset</button>
-        <button onclick="setTimerManually()" id="setTimerBtn">Set Timer</button>
-    </div>
-</div>
-
-<div class="chatbot">
-    <div class="chat-messages"></div>
-    <input type="text" placeholder="Ask your assistant..." class="chat-input">
-</div>
-
-<div class="calculator" id="calculator">
-    <div class="calc-header">
-        <span class="calc-title">Calculator</span>
-        <button class="toggle-calc" id="toggleCalc" title="Maximize/Minimize The Calculator">-</button>
-    </div>
-    <div class="calc-body">
-        <input type="text" class="calc-screen" id="calcScreen" title="Click on anywhere of the calculator to enable direct typing" disabled>
-        <div class="calc-buttons">
-            <button class="button" onclick="press('1')" title="Press this button to enter 1">1</button>
-            <button class="button" onclick="press('2')" title="Press this button to enter 2">2</button>
-            <button class="button" onclick="press('3')" title="Press this button to enter 3">3</button>
-            <button class="button" onclick="press('/')" title="Divide a number by another">/</button>
-            <button class="button" onclick="press('4')" title="Press this button to enter 4">4</button>
-            <button class="button" onclick="press('5')" title="Press this button to enter 5">5</button>
-            <button class="button" onclick="press('6')" title="Press this button to enter 6">6</button>
-            <button class="button" onclick="press('*')" title="Multiply a number by another">*</button>
-            <button class="button" onclick="press('7')" title="Press this button to enter 7">7</button>
-            <button class="button" onclick="press('8')" title="Press this button to enter 8">8</button>
-            <button class="button" onclick="press('9')" title="Press this button to enter 9">9</button>
-            <button class="button" onclick="press('-')" title="Subtract a number by another">-</button>
-            <button class="button" onclick="press('0')" title="Press this button to enter 0">0</button>
-            <button class="button" onclick="press('.')" title="Enter a non-integer (e.g. 0.99)">.</button>
-            <button class="button" onclick="calculate()" title="Press this button to evaluate the entered expression">=</button>
-            <button class="button" onclick="press('+')" title="Sum a number with another">+</button>
-            <button onclick="press('%')" title="Convert any number to its percentage (choose a number then press this symbol)">%</button>
-            <button onclick="pressOperation('pow')" title="Raise to power (use ^ for exponentiation, e.g. 9^9)">^</button>
-            <button onclick="pressOperation('sqrt')" title="Calculate the square root of any number(choose a number then press this symbol)">√</button>
-            <button onclick="clearScreen()" title="Clear the calculator's screen">C</button>
+    <div class="timer-container">
+        <button onclick="toggleTimer()" class="timer-toggle-btn"><i class="fas fa-clock"></i></button>
+        <div class="timer-form" id="timerForm">
+            <h4 class="timer-title">Focus Timer</h4>
+            <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
+            <button onclick="startTimer()" id="startTimerBtn">Start</button>
+            <button onclick="toggleTimer()" id="closeTimerBtn">Close</button>
+            <button onclick="pauseTimer()" id="pauseTimerBtn" style="display:none;">Pause</button>
+            <button onclick="resetTimer()">Reset</button>
+            <button onclick="setTimerManually()" id="setTimerBtn">Set Timer</button>
         </div>
     </div>
-</div>
 
-<button onclick="location.href='about.html'" class="about-btn">About This App</button>
+    <div class="chatbot">
+        <div class="chat-messages"></div>
+        <input type="text" placeholder="Ask your assistant..." class="chat-input">
+    </div>
+
+    <div class="calculator" id="calculator">
+        <div class="calc-header">
+            <span class="calc-title">Calculator</span>
+            <button class="toggle-calc" id="toggleCalc" title="Maximize/Minimize The Calculator">-</button>
+        </div>
+        <div class="calc-body">
+            <input type="text" class="calc-screen" id="calcScreen" title="Click on anywhere of the calculator to enable direct typing" disabled>
+            <div class="calc-buttons">
+                <button class="button" onclick="press('1')" title="Press this button to enter 1">1</button>
+                <button class="button" onclick="press('2')" title="Press this button to enter 2">2</button>
+                <button class="button" onclick="press('3')" title="Press this button to enter 3">3</button>
+                <button class="button" onclick="press('/')" title="Divide a number by another">/</button>
+                <button class="button" onclick="press('4')" title="Press this button to enter 4">4</button>
+                <button class="button" onclick="press('5')" title="Press this button to enter 5">5</button>
+                <button class="button" onclick="press('6')" title="Press this button to enter 6">6</button>
+                <button class="button" onclick="press('*')" title="Multiply a number by another">*</button>
+                <button class="button" onclick="press('7')" title="Press this button to enter 7">7</button>
+                <button class="button" onclick="press('8')" title="Press this button to enter 8">8</button>
+                <button class="button" onclick="press('9')" title="Press this button to enter 9">9</button>
+                <button class="button" onclick="press('-')" title="Subtract a number by another">-</button>
+                <button class="button" onclick="press('0')" title="Press this button to enter 0">0</button>
+                <button class="button" onclick="press('.')" title="Enter a non-integer (e.g. 0.99)">.</button>
+                <button class="button" onclick="calculate()" title="Press this button to evaluate the entered expression">=</button>
+                <button class="button" onclick="press('+')" title="Sum a number with another">+</button>
+                <button onclick="press('%')" title="Convert any number to its percentage (choose a number then press this symbol)">%</button>
+                <button onclick="pressOperation('pow')" title="Raise to power (use ^ for exponentiation, e.g. 9^9)">^</button>
+                <button onclick="pressOperation('sqrt')" title="Calculate the square root of any number(choose a number then press this symbol)">√</button>
+                <button onclick="clearScreen()" title="Clear the calculator's screen">C</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="weather-container">
+        <div id="weather-display" class="weather-display">
+            <!-- Weather information will be displayed here -->
+        </div>
+        <div id="weather-search-container" class="weather-search-container hidden">
+            <input type="text" id="weather-search-input" placeholder="Enter location...">
+            <button id="weather-search-btn">Search</button>
+        </div>
+    </div>
+
+    <div id="mini-task-list">
+        <h5>Task List</h5>
+        <input type="text" id="task-input" placeholder="New task..." maxlength="20">
+        <ul id="task-list"></ul>
+    </div>
+
+    <div id="timeContainer" class="time-display"></div>
 
 </body>
 

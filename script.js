@@ -3,13 +3,23 @@ const notesContainer = document.createElement("div");
 notesContainer.classList.add("notes-container");
 document.body.appendChild(notesContainer);
 
+const aboutBtn = document.createElement("button");
+aboutBtn.innerText = "About This App";
+aboutBtn.classList.add("about-btn");
+
+aboutBtn.addEventListener("click", function() {
+    window.location.href = 'about.html';
+});
+
+document.body.appendChild(aboutBtn);
+
 // Existing code for handling notes
 const addBtn = document.getElementById("add");
 const notes = JSON.parse(localStorage.getItem("notes"));
 
 if (notes) {
     notes.forEach((note) => {
-        addNewNote(note.text, note.color, note.tag, note.dueDate, note.voiceNote);
+        addNewNote(note.title, note.text, note.color, note.tag, note.dueDate, note.voiceNote);
     });
     sortNotesByDueDate();
 }
@@ -18,7 +28,7 @@ addBtn.addEventListener("click", () => {
     addNewNote();
 });
 
-function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "") {
+function addNewNote(title = "Untitled Note - Click here to give it a name!", text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "") {
     const note = document.createElement("div");
     note.classList.add("note");
     note.style.backgroundColor = color;
@@ -35,8 +45,9 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceN
                 <button class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;">
             </div>
+            <div class="note-title ${title ? "" : "untitled"}" contenteditable="false">${title}</div>
             <div class="main ${text ? "" : "hidden"}"></div>
-            <textarea class="${text ? "hidden" : ""}"></textarea>
+            <textarea class="${text ? "" : "hidden"}">${text}</textarea>
         </div>
     `;
 
@@ -44,15 +55,39 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceN
     const deleteBtn = note.querySelector(".delete");
     const colorPicker = note.querySelector(".color-picker");
 
+    const noteTitle = note.querySelector('.note-title');
     const main = note.querySelector(".main");
     const textArea = note.querySelector("textarea");
 
     textArea.value = text;
-    main.innerHTML = marked(text);
+
+    noteTitle.addEventListener('click', () => {
+        if (noteTitle.classList.contains('untitled')) {
+            noteTitle.textContent = ''; // Clear the default text
+        }
+        noteTitle.contentEditable = true;
+        noteTitle.focus();
+    });
+
+    noteTitle.addEventListener('blur', () => {
+        noteTitle.contentEditable = false;
+        if (!noteTitle.textContent.trim()) {
+            noteTitle.textContent = 'Untitled Note - Click here to give it a name!';
+            noteTitle.classList.add('untitled');
+        }
+        else {
+            noteTitle.classList.remove('untitled');
+        }
+        updateLS();
+    });
 
     editBtn.addEventListener("click", () => {
         main.classList.toggle("hidden");
         textArea.classList.toggle("hidden");
+
+        if (!textArea.classList.contains("hidden")) {
+            textArea.focus();
+        }
     });
 
     editBtn.title = "Edit Note";
@@ -69,17 +104,18 @@ function addNewNote(text = "", color = "#ffffff", tag = "", dueDate = "", voiceN
     });
 
     textArea.addEventListener("input", (e) => {
-        const { value } = e.target;
-        main.innerHTML = marked(value);
         updateLS();
     });
 
     const tagInput = note.querySelector(".tag");
     tagInput.value = tag;
 
+    tagInput.addEventListener("change", () => {
+        updateLS();
+    });
+
     const dueDatePicker = note.querySelector(".due-date");
     dueDatePicker.addEventListener("change", () => {
-        sortNotesByDueDate();
         updateLS();
     });
 
@@ -305,12 +341,26 @@ document.body.appendChild(recordingStatus);
 
 function sortNotesByDueDate() {
     const notesArray = Array.from(document.querySelectorAll('.note'));
+
+    // Sorting function
     notesArray.sort((a, b) => {
-        let dateA = new Date(a.querySelector(".due-date").value);
-        let dateB = new Date(b.querySelector(".due-date").value);
-        return dateA - dateB;
+        const dateA = a.querySelector(".due-date").value;
+        const dateB = b.querySelector(".due-date").value;
+        const titleA = a.querySelector(".note-title").textContent.trim().toUpperCase();
+        const titleB = b.querySelector(".note-title").textContent.trim().toUpperCase();
+
+        if (dateA && dateB) {
+            return new Date(dateA) - new Date(dateB);
+        } else if (dateA) {
+            return -1;
+        } else if (dateB) {
+            return 1;
+        } else {
+            return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
+        }
     });
 
+    // Re-append notes in sorted order
     notesArray.forEach(note => notesContainer.appendChild(note));
 }
 
@@ -318,6 +368,7 @@ function updateLS() {
     const notesArr = [];
     document.querySelectorAll(".note").forEach((note) => {
         notesArr.push({
+            title: note.querySelector(".note-title").textContent,
             text: note.querySelector("textarea").value,
             color: note.style.backgroundColor,
             tag: note.querySelector(".tag").value,
@@ -353,7 +404,6 @@ function filterNotes(query) {
 const themeToggleButton = document.createElement("button");
 themeToggleButton.innerText = "Toggle Dark Mode";
 themeToggleButton.id = "themeToggle";
-document.body.appendChild(themeToggleButton);
 themeToggleButton.className = "button";
 
 themeToggleButton.addEventListener("click", () => {
@@ -458,7 +508,35 @@ function getElizaResponse(question) {
 
     const responses = [
         { pattern: /hello|hi|hey/, response: "Hello! How can I assist you today?" },
+        { pattern: /what is this app|what does this app do/, response: "This app allows you to create, edit, and manage sticky notes." },
+        { pattern: /who created this app/, response: "The app was created by David Nguyen in 2023." },
+        { pattern: /thank you|thanks/, response: "You're welcome! If you have more questions, just ask." },
+        { pattern: /dark mode/, response: "Click the 'Toggle Dark Mode' button to switch between themes." },
+        { pattern: /export notes/, response: "You can export your notes by clicking the 'Export Notes' button. It'll save as a JSON file." },
+        { pattern: /import notes/, response: "Click on the 'Choose Files' button to select and upload your notes." },
+        { pattern: /how are you/, response: "I'm a computer program, so I don't have feelings, but I'm operating at full capacity. How can I help?" },
+        { pattern: /what can you do/, response: "I'm here to answer your questions about the app. Just ask away!" },
+        { pattern: /create note|new note/, response: "To create a new note, click on the 'Add New Note' button and start typing." },
+        { pattern: /delete note/, response: "You can delete a note by selecting it and clicking the 'Delete' button (Trash icon)." },
+        { pattern: /edit note/, response: "Simply click on a note to start editing its content." },
+        { pattern: /save note/, response: "Your notes are saved automatically once you stop typing." },
+        { pattern: /lost note|recover note/, response: "If you've exported your notes previously, you can re-import them. Otherwise, deleted notes cannot be recovered." },
+        { pattern: /how many notes/, response: "You can have as many notes as you like in the app. There's no set limit!" },
+        { pattern: /search note/, response: "Use the search bar at the top of the app to find specific notes by their content." },
+        { pattern: /shortcut|keyboard shortcut/, response: "Use 'Ctrl + N' for a new note, 'Ctrl + S' to save, and 'Ctrl + D' to delete a note." },
+        { pattern: /share note/, response: "Currently, this app doesn't support direct note sharing. You can export and send the JSON file manually." },
+        { pattern: /cloud|sync/, response: "We don't have cloud syncing at the moment, but it's a feature we're considering for future versions." },
+        { pattern: /security|privacy/, response: "Your notes are stored locally on your device. We don't access or store them on any external servers." },
+        { pattern: /can i customize/, response: "At the moment, customization is limited to dark and light themes. We're working on more personalization features!" },
+        { pattern: /feedback|suggestion/, response: "We appreciate feedback and suggestions! There's a 'Feedback' button in the settings where you can submit yours." },
+        { pattern: /language|translate/, response: "Currently, the app is in English only, but multi-language support is in our roadmap." },
+        { pattern: /update|new version/, response: "Keep an eye on the 'Updates' section in settings for any new versions or features." },
+        { pattern: /bug|issue/, response: "Sorry for the inconvenience. Please report any bugs through the 'Feedback' section so we can address them." },
+        { pattern: /cost|price/, response: "The basic version of the app is free, but there might be premium features available for purchase in the future." },
+        { pattern: /tutorial|guide/, response: "There's a 'Help' section in the app that provides a step-by-step guide on how to use the various features." },
+        { pattern: /favorite note|bookmark/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
         { pattern: /how does this app work/, response: "This app allows you to create, edit, and manage sticky notes." },
+        { pattern: /search notes/, response: "You can use the search bar at the top to quickly find any note by its content or title." },
         { pattern: /who created this app/, response: "The app was created by David Nguyen in 2023." },
         { pattern: /thank you|thanks/, response: "You're welcome! If you have more questions, just ask." },
         { pattern: /dark mode/, response: "Click the 'Toggle Dark Mode' button to switch between themes." },
@@ -488,6 +566,11 @@ function getElizaResponse(question) {
         { pattern: /search notes/, response: "You can use the search bar at the top to quickly find any note by its content or title." },
         { pattern: /collaborate|team/, response: "The current version doesn't support real-time collaboration. It's a feature we might consider in the future." },
         { pattern: /notification|alert/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
+        { pattern: /due date|reminder/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
+        { pattern: /calendar/, response: "The app doesn't have a calendar view at the moment, but it's a feature we're considering for future versions." },
+        { pattern: /archive|archive note/, response: "You can archive notes that you don't need anymore. They'll be hidden from the main view but can be accessed later." },
+        { pattern: /favorite|favorite note/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
+        { pattern: /voice|voice note/, response: "You can record voice notes instead of typing. Just click on the 'Record' button to start recording." },
         { pattern: /voice command|voice activation/, response: "Voice commands are not supported currently, but it's an interesting idea for future versions!" },
         { pattern: /offline/, response: "Yes, the app works offline. Any changes you make will be synced when you go online next." },
         { pattern: /backup/, response: "It's a good practice to regularly export and back up your notes. This ensures you don't lose any important information." },
@@ -784,7 +867,7 @@ function updateCountdownDisplay() {
         clearInterval(countdownInterval);
         countdownInterval = null;
         notifyTimerComplete();
-        resetTimer(); // Reset the timer to 25 minutes
+        resetTimer();
         return;
     }
 
@@ -804,4 +887,142 @@ function notifyTimerComplete() {
 function playSound(filename) {
     const audio = new Audio(filename);
     audio.play();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    function updateTime() {
+        const now = new Date();
+        const timeParts = now.toLocaleTimeString().split(" "); // Split time and AM/PM
+        const timeString = timeParts[0]; // Time
+        const amPm = timeParts[1]; // AM/PM
+
+        // Display time and AM/PM on separate lines
+        document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+});
+
+const weatherSearchContainer = document.getElementById('weather-search-container');
+const weatherSearchInput = document.getElementById('weather-search-input');
+const weatherSearchBtn = document.getElementById('weather-search-btn');
+
+const apiKey = '593309284d3eb093ee96647eb294905b';
+
+async function fetchWeather(city) {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const data = await response.json();
+        displayWeather(data);
+    }
+    catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+function handleGeoLocation(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    // Display loading message
+    weatherDisplay.innerHTML = "<p>Loading Weather...</p>";
+
+    fetchWeatherByCoords(lat, lon);
+}
+
+weatherSearchBtn.addEventListener('click', () => {
+    const city = weatherSearchInput.value;
+    fetchWeather(city);
+});
+
+weatherSearchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const city = weatherSearchInput.value;
+        fetchWeather(city);
+    }
+});
+
+const weatherDisplay = document.getElementById('weather-display');
+weatherDisplay.innerHTML = "<p>Loading Weather...</p>";
+
+function displayWeather(data) {
+    if (data.cod !== 200) {
+        weatherDisplay.innerHTML = '<p>Weather data not found</p>';
+        return;
+    }
+    const temp = data.main.temp.toFixed(0);
+    weatherDisplay.innerHTML = `
+        <strong style="text-align: center; margin-top: -5px">${data.name}</strong>
+        <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather icon">
+        <span>${temp}°C</span>
+    `;
+}
+
+function fetchWeatherByCoords(lat, lon) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then(data => displayWeather(data))
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            weatherDisplay.innerHTML = '<p>Error loading weather data</p>';
+        });
+}
+
+// Your existing geolocation code
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
+        if (error.code == error.PERMISSION_DENIED) {
+            weatherDisplay.innerHTML = "<p>Please enable location access to view weather in your area.</p>";
+        }
+        weatherSearchContainer.classList.remove('weather-hidden');
+    });
+}
+else {
+    weatherSearchContainer.classList.remove('weather-hidden');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadTasksFromLocalStorage();
+});
+
+const taskInput = document.getElementById("task-input");
+const taskList = document.getElementById("task-list");
+
+taskInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        addTask(taskInput.value);
+        taskInput.value = '';
+    }
+});
+
+function addTask(task) {
+    if (task.trim() === '') return;
+
+    const li = document.createElement("li");
+    li.textContent = task;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "✖";
+    deleteBtn.onclick = function() {
+        this.parentElement.remove();
+        updateLocalStorage();
+    };
+
+    li.appendChild(deleteBtn);
+    taskList.appendChild(li);
+    updateLocalStorage();
+}
+
+function updateLocalStorage() {
+    const tasks = [];
+    document.querySelectorAll("#task-list li").forEach(li => {
+        tasks.push(li.textContent.replace("✖", "").trim());
+    });
+    localStorage.setItem("quick-tasks", JSON.stringify(tasks));
+}
+
+function loadTasksFromLocalStorage() {
+    const tasks = JSON.parse(localStorage.getItem("quick-tasks")) || [];
+    tasks.forEach(task => addTask(task));
 }

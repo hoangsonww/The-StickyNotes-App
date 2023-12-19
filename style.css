@@ -214,9 +214,130 @@ h4 {
     width: auto;
 }
 
+.time-display {
+    position: fixed;
+    top: 15px;
+    right: 7.5px;
+    width: 90px;
+    height: auto;
+    text-align: center;
+    background-color: #534caf;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-container {
+    position: fixed;
+    top: 15px;
+    left: 7.5px;
+    width: 90px;
+    height: 203px;
+    background-color: #534caf;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+#mini-task-list {
+    width: 90px;
+    height: 140px;
+    position: fixed;
+    top: 75px;
+    right: 7.5px;
+    background: #534caf;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+#task-input {
+    width: 80px;
+    margin-bottom: 0;
+    border-radius: 5px;
+    padding-left: 2px;
+}
+
+#task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#task-list li {
+    font-size: 0.8rem;
+    margin-bottom: -15px;
+    color: white;
+}
+
+#mini-task-list h5 {
+    margin: 0;
+    margin-bottom: 1px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: white;
+}
+
+#task-list button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    margin-left: 1px;
+    padding: 5px;
+}
+
+#task-list button:hover {
+    background-color: #5a51d6;
+}
+
+#weather-search-btn {
+    height: 40px;
+    width: 90px;
+}
+
+#weather-search-btn:hover {
+    background-color: #534caf;
+}
+
+#weather-search-input {
+    width: 90%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.weather-display, .weather-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-hidden {
+    display: none;
+}
+
 body.dark-mode {
     background: linear-gradient(to right, #2c3e50, #34495e);
-    color: #ecf0f1;
+    color: black;
 }
 
 body.dark-mode header {
@@ -225,7 +346,7 @@ body.dark-mode header {
 
 body.dark-mode .note {
     background-color: #2c3e50;
-    color: #ecf0f1;
+    color: black;
 }
 
 body.dark-mode .about-btn, body.dark-mode .add {
@@ -371,14 +492,14 @@ input[type="file"]:hover::before {
 
 /* Styling for the notes container */
 .notes-container {
-    display: flex; /* Added this line */
-    flex-direction: column; /* Added this line */
-    align-items: center; /* Added this line */
-    width: 90%; /* Span most of the screen's width */
-    max-width: 1200px; /* Optional: Cap a maximum width for very wide screens */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add some padding around notes for spacing */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
@@ -692,13 +813,17 @@ button:hover .tooltip {
 }
 
 #calculator,
-.chatbot {
+.chatbot,
+.weather-container,
+#timeContainer {
     display: none;
 }
 
 @media (min-width: 768px) {
     #calculator,
-    .chatbot {
+    .chatbot,
+    .weather-container,
+    #timeContainer {
         display: block;
     }
 }
@@ -899,3 +1024,38 @@ button:hover .tooltip {
 #closeTimerBtn:hover, #setTimerBtn:hover {
     background-color: #403890;
 }
+
+#other-apps li {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    color: black;
+    align-items: center;
+    list-style-type: none;
+}
+
+button {
+    font: inherit;
+}
+
+.app-btn {
+    background-color: #534caf;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    display: block;
+    width: auto;
+    margin: 10px auto;
+}
+
+.app-btn:hover {
+    background-color: #403890;
+}
+
