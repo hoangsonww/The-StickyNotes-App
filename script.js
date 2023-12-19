@@ -1,4 +1,3 @@
-// Creating a container for the notes
 const notesContainer = document.createElement("div");
 notesContainer.classList.add("notes-container");
 document.body.appendChild(notesContainer);
@@ -13,7 +12,6 @@ aboutBtn.addEventListener("click", function() {
 
 document.body.appendChild(aboutBtn);
 
-// Existing code for handling notes
 const addBtn = document.getElementById("add");
 const notes = JSON.parse(localStorage.getItem("notes"));
 
@@ -154,7 +152,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         }
     });
 
-    // Create tooltips for both elements
     const micTooltip = document.createElement("span");
     micTooltip.classList.add("tooltip");
     micTooltip.innerText = "Record a quick voice note instead of typing!";
@@ -167,7 +164,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     voiceNotePlayer.style.position = "relative"; // to position tooltip correctly
     voiceNotePlayer.parentNode.insertBefore(playbackTooltip, voiceNotePlayer.nextSibling); // placing tooltip next to voiceNotePlayer
 
-    // Add event listeners to mic button
     micBtn.addEventListener("mouseenter", () => {
         micTooltip.classList.add("visible");
     });
@@ -452,7 +448,6 @@ document.body.appendChild(exportButton);
 exportButton.addEventListener("click", exportNotes);
 exportButton.className = "button";
 
-// Create a label for the input for better styling
 const importLabel = document.createElement("label");
 importLabel.innerText = "Import Notes";
 importLabel.setAttribute("for", "import-input");
@@ -474,11 +469,9 @@ document.body.appendChild(importInput);
 importInput.addEventListener("change", importNotes);
 importInput.className = "button";
 
-// Chat interaction with delay
 const chatInput = document.querySelector(".chat-input");
 const chatMessages = document.querySelector(".chat-messages");
 
-// Create the chatbot title
 const chatTitleElem = document.createElement("div");
 chatTitleElem.className = "chat-header chat-title";
 chatTitleElem.innerText = "The StickyNotes Assistant";
@@ -582,6 +575,13 @@ function getElizaResponse(question) {
         { pattern: /fonts|text style/, response: "While the current version offers a standard font, we're considering font customization options in the future." },
         { pattern: /printing/, response: "Yes, you can print your notes directly from the app. Just open the note and click on the 'Print' option." },
         { pattern: /create note titled (.*) with content (.*)/, response: "Creating note titled '{title}' with content '{content}'..." },
+        { pattern: /create note titled (.*)/, response: "Creating note titled '{title}'..." },
+        { pattern: /goals|goal/, response: "You can set goals for yourself and track your progress. Just click on the 'Goals' button in the settings." },
+        { pattern: /settings/, response: "You can access the app settings by clicking on the 'Settings' button in the top-right corner." },
+        { pattern: /help|guide/, response: "You can access the app guide by clicking on the 'Help' button in the top-right corner." },
+        { pattern: /reminders|notifications/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
+        { pattern: /archive|archive note/, response: "You can archive notes that you don't need anymore. They'll be hidden from the main view but can be accessed later." },
+        { pattern: /mood|emoji/, response: "You can add emojis to your notes. Just click on the 'Add Emoji' button when editing a note." },
 
         // Default response
         { pattern: /.*/, response: "I'm not sure about that. Can you be more specific or ask another question?" }
@@ -601,7 +601,6 @@ function getElizaResponse(question) {
     return "Sorry, I didn't get that. Could you please rephrase or ask another question?";
 }
 
-// Creating the chatbot's maximize/minimize button
 const toggleButton = document.createElement("button");
 toggleButton.innerText = "-";
 toggleButton.className = "toggle-chat";
@@ -624,13 +623,11 @@ toggleButton.onclick = function() {
 const chatHeaderElem = document.querySelector(".chat-header");
 chatHeaderElem.appendChild(toggleButton);
 
-// Initially showing only header
 const chatMessagesElem = document.querySelector(".chat-messages");
 const chatInputElem = document.querySelector(".chat-input");
 chatMessagesElem.style.display = "none";
 chatInputElem.style.display = "none";
 
-// Function to enable or disable typing in the calculator screen
 function toggleTyping(enable) {
     let screen = document.getElementById('calcScreen');
     screen.disabled = !enable; // Enable or disable based on the parameter
@@ -639,50 +636,45 @@ function toggleTyping(enable) {
     }
 }
 
-// Call this function with 'true' to enable typing when the screen is clicked
 document.getElementById('calcScreen').addEventListener('click', function() {
     toggleTyping(true);
 });
 
-// Call this function with 'false' to disable typing when focus is lost
 document.getElementById('calcScreen').addEventListener('blur', function() {
     toggleTyping(false);
 });
 
-// Function to enable typing in the calculator screen
 function enableScreen() {
     const screen = document.getElementById('calcScreen');
     screen.disabled = false; // Make sure the screen is enabled
     screen.focus(); // Focus on the screen for immediate typing
 }
 
-// Function to clear the calculator screen
 function clearScreen() {
     document.getElementById('calcScreen').value = '';
 }
 
-// Function to append the pressed number or operator to the calculator screen
 function press(num) {
     const screen = document.getElementById('calcScreen');
     if (num === '%') {
         screen.value = (eval(screen.value) / 100).toString();
-    } else {
+    }
+    else {
         screen.value += num;
     }
 }
 
-// Function to calculate the result
 function calculate() {
     try {
         const expression = document.getElementById('calcScreen').value;
         const result = expression.includes('**') ? eval(expression) : eval(expression.replace('^', '**'));
         document.getElementById('calcScreen').value = result;
-    } catch (e) {
+    }
+    catch (e) {
         document.getElementById('calcScreen').value = 'Error';
     }
 }
 
-// Event listener for the Enter key to calculate the result
 document.getElementById('calcScreen').addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.key === '=') {
         event.preventDefault(); // Prevent the default action of the Enter key
@@ -690,10 +682,8 @@ document.getElementById('calcScreen').addEventListener('keydown', function(event
     }
 });
 
-// Event listener to enable the screen when it is clicked
 document.getElementById('calcScreen').addEventListener('click', enableScreen);
 
-// Event listener to filter out invalid characters
 document.getElementById('calcScreen').addEventListener('input', function(event) {
     const allowedCharacters = /[0-9+\-*/.]/;
     let value = event.target.value;
@@ -701,7 +691,6 @@ document.getElementById('calcScreen').addEventListener('input', function(event) 
     event.target.value = newValue;
 });
 
-// Function to toggle calculator visibility
 function toggleCalculator() {
     const calcBody = document.querySelector('.calc-body');
     const toggleCalcButton = document.getElementById('toggleCalc');
@@ -709,7 +698,7 @@ function toggleCalculator() {
     if (calcBody.style.display === 'none') {
         calcBody.style.display = 'block';
         toggleCalcButton.innerText = '-';
-        enableScreen(); // Enable the screen after showing the calculator
+        enableScreen();
     }
     else {
         calcBody.style.display = 'none';
@@ -717,27 +706,19 @@ function toggleCalculator() {
     }
 }
 
-// Event listener for the toggle calculator button
 document.getElementById('toggleCalc').addEventListener('click', toggleCalculator);
 
-// Set the initial display state of the calculator to 'none' (minimized)
 document.querySelector('.calc-body').style.display = 'none';
 document.getElementById('toggleCalc').innerText = '+';
 
-// Initial call to enable screen when the page loads
 enableScreen();
 
-// Always enable the screen when the calculator is clicked
 document.getElementById('calculator').addEventListener('click', enableScreen);
 
-
-// Initial call to enable screen when the page loads
 enableScreen();
 
-// Always enable the screen when the calculator is clicked
 document.getElementById('calculator').addEventListener('click', enableScreen);
 
-// Operation function for square root and power
 function pressOperation(operation) {
     const screen = document.getElementById('calcScreen');
     const value = screen.value;
@@ -777,7 +758,6 @@ function toggleTimer() {
     timerForm.style.display = isTimerVisible ? 'none' : 'block';
     timerBtn.style.display = isTimerVisible ? 'flex' : 'none';
 
-    // Close feedback form if it's open
     if (!isTimerVisible && document.getElementById('feedbackForm').style.display === 'block') {
         toggleFeedbackForm();
     }
@@ -791,7 +771,6 @@ function toggleFeedbackForm() {
     feedbackForm.style.display = isFeedbackVisible ? 'none' : 'block';
     feedbackBtn.style.display = isFeedbackVisible ? 'flex' : 'none';
 
-    // Close timer form if it's open
     if (!isFeedbackVisible && document.getElementById('timerForm').style.display === 'block') {
         toggleTimer();
     }
@@ -896,7 +875,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const timeString = timeParts[0]; // Time
         const amPm = timeParts[1]; // AM/PM
 
-        // Display time and AM/PM on separate lines
         document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
     }
 
@@ -925,7 +903,6 @@ function handleGeoLocation(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
-    // Display loading message
     weatherDisplay.innerHTML = "<p>Loading Weather...</p>";
 
     fetchWeatherByCoords(lat, lon);
@@ -969,7 +946,6 @@ function fetchWeatherByCoords(lat, lon) {
         });
 }
 
-// Your existing geolocation code
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
         if (error.code == error.PERMISSION_DENIED) {
@@ -1026,3 +1002,188 @@ function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("quick-tasks")) || [];
     tasks.forEach(task => addTask(task));
 }
+
+function logMood() {
+    const mood = document.getElementById('moodSelect').value;
+    const moodLog = JSON.parse(localStorage.getItem('moodLog')) || {};
+    moodLog[mood] = (moodLog[mood] || 0) + 1;
+    localStorage.setItem('moodLog', JSON.stringify(moodLog));
+    provideMoodRecommendation(moodLog);
+}
+
+function provideMoodRecommendation(moodLog) {
+    const mostFrequentMood = getMostFrequentMood(moodLog);
+    const recommendation = getMoodRecommendation(mostFrequentMood);
+    alert(`Your most frequent mood is '${mostFrequentMood}'. ${recommendation}`);
+}
+
+function getMostFrequentMood(moodLog) {
+    return Object.keys(moodLog).reduce((a, b) => moodLog[a] > moodLog[b] ? a : b);
+}
+
+function getMoodRecommendation(mood) {
+    const recommendations = {
+        'Happy': 'Keep up the good work! Maybe share your happiness with others.',
+        'Sad': 'Consider talking to a friend or doing something you enjoy.',
+        'Stressed': 'A break might be good. Perhaps try some relaxation techniques.',
+        'Relaxed': 'Sounds like a good state to be in! Maybe it is a good time for a creative activity!'
+    };
+    return recommendations[mood] || 'Enjoy your day!';
+}
+
+function toggleMoodTracker() {
+    const moodForm = document.getElementById('moodTrackerForm');
+    moodForm.style.display = moodForm.style.display === 'none' ? 'block' : 'none';
+}
+
+let reminders = [];
+
+function setReminder() {
+    const reminderText = document.getElementById('reminderText').value;
+    const reminderDateTime = new Date(document.getElementById('reminderDateTime').value);
+
+    if (reminderText && reminderDateTime > new Date()) {
+        reminders.push({ text: reminderText, dueTime: reminderDateTime });
+        displayReminders();
+        saveRemindersToLocalStorage();
+        document.getElementById('reminderText').value = ''; // Clear the text input
+        document.getElementById('reminderDateTime').value = ''; // Clear the date input
+    }
+    else {
+        alert("Please enter a valid reminder and future date/time.");
+    }
+}
+
+function displayReminders() {
+    const list = document.getElementById('reminderList');
+    list.innerHTML = '';
+
+    reminders.forEach((reminder, index) => {
+        const item = document.createElement('li');
+        item.textContent = `${reminder.text} - Due: ${reminder.dueTime.toLocaleString()}`;
+        list.appendChild(item);
+    });
+}
+
+function checkReminders() {
+    const now = new Date();
+    reminders = reminders.filter(reminder => {
+        const timeDiff = reminder.dueTime - now;
+        if (timeDiff <= 0) {
+            return false;
+        }
+        if (timeDiff <= 5 * 60 * 1000) {
+            alert("Reminder: " + reminder.text + " is due in 5 minutes!");
+        }
+        if (timeDiff <= 1 * 60 * 1000) {
+            alert("Reminder: " + reminder.text + " is due in 1 minute!");
+            return false;
+        }
+        return true;
+    });
+    displayReminders();
+    saveRemindersToLocalStorage();
+}
+
+function saveRemindersToLocalStorage() {
+    localStorage.setItem('reminders', JSON.stringify(reminders));
+}
+
+function loadRemindersFromLocalStorage() {
+    const storedReminders = localStorage.getItem('reminders');
+    if (storedReminders) {
+        reminders = JSON.parse(storedReminders).map(reminder => {
+            reminder.dueTime = new Date(reminder.dueTime);
+            return reminder;
+        });
+        displayReminders();
+    }
+}
+
+document.getElementById("reminderText").addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        setReminder();
+    }
+});
+
+setInterval(checkReminders, 60000);
+
+document.addEventListener('DOMContentLoaded', loadRemindersFromLocalStorage);
+
+function toggleReminderForm() {
+    const form = document.getElementById('reminderForm');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+setInterval(checkReminders, 60000);
+
+let goals = [];
+
+function toggleGoalsTracker() {
+    const container = document.getElementById('goalsTrackerContainer');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+}
+
+function addGoal() {
+    const goalText = document.getElementById('goalText').value;
+    if (goalText) {
+        goals.push({ text: goalText, completed: false });
+        displayGoals();
+        saveGoalsToLocalStorage();
+        document.getElementById('goalText').value = '';
+    }
+    else {
+        alert("Please enter a goal.");
+    }
+}
+
+function displayGoals() {
+    const inProgressList = document.getElementById('inProgressGoals');
+    const completedList = document.getElementById('completedGoals');
+
+    inProgressList.innerHTML = '';
+    completedList.innerHTML = '';
+
+    goals.forEach((goal, index) => {
+        const item = document.createElement('li');
+        item.textContent = goal.text;
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = goal.completed;
+        checkbox.onchange = () => toggleGoalCompletion(index);
+        item.prepend(checkbox);
+
+        if (goal.completed) {
+            completedList.appendChild(item);
+        }
+        else {
+            inProgressList.appendChild(item);
+        }
+    });
+}
+
+function toggleGoalCompletion(index) {
+    goals[index].completed = !goals[index].completed;
+    saveGoalsToLocalStorage();
+    displayGoals();
+}
+
+function saveGoalsToLocalStorage() {
+    localStorage.setItem('goals', JSON.stringify(goals));
+}
+
+function loadGoalsFromLocalStorage() {
+    const storedGoals = localStorage.getItem('goals');
+    if (storedGoals) {
+        goals = JSON.parse(storedGoals);
+        displayGoals();
+    }
+}
+
+document.getElementById("goalText").addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        addGoal();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', loadGoalsFromLocalStorage);

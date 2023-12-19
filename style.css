@@ -35,7 +35,7 @@ h1 {
 }
 
 h4 {
-    color: #f1b884;
+    color: #ffa24e;
     margin-top: 0.5rem;
 }
 
@@ -590,7 +590,6 @@ input[type="date"]:focus {
     opacity: 1;
 }
 
-/* Style for both buttons */
 .sticky-button {
     background-color: #534caf;
     color: white;
@@ -815,16 +814,45 @@ button:hover .tooltip {
 #calculator,
 .chatbot,
 .weather-container,
-#timeContainer {
+#timeContainer,
+#mini-task-list,
+.mood-tracker-container,
+.timer-container,
+.feedback-container,
+.goals-tracker-container,
+.reminder-container,
+#toggleReminderBtn,
+.reminder-form,
+#toggleGoalsTrackerBtn {
     display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 904.5px) {
     #calculator,
     .chatbot,
     .weather-container,
-    #timeContainer {
+    #timeContainer,
+    #mini-task-list,
+    .mood-tracker-container,
+    .timer-container,
+    .feedback-container,
+    .goals-tracker-container,
+    .reminder-container,
+    .reminder-form {
         display: block;
+    }
+}
+
+@media (min-width: 904.5px) {
+    #toggleReminderBtn,
+    #toggleGoalsTrackerBtn {
+        display: inherit;
+    }
+}
+
+@media (max-width: 768px) {
+    #toggleCalcBtn {
+        display: none;
     }
 }
 
@@ -870,6 +898,7 @@ button:hover .tooltip {
     top: 50%;
     transform: translateY(-50%);
     width: 200px;
+    z-index: 1000;
 }
 
 .feedback-btn {
@@ -944,13 +973,162 @@ button:hover .tooltip {
     background-color: #403890;
 }
 
-/* Timer Styles */
+.mood-tracker-toggle-btn {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    transform: translateY(459%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    padding-top: 12.9px;
+}
+
+.reminder-toggle-btn {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    transform: translateY(1305%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.goals-toggle-btn {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    transform: translateY(1405%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.mood-tracker-toggle-btn:hover {
+    background-color: #403890;
+}
+
+.reminder-toggle-btn:hover {
+    background-color: #403890;
+}
+
+.goals-toggle-btn:hover {
+    background-color: #403890;
+}
+
+.mood-tracker-form {
+    position: fixed;
+    right: 10px;
+    transform: translateY(65%);
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: none;
+    z-index: 1000;
+}
+
+.reminder-form {
+    position: fixed;
+    right: 10px;
+    top: 590px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: none;
+    z-index: 1000;
+}
+
+.goals-tracker-container {
+    position: fixed;
+    right: 10px;
+    top: 900px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: none;
+    z-index: 1000;
+}
+
+.goals-tracker-container {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+}
+
+.upcoming-reminders ul {
+    list-style: none;
+}
+
+#goalText {
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+li {
+    list-style: none;
+}
+
+#goalsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#logMoodBtn {
+    height: 35px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.close-btn {
+    height: 35px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.close-btn:hover {
+    background-color: #403890; /* Darker shade for hover effect */
+}
+
 .timer-container {
     position: fixed;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
     width: 200px;
+    z-index: 1000;
 }
 
 .timer-toggle-btn {
@@ -1058,4 +1236,3 @@ button {
 .app-btn:hover {
     background-color: #403890;
 }
-
