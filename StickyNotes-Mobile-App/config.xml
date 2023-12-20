@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>The StickyNotes App</name>
-    <description>Sample Apache Cordova App</description>
+    <name>StickyNotes</name>
+    <description>Welcome to Your Ultimate Notes Manager</description>
     <author email="hoangson091104@gmail.com" href="https://hoangsonww.github.io/My-Portfolio-Website/">
         David Nguyen
     </author>
