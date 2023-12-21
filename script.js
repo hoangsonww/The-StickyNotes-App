@@ -17,7 +17,7 @@ const notes = JSON.parse(localStorage.getItem("notes"));
 
 if (notes) {
     notes.forEach((note) => {
-        addNewNote(note.title, note.text, note.color, note.tag, note.dueDate, note.voiceNote);
+        addNewNote(note.title, note.text, note.color, note.tag, note.dueDate, note.voiceNote, note.image);
     });
     sortNotesByDueDate();
 }
@@ -26,7 +26,7 @@ addBtn.addEventListener("click", () => {
     addNewNote();
 });
 
-function addNewNote(title = "Untitled Note - Click here to give it a name!", text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "") {
+function addNewNote(title = "Untitled Note - Click here to give it a name!", text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "", image = "") {
     const note = document.createElement("div");
     note.classList.add("note");
     note.style.backgroundColor = color;
@@ -39,13 +39,21 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                 <input type="text" class="tag" placeholder="Add tag..."/>
                 <button class="edit"><i class="fas fa-edit"></i></button>
                 <button class="mic"><i class="fas fa-microphone"></i></button>
+                <button class="image-btn"><i class="fas fa-image"></i></button>
+                <input type="file" class="image-upload" accept="image/*" style="display: none;">
                 <audio class="voice-note" controls></audio>
                 <button class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;">
             </div>
             <div class="note-title ${title ? "" : "untitled"}" contenteditable="false">${title}</div>
             <div class="main ${text ? "" : "hidden"}"></div>
-            <textarea class="${text ? "" : "hidden"}">${text}</textarea>
+            <div class="note-content">
+                <textarea>${text}</textarea>
+                <div class="image-container ${image ? "" : "hidden"}">
+                    <img src="${image}" class="note-image" />
+                    <span class="remove-image">✖</span>
+                </div>
+            </div>
         </div>
     `;
 
@@ -117,11 +125,71 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         updateLS();
     });
 
+    const imageBtn = note.querySelector('.image-btn');
+    const imageUploadInput = note.querySelector('.image-upload');
+    const imageContainer = note.querySelector('.image-container');
+    const noteImage = note.querySelector('.note-image');
+    const removeImageIcon = note.querySelector('.remove-image');
+
+    if (image) {
+        noteImage.src = image;
+        imageContainer.classList.remove('hidden');
+    }
+
+    imageBtn.addEventListener('click', () => {
+        imageUploadInput.click();
+    });
+
+    imageUploadInput.addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                noteImage.src = e.target.result;
+                imageContainer.classList.remove('hidden');
+                updateLS(); // Update Local Storage with new image data
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    removeImageIcon.addEventListener('click', () => {
+        noteImage.src = '';
+        imageContainer.classList.add('hidden');
+        updateLS();
+    });
+
+    // Add tooltip for image upload button
+    const imageTooltip = document.createElement("span");
+    imageTooltip.classList.add("tooltip");
+    imageTooltip.innerText = "Upload or remove image";
+    imageBtn.appendChild(imageTooltip);
+
+    imageBtn.addEventListener("mouseenter", () => {
+        imageTooltip.classList.add("visible");
+    });
+
+    imageBtn.addEventListener("mouseleave", () => {
+        imageTooltip.classList.remove("visible");
+    });
+
     const micBtn = note.querySelector(".mic");
     const voiceNotePlayer = note.querySelector(".voice-note");
-
     let mediaRecorder;
     let audioChunks = [];
+    const removeRecordingBtn = document.createElement('button');
+    removeRecordingBtn.innerHTML = '✖';
+    removeRecordingBtn.className = 'remove-recording hidden';
+    removeRecordingBtn.title = "Remove Voice Note";
+
+    if (voiceNote) {
+        note.querySelector('.voice-note').src = voiceNote;
+    }
+
+    // Check if there is an existing voice note
+    if (voiceNote.src) {
+        micBtn.disabled = true; // Disable recording if voice note exists
+        removeRecordingBtn.classList.remove('hidden');
+    }
 
     micBtn.addEventListener("click", () => {
         if (typeof mediaRecorder === 'undefined' || mediaRecorder.state === "inactive") {
@@ -135,8 +203,17 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                     mediaRecorder.onstop = () => {
                         let audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                         let audioUrl = URL.createObjectURL(audioBlob);
-                        voiceNotePlayer.src = audioUrl;
-                        updateLS();
+
+                        // Convert blob to Base64
+                        const reader = new FileReader();
+                        reader.onloadend = function() {
+                            let base64data = reader.result;
+                            voiceNotePlayer.src = base64data;
+                            updateLS(); // Update Local Storage
+                        };
+                        reader.readAsDataURL(audioBlob);
+
+                        audioChunks = [];
                     };
 
                     audioChunks = [];
@@ -151,6 +228,15 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             recordingStatus.style.display = "none";
         }
     });
+
+    removeRecordingBtn.addEventListener('click', () => {
+        voiceNotePlayer.src = '';
+        removeRecordingBtn.classList.add('hidden');
+        micBtn.disabled = false;
+        updateLS();
+    });
+
+    voiceNotePlayer.parentNode.insertBefore(removeRecordingBtn, voiceNotePlayer.nextSibling);
 
     const micTooltip = document.createElement("span");
     micTooltip.classList.add("tooltip");
@@ -204,6 +290,27 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     notesContainer.addEventListener('drop', handleDrop);
 
     notesContainer.appendChild(note);
+
+    imageBtn.title = "Upload or remove image";
+    micBtn.title = "Record or stop recording voice note";
+}
+
+function updateLS() {
+    const notesArr = [];
+    document.querySelectorAll(".note").forEach((note) => {
+        const imageData = note.querySelector('.note-image').src;
+        const voiceData = note.querySelector('.voice-note').src;
+        notesArr.push({
+            title: note.querySelector(".note-title").textContent,
+            text: note.querySelector("textarea").value,
+            color: note.style.backgroundColor,
+            tag: note.querySelector(".tag").value,
+            dueDate: note.querySelector(".due-date").value,
+            voiceNote: voiceData.startsWith('data:audio') ? voiceData : '',
+            image: imageData.includes('data:image') ? imageData : ''
+        });
+    });
+    localStorage.setItem("notes", JSON.stringify(notesArr));
 }
 
 let autoScrollInterval;
@@ -224,11 +331,11 @@ function handleWindowDragOver(e) {
 }
 
 function startAutoScrolling(amount) {
-    if (autoScrollInterval) return; // Already autoscrolling
+    if (autoScrollInterval) return;
 
     autoScrollInterval = setInterval(() => {
         window.scrollBy(0, amount);
-    }, 50); // Adjust the interval for faster or slower scrolling
+    }, 50);
 }
 
 function stopAutoScrolling() {
@@ -268,22 +375,6 @@ function handleDrop(e) {
     draggable.classList.remove('dragging');
 }
 
-function handleDragEnter(e) {
-    e.preventDefault();
-    const afterElement = getDragAfterElement(notesContainer, e.clientY);
-    if (afterElement) {
-        afterElement.style.borderTop = '2px dashed #666';
-    }
-}
-
-function handleDragLeave(e) {
-    e.preventDefault();
-    const afterElement = getDragAfterElement(notesContainer, e.clientY);
-    if (afterElement) {
-        afterElement.style.borderTop = 'none';
-    }
-}
-
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.note:not(.dragging)')];
 
@@ -292,7 +383,8 @@ function getDragAfterElement(container, y) {
         const offset = y - box.top - box.height / 2;
         if (offset < 0 && offset > closest.offset) {
             return { offset: offset, element: child };
-        } else {
+        }
+        else {
             return closest;
         }
     }, { offset: Number.NEGATIVE_INFINITY }).element;
@@ -356,24 +448,7 @@ function sortNotesByDueDate() {
         }
     });
 
-    // Re-append notes in sorted order
     notesArray.forEach(note => notesContainer.appendChild(note));
-}
-
-function updateLS() {
-    const notesArr = [];
-    document.querySelectorAll(".note").forEach((note) => {
-        notesArr.push({
-            title: note.querySelector(".note-title").textContent,
-            text: note.querySelector("textarea").value,
-            color: note.style.backgroundColor,
-            tag: note.querySelector(".tag").value,
-            dueDate: note.querySelector(".due-date").value,
-            voiceNote: note.querySelector(".voice-note").src
-        });
-    });
-
-    localStorage.setItem("notes", JSON.stringify(notesArr));
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -406,7 +481,8 @@ themeToggleButton.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
     if (document.body.classList.contains("dark-mode")) {
         localStorage.setItem("theme", "dark-mode");
-    } else {
+    }
+    else {
         localStorage.removeItem("theme");
     }
 });
