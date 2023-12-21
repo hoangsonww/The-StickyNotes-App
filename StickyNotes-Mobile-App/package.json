@@ -15,7 +15,14 @@
   "devDependencies": {
     "cordova-android": "^12.0.1",
     "cordova-ios": "^7.0.1",
-    "cordova-plugin-geolocation": "^5.0.0"
+    "cordova-plugin-battery-status": "^2.0.3",
+    "cordova-plugin-camera": "^7.0.0",
+    "cordova-plugin-device": "^2.1.0",
+    "cordova-plugin-geolocation": "^5.0.0",
+    "cordova-plugin-inappbrowser": "^6.0.0",
+    "cordova-plugin-network-information": "^3.0.0",
+    "cordova-plugin-statusbar": "^4.0.0",
+    "cordova-plugin-vibration": "^3.1.1"
   },
   "cordova": {
     "platforms": [
@@ -25,7 +32,16 @@
     "plugins": {
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
-      }
+      },
+      "cordova-plugin-battery-status": {},
+      "cordova-plugin-camera": {
+        "ANDROIDX_CORE_VERSION": "1.6.+"
+      },
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-vibration": {},
+      "cordova-plugin-device": {}
     }
   }
 }

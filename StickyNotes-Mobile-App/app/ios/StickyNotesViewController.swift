@@ -313,12 +313,3 @@ weatherManager.fetchWeather(city: "London") { result in
     }
 }
 
-let weatherManager = WeatherManager()
-weatherManager.fetchLocation { result in
-    switch result {
-    case .success(let location):
-        print("Location: \(location)")
-    case .failure(let error):
-        print("Location fetching failed with error: \(error)")
-    }
-}

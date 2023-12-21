@@ -2,7 +2,7 @@
 
 ## Overview
 
-The StickyNotes App is a dynamic, user-friendly web application that allows users to create, edit, manage, and organize sticky notes with ease. Created by Son (David) Nguyen in 2023, the app features a variety of functionalities including voice note recording, color customization, tagging, and more, making it a versatile tool for personal or professional use.
+The StickyNotes App is a dynamic, user-friendly web application that allows users to create, edit, manage, and organize sticky notes with ease. Created by Son (David) Nguyen in 2023, the app features a variety of functionalities including voice note recording, color customization, tagging, and more, making it a versatile tool for personal or professional use. Additionally, the mobile app version of the app is currently in development with Apache Cordova and React Native and will be released in the near future!
 
 ## Features
 
@@ -18,6 +18,13 @@ The StickyNotes App is a dynamic, user-friendly web application that allows user
 - **Automatic Sorting:** Notes can be automatically sorted by their due dates.
 - **Shake Animation:** A fun feature to shake all the notes on the screen.
 - **Chatbot Integration:** An embedded chatbot named Eliza provides assistance and answers to common queries about the app.
+
+## Technology Stack
+- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React.
+- **Backend:** Node.js, Django, and more.
+- **Database:** MongoDB, MySQL.
+- **Middleware:** Express, Django REST Framework.
+- **APIs:** Google Cloud Speech-to-Text API, Google Cloud Text-to-Speech API, Google Cloud Translation API, Google Cloud Natural Language API, Go
 
 ## Installation and Setup
 
