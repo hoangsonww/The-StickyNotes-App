@@ -17,7 +17,7 @@ const notes = JSON.parse(localStorage.getItem("notes"));
 
 if (notes) {
     notes.forEach((note) => {
-        addNewNote(note.title, note.text, note.color, note.tag, note.dueDate, note.voiceNote, note.image);
+        addNewNote(note.title, note.text, note.color, note.tag, note.dueDate, note.voiceNote, note.image, note.isPinned);
     });
     sortNotesByDueDate();
 }
@@ -26,11 +26,15 @@ addBtn.addEventListener("click", () => {
     addNewNote();
 });
 
-function addNewNote(title = "Untitled Note - Click here to give it a name!", text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "", image = "") {
+function addNewNote(title = "Untitled Note - Click here to give it a name!", text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "", image = "", isPinned = false) {
     const note = document.createElement("div");
     note.classList.add("note");
     note.style.backgroundColor = color;
     let today = new Date().toISOString().split('T')[0];
+
+    if (isPinned) {
+        note.classList.add("pinned");
+    }
 
     note.innerHTML = `
         <div class="notes">
@@ -42,6 +46,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                 <button class="image-btn"><i class="fas fa-image"></i></button>
                 <input type="file" class="image-upload" accept="image/*" style="display: none;">
                 <audio class="voice-note" controls></audio>
+                <button class="pin">${isPinned ? 'Unpin' : 'Pin'}</button>
                 <button class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;">
             </div>
@@ -94,6 +99,16 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         if (!textArea.classList.contains("hidden")) {
             textArea.focus();
         }
+    });
+
+    const pinBtn = note.querySelector('.pin');
+    pinBtn.innerHTML = '<i class="fas fa-thumbtack"></i>';
+    pinBtn.title = isPinned ? "Unpin Note" : "Pin Note";
+    pinBtn.addEventListener('click', () => {
+        const isNotePinned = note.classList.toggle('pinned');
+        pinBtn.innerHTML = isNotePinned ? '<i class="fas fa-thumbtack"></i>' : '<i class="far fa-thumbtack"></i>';
+        updateLS();
+        sortNotesByPinned();
     });
 
     editBtn.title = "Edit Note";
@@ -302,6 +317,31 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     micBtn.title = "Record or stop recording voice note";
 }
 
+function sortNotesByPinned() {
+    const pinnedNotes = [];
+    const unpinnedNotes = [];
+
+    document.querySelectorAll(".note").forEach((note) => {
+        if (note.classList.contains('pinned')) {
+            pinnedNotes.push(note);
+        } else {
+            unpinnedNotes.push(note);
+        }
+    });
+
+    pinnedNotes.concat(unpinnedNotes).forEach(note => notesContainer.appendChild(note));
+}
+
+function toggleDarkMode() {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    if (isDarkMode) {
+        localStorage.setItem('theme', 'dark-mode');
+    }
+    else {
+        localStorage.removeItem('theme');
+    }
+}
+
 function updateLS() {
     const notesArr = [];
     document.querySelectorAll(".note").forEach((note) => {
@@ -314,7 +354,8 @@ function updateLS() {
             tag: note.querySelector(".tag").value,
             dueDate: note.querySelector(".due-date").value,
             voiceNote: voiceData.startsWith('data:audio') ? voiceData : '',
-            image: imageData.includes('data:image') ? imageData : ''
+            image: imageData.includes('data:image') ? imageData : '',
+            isPinned: note.classList.contains('pinned')
         });
     });
     localStorage.setItem("notes", JSON.stringify(notesArr));

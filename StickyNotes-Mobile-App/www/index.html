@@ -20,6 +20,9 @@
     <button class="add" id="add">
         <i class="fas fa-plus"></i> Add A Note!
     </button>
+    <h4>
+        Cre: Son (David) Nguyen, 2023
+    </h4>
     <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
 
 </header>
@@ -28,77 +31,79 @@
 
     <div class="quick-access-toolbar" title="Quick Access Buttons">
         <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
-        <button onclick="document.body.classList.toggle('dark-mode')" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+        <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
         <button id= "toggleCalcBtn" onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
-        <button onclick="sortNotesByDueDate()" title="Sort Notes"><i class="fas fa-sort"></i></button>
+        <button onclick="sortNotesByDueDate()" title="Sort Notes By Due Date"><i class="fas fa-sort"></i></button>
     </div>
 
-    <div class="feedback-container">
-        <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
-        <div class="feedback-form" id="feedbackForm">
-            <h4 class="feedback-title">Quick Feedback</h4>
-            <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
-            <div class="feedback-actions">
-                <button onclick="submitFeedback()">Submit</button>
-                <button onclick="toggleFeedbackForm()">Cancel</button>
+    <div>
+        <div class="feedback-container">
+            <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
+            <div class="feedback-form" id="feedbackForm">
+                <h4 class="feedback-title">Quick Feedback</h4>
+                <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
+                <div class="feedback-actions">
+                    <button onclick="submitFeedback()">Submit</button>
+                    <button onclick="toggleFeedbackForm()">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="timer-container">
-        <button onclick="toggleTimer()" class="timer-toggle-btn"><i class="fas fa-clock"></i></button>
-        <div class="timer-form" id="timerForm">
-            <h4 class="timer-title">Focus Timer</h4>
-            <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
-            <button onclick="startTimer()" id="startTimerBtn">Start</button>
-            <button onclick="toggleTimer()" id="closeTimerBtn">Close</button>
-            <button onclick="pauseTimer()" id="pauseTimerBtn" style="display:none;">Pause</button>
-            <button onclick="resetTimer()">Reset</button>
-            <button onclick="setTimerManually()" id="setTimerBtn">Set Timer</button>
+        <div class="timer-container">
+            <button onclick="toggleTimer()" class="timer-toggle-btn"><i class="fas fa-clock"></i></button>
+            <div class="timer-form" id="timerForm">
+                <h4 class="timer-title">Focus Timer</h4>
+                <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
+                <button onclick="startTimer()" id="startTimerBtn">Start</button>
+                <button onclick="toggleTimer()" id="closeTimerBtn">Close</button>
+                <button onclick="pauseTimer()" id="pauseTimerBtn" style="display:none;">Pause</button>
+                <button onclick="resetTimer()">Reset</button>
+                <button onclick="setTimerManually()" id="setTimerBtn">Set Timer</button>
+            </div>
         </div>
-    </div>
 
-    <div class="mood-tracker-container">
-        <button onclick="toggleMoodTracker()" class="mood-tracker-toggle-btn"><i class="fas fa-smile"></i></button>
-        <div class="mood-tracker-form" id="moodTrackerForm">
-            <h4 class="mood-tracker-title">Mood Tracker</h4>
-            <select id="moodSelect">
-                <option value="Happy">Happy</option>
-                <option value="Sad">Sad</option>
-                <option value="Stressed">Stressed</option>
-                <option value="Relaxed">Relaxed</option>
-            </select>
-            <button id="logMoodBtn" onclick="logMood()">Log Mood</button>
-            <button onclick="toggleMoodTracker()" class="close-btn">Close</button>
+        <div class="mood-tracker-container">
+            <button onclick="toggleMoodTracker()" class="mood-tracker-toggle-btn"><i class="fas fa-smile"></i></button>
+            <div class="mood-tracker-form" id="moodTrackerForm">
+                <h4 class="mood-tracker-title">Mood Tracker</h4>
+                <select id="moodSelect">
+                    <option value="Happy">Happy</option>
+                    <option value="Sad">Sad</option>
+                    <option value="Stressed">Stressed</option>
+                    <option value="Relaxed">Relaxed</option>
+                </select>
+                <button id="logMoodBtn" onclick="logMood()">Log Mood</button>
+                <button onclick="toggleMoodTracker()" class="close-btn">Close</button>
+            </div>
         </div>
-    </div>
-
-    <button id="toggleReminderBtn" onclick="toggleReminderForm()" title="Add & View your reminders!" class="reminder-toggle-btn"><i style="margin-left: -2px" class="fas fa-bell"></i></button>
-
-    <div class="reminder-form" id="reminderForm" style="display: none;">
-        <h4 class="reminder-title">Set a Quick Reminder</h4>
-        <input type="text" id="reminderText" placeholder="Your reminder...">
-        <input type="datetime-local" id="reminderDateTime" />
-        <button onclick="setReminder()" id="logMoodBtn">Set Reminder</button>
-        <button onclick="toggleReminderForm()" class="close-btn">Close</button>
-        <div id="upcomingReminders" class="upcoming-reminders">
-            <h4>Upcoming Reminders</h4>
-            <ul id="reminderList"></ul>
+        <div class="reminder-container">
+            <button id="toggleReminderBtn" onclick="toggleReminderForm()" title="Add & View your reminders!" class="reminder-toggle-btn"><i style="margin-left: -2px" class="fas fa-bell"></i></button>
+            <div class="reminder-form" id="reminderForm" style="display: none;">
+                <h4 class="reminder-title">Set a Quick Reminder</h4>
+                <input type="text" id="reminderText" placeholder="Your reminder...">
+                <input type="datetime-local" id="reminderDateTime" />
+                <button onclick="setReminder()" id="logMoodBtn">Set Reminder</button>
+                <button onclick="toggleReminderForm()" class="close-btn">Close</button>
+                <div id="upcomingReminders" class="upcoming-reminders">
+                    <h4>Upcoming Reminders</h4>
+                    <ul id="reminderList"></ul>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <button id="toggleGoalsTrackerBtn" onclick="toggleGoalsTracker()" title="Track your goals!" class="goals-toggle-btn"><i style="margin-left: -3px" class="fas fa-tasks"></i></button>
+        <button id="toggleGoalsTrackerBtn" onclick="toggleGoalsTracker()" title="Track your goals!" class="goals-toggle-btn"><i style="margin-left: -3px" class="fas fa-tasks"></i></button>
 
-    <div id="goalsTrackerContainer" class="goals-tracker-container" style="display:none;">
-        <div class="goals-tracker-form">
-            <h4 class="goals-tracker-title">Daily Goals Tracker</h4>
-            <input type="text" id="goalText" placeholder="Enter your goal...">
-            <button id="logMoodBtn" onclick="addGoal()">Add Goal</button>
-            <button onclick="toggleGoalsTracker()" class="close-btn">Close</button>
-            <h5>In-Progress Goals</h5>
-            <ul id="inProgressGoals"></ul>
-            <h5>Completed Goals</h5>
-            <ul id="completedGoals"></ul>
+        <div id="goalsTrackerContainer" class="goals-tracker-container" style="display:none;">
+            <div class="goals-tracker-form">
+                <h4 class="goals-tracker-title">Daily Goals Tracker</h4>
+                <input type="text" id="goalText" placeholder="Enter your goal...">
+                <button id="logMoodBtn" onclick="addGoal()">Add Goal</button>
+                <button onclick="toggleGoalsTracker()" class="close-btn">Close</button>
+                <h5>In-Progress Goals</h5>
+                <ul id="inProgressGoals"></ul>
+                <h5>Completed Goals</h5>
+                <ul id="completedGoals"></ul>
+            </div>
         </div>
     </div>
 
@@ -156,6 +161,15 @@
     </div>
 
     <div id="timeContainer" class="time-display"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
 
 </body>
 

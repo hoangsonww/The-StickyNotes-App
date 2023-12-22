@@ -1330,3 +1330,7 @@ button {
 .app-btn:hover {
     background-color: #403890;
 }
+
+.note.pinned {
+    border: 2px solid gold;
+}
