@@ -94,14 +94,22 @@ h4 {
 }
 
 .note-content {
-    display: flex;
     align-items: flex-start;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .note-content textarea {
     flex: 1;
     max-height: 200px;
     resize: none;
+}
+
+.note-content textarea,
+.note-content .image-container {
+    width: 100%;
+    margin-top: 0.5rem;
 }
 
 .note-content .note-image {
@@ -120,6 +128,9 @@ h4 {
     padding: 1rem;
     border-radius: 10px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .note:hover {
@@ -168,8 +179,11 @@ h4 {
 
 .note .tools {
     display: flex;
-    justify-content: space-between; /* Changed for spacing */
-    padding: 0.5rem; /* Added padding */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .note .tools button,
@@ -389,6 +403,20 @@ h4 {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
+}
+
+.note .tools .tag {
+    font-size: 1rem;
+    margin-right: 10px;
+    outline: none;
+    padding: 5px;
+    width: auto;
+    padding-left: 10px;
+    border: grey 1px solid;
+}
+
+.note .tools .due-date {
+    border: grey 1px solid;
 }
 
 .weather-display, .weather-search-container {

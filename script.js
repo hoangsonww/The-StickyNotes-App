@@ -35,7 +35,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     note.innerHTML = `
         <div class="notes">
             <div class="tools">
-                <input type="date" class="due-date" min="${today}" value="${dueDate}">
+                <input type="text" class="due-date" placeholder="Add Due Date..." onfocus="this.type='date';this.focus();" onblur="if(!this.value)this.type='text';" min="${today}" value="">
                 <input type="text" class="tag" placeholder="Add tag..."/>
                 <button class="edit"><i class="fas fa-edit"></i></button>
                 <button class="mic"><i class="fas fa-microphone"></i></button>
@@ -121,6 +121,15 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     });
 
     const dueDatePicker = note.querySelector(".due-date");
+
+    dueDatePicker.type = 'text';
+    dueDatePicker.value = '';
+
+    if (dueDate) {
+        dueDatePicker.type = 'date';
+        dueDatePicker.value = dueDate;
+    }
+
     dueDatePicker.addEventListener("change", () => {
         updateLS();
     });
@@ -158,7 +167,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         updateLS();
     });
 
-    // Add tooltip for image upload button
     const imageTooltip = document.createElement("span");
     imageTooltip.classList.add("tooltip");
     imageTooltip.innerText = "Upload or remove image";
@@ -185,9 +193,8 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         note.querySelector('.voice-note').src = voiceNote;
     }
 
-    // Check if there is an existing voice note
     if (voiceNote.src) {
-        micBtn.disabled = true; // Disable recording if voice note exists
+        micBtn.disabled = true;
         removeRecordingBtn.classList.remove('hidden');
     }
 
@@ -241,14 +248,14 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     const micTooltip = document.createElement("span");
     micTooltip.classList.add("tooltip");
     micTooltip.innerText = "Record a quick voice note instead of typing!";
-    micBtn.style.position = "relative"; // to position tooltip correctly
+    micBtn.style.position = "relative";
     micBtn.appendChild(micTooltip);
 
     const playbackTooltip = document.createElement("span");
     playbackTooltip.classList.add("tooltip");
     playbackTooltip.innerText = "Listen to your voice note!";
-    voiceNotePlayer.style.position = "relative"; // to position tooltip correctly
-    voiceNotePlayer.parentNode.insertBefore(playbackTooltip, voiceNotePlayer.nextSibling); // placing tooltip next to voiceNotePlayer
+    voiceNotePlayer.style.position = "relative";
+    voiceNotePlayer.parentNode.insertBefore(playbackTooltip, voiceNotePlayer.nextSibling);
 
     micBtn.addEventListener("mouseenter", () => {
         micTooltip.classList.add("visible");
@@ -258,7 +265,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         micTooltip.classList.remove("visible");
     });
 
-    // Add event listeners to voice note player
     voiceNotePlayer.addEventListener("mouseenter", () => {
         playbackTooltip.classList.add("visible");
     });
@@ -281,7 +287,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     moveDownButton.addEventListener('click', () => moveDown(note));
     note.querySelector('.tools').appendChild(moveDownButton);
 
-    // Drag and Drop
     note.draggable = true;
     note.addEventListener('dragstart', handleDragStart);
     note.addEventListener('dragend', handleDragEnd);

@@ -17,6 +17,14 @@ body {
     width: 100%;
 }
 
+.note .tools .due-date {
+    border: 1px solid grey;
+}
+
+.note .tools .tag {
+    border: 1px solid grey;
+}
+
 header {
     text-align: center;
     margin-bottom: 1rem;
@@ -269,10 +277,10 @@ h4 {
 .note .tools .tag {
     font-size: 1rem;
     margin-right: 10px;
-    border: none;
     outline: none;
     padding: 5px;
     width: auto;
+    padding-left: 10px;
 }
 
 .tag {
@@ -1301,4 +1309,34 @@ button {
 
 .app-btn:hover {
     background-color: #403890;
+}
+
+@media (max-width: 888px) {
+    .note {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .note-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .note-content textarea,
+    .note-content .image-container {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .note .tools {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0.5rem;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
 }
