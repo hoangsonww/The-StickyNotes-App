@@ -1030,7 +1030,7 @@ function fetchWeatherByCoords(lat, lon) {
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
         if (error.code == error.PERMISSION_DENIED) {
-            weatherDisplay.innerHTML = "<p>Please enable location access to view weather in your area.</p>";
+            weatherDisplay.innerHTML = "<p>Location Access Denied.</p>";
         }
         weatherSearchContainer.classList.remove('weather-hidden');
     });

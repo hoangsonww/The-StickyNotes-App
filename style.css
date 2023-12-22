@@ -975,6 +975,15 @@ button:hover .tooltip {
     z-index: 1000;
 }
 
+.reminder-container {
+    position: fixed;
+    right: 0;
+    top: 54%;
+    transform: translateY(-50%);
+    width: 200px;
+    z-index: 1000;
+}
+
 .feedback-btn {
     position: absolute;
     right: 0;
@@ -1058,7 +1067,7 @@ button:hover .tooltip {
     cursor: pointer;
     position: fixed;
     right: 0;
-    transform: translateY(290%);
+    top: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1077,7 +1086,7 @@ button:hover .tooltip {
     cursor: pointer;
     position: fixed;
     right: 0;
-    transform: translateY(939%);
+    top: 54%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1095,7 +1104,7 @@ button:hover .tooltip {
     cursor: pointer;
     position: fixed;
     right: 0;
-    transform: translateY(1040%);
+    top: 58%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1338,5 +1347,4 @@ button {
         align-items: center;
         gap: 0.5rem;
     }
-
 }
