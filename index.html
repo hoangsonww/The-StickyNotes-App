@@ -21,7 +21,7 @@
         <i class="fas fa-plus"></i> Add A Note!
     </button>
     <h4>
-        Cre: Son (David) Nguyen, 2023
+        Your personal space for ideas, tasks, and creativity at your fingertips or mouse clicks!
     </h4>
     <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
 
@@ -73,6 +73,12 @@
             </select>
             <button id="logMoodBtn" onclick="logMood()">Log Mood</button>
             <button onclick="toggleMoodTracker()" class="close-btn">Close</button>
+        </div>
+    </div>
+
+    <div class="recommended-note-container">
+        <button id="generateRecommendedNoteBtn" class="recommended-note-toggle-btn" title="Generate a Recommended Note!"><i class="fas fa-brain"></i></button>
+        <div class="recommended-note-form" id="recommendedNoteForm">
         </div>
     </div>
 

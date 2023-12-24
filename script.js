@@ -75,7 +75,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
     noteTitle.addEventListener('click', () => {
         if (noteTitle.classList.contains('untitled')) {
-            noteTitle.textContent = ''; // Clear the default text
+            noteTitle.textContent = '';
         }
         noteTitle.contentEditable = true;
         noteTitle.focus();
@@ -171,7 +171,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             reader.onload = function (e) {
                 noteImage.src = e.target.result;
                 imageContainer.classList.remove('hidden');
-                updateLS(); // Update Local Storage with new image data
+                updateLS();
             };
             reader.readAsDataURL(this.files[0]);
         }
@@ -227,12 +227,11 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                         let audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                         let audioUrl = URL.createObjectURL(audioBlob);
 
-                        // Convert blob to Base64
                         const reader = new FileReader();
                         reader.onloadend = function() {
                             let base64data = reader.result;
                             voiceNotePlayer.src = base64data;
-                            updateLS(); // Update Local Storage
+                            updateLS();
                         };
                         reader.readAsDataURL(audioBlob);
 
@@ -241,13 +240,13 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
                     audioChunks = [];
                     mediaRecorder.start();
-                    micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>'; // Update icon to indicate recording
+                    micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
                 });
             recordingStatus.style.display = "block";
         }
         else if (mediaRecorder.state === "recording") {
             mediaRecorder.stop();
-            micBtn.innerHTML = '<i class="fas fa-microphone"></i>'; // Reset icon after recording
+            micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
             recordingStatus.style.display = "none";
         }
     });
@@ -338,7 +337,6 @@ function updateLS() {
 function sortNotesByPinned() {
     const pinnedNotes = [];
     const unpinnedNotes = [];
-
     document.querySelectorAll(".note").forEach((note) => {
         if (note.classList.contains('pinned')) {
             pinnedNotes.push(note);
@@ -346,7 +344,6 @@ function sortNotesByPinned() {
             unpinnedNotes.push(note);
         }
     });
-
     pinnedNotes.concat(unpinnedNotes).forEach(note => notesContainer.appendChild(note));
 }
 
@@ -354,18 +351,15 @@ let autoScrollInterval;
 
 function handleWindowDragOver(e) {
     const cursorY = e.clientY;
-    const triggerDistance = 50; // The distance from the edge at which scrolling should start
-
+    const triggerDistance = 50;
     if (cursorY < triggerDistance) {
-        // Cursor is near the top of the viewport
-        startAutoScrolling(-5); // Negative for scrolling up
+        startAutoScrolling(-5);
     }
     else if (window.innerHeight - cursorY < triggerDistance) {
-        // Cursor is near the bottom of the viewport
-        startAutoScrolling(5); // Positive for scrolling down
+        startAutoScrolling(5);
     }
     else {
-        stopAutoScrolling(); // Cursor is no longer near the top or bottom
+        stopAutoScrolling();
     }
 }
 
@@ -447,7 +441,6 @@ function shakeAllNotes() {
     const notes = document.querySelectorAll(".note");
     notes.forEach((note) => {
         note.classList.add("shake-it");
-        // Remove the shake-it class after the animation ends to avoid unwanted repetitions
         note.addEventListener("animationend", () => {
             note.classList.remove("shake-it");
         });
@@ -570,7 +563,7 @@ function importNotes(event) {
 
 const exportButton = document.createElement("button");
 exportButton.innerText = "Export Notes";
-exportButton.className = "sticky-button"; // Add this line
+exportButton.className = "sticky-button";
 document.body.appendChild(exportButton);
 exportButton.addEventListener("click", exportNotes);
 exportButton.className = "button";
@@ -578,20 +571,20 @@ exportButton.className = "button";
 const importLabel = document.createElement("label");
 importLabel.innerText = "Import Notes";
 importLabel.setAttribute("for", "import-input");
-importLabel.className = "sticky-button"; // Using the same class for consistency
+importLabel.className = "sticky-button";
 document.body.appendChild(importLabel);
-importLabel.style.transition = "all 0.3s ease-in-out"; // Add a transition for the hover effect
+importLabel.style.transition = "all 0.3s ease-in-out";
 
 importLabel.addEventListener("mouseenter", () => {
-    importLabel.style.transform = "scale(1.1)"; // Scale up on hover
+    importLabel.style.transform = "scale(1.1)";
 });
 importLabel.addEventListener("mouseleave", () => {
-    importLabel.style.transform = "scale(1)"; // Scale back to normal on exit
+    importLabel.style.transform = "scale(1)";
 });
 
 const importInput = document.createElement("input");
 importInput.type = "file";
-importInput.id = "import-input"; // ID added for the label to recognize it
+importInput.id = "import-input";
 document.body.appendChild(importInput);
 importInput.addEventListener("change", importNotes);
 importInput.className = "button";
@@ -607,25 +600,21 @@ document.querySelector(".chatbot").prepend(chatTitleElem);
 chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.target.value.trim()) {
         const question = e.target.value.trim();
-
         const userMsgElem = document.createElement("div");
         userMsgElem.innerText = `You: ${question}`;
         chatMessages.appendChild(userMsgElem);
-
         setTimeout(() => {
             const response = getElizaResponse(question);
             const elizaMsgElem = document.createElement("div");
             elizaMsgElem.innerText = `Eliza: ${response}`;
             chatMessages.appendChild(elizaMsgElem);
-        }, 1000); // 1-second delay
-
+        }, 1000);
         e.target.value = '';
     }
 });
 
 function getElizaResponse(question) {
     question = question.toLowerCase();
-
     const responses = [
         { pattern: /hello|hi|hey/, response: "Hello! How can I assist you today?" },
         { pattern: /what is this app|what does this app do/, response: "This app allows you to create, edit, and manage sticky notes." },
@@ -709,17 +698,13 @@ function getElizaResponse(question) {
         { pattern: /reminders|notifications/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
         { pattern: /archive|archive note/, response: "You can archive notes that you don't need anymore. They'll be hidden from the main view but can be accessed later." },
         { pattern: /mood|emoji/, response: "You can add emojis to your notes. Just click on the 'Add Emoji' button when editing a note." },
-
-        // Default response
         { pattern: /.*/, response: "I'm not sure about that. Can you be more specific or ask another question?" }
     ];
-
     for (let i = 0; i < responses.length; i++) {
         let match = question.match(responses[i].pattern);
         if (match) {
             if (match[1] && match[2]) {
-                // Handle creation of a new note if the pattern matches
-                addNewNote(match[2]); // Add the note with the captured content
+                addNewNote(match[2]);
                 return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]);
             }
             return responses[i].response;
@@ -735,12 +720,12 @@ toggleButton.title="Minimize/Maximize Chatbot";
 toggleButton.onclick = function() {
     const chatMessagesElem = document.querySelector(".chat-messages");
     const chatInputElem = document.querySelector(".chat-input");
-
     if (chatMessagesElem.style.display === "none") {
         chatMessagesElem.style.display = "";
         chatInputElem.style.display = "";
         toggleButton.innerText = "-";
-    } else {
+    }
+    else {
         chatMessagesElem.style.display = "none";
         chatInputElem.style.display = "none";
         toggleButton.innerText = "+";
@@ -749,7 +734,6 @@ toggleButton.onclick = function() {
 
 const chatHeaderElem = document.querySelector(".chat-header");
 chatHeaderElem.appendChild(toggleButton);
-
 const chatMessagesElem = document.querySelector(".chat-messages");
 const chatInputElem = document.querySelector(".chat-input");
 chatMessagesElem.style.display = "none";
@@ -757,9 +741,9 @@ chatInputElem.style.display = "none";
 
 function toggleTyping(enable) {
     let screen = document.getElementById('calcScreen');
-    screen.disabled = !enable; // Enable or disable based on the parameter
+    screen.disabled = !enable;
     if (enable) {
-        screen.focus(); // Focus on the screen if typing is enabled
+        screen.focus();
     }
 }
 
@@ -773,8 +757,8 @@ document.getElementById('calcScreen').addEventListener('blur', function() {
 
 function enableScreen() {
     const screen = document.getElementById('calcScreen');
-    screen.disabled = false; // Make sure the screen is enabled
-    screen.focus(); // Focus on the screen for immediate typing
+    screen.disabled = false;
+    screen.focus();
 }
 
 function clearScreen() {
@@ -804,7 +788,7 @@ function calculate() {
 
 document.getElementById('calcScreen').addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.key === '=') {
-        event.preventDefault(); // Prevent the default action of the Enter key
+        event.preventDefault();
         calculate();
     }
 });
@@ -866,7 +850,7 @@ function pressOperation(operation) {
 
 function submitFeedback() {
     const feedbackText = document.getElementById('feedbackText').value;
-    if(feedbackText) {
+    if (feedbackText) {
         console.log('Feedback submitted:', feedbackText);
         alert('Thank you for your feedback!');
         document.getElementById('feedbackText').value = '';
@@ -881,10 +865,8 @@ function toggleTimer() {
     const timerForm = document.getElementById('timerForm');
     const timerBtn = document.querySelector('.timer-toggle-btn');
     const isTimerVisible = timerForm.style.display === 'block';
-
     timerForm.style.display = isTimerVisible ? 'none' : 'block';
     timerBtn.style.display = isTimerVisible ? 'flex' : 'none';
-
     if (!isTimerVisible && document.getElementById('feedbackForm').style.display === 'block') {
         toggleFeedbackForm();
     }
@@ -894,18 +876,16 @@ function toggleFeedbackForm() {
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackBtn = document.querySelector('.feedback-btn');
     const isFeedbackVisible = feedbackForm.style.display === 'block';
-
     feedbackForm.style.display = isFeedbackVisible ? 'none' : 'block';
     feedbackBtn.style.display = isFeedbackVisible ? 'flex' : 'none';
-
     if (!isFeedbackVisible && document.getElementById('timerForm').style.display === 'block') {
         toggleTimer();
     }
 }
 
 let countdownInterval;
-let defaultTimeInSeconds = 1500; // 25 minutes in seconds
-let totalTimeInSeconds = defaultTimeInSeconds; // Initialize to 25 minutes
+let defaultTimeInSeconds = 1500;
+let totalTimeInSeconds = defaultTimeInSeconds;
 let isTimerPaused = false;
 
 function startTimer() {
@@ -939,26 +919,24 @@ function stopTimer() {
 }
 
 function resetTimer() {
-    totalTimeInSeconds = defaultTimeInSeconds; // Reset to 25 minutes (1500 seconds)
-    updateTimerDisplay(); // Update the display after resetting
-    stopTimer(); // Stop the timer if it's running
+    totalTimeInSeconds = defaultTimeInSeconds;
+    updateTimerDisplay();
+    stopTimer();
 }
 
 function updateTimerDisplay() {
     let hours = Math.floor(totalTimeInSeconds / 3600);
     let minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
     let seconds = totalTimeInSeconds % 60;
-
     hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-
     document.getElementById('timerDisplay').textContent = `${hours}:${minutes}:${seconds}`;
 }
 
 
 function setTimerManually() {
-    const timeInput = prompt("Set timer (in seconds)", "1800"); // 30 minutes as default
+    const timeInput = prompt("Set timer (in seconds)", "1800");
     if (timeInput && !isNaN(timeInput) && Number(timeInput) >= 0) {
         totalTimeInSeconds = Number(timeInput);
         updateTimerDisplay();
@@ -976,7 +954,6 @@ function updateCountdownDisplay() {
         resetTimer();
         return;
     }
-
     updateTimerDisplay();
     if (!isTimerPaused) {
         totalTimeInSeconds--;
@@ -998,13 +975,11 @@ function playSound(filename) {
 document.addEventListener("DOMContentLoaded", function() {
     function updateTime() {
         const now = new Date();
-        const timeParts = now.toLocaleTimeString().split(" "); // Split time and AM/PM
-        const timeString = timeParts[0]; // Time
-        const amPm = timeParts[1]; // AM/PM
-
+        const timeParts = now.toLocaleTimeString().split(" ");
+        const timeString = timeParts[0];
+        const amPm = timeParts[1];
         document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
     }
-
     updateTime();
     setInterval(updateTime, 1000);
 });
@@ -1012,7 +987,6 @@ document.addEventListener("DOMContentLoaded", function() {
 const weatherSearchContainer = document.getElementById('weather-search-container');
 const weatherSearchInput = document.getElementById('weather-search-input');
 const weatherSearchBtn = document.getElementById('weather-search-btn');
-
 const apiKey = '593309284d3eb093ee96647eb294905b';
 
 async function fetchWeather(city) {
@@ -1029,9 +1003,7 @@ async function fetchWeather(city) {
 function handleGeoLocation(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-
     weatherDisplay.innerHTML = "<p>Loading Weather...</p>";
-
     fetchWeatherByCoords(lat, lon);
 }
 
@@ -1101,17 +1073,14 @@ taskInput.addEventListener('keydown', (e) => {
 
 function addTask(task) {
     if (task.trim() === '') return;
-
     const li = document.createElement("li");
     li.textContent = task;
-
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "✖";
     deleteBtn.onclick = function() {
         this.parentElement.remove();
         updateLocalStorage();
     };
-
     li.appendChild(deleteBtn);
     taskList.appendChild(li);
     updateLocalStorage();
@@ -1160,168 +1129,68 @@ function getMoodRecommendation(mood) {
 
 function toggleMoodTracker() {
     const moodForm = document.getElementById('moodTrackerForm');
-
-    // Toggle the display state of the form
     if (moodForm.style.display === 'none' || moodForm.style.display === '') {
         moodForm.style.display = 'block';
-    } else {
+    }
+    else {
         moodForm.style.display = 'none';
     }
 }
 
-
-let reminders = [];
-
-function setReminder() {
-    const reminderText = document.getElementById('reminderText').value;
-    const reminderDateTime = new Date(document.getElementById('reminderDateTime').value);
-
-    if (reminderText && reminderDateTime > new Date()) {
-        reminders.push({ text: reminderText, dueTime: reminderDateTime });
-        displayReminders();
-        saveRemindersToLocalStorage();
-        document.getElementById('reminderText').value = ''; // Clear the text input
-        document.getElementById('reminderDateTime').value = ''; // Clear the date input
-    }
-    else {
-        alert("Please enter a valid reminder and future date/time.");
-    }
-}
-
-function displayReminders() {
-    const list = document.getElementById('reminderList');
-    list.innerHTML = '';
-
-    reminders.forEach((reminder, index) => {
-        const item = document.createElement('li');
-        item.textContent = `${reminder.text} - Due: ${reminder.dueTime.toLocaleString()}`;
-        list.appendChild(item);
-    });
-}
-
-function checkReminders() {
+async function generateRecommendedNote() {
+    const categories = {
+        morning: ["Plan your day ahead", "List three things you are grateful for", "Write a morning affirmation"],
+        afternoon: ["Summarize your morning achievements", "Draft a to-do list for the afternoon", "Reflect on a positive interaction you had today"],
+        evening: ["Plan a relaxing evening activity", "Journal about your day", "Set goals for tomorrow"],
+        weekend: ["Brainstorm a creative project", "Write about your ideal weekend", "Create a list of books or movies you want to explore"],
+        creative: ["Sketch a small drawing", "Write a short poem or story", "Brainstorm business ideas or inventions"],
+        wellness: ["Note down your workout plan", "Meditation or mindfulness exercise", "Track your water intake or diet for the day"],
+        learning: ["Write about a new topic you want to learn", "Reflect on an interesting article or book", "Plan your learning goals for the week"]
+    };
     const now = new Date();
-    reminders = reminders.filter(reminder => {
-        const timeDiff = reminder.dueTime - now;
-        if (timeDiff <= 0) {
-            return false;
-        }
-        if (timeDiff <= 5 * 60 * 1000) {
-            alert("Reminder: " + reminder.text + " is due in 5 minutes!");
-        }
-        if (timeDiff <= 1 * 60 * 1000) {
-            alert("Reminder: " + reminder.text + " is due in 1 minute!");
-            return false;
-        }
-        return true;
-    });
-    displayReminders();
-    saveRemindersToLocalStorage();
-}
-
-function saveRemindersToLocalStorage() {
-    localStorage.setItem('reminders', JSON.stringify(reminders));
-}
-
-function loadRemindersFromLocalStorage() {
-    const storedReminders = localStorage.getItem('reminders');
-    if (storedReminders) {
-        reminders = JSON.parse(storedReminders).map(reminder => {
-            reminder.dueTime = new Date(reminder.dueTime);
-            return reminder;
-        });
-        displayReminders();
-    }
-}
-
-document.getElementById("reminderText").addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        setReminder();
-    }
-});
-
-setInterval(checkReminders, 60000);
-
-document.addEventListener('DOMContentLoaded', loadRemindersFromLocalStorage);
-
-function toggleReminderForm() {
-    const form = document.getElementById('reminderForm');
-    if (form.style.display === 'none' || form.style.display === '') {
-        form.style.display = 'block';
+    let selectedCategory;
+    let isWeekend = [0, 6].includes(now.getDay());
+    let month = now.getMonth();
+    let isSummer = month >= 5 && month <= 7;
+    if (now.getHours() < 12) {
+        selectedCategory = categories.morning;
+    } else if (now.getHours() < 18) {
+        selectedCategory = categories.afternoon;
     } else {
-        form.style.display = 'none';
+        selectedCategory = categories.evening;
     }
-}
-
-setInterval(checkReminders, 60000);
-
-let goals = [];
-
-function toggleGoalsTracker() {
-    const container = document.getElementById('goalsTrackerContainer');
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
-}
-
-function addGoal() {
-    const goalText = document.getElementById('goalText').value;
-    if (goalText) {
-        goals.push({ text: goalText, completed: false });
-        displayGoals();
-        saveGoalsToLocalStorage();
-        document.getElementById('goalText').value = '';
+    if (isWeekend) {
+        selectedCategory = categories.weekend;
     }
-    else {
-        alert("Please enter a goal.");
+    if (Math.random() < 0.2) {
+        selectedCategory = isSummer ? categories.wellness : categories.creative;
     }
+    const recommendedPrompt = selectedCategory[Math.floor(Math.random() * selectedCategory.length)];
+    createRecommendedNote(recommendedPrompt);
 }
 
-function displayGoals() {
-    const inProgressList = document.getElementById('inProgressGoals');
-    const completedList = document.getElementById('completedGoals');
-
-    inProgressList.innerHTML = '';
-    completedList.innerHTML = '';
-
-    goals.forEach((goal, index) => {
-        const item = document.createElement('li');
-        item.textContent = goal.text;
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = goal.completed;
-        checkbox.onchange = () => toggleGoalCompletion(index);
-        item.prepend(checkbox);
-
-        if (goal.completed) {
-            completedList.appendChild(item);
-        }
-        else {
-            inProgressList.appendChild(item);
-        }
-    });
+function createRecommendedNote(prompt) {
+    const popup = document.getElementById('recommendedNoteForm');
+    popup.innerHTML = `
+        <h4 class="recommended-note-title">We've got a suggestion!</h4>
+        <p>Based on your recent activities and the time of day, we think you might enjoy this:</p>
+        <p class="recommended-prompt"><strong>${prompt}</strong></p>
+        <button onclick="addNewNote('Recommended: ${prompt}', '${prompt}')">Create This Note</button>
+        <button onclick="toggleRecommendedNoteForm()">Close</button>
+    `;
+    popup.style.display = 'block';
 }
 
-function toggleGoalCompletion(index) {
-    goals[index].completed = !goals[index].completed;
-    saveGoalsToLocalStorage();
-    displayGoals();
+function toggleRecommendedNoteForm() {
+    const form = document.getElementById('recommendedNoteForm');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
 
-function saveGoalsToLocalStorage() {
-    localStorage.setItem('goals', JSON.stringify(goals));
-}
-
-function loadGoalsFromLocalStorage() {
-    const storedGoals = localStorage.getItem('goals');
-    if (storedGoals) {
-        goals = JSON.parse(storedGoals);
-        displayGoals();
-    }
-}
-
-document.getElementById("goalText").addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        addGoal();
+document.addEventListener("DOMContentLoaded", function() {
+    const generateRecommendedNoteBtn = document.getElementById("generateRecommendedNoteBtn");
+    if (generateRecommendedNoteBtn) {
+        generateRecommendedNoteBtn.addEventListener("click", function() {
+            generateRecommendedNote();
+        });
     }
 });
-
-document.addEventListener('DOMContentLoaded', loadGoalsFromLocalStorage);
