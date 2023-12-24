@@ -1160,8 +1160,15 @@ function getMoodRecommendation(mood) {
 
 function toggleMoodTracker() {
     const moodForm = document.getElementById('moodTrackerForm');
-    moodForm.style.display = moodForm.style.display === 'none' ? 'block' : 'none';
+
+    // Toggle the display state of the form
+    if (moodForm.style.display === 'none' || moodForm.style.display === '') {
+        moodForm.style.display = 'block';
+    } else {
+        moodForm.style.display = 'none';
+    }
 }
+
 
 let reminders = [];
 
@@ -1239,7 +1246,11 @@ document.addEventListener('DOMContentLoaded', loadRemindersFromLocalStorage);
 
 function toggleReminderForm() {
     const form = document.getElementById('reminderForm');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    if (form.style.display === 'none' || form.style.display === '') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
 }
 
 setInterval(checkReminders, 60000);

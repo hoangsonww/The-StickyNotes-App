@@ -36,7 +36,6 @@
         <button onclick="sortNotesByDueDate()" title="Sort Notes By Due Date"><i class="fas fa-sort"></i></button>
     </div>
 
-    <div>
     <div class="feedback-container">
         <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
         <div class="feedback-form" id="feedbackForm">
@@ -75,36 +74,6 @@
             <button id="logMoodBtn" onclick="logMood()">Log Mood</button>
             <button onclick="toggleMoodTracker()" class="close-btn">Close</button>
         </div>
-    </div>
-    <div class="reminder-container">
-        <button id="toggleReminderBtn" onclick="toggleReminderForm()" title="Add & View your reminders!" class="reminder-toggle-btn"><i style="margin-left: -2px" class="fas fa-bell"></i></button>
-        <div class="reminder-form" id="reminderForm" style="display: none;">
-            <h4 class="reminder-title">Set a Quick Reminder</h4>
-            <input type="text" id="reminderText" placeholder="Your reminder...">
-            <input type="datetime-local" id="reminderDateTime" />
-            <button onclick="setReminder()" id="logMoodBtn">Set Reminder</button>
-            <button onclick="toggleReminderForm()" class="close-btn">Close</button>
-            <div id="upcomingReminders" class="upcoming-reminders">
-                <h4>Upcoming Reminders</h4>
-                <ul id="reminderList"></ul>
-            </div>
-        </div>
-    </div>
-
-    <button id="toggleGoalsTrackerBtn" onclick="toggleGoalsTracker()" title="Track your goals!" class="goals-toggle-btn"><i style="margin-left: -3px" class="fas fa-tasks"></i></button>
-
-    <div id="goalsTrackerContainer" class="goals-tracker-container" style="display:none;">
-        <div class="goals-tracker-form">
-            <h4 class="goals-tracker-title">Daily Goals Tracker</h4>
-            <input type="text" id="goalText" placeholder="Enter your goal...">
-            <button id="logMoodBtn" onclick="addGoal()">Add Goal</button>
-            <button onclick="toggleGoalsTracker()" class="close-btn">Close</button>
-            <h5>In-Progress Goals</h5>
-            <ul id="inProgressGoals"></ul>
-            <h5>Completed Goals</h5>
-            <ul id="completedGoals"></ul>
-        </div>
-    </div>
     </div>
 
     <div class="chatbot">

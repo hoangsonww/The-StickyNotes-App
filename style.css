@@ -1215,7 +1215,7 @@ li {
     top: 50%;
     transform: translateY(-50%);
     width: 200px;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .timer-toggle-btn {
