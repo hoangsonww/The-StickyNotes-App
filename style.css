@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 
 * {
@@ -176,8 +175,8 @@ h4 {
 
 .note .tools {
     display: flex;
-    justify-content: space-between; /* Changed for spacing */
-    padding: 0.5rem; /* Added padding */
+    justify-content: space-between;
+    padding: 0.5rem;
 }
 
 .note .tools button,
@@ -479,13 +478,13 @@ body.dark-mode .note .tools button:hover {
     border-radius: 8px;
 }
 
-.chat-messages div:nth-child(odd) { /* User messages */
+.chat-messages div:nth-child(odd) {
     background-color: #e1e1e1;
     align-self: flex-end;
     margin-right: 10%;
 }
 
-.chat-messages div:nth-child(even) { /* Eliza messages */
+.chat-messages div:nth-child(even) {
     background-color: #c4c4ff;
     align-self: flex-start;
     margin-left: 10%;
@@ -519,7 +518,6 @@ body.dark-mode .note .tools button:hover {
     font-size: 16.5px;
 }
 
-/* Button Styles */
 button, input[type="button"], input[type="submit"], input[type="file"] {
     background-color: #534caf;
     border: none;
@@ -538,7 +536,6 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover {
     background-color: #403890;
 }
 
-/* File Input Styling */
 input[type="file"] {
     color: transparent;
     position: relative;
@@ -564,7 +561,6 @@ input[type="file"]:hover::before {
     background-color: #403890;
 }
 
-/* Styling for the notes container */
 .notes-container {
     display: flex;
     flex-direction: column;
@@ -577,7 +573,6 @@ input[type="file"]:hover::before {
     border-radius: 8px;
 }
 
-/* Styling for the date picker */
 input[type="date"] {
     padding: 10px;
     font-size: 16px;
@@ -594,7 +589,7 @@ input[type="date"]:hover {
 
 input[type="date"]:focus {
     outline: none;
-    border-color: #007BFF; /* Change this color if you want a different focus color */
+    border-color: #007BFF;
 }
 
 .note.pinned {
@@ -606,8 +601,8 @@ input[type="date"]:focus {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 30px; /* Adjusted for better visibility */
-    height: 30px; /* Adjusted for better visibility */
+    width: 30px;
+    height: 30px;
     font-size: 1rem;
     cursor: pointer;
     position: absolute;
@@ -635,7 +630,7 @@ input[type="date"]:focus {
     z-index: 1;
     bottom: 125%;
     left: 50%;
-    margin-left: -50px; /* Use half of the width value */
+    margin-left: -50px;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -644,20 +639,6 @@ input[type="date"]:focus {
     visibility: visible;
     opacity: 1;
 }
-
-/*.tooltip {*/
-/*    position: absolute;*/
-/*    background-color: #333;*/
-/*    color: #fff;*/
-/*    padding: 5px 10px;*/
-/*    border-radius: 5px;*/
-/*    font-size: 0.9em;*/
-/*    visibility: hidden;*/
-/*    opacity: 0;*/
-/*    transition: opacity 0.3s;*/
-/*    z-index: 10;*/
-/*    pointer-events: none; !* ensure it doesn't interfere with other interactions *!*/
-/*}*/
 
 .tooltip.visible {
     visibility: visible;
@@ -679,12 +660,10 @@ input[type="date"]:focus {
     background-color: #403890;
 }
 
-/* Hide the actual input */
 #import-input {
     display: none;
 }
 
-/* Style the import label as a button */
 #import-label {
     background-color: #534caf;
     color: white;
@@ -706,6 +685,7 @@ input[type="date"]:focus {
     font-size: 24px;
     cursor: pointer;
     color: #555;
+    z-index: 0;
 }
 
 .mic:focus {
@@ -822,9 +802,9 @@ input[type="date"]:focus {
 
 .calc-body {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
 }
 
@@ -842,14 +822,14 @@ input[type="date"]:focus {
 
 .calc-buttons {
     display: flex;
-    flex-wrap: wrap; /* Allow buttons to wrap to the next row if needed */
-    justify-content: center; /* Center horizontally */
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .calc-buttons button {
-    width: 20%; /* Adjust the width as needed */
+    width: 20%;
     padding: 10px 0;
-    margin: 5px 5px; /* Add margin to create spacing between buttons */
+    margin: 5px 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f7f7f7;
@@ -887,32 +867,18 @@ button:hover .tooltip {
 
 #calculator,
 .chatbot,
-.weather-container,
 #timeContainer,
-#mini-task-list,
-.mood-tracker-container,
-.timer-container,
-.feedback-container,
-.goals-tracker-container,
-.reminder-container,
-#toggleReminderBtn,
-.reminder-form,
-#toggleGoalsTrackerBtn {
+.weather-container,
+#mini-task-list {
     display: none;
 }
 
 @media (min-width: 904.5px) {
     #calculator,
     .chatbot,
-    .weather-container,
     #timeContainer,
-    #mini-task-list,
-    .mood-tracker-container,
-    .timer-container,
-    .feedback-container,
-    .goals-tracker-container,
-    .reminder-container,
-    .reminder-form {
+    .weather-container,
+    #mini-task-list {
         display: block;
     }
 }
@@ -976,7 +942,7 @@ button:hover .tooltip {
     top: 50%;
     transform: translateY(-50%);
     width: 200px;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 .reminder-container {
@@ -1079,51 +1045,7 @@ button:hover .tooltip {
     padding-top: 12.9px;
 }
 
-.reminder-toggle-btn {
-    background-color: #534caf;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-    cursor: pointer;
-    position: fixed;
-    right: 0;
-    top: 54%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
-}
-
-.goals-toggle-btn {
-    background-color: #534caf;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-    cursor: pointer;
-    position: fixed;
-    right: 0;
-    top: 58%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
-}
-
 .mood-tracker-toggle-btn:hover {
-    background-color: #403890;
-}
-
-.reminder-toggle-btn:hover {
-    background-color: #403890;
-}
-
-.goals-toggle-btn:hover {
     background-color: #403890;
 }
 
@@ -1140,58 +1062,44 @@ button:hover .tooltip {
     z-index: 1000;
 }
 
-.reminder-form {
-    position: fixed;
-    right: 10px;
-    top: 590px;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: none;
-    z-index: 1000;
-}
-
-.goals-tracker-container {
-    position: fixed;
-    right: 10px;
-    top: 900px;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: none;
-    z-index: 1000;
-}
-
-.goals-tracker-container {
-    position: fixed;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 200px;
-}
-
 .recommended-note-container {
     position: fixed;
-    right: 10px;
-    top: 70%;
-    transform: translateY(-50%);
+    right: 0;
+    top: calc(50% + 40px);
     z-index: 1000;
+}
+
+.recommended-note-toggle-btn {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    right: -20px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.recommended-note-toggle-btn:hover {
+    background-color: #403890;
 }
 
 .recommended-note-form {
     display: none;
-    flex-direction: column;
-    align-items: center;
+    position: fixed;
+    right: 45px;
+    top: calc(50% + 60px);
     background: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10000000000000;
     text-align: center;
-    right: -10px;
 }
 
 .recommended-note-form h4.recommended-note-title {
@@ -1205,6 +1113,7 @@ button:hover .tooltip {
 .recommended-note-form .recommended-prompt {
     margin: 10px 0;
     font-weight: bold;
+    color: #ffa24e;
 }
 
 .recommended-note-form button {
@@ -1219,21 +1128,6 @@ button:hover .tooltip {
 
 .recommended-note-form button:hover {
     background-color: #403890;
-}
-
-.recommended-note-toggle-btn {
-    background-color: #534caf;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
 }
 
 .upcoming-reminders ul {
@@ -1392,19 +1286,16 @@ button {
         flex-direction: column;
         overflow: hidden;
     }
-
     .note-content {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
     }
-
     .note-content textarea,
     .note-content .image-container {
         width: 100%;
         margin-top: 0.5rem;
     }
-
     .note .tools {
         display: flex;
         flex-wrap: wrap;

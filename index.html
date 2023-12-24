@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The StickyNotes App</title>
@@ -11,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
     <script src="script.js" defer></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-
 </head>
 
 <header>
@@ -24,11 +22,9 @@
         Your personal space for ideas, tasks, and creativity at your fingertips or mouse clicks!
     </h4>
     <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
-
 </header>
 
 <body>
-
     <div class="quick-access-toolbar" title="Quick Access Buttons">
         <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
         <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
@@ -121,7 +117,6 @@
 
     <div class="weather-container">
         <div id="weather-display" class="weather-display">
-            <!-- Weather information will be displayed here -->
         </div>
         <div id="weather-search-container" class="weather-search-container hidden">
             <input type="text" id="weather-search-input" placeholder="Enter location...">
@@ -145,7 +140,6 @@
             }
         });
     </script>
-
 </body>
 
 </html>

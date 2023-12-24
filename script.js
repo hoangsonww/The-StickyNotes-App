@@ -313,6 +313,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
     imageBtn.title = "Upload or remove image";
     micBtn.title = "Record or stop recording voice note";
+    updateLS();
 }
 
 function updateLS() {
@@ -340,7 +341,8 @@ function sortNotesByPinned() {
     document.querySelectorAll(".note").forEach((note) => {
         if (note.classList.contains('pinned')) {
             pinnedNotes.push(note);
-        } else {
+        }
+        else {
             unpinnedNotes.push(note);
         }
     });
@@ -381,7 +383,6 @@ function stopAutoScrolling() {
 document.addEventListener('dragover', handleWindowDragOver);
 document.addEventListener('dragend', stopAutoScrolling);
 
-
 function handleDragStart(e) {
     e.target.classList.add('dragging');
 }
@@ -402,7 +403,8 @@ function handleDrop(e) {
     const draggable = document.querySelector('.dragging');
     if (afterElement == null) {
         notesContainer.appendChild(draggable);
-    } else {
+    }
+    else {
         notesContainer.insertBefore(draggable, afterElement);
     }
     draggable.classList.remove('dragging');
@@ -500,7 +502,8 @@ function filterNotes(query) {
         const noteContent = note.textContent;
         if (noteContent.toLowerCase().includes(query.toLowerCase())) {
             note.style.display = "block";
-        } else {
+        }
+        else {
             note.style.display = "none";
         }
     });
@@ -510,7 +513,6 @@ const themeToggleButton = document.createElement("button");
 themeToggleButton.innerText = "Toggle Dark Mode";
 themeToggleButton.id = "themeToggle";
 themeToggleButton.className = "button";
-
 themeToggleButton.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
     if (document.body.classList.contains("dark-mode")) {
@@ -588,15 +590,12 @@ importInput.id = "import-input";
 document.body.appendChild(importInput);
 importInput.addEventListener("change", importNotes);
 importInput.className = "button";
-
 const chatInput = document.querySelector(".chat-input");
 const chatMessages = document.querySelector(".chat-messages");
-
 const chatTitleElem = document.createElement("div");
 chatTitleElem.className = "chat-header chat-title";
 chatTitleElem.innerText = "The StickyNotes Assistant";
 document.querySelector(".chatbot").prepend(chatTitleElem);
-
 chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.target.value.trim()) {
         const question = e.target.value.trim();
@@ -698,6 +697,9 @@ function getElizaResponse(question) {
         { pattern: /reminders|notifications/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
         { pattern: /archive|archive note/, response: "You can archive notes that you don't need anymore. They'll be hidden from the main view but can be accessed later." },
         { pattern: /mood|emoji/, response: "You can add emojis to your notes. Just click on the 'Add Emoji' button when editing a note." },
+        { pattern: /favorite|favorite note/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
+        { pattern: /recommended|suggested/, response: "You can access recommended notes in the 'Recommended' section. These are notes that you might find useful." },
+        { pattern: /voice|voice note/, response: "You can record voice notes instead of typing. Just click on the 'Record' button to start recording." },
         { pattern: /.*/, response: "I'm not sure about that. Can you be more specific or ask another question?" }
     ];
     for (let i = 0; i < responses.length; i++) {
@@ -805,7 +807,6 @@ document.getElementById('calcScreen').addEventListener('input', function(event) 
 function toggleCalculator() {
     const calcBody = document.querySelector('.calc-body');
     const toggleCalcButton = document.getElementById('toggleCalc');
-
     if (calcBody.style.display === 'none') {
         calcBody.style.display = 'block';
         toggleCalcButton.innerText = '-';
@@ -1154,9 +1155,11 @@ async function generateRecommendedNote() {
     let isSummer = month >= 5 && month <= 7;
     if (now.getHours() < 12) {
         selectedCategory = categories.morning;
-    } else if (now.getHours() < 18) {
+    }
+    else if (now.getHours() < 18) {
         selectedCategory = categories.afternoon;
-    } else {
+    }
+    else {
         selectedCategory = categories.evening;
     }
     if (isWeekend) {
