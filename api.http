@@ -1,0 +1,72 @@
+@baseUrl = http://localhost:3000
+@authToken = your_auth_token_here (get this from the login API response - not published here for security reasons)
+
+### Get All Notes
+GET {{baseUrl}}/notes
+Authorization: Bearer {{authToken}}
+
+### Get a Single Note
+GET {{baseUrl}}/notes/1
+Authorization: Bearer {{authToken}}
+
+### Create a New Note
+POST {{baseUrl}}/notes
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Meeting Notes",
+  "content": "Meeting with team at 10 AM",
+  "color": "#FF5733",
+  "tag": "work",
+  "dueDate": "2023-01-20"
+}
+
+### Update a Note
+PUT {{baseUrl}}/notes/1
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Updated Meeting Notes",
+  "content": "Meeting rescheduled to 11 AM",
+  "color": "#3355FF",
+  "tag": "work",
+  "dueDate": "2023-01-21"
+}
+
+### Delete a Note
+DELETE {{baseUrl}}/notes/1
+Authorization: Bearer {{authToken}}
+
+### User Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "user@example.com",
+  "password": "your_password"
+}
+
+### User Registration
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "newuser@example.com",
+  "password": "new_password"
+}
+
+### Get Weather Information (Example of external API integration)
+GET {{baseUrl}}/weather/today
+Authorization: Bearer {{authToken}}
+
+### Submit Feedback
+POST {{baseUrl}}/feedback
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "message": "Great app! Really helpful for organizing my tasks."
+}
+

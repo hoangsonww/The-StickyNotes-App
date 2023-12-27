@@ -20,9 +20,9 @@ The StickyNotes App is a dynamic, user-friendly web application that allows user
 - **Chatbot Integration:** An embedded chatbot named Eliza provides assistance and answers to common queries about the app.
 
 ## Technology Stack
-- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React.
-- **Backend:** Node.js, Django, and more.
-- **Database:** MongoDB, MySQL.
+- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, and Vue.js.
+- **Backend:** Node.js, Django, and Flask.
+- **Database:** Apache Cassandra, MySQL.
 - **Middleware:** Express, Django REST Framework.
 - **APIs:** Google Cloud Speech-to-Text API, Google Cloud Text-to-Speech API, Google Cloud Translation API, Google Cloud Natural Language API, Go
 

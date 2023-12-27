@@ -7,7 +7,7 @@ aboutBtn.innerText = "About This App";
 aboutBtn.classList.add("about-btn");
 
 aboutBtn.addEventListener("click", function() {
-    window.location.href = 'about.html';
+    window.location.href = 'src/html/about.html';
 });
 
 document.body.appendChild(aboutBtn);
@@ -962,7 +962,7 @@ function updateCountdownDisplay() {
 }
 
 function notifyTimerComplete() {
-    playSound('timer-sound.mp3');
+    playSound('utils/timer-sound.mp3');
     setTimeout(function() {
         alert("Timer complete!");
     }, 100);
