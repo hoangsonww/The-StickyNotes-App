@@ -605,16 +605,62 @@ chatInput.addEventListener("keydown", (e) => {
         setTimeout(() => {
             const response = getElizaResponse(question);
             const elizaMsgElem = document.createElement("div");
-            elizaMsgElem.innerText = `Eliza: ${response}`;
+            elizaMsgElem.innerText = `Assistant: ${response}`;
             chatMessages.appendChild(elizaMsgElem);
         }, 1000);
         e.target.value = '';
     }
 });
 
+function deleteNoteWithTitle(title) {
+    const notes = document.querySelectorAll('.note');
+    notes.forEach(note => {
+        const noteTitle = note.querySelector('.note-title').textContent;
+        if (noteTitle.includes(title)) {
+            note.querySelector('.delete').click();
+        }
+    });
+}
+
+function searchForNote(query) {
+    const searchBox = document.getElementById("searchBox");
+    searchBox.value = query;
+    filterNotes(query);
+}
+
 function getElizaResponse(question) {
     question = question.toLowerCase();
     const responses = [
+        {
+            pattern: /add note titled "?([^"]+)"? with content "?([^"]+)"?/i,
+            response: "Adding note titled '{title}' with content '{content}'...",
+            action: (title, content) => addNewNote(title, content)
+        },
+        {
+            pattern: /add note titled "?([^"]+)"?/i,
+            response: "Adding note titled '{title}'...",
+            action: (title, content) => addNewNote(title, content)
+        },
+        {
+            pattern: /dark mode/,
+            response: "Toggling dark mode",
+            action: () => toggleDarkMode()
+        },
+        {
+            pattern: /delete note titled "?([^"]+)"?/i,
+            response: "Deleting note titled '{title}'...",
+            action: (title) => deleteNoteWithTitle(title)
+        },
+        {
+            pattern: /toggle (dark|light) mode/i,
+            response: "Toggling {mode} mode...",
+            action: () => toggleDarkMode()
+        },
+        {
+            pattern: /search for "?([^"]+)"?/i,
+            response: "Searching for '{query}'...",
+            action: (query) => searchForNote(query)
+        },
         { pattern: /hello|hi|hey/, response: "Hello! How can I assist you today?" },
         { pattern: /what is this app|what does this app do/, response: "This app allows you to create, edit, and manage sticky notes." },
         { pattern: /who created this app/, response: "The app was created by David Nguyen in 2023." },
@@ -705,11 +751,8 @@ function getElizaResponse(question) {
     for (let i = 0; i < responses.length; i++) {
         let match = question.match(responses[i].pattern);
         if (match) {
-            if (match[1] && match[2]) {
-                addNewNote(match[2]);
-                return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]);
-            }
-            return responses[i].response;
+            if (responses[i].action) responses[i].action(...match.slice(1));
+            return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]).replace('{query}', match[1]).replace('{mode}', match[1]);
         }
     }
     return "Sorry, I didn't get that. Could you please rephrase or ask another question?";
@@ -719,13 +762,22 @@ const toggleButton = document.createElement("button");
 toggleButton.innerText = "-";
 toggleButton.className = "toggle-chat";
 toggleButton.title="Minimize/Maximize Chatbot";
+
+let isChatbotFirstOpened = true;
+
 toggleButton.onclick = function() {
     const chatMessagesElem = document.querySelector(".chat-messages");
     const chatInputElem = document.querySelector(".chat-input");
+
     if (chatMessagesElem.style.display === "none") {
         chatMessagesElem.style.display = "";
         chatInputElem.style.display = "";
         toggleButton.innerText = "-";
+
+        if (isChatbotFirstOpened) {
+            sendInstructionalMessage();
+            isChatbotFirstOpened = false;
+        }
     }
     else {
         chatMessagesElem.style.display = "none";
@@ -733,6 +785,22 @@ toggleButton.onclick = function() {
         toggleButton.innerText = "+";
     }
 };
+
+function sendInstructionalMessage() {
+    const instructions = `
+        Welcome to the StickyNotes Assistant! Here's how you can use me: 
+        To add a note, type: "Add note titled 'Your Title' with content 'Your Content'", 
+        to delete a note, type: "Delete note titled 'Your Title'", 
+        to search for a note, type: "Search for 'Your Keyword'", 
+        to toggle dark mode, type: "Toggle dark mode" or "Toggle light mode", 
+        and there are so many other things that you can use me for! 
+        Enjoy managing your notes more efficiently!
+    `;
+
+    const instructionalMsgElem = document.createElement("div");
+    instructionalMsgElem.innerHTML = `Assistant: ${instructions}`;
+    chatMessages.appendChild(instructionalMsgElem);
+}
 
 const chatHeaderElem = document.querySelector(".chat-header");
 chatHeaderElem.appendChild(toggleButton);
