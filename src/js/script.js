@@ -40,8 +40,8 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     note.innerHTML = `
         <div class="notes">
             <div class="tools">
-                <input type="text" class="due-date" placeholder="Add Due Date..." onfocus="this.type='date';this.focus();" onblur="if(!this.value)this.type='text';" min="${today}" value="">
-                <input type="text" class="tag" placeholder="Add tag..."/>
+                <input type="text" class="due-date" style="font: inherit" placeholder="Add Due Date..." onfocus="this.type='date';this.focus();" onblur="if(!this.value)this.type='text';" min="${today}" value="">
+                <input type="text" class="tag" style="font: inherit" placeholder="Add tag..."/>
                 <button class="edit"><i class="fas fa-edit"></i></button>
                 <button class="mic"><i class="fas fa-microphone"></i></button>
                 <button class="image-btn"><i class="fas fa-image"></i></button>
