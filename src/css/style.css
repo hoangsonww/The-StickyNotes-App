@@ -1314,3 +1314,13 @@ button {
         gap: 0.5rem;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .due-date,
+    .tag {
+        width: 90%; 
+        padding-left: 5%; 
+        padding-right: 5%;
+        margin: 0 auto;
+    }
+}
