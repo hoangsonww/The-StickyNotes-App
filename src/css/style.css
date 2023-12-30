@@ -1316,11 +1316,12 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-    .due-date,
-    .tag {
-        width: 90%; 
-        padding-left: 5%; 
-        padding-right: 5%;
-        margin: 0 auto;
+    .note .tools .due-date,
+    .note .tools .tag {
+        box-sizing: border-box;
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 5px;
     }
 }
