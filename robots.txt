@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://hoangsonww.github.io/The-StickyNotes-App/sitemap.xml
