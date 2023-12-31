@@ -1060,7 +1060,7 @@ button:hover .tooltip {
 
 .mood-tracker-form {
     position: fixed;
-    right: 10px;
+    right: 45px;
     transform: translateY(65%);
     background: white;
     padding: 15px;
@@ -1209,7 +1209,7 @@ li {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    right: -10px;
+    right: 30px;
 }
 
 .timer-form h4.timer-title {
