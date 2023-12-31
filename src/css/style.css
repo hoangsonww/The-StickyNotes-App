@@ -1176,7 +1176,7 @@ li {
 
 .timer-container {
     position: fixed;
-    right: 10px;
+    right: 45px;
     top: 50%;
     transform: translateY(-50%);
     width: 200px;
@@ -1185,7 +1185,7 @@ li {
 
 .timer-toggle-btn {
     position: absolute;
-    right: -10px;
+    right: -45px;
     top: -80px;
     background-color: #534caf;
     border: none;
@@ -1209,7 +1209,6 @@ li {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    right: 30px;
 }
 
 .timer-form h4.timer-title {
