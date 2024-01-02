@@ -23,6 +23,8 @@ if (notes) {
     sortNotesByPinned()
 }
 
+checkAndDisplayEmptyNotesMessage();
+
 addBtn.addEventListener("click", () => {
     addNewNote();
 });
@@ -48,7 +50,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                 <input type="file" class="image-upload" accept="image/*" style="display: none;">
                 <audio class="voice-note" controls></audio>
                 <button class="pin">${isPinned ? 'Unpin' : 'Pin'}</button>
-                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                <button id="deletBtn" class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;">
             </div>
             <div class="note-title ${title ? "" : "untitled"}" contenteditable="false">${title}</div>
@@ -118,6 +120,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     deleteBtn.addEventListener("click", () => {
         note.remove();
         updateLS();
+        checkAndDisplayEmptyNotesMessage();
     });
 
     colorPicker.addEventListener("input", (e) => {
@@ -313,6 +316,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     imageBtn.title = "Upload or remove image";
     micBtn.title = "Record or stop recording voice note";
     updateLS();
+    checkAndDisplayEmptyNotesMessage();
 }
 
 function updateLS() {
@@ -883,7 +887,6 @@ function toggleCalculator() {
 }
 
 document.getElementById('toggleCalc').addEventListener('click', toggleCalculator);
-
 document.querySelector('.calc-body').style.display = 'none';
 document.getElementById('toggleCalc').innerText = '+';
 
@@ -1306,18 +1309,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-let isSignedIn = false;
-
 function updateSignInStatus(isSignedInNow) {
     isSignedIn = isSignedInNow;
     updateSignInButton();
 }
 
 function updateSignInButton() {
-    const signInOutButton = document.getElementById('signInOutButton');
+    const signInOutButton = document.getElementById('googleSignInBtn');
     const signInOutText = signInOutButton.querySelector('span');
     signInOutText.textContent = isSignedIn ? 'Sign Out' : 'Sign In';
-    signInOutButton.querySelector('i').className = isSignedIn ? 'fas fa-sign-out-alt' : 'fas fa-sign-in-alt';
+    signInOutButton.querySelector('i').className = isSignedIn ? 'fas fa-sign-out-alt' : 'fas fa-user-alt';
 }
 
 function initClient() {
@@ -1332,11 +1333,60 @@ function initClient() {
 
 gapi.load('client:auth2', initClient);
 
+let isSignedIn = JSON.parse(localStorage.getItem('isSignedIn')) || false;
+updateSignInButton();
+
 function handleSignInOut() {
-    if (isSignedIn) {
-        gapi.auth2.getAuthInstance().signOut();
+    const signInOutButton = document.getElementById('googleSignInBtn');
+    const signInOutText = signInOutButton.querySelector('span');
+    const signInOutIcon = signInOutButton.querySelector('i');
+
+    if (!isSignedIn) {
+        signInOutText.textContent = 'Sign Out';
+        signInOutIcon.className = 'fas fa-sign-out-alt';
+        gapi.auth2.getAuthInstance().signIn().catch(error => {
+            console.error("Error during sign-in: ", error);
+        });
     }
     else {
-        gapi.auth2.getAuthInstance().signIn();
+        signInOutText.textContent = 'Sign In';
+        signInOutIcon.className = 'fas fa-user-alt';
+        gapi.auth2.getAuthInstance().signOut().catch(error => {
+            console.error("Error during sign-out: ", error);
+        });
     }
+
+    isSignedIn = !isSignedIn;
+    localStorage.setItem('isSignedIn', isSignedIn);
 }
+
+function checkAndDisplayEmptyNotesMessage() {
+    let notesContainer = document.querySelector(".notes-container");
+    let emptyMessage = document.querySelector("#emptyNotesMessage");
+
+    if (!emptyMessage) {
+        emptyMessage = document.createElement("div");
+        emptyMessage.id = "emptyNotesMessage";
+        emptyMessage.textContent = "No notes added yet";
+        emptyMessage.style.textAlign = "center";
+        emptyMessage.style.marginTop = "20px";
+        notesContainer.appendChild(emptyMessage);
+    }
+
+    const notes = notesContainer.querySelectorAll(".note");
+    emptyMessage.style.display = notes.length === 0 ? "block" : "none";
+}
+
+document.getElementById("add").addEventListener("click", function() {
+    checkAndDisplayEmptyNotesMessage();
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    checkAndDisplayEmptyNotesMessage();
+});
+
+document.getElementById("toggleAddBtn").addEventListener("click", function() {
+    checkAndDisplayEmptyNotesMessage();
+});
+
+checkAndDisplayEmptyNotesMessage();

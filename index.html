@@ -47,7 +47,7 @@
 
 <body>
     <div class="quick-access-toolbar" title="Quick Access Buttons">
-        <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
+        <button id="toggleAddBtn" onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
         <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
         <button id= "toggleCalcBtn" onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
         <button onclick="sortNotesByDueDate()" title="Sort Notes By Due Date"><i class="fas fa-sort"></i></button>
@@ -140,7 +140,7 @@
         <div id="weather-display" class="weather-display">
         </div>
         <div id="weather-search-container" class="weather-search-container hidden">
-            <input type="text" id="weather-search-input" style="font: inherit; font-size: 11px" placeholder="Enter location...">
+            <input type="text" id="weather-search-input" style="font: inherit; font-size: 11px" placeholder="Enter a location...">
             <button id="weather-search-btn">Search</button>
         </div>
     </div>
@@ -152,13 +152,12 @@
     </div>
 
     <div class="google-sign-in-container">
-        <button id="googleSignInBtn" onclick="handleSignInOut()">
+        <button id="googleSignInBtn" onclick="handleSignInOut()" style="margin-bottom: 25px">
             <i class="fas fa-user"></i> <span id="signInOutText">Sign In</span>
         </button>
     </div>
 
-
-
+    <div id="timeContainer" class="time-display hover-effect"></div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {

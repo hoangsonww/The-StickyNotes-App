@@ -287,7 +287,7 @@ h4 {
     border: #1B1B1B 1px solid;
 }
 
-.google-sign-in-container {
+.time-display {
     position: fixed;
     top: 15px;
     right: 7.5px;
@@ -295,30 +295,21 @@ h4 {
     height: auto;
     text-align: center;
     background-color: #534caf;
+    padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     font-family: "Poppins", sans-serif;
     font-size: 0.9rem;
     color: white;
     z-index: 1000;
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    transition: transform 0.1s;
-}
-
-.google-sign-in-container:hover {
-    background-color: #403890;
-}
-
-#googleSignInBtn {
-    height: 35px;
-    padding: 0;
-    transition: transform 0.1s;
 }
 
 #googleSignInBtn:hover {
     background-color: #403890;
+    transform: scale(1.03);
 }
 
 .weather-container {
@@ -400,9 +391,10 @@ h4 {
     border-top-right-radius: 0;
 }
 
-
 #weather-search-btn:hover {
-    background-color: #534caf;
+    background-color: #403890;
+    transform: scale(1.03);
+    border-radius: 8px;
 }
 
 #weather-search-input {
