@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The StickyNotes App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+
+<header>
+    <h1>The StickyNotes App</h1>
+    <input type="text" id="searchBox" placeholder="Search for a note..." />
+    <button class="add" id="add">
+        <i class="fas fa-plus"></i> Add A Note!
+    </button>
+    <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
+
+</header>
+
+<body>
+
+    <div class="quick-access-toolbar" title="Quick Access Buttons">
+        <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
+        <button onclick="document.body.classList.toggle('dark-mode')" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+        <button id= "toggleCalcBtn" onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
+        <button onclick="sortNotesByDueDate()" title="Sort Notes"><i class="fas fa-sort"></i></button>
+    </div>
+
+    <div class="feedback-container">
+        <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
+        <div class="feedback-form" id="feedbackForm">
+            <h4 class="feedback-title">Quick Feedback</h4>
+            <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
+            <div class="feedback-actions">
+                <button onclick="submitFeedback()">Submit</button>
+                <button onclick="toggleFeedbackForm()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="timer-container">
+        <button onclick="toggleTimer()" class="timer-toggle-btn"><i class="fas fa-clock"></i></button>
+        <div class="timer-form" id="timerForm">
+            <h4 class="timer-title">Focus Timer</h4>
+            <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
+            <button onclick="startTimer()" id="startTimerBtn">Start</button>
+            <button onclick="toggleTimer()" id="closeTimerBtn">Close</button>
+            <button onclick="pauseTimer()" id="pauseTimerBtn" style="display:none;">Pause</button>
+            <button onclick="resetTimer()">Reset</button>
+            <button onclick="setTimerManually()" id="setTimerBtn">Set Timer</button>
+        </div>
+    </div>
+
+    <div class="mood-tracker-container">
+        <button onclick="toggleMoodTracker()" class="mood-tracker-toggle-btn"><i class="fas fa-smile"></i></button>
+        <div class="mood-tracker-form" id="moodTrackerForm">
+            <h4 class="mood-tracker-title">Mood Tracker</h4>
+            <select id="moodSelect">
+                <option value="Happy">Happy</option>
+                <option value="Sad">Sad</option>
+                <option value="Stressed">Stressed</option>
+                <option value="Relaxed">Relaxed</option>
+            </select>
+            <button id="logMoodBtn" onclick="logMood()">Log Mood</button>
+            <button onclick="toggleMoodTracker()" class="close-btn">Close</button>
+        </div>
+    </div>
+
+    <button id="toggleReminderBtn" onclick="toggleReminderForm()" title="Add & View your reminders!" class="reminder-toggle-btn"><i class="fas fa-bell"></i></button>
+
+    <div class="reminder-form" id="reminderForm" style="display: none;">
+        <h4 class="reminder-title">Set a Quick Reminder</h4>
+        <input type="text" id="reminderText" placeholder="Your reminder...">
+        <input type="datetime-local" id="reminderDateTime" />
+        <button onclick="setReminder()" id="logMoodBtn">Set Reminder</button>
+        <button onclick="toggleReminderForm()" class="close-btn">Close</button>
+        <div id="upcomingReminders" class="upcoming-reminders">
+            <h4>Upcoming Reminders</h4>
+            <ul id="reminderList"></ul>
+        </div>
+    </div>
+
+    <button id="toggleGoalsTrackerBtn" onclick="toggleGoalsTracker()" title="Track your goals!" class="goals-toggle-btn"><i class="fas fa-tasks"></i></button>
+
+    <div id="goalsTrackerContainer" class="goals-tracker-container" style="display:none;">
+        <div class="goals-tracker-form">
+            <h4 class="goals-tracker-title">Daily Goals Tracker</h4>
+            <input type="text" id="goalText" placeholder="Enter your goal...">
+            <button id="logMoodBtn" onclick="addGoal()">Add Goal</button>
+            <button onclick="toggleGoalsTracker()" class="close-btn">Close</button>
+            <h5>In-Progress Goals</h5>
+            <ul id="inProgressGoals"></ul>
+            <h5>Completed Goals</h5>
+            <ul id="completedGoals"></ul>
+        </div>
+    </div>
+
+    <div class="chatbot">
+        <div class="chat-messages"></div>
+        <input type="text" placeholder="Ask your assistant..." class="chat-input">
+    </div>
+
+    <div class="calculator" id="calculator">
+        <div class="calc-header">
+            <span class="calc-title">Calculator</span>
+            <button class="toggle-calc" id="toggleCalc" title="Maximize/Minimize The Calculator">-</button>
+        </div>
+        <div class="calc-body">
+            <input type="text" class="calc-screen" id="calcScreen" title="Click on anywhere of the calculator to enable direct typing" disabled>
+            <div class="calc-buttons">
+                <button class="button" onclick="press('1')" title="Press this button to enter 1">1</button>
+                <button class="button" onclick="press('2')" title="Press this button to enter 2">2</button>
+                <button class="button" onclick="press('3')" title="Press this button to enter 3">3</button>
+                <button class="button" onclick="press('/')" title="Divide a number by another">/</button>
+                <button class="button" onclick="press('4')" title="Press this button to enter 4">4</button>
+                <button class="button" onclick="press('5')" title="Press this button to enter 5">5</button>
+                <button class="button" onclick="press('6')" title="Press this button to enter 6">6</button>
+                <button class="button" onclick="press('*')" title="Multiply a number by another">*</button>
+                <button class="button" onclick="press('7')" title="Press this button to enter 7">7</button>
+                <button class="button" onclick="press('8')" title="Press this button to enter 8">8</button>
+                <button class="button" onclick="press('9')" title="Press this button to enter 9">9</button>
+                <button class="button" onclick="press('-')" title="Subtract a number by another">-</button>
+                <button class="button" onclick="press('0')" title="Press this button to enter 0">0</button>
+                <button class="button" onclick="press('.')" title="Enter a non-integer (e.g. 0.99)">.</button>
+                <button class="button" onclick="calculate()" title="Press this button to evaluate the entered expression">=</button>
+                <button class="button" onclick="press('+')" title="Sum a number with another">+</button>
+                <button onclick="press('%')" title="Convert any number to its percentage (choose a number then press this symbol)">%</button>
+                <button onclick="pressOperation('pow')" title="Raise to power (use ^ for exponentiation, e.g. 9^9)">^</button>
+                <button onclick="pressOperation('sqrt')" title="Calculate the square root of any number(choose a number then press this symbol)">√</button>
+                <button onclick="clearScreen()" title="Clear the calculator's screen">C</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="weather-container">
+        <div id="weather-display" class="weather-display">
+            <!-- Weather information will be displayed here -->
+        </div>
+        <div id="weather-search-container" class="weather-search-container hidden">
+            <input type="text" id="weather-search-input" placeholder="Enter location...">
+            <button id="weather-search-btn">Search</button>
+        </div>
+    </div>
+
+    <div id="mini-task-list">
+        <h5>Task List</h5>
+        <input type="text" id="task-input" placeholder="New task..." maxlength="20">
+        <ul id="task-list"></ul>
+    </div>
+
+    <div id="timeContainer" class="time-display"></div>
+
+</body>
+
+</html>

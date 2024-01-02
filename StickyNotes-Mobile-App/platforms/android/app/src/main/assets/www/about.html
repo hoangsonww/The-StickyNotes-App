@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About StickyNotes App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<style>
+    .about-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        text-align: justify;
+    }
+
+    .about-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .about-section h2 {
+        color: #534caf;
+        margin-bottom: 0.5rem;
+    }
+
+    .about-section p,
+    .about-section ul {
+        line-height: 1.6;
+        margin-left: 1rem;
+    }
+
+    .about-section ul {
+        list-style-type: circle;
+    }
+
+    .about-footer {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .about-container {
+            margin: 1rem;
+            padding: 0.5rem;
+        }
+    }
+
+    body.dark-mode {
+        background: linear-gradient(to right, #2c3e50, #34495e);
+        color: #ffffff;
+    }
+
+    body.dark-mode .about-container {
+        background-color: #2c3e50;
+        color: #ffffff;
+    }
+
+    body.dark-mode .about-section h2 {
+        color: #c2e9fb;
+    }
+
+    body.dark-mode .about-footer button {
+        background-color: #34495e;
+        color: #ffffff;
+    }
+
+    body.dark-mode #other-apps p {
+        color: #ffffff;
+    }
+
+    body.dark-mode .app-btn {
+        background-color: #34495e;
+        color: #ffffff;
+    }
+
+    body.dark-mode .back-to-app {
+        background-color: #34495e;
+        color: #ffffff;
+    }
+
+    body.dark-mode .back-to-app:hover {
+        background-color: #2c3e50;
+        border: grey 1px solid;
+    }
+
+    body.dark-mode .app-btn:hover {
+        background-color: #2c3e50;
+    }
+
+    body.dark-mode h2 {
+        color: #c2e9fb;
+    }
+
+    body h2 {
+        color: #534caf;
+    }
+
+    @media (max-width: 768px) {
+        .about-container {
+            margin: 1rem;
+            padding: 0.5rem;
+        }
+    }
+</style>
+
+<body>
+
+    <header>
+        <h1>About The StickyNotes App</h1>
+    </header>
+
+    <div class="about-container">
+        <section class="about-section">
+            <h2>Welcome to StickyNotes!</h2>
+            <p>StickyNotes is your go-to app for jotting down ideas, reminders, or anything that you need to remember. Created in 2023 by David Nguyen, our app offers a user-friendly platform to make note-taking a breeze. Whether you're a student, a professional, or anyone in between, StickyNotes is designed to help you keep track of your day-to-day tasks with ease.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>Features</h2>
+            <ul>
+                <li>Create unlimited sticky notes for all your needs.</li>
+                <li>Easy to use – Just click and type!</li>
+                <li>Edit and delete functionality for better note management.</li>
+                <li>Local storage ensures your notes are always with you.</li>
+                <li>Customizable note colors for organization and prioritization.</li>
+            </ul>
+        </section>
+
+        <h2>Explore Our Other Apps</h2>
+        <ul id="other-apps" style="align-content: center; color: white; margin-bottom: 30px">
+            <li>
+                <p style="color: black; text-align: center">Embark on a culinary adventure with RecipeGenie, your go-to database for delightful recipes.</p>
+                <button onclick="window.location.href='https://hoangsonww.github.io/RecipeGenie-App/';" class="app-btn">The RecipeGenie Database</button>
+            </li>
+
+            <li>
+                <p style="color: black; text-align: center">Take a deep dive into the world of movies and cinema!</p>
+                <button onclick="window.location.href='https://hoangsonww.github.io/The-MovieVerse-Database/';" class="app-btn">The MovieVerse Database</button>
+            </li>
+
+            <li>
+                <p style="color: black; text-align: center">Stay ahead of the weather with WeatherMate, your personal weather forecasting assistant.</p>
+                <button onclick="window.location.href='https://hoangsonww.github.io/WeatherMate-App/';" class="app-btn">The WeatherMate App</button>
+            </li>
+
+            <li>
+                <p style="color: black; text-align: center">Keep track of your tasks and boost productivity with the ToDo App, a straightforward task manager.</p>
+                <button onclick="window.location.href='https://hoangsonww.github.io/The-ToDo-App/';" class="app-btn">The ToDo App</button>
+            </li>
+
+            <li>
+                <p style="color: black; text-align: center">Plan and manage your events seamlessly with EventHorizon, your ultimate event organizer.</p>
+                <button onclick="window.location.href='https://hoangsonww.github.io/The-Event-Horizon-App/';" class="app-btn">The EventHorizon App</button>
+            </li>
+        </ul>
+
+        <section class="about-section">
+            <h2>How It Works</h2>
+            <p>Using StickyNotes is straightforward. Click 'Add A Note' to start, type your note, and it automatically saves. Edit by clicking on a note and pressing the edit button, and delete any note with a simple click on the delete icon. Your notes stay on your screen until you decide to remove them.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>Contact and Feedback</h2>
+            <p>We love hearing from our users! If you have any feedback, suggestions, or questions, please don't hesitate to reach out to us. Your input helps us to continually improve StickyNotes and provide the best experience possible.</p>
+        </section>
+
+        <div class="about-footer">
+            <button onclick="location.href='index.html'" style="font: inherit" class="back-to-app">Back to App</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
