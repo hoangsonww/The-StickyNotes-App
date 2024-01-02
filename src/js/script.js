@@ -1305,3 +1305,38 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+let isSignedIn = false;
+
+function updateSignInStatus(isSignedInNow) {
+    isSignedIn = isSignedInNow;
+    updateSignInButton();
+}
+
+function updateSignInButton() {
+    const signInOutButton = document.getElementById('signInOutButton');
+    const signInOutText = signInOutButton.querySelector('span');
+    signInOutText.textContent = isSignedIn ? 'Sign Out' : 'Sign In';
+    signInOutButton.querySelector('i').className = isSignedIn ? 'fas fa-sign-out-alt' : 'fas fa-sign-in-alt';
+}
+
+function initClient() {
+    gapi.client.init({
+        clientId: '979580896903-hllisv9ev8pgn302e2959o7mlgkp2k9s',
+        scope: 'email',
+    }).then(() => {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    });
+}
+
+gapi.load('client:auth2', initClient);
+
+function handleSignInOut() {
+    if (isSignedIn) {
+        gapi.auth2.getAuthInstance().signOut();
+    }
+    else {
+        gapi.auth2.getAuthInstance().signIn();
+    }
+}

@@ -30,6 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
     <script src="src/js/script.js" defer></script>
     <link rel="icon" type="image/x-icon" href="utils/favicon.ico">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <header>
@@ -150,7 +151,11 @@
         <ul id="task-list"></ul>
     </div>
 
-    <div id="timeContainer" class="time-display hover-effect"></div>
+    <div class="google-sign-in-container">
+        <button id="googleSignInBtn" onclick="handleSignInOut()">
+            <i class="fas fa-user"></i> <span id="signInOutText">Sign In</span>
+        </button>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -160,6 +165,8 @@
             }
         });
     </script>
+
+    <script src="https://apis.google.com/js/api.js"></script>
 </body>
 
 </html>
