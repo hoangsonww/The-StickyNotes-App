@@ -882,6 +882,7 @@ button:hover .tooltip {
 
 #calculator,
 .chatbot,
+#timeContainer,
 .weather-container,
 #mini-task-list {
     display: none;
@@ -890,6 +891,7 @@ button:hover .tooltip {
 @media (min-width: 904.5px) {
     #calculator,
     .chatbot,
+    #timeContainer,
     .weather-container,
     #mini-task-list {
         display: block;
