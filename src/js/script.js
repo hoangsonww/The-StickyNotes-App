@@ -308,7 +308,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
     notesContainer.addEventListener('dragover', handleDragOver);
     notesContainer.addEventListener('drop', handleDrop);
-
     notesContainer.appendChild(note);
 
     imageBtn.title = "Upload or remove image";
@@ -367,7 +366,6 @@ function handleWindowDragOver(e) {
 
 function startAutoScrolling(amount) {
     if (autoScrollInterval) return;
-
     autoScrollInterval = setInterval(() => {
         window.scrollBy(0, amount);
     }, 50);
@@ -463,7 +461,6 @@ document.body.appendChild(recordingStatus);
 
 function sortNotesByDueDate() {
     const notesArray = Array.from(document.querySelectorAll('.note'));
-
     notesArray.sort((a, b) => {
         const dateA = a.querySelector(".due-date").value;
         const dateB = b.querySelector(".due-date").value;
@@ -483,13 +480,11 @@ function sortNotesByDueDate() {
             return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
         }
     });
-
     notesArray.forEach(note => notesContainer.appendChild(note));
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     const searchBox = document.getElementById("searchBox");
-
     searchBox.addEventListener("input", (e) => {
         const { value } = e.target;
         filterNotes(value);
@@ -580,6 +575,7 @@ importLabel.style.transition = "all 0.3s ease-in-out";
 importLabel.addEventListener("mouseenter", () => {
     importLabel.style.transform = "scale(1.1)";
 });
+
 importLabel.addEventListener("mouseleave", () => {
     importLabel.style.transform = "scale(1)";
 });
@@ -917,13 +913,32 @@ function pressOperation(operation) {
     }
 }
 
-function submitFeedback() {
+function submitFeedback(event) {
+    event.preventDefault();
+
+    const feedbackForm = document.getElementById('feedbackForm');
     const feedbackText = document.getElementById('feedbackText').value;
+
     if (feedbackText) {
-        console.log('Feedback submitted:', feedbackText);
-        alert('Thank you for your feedback!');
-        document.getElementById('feedbackText').value = '';
-        toggleFeedbackForm();
+        fetch('https://formspree.io/f/mayryobo', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: new FormData(feedbackForm)
+        })
+          .then(response => {
+              if (response.ok) {
+                  alert('Thank you for your feedback!');
+                  document.getElementById('feedbackText').value = '';
+                  toggleFeedbackForm();
+              } else {
+                  alert('Oops! Something went wrong.');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
     }
     else {
         alert('Please enter some feedback before submitting.');
@@ -933,22 +948,31 @@ function submitFeedback() {
 function toggleTimer() {
     const timerForm = document.getElementById('timerForm');
     const timerBtn = document.querySelector('.timer-toggle-btn');
-    const isTimerVisible = timerForm.style.display === 'block';
-    timerForm.style.display = isTimerVisible ? 'none' : 'block';
-    timerBtn.style.display = isTimerVisible ? 'flex' : 'none';
-    if (!isTimerVisible && document.getElementById('feedbackForm').style.display === 'block') {
-        toggleFeedbackForm();
+    closeAllFormsExcept(timerForm);
+
+    if (timerForm.style.display === 'block') {
+        timerForm.style.display = 'none';
+        timerBtn.style.display = 'block';
+    }
+    else {
+        timerForm.style.display = 'block';
+        timerBtn.style.display = 'none';
     }
 }
 
 function toggleFeedbackForm() {
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackBtn = document.querySelector('.feedback-btn');
-    const isFeedbackVisible = feedbackForm.style.display === 'block';
-    feedbackForm.style.display = isFeedbackVisible ? 'none' : 'block';
-    feedbackBtn.style.display = isFeedbackVisible ? 'flex' : 'none';
-    if (!isFeedbackVisible && document.getElementById('timerForm').style.display === 'block') {
-        toggleTimer();
+    const timerBtn = document.querySelector('.timer-toggle-btn');
+    timerBtn.style.display = 'block';
+    closeAllFormsExcept(feedbackForm);
+
+    if (feedbackForm.style.display === 'block') {
+        feedbackForm.style.display = 'none';
+        feedbackBtn.style.display = 'block';
+    } else {
+        feedbackForm.style.display = 'block';
+        feedbackBtn.style.display = 'none';
     }
 }
 
@@ -1196,16 +1220,6 @@ function getMoodRecommendation(mood) {
     return recommendations[mood] || 'Enjoy your day!';
 }
 
-function toggleMoodTracker() {
-    const moodForm = document.getElementById('moodTrackerForm');
-    if (moodForm.style.display === 'none' || moodForm.style.display === '') {
-        moodForm.style.display = 'block';
-    }
-    else {
-        moodForm.style.display = 'none';
-    }
-}
-
 async function generateRecommendedNote() {
     const categories = {
         morning: ["Plan your day ahead", "List three things you are grateful for", "Write a morning affirmation"],
@@ -1246,15 +1260,41 @@ function createRecommendedNote(prompt) {
         <h4 class="recommended-note-title">We've got a suggestion!</h4>
         <p>Based on your recent activities and the time of day, we think you might enjoy this:</p>
         <p class="recommended-prompt"><strong>${prompt}</strong></p>
-        <button onclick="addNewNote('Recommended: ${prompt}', '${prompt}')">Create This Note</button>
+        <button onclick="addNewNote('Recommended: ${prompt}', '${prompt}'); toggleRecommendedNoteForm();">Create This Note</button>
         <button onclick="toggleRecommendedNoteForm()">Close</button>
     `;
     popup.style.display = 'block';
 }
 
+function toggleMoodTracker() {
+    const moodForm = document.getElementById('moodTrackerForm');
+    closeAllFormsExcept(moodForm);
+    const timerBtn = document.querySelector('.timer-toggle-btn');
+    timerBtn.style.display = 'block';
+    moodForm.style.display = moodForm.style.display === 'block' ? 'none' : 'block';
+}
+
 function toggleRecommendedNoteForm() {
-    const form = document.getElementById('recommendedNoteForm');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    const recommendedNoteForm = document.getElementById('recommendedNoteForm');
+    closeAllFormsExcept(recommendedNoteForm);
+    const timerBtn = document.querySelector('.timer-toggle-btn');
+    timerBtn.style.display = 'block';
+    recommendedNoteForm.style.display = recommendedNoteForm.style.display === 'block' ? 'none' : 'block';
+}
+
+function closeAllFormsExcept(exceptForm) {
+    const allForms = [
+        document.getElementById('timerForm'),
+        document.getElementById('feedbackForm'),
+        document.getElementById('moodTrackerForm'),
+        document.getElementById('recommendedNoteForm')
+    ];
+
+    allForms.forEach(form => {
+        if (form !== exceptForm) {
+            form.style.display = 'none';
+        }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function() {

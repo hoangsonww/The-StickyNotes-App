@@ -8,7 +8,8 @@
     <meta name="description" content="StickyNotes - A versatile and user-friendly app for taking and organizing notes. Keep track of your ideas and tasks easily." />
     <meta name="keywords" content="StickyNotes, note taking, task management, productivity, note app, reminders" />
     <meta name="author" content="Son Nguyen Hoang" />
-    
+    <meta http-equiv="content-language" content="en" />
+
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
@@ -22,6 +23,7 @@
     <meta name="twitter:title" content="StickyNotes App" />
     <meta name="twitter:description" content="Your personal space for ideas, tasks, and creativity. Discover StickyNotes and enhance your note-taking experience." />
     <meta name="twitter:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+
     <title>The StickyNotes App</title>
     <link rel="stylesheet" href="src/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
@@ -52,14 +54,14 @@
 
     <div class="feedback-container">
         <button onclick="toggleFeedbackForm()" class="feedback-btn" title="Have any feedback? Let us know here!"><i class="fas fa-comment-dots"></i></button>
-        <div class="feedback-form" id="feedbackForm">
+        <form class="feedback-form" id="feedbackForm">
             <h4 class="feedback-title">Quick Feedback</h4>
-            <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
+            <textarea name="feedback" id="feedbackText" placeholder="Your feedback..."></textarea>
             <div class="feedback-actions">
-                <button onclick="submitFeedback()">Submit</button>
-                <button onclick="toggleFeedbackForm()">Cancel</button>
+                <button type="button" onclick="submitFeedback(event)">Submit</button>
+                <button type="button" onclick="toggleFeedbackForm()">Cancel</button>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="timer-container">
@@ -91,7 +93,7 @@
     </div>
 
     <div class="recommended-note-container">
-        <button id="generateRecommendedNoteBtn" class="recommended-note-toggle-btn" title="Generate a Recommended Note!"><i class="fas fa-brain"></i></button>
+        <button id="generateRecommendedNoteBtn" class="recommended-note-toggle-btn" onclick="toggleRecommendedNoteForm()" title="Generate a Recommended Note!"><i class="fas fa-brain"></i></button>
         <div class="recommended-note-form" id="recommendedNoteForm">
         </div>
     </div>

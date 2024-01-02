@@ -1061,7 +1061,7 @@ button:hover .tooltip {
 .mood-tracker-form {
     position: fixed;
     right: 45px;
-    transform: translateY(65%);
+    top: 50%;
     background: white;
     padding: 15px;
     border-radius: 10px;
