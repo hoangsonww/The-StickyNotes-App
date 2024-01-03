@@ -83,6 +83,10 @@ The StickyNotes App is a dynamic, user-friendly web application that allows user
 - More advanced data management features including cloud storage and data encryption.
 - More advanced note-taking features including drawing and handwriting recognition.
 
+## Contributing
+
+If you're interested in contributing to the StickyNotes App, please read our [Contributing Guidelines](CONTRIBUTING.md) for more information on how to get started.
+
 ## Support and Feedback
 
 For support, feedback, or contributions, please refer to the GitHub repository's issues section or contact the developer directly.
