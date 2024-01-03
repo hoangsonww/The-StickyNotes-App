@@ -467,7 +467,7 @@ body.dark-mode .note .tools button:hover {
 }
 
 .chatbot {
-    z-index: 1000;
+    z-index: 100000;
     position: fixed;
     bottom: 10px;
     right: 10px;
