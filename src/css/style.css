@@ -219,6 +219,7 @@ h4 {
 }
 
 .about-btn {
+    margin-top: 30px;
     margin-bottom: 25px;
     transition: transform 1s;
 }
@@ -331,9 +332,13 @@ h4 {
     font-family: 'Poppins', sans-serif;
 }
 
+.dark-mode #emptyNotesMessage {
+    color: white;
+}
+
 #mini-task-list {
     width: 90px;
-    height: 140px;
+    height: 160px;
     position: fixed;
     top: 75px;
     right: 7.5px;

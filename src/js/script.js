@@ -537,6 +537,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (savedTheme === "dark-mode") {
         document.body.classList.add("dark-mode");
     }
+    else {
+        document.body.classList.remove("dark-mode");
+    }
 });
 
 function exportNotes() {
@@ -955,7 +958,7 @@ function toggleTimer() {
 
     if (timerForm.style.display === 'block') {
         timerForm.style.display = 'none';
-        timerBtn.style.display = 'block';
+        timerBtn.style.display = 'flex';
     }
     else {
         timerForm.style.display = 'block';
@@ -973,7 +976,8 @@ function toggleFeedbackForm() {
     if (feedbackForm.style.display === 'block') {
         feedbackForm.style.display = 'none';
         feedbackBtn.style.display = 'block';
-    } else {
+    }
+    else {
         feedbackForm.style.display = 'block';
         feedbackBtn.style.display = 'none';
     }
@@ -1273,7 +1277,7 @@ function toggleMoodTracker() {
     const moodForm = document.getElementById('moodTrackerForm');
     closeAllFormsExcept(moodForm);
     const timerBtn = document.querySelector('.timer-toggle-btn');
-    timerBtn.style.display = 'block';
+    timerBtn.style.display = 'flex';
     moodForm.style.display = moodForm.style.display === 'block' ? 'none' : 'block';
 }
 
@@ -1281,7 +1285,7 @@ function toggleRecommendedNoteForm() {
     const recommendedNoteForm = document.getElementById('recommendedNoteForm');
     closeAllFormsExcept(recommendedNoteForm);
     const timerBtn = document.querySelector('.timer-toggle-btn');
-    timerBtn.style.display = 'block';
+    timerBtn.style.display = 'flex';
     recommendedNoteForm.style.display = recommendedNoteForm.style.display === 'block' ? 'none' : 'block';
 }
 
