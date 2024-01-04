@@ -56,7 +56,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             <div class="note-title ${title ? "" : "untitled"}" contenteditable="false">${title}</div>
             <div class="main ${text ? "" : "hidden"}"></div>
             <div class="note-content">
-                <textarea>${text}</textarea>
+                <textarea placeholder="Add note content here..." style="font: inherit">${text}</textarea>
                 <div class="image-container ${image ? "" : "hidden"}">
                     <img src="${image}" class="note-image" />
                     <span class="remove-image">✖</span>
@@ -109,7 +109,16 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     pinBtn.title = isPinned ? "Unpin Note" : "Pin Note";
     pinBtn.addEventListener('click', () => {
         const isNotePinned = note.classList.toggle('pinned');
-        pinBtn.innerHTML = isNotePinned ? '<i class="fas fa-thumbtack"></i>' : '<i class="far fa-thumbtack"></i>';
+        if (isNotePinned) {
+            pinBtn.querySelector('i').classList.remove('pin-unpinned');
+            pinBtn.querySelector('i').classList.add('pin-pinned');
+            pinBtn.title = "Unpin Note";
+        }
+        else {
+            pinBtn.querySelector('i').classList.remove('pin-pinned');
+            pinBtn.querySelector('i').classList.add('pin-unpinned');
+            pinBtn.title = "Pin Note";
+        }
         updateLS();
         sortNotesByPinned();
     });
@@ -405,11 +414,11 @@ function handleDrop(e) {
     const draggable = document.querySelector('.dragging');
     if (afterElement == null) {
         notesContainer.appendChild(draggable);
-    }
-    else {
+    } else {
         notesContainer.insertBefore(draggable, afterElement);
     }
     draggable.classList.remove('dragging');
+    updateLS();
 }
 
 function getDragAfterElement(container, y) {
@@ -431,6 +440,7 @@ function moveUp(noteElem) {
     const prevNote = noteElem.previousElementSibling;
     if (prevNote) {
         notesContainer.insertBefore(noteElem, prevNote);
+        updateLS();
     }
 }
 
@@ -438,6 +448,7 @@ function moveDown(noteElem) {
     const nextNote = noteElem.nextElementSibling;
     if (nextNote) {
         notesContainer.insertBefore(nextNote, noteElem);
+        updateLS();
     }
 }
 
@@ -1337,7 +1348,7 @@ function initClient() {
 
 gapi.load('client:auth2', initClient);
 
-let isSignedIn = JSON.parse(localStorage.getItem('isSignedIn')) || false;
+let isSignedIn = JSON.parse(localStorage.getItem('googleAuthStatus')) || false;
 updateSignInButton();
 
 function handleSignInOut() {
@@ -1361,7 +1372,7 @@ function handleSignInOut() {
     }
 
     isSignedIn = !isSignedIn;
-    localStorage.setItem('isSignedIn', isSignedIn);
+    localStorage.setItem('googleAuthStatus', isSignedIn);
 }
 
 function checkAndDisplayEmptyNotesMessage() {

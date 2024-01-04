@@ -2,94 +2,79 @@
 
 ## Overview
 
-The StickyNotes App is a dynamic, user-friendly web application that allows users to create, edit, manage, and organize sticky notes with ease. Created by Son (David) Nguyen in 2023, the app features a variety of functionalities including voice note recording, color customization, tagging, and more, making it a versatile tool for personal or professional use. Additionally, the mobile app version of the app is currently in development with Apache Cordova and React Native and will be released in the near future!
+The StickyNotes App is a dynamic, user-friendly web application designed for effective note-taking and task management. Developed by Son (David) Nguyen in 2023, it offers a versatile suite of features, including voice note recording, color customization, tagging, and more. Suitable for both personal and professional use, StickyNotes stands out with its intuitive design and robust functionality. A mobile app version is also under development, leveraging Apache Cordova and React Native, with a planned release in the near future.
 
 ## Features
 
-- **Note Creation and Editing:** Users can create new notes and edit existing ones. The app supports markdown syntax for formatting.
-- **Voice Note Recording:** Record voice notes using the microphone feature for quick note-taking.
-- **Color Customization:** Customize the color of each note for easy identification and organization.
-- **Tagging and Due Dates:** Add tags and due dates to notes for better organization.
-- **Search Functionality:** Quickly find notes using the search feature.
-- **Dark Mode:** Toggle between light and dark themes for a comfortable viewing experience.
-- **Import/Export Functionality:** Export notes as a JSON file or import them for data backup and transfer.
-- **Drag and Drop:** Reorder notes by dragging and dropping.
-- **Auto-Save:** Notes are automatically saved to local storage to prevent data loss.
-- **Automatic Sorting:** Notes can be automatically sorted by their due dates.
-- **Shake Animation:** A fun feature to shake all the notes on the screen.
-- **Chatbot Integration:** An embedded chatbot named Eliza provides assistance and answers to common queries about the app.
+- **Note Creation and Editing:** Easy-to-use interface for creating and modifying notes. Supports markdown for enhanced formatting.
+- **Drag and Drop Functionality:** Conveniently rearrange notes on your screen by dragging them to different positions.
+- **Pinning Notes:** Prioritize important notes by pinning them to the top of the screen.
+- **Voice Note Recording:** Quickly capture ideas with the integrated voice recording feature.
+- **Color Customization:** Personalize notes with custom colors for better organization and visual appeal.
+- **Tagging and Due Dates:** Organize your notes with tags and keep track of deadlines with due date settings.
+- **Search Functionality:** Efficiently locate specific notes using the built-in search feature.
+- **Dark Mode:** Switch between light and dark themes for an optimal visual experience.
+- **Import/Export Functionality:** Easily back up or transfer notes with JSON file import/export options.
+- **Auto-Save:** Automatically saves notes to local storage to prevent data loss.
+- **Calculator, Mood Tracker, and Timer:** Built-in tools for enhanced productivity.
+- **Chatbot Integration:** An AI-powered chatbot named Eliza assists with user queries about the app.
 
 ## Technology Stack
-- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, and Vue.js. (Micro-frontends)
-- **Backend:** Node.js, Django, and Flask. (Micro-services)
+- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, Vue.js (Micro-frontends).
+- **Backend:** Node.js, Django, Flask (Micro-services).
 - **Database:** Apache Cassandra, MySQL.
 - **Middleware:** Express, Django REST Framework.
-- **APIs:** Google Cloud Speech-to-Text API, Google Cloud Text-to-Speech API, Google Cloud Translation API, Google Cloud Natural Language API, Go
+- **APIs:** Google Cloud Speech-to-Text, Text-to-Speech, Translation, Natural Language, Personalized Recommendations, and Notes Storage for Users.
 
 ## Installation and Setup
 
-1. Clone the repository from https://github.com/hoangsonww/The-StickyNotes-App.
-2. Install necessary dependencies via `npm install` or a similar command, if applicable.
-3. Open `index.html` in a web browser to start the app.
+1. Clone the repository from [GitHub](https://github.com/hoangsonww/The-StickyNotes-App).
+2. Install necessary dependencies with `npm install`.
+3. Open `index.html` in a web browser to start using the app.
 
 ## Usage
-- **Note Creation:** Click on the "Add A Note!" button to create a new note.
-- **Note Editing:** Click on a note to edit it.
-- **Note Deletion:** Click the delete button (trash can icon) on a note to delete it.
-- **Note Color Customization:** Use the color picker to select a new color for the note.
-- **Note Tagging:** Fill in the "Tags" field in the note's toolbar.
-- **Note Due Dates:** Fill in the "Due Date" field in the note's toolbar.
-- **Note Searching:** Type in the search box to filter notes by content.
-- **Note Sorting:** Click the "Sort Notes" button to sort notes by due date.
 
 ### Basic Operations
-
-- **Adding a Note:** Click on the "Add A Note!" button.
+- **Adding a Note:** Click "Add A Note!" to create a new note.
 - **Editing a Note:** Click the edit button (pencil icon) on a note.
 - **Deleting a Note:** Click the delete button (trash can icon) on a note.
-- **Exporting Notes:** Click the "Export Notes" button to download your notes as a JSON file.
-- **Importing Notes:** Use the "Import Notes" button to upload and restore notes from a JSON file.
+- **Exporting/Importing Notes:** Use the "Export Notes" and "Import Notes" buttons for data backup and restoration.
 
 ### Advanced Features
-
-- **Recording a Voice Note:** Click the microphone icon to start and stop recording.
-- **Changing Note Color:** Use the color picker to select a new color for the note.
-- **Adding Tags and Due Dates:** Fill in the respective fields in the note's toolbar.
-- **Searching for Notes:** Type in the search box to filter notes by content.
-- **Sorting Notes:** Click the "Sort Notes" button to sort notes by due date.
-- **Shaking Notes:** Click the "Shake Notes" button to shake all the notes on the screen.
-- **Chatting with Eliza:** Click the chatbot icon to open the chatbot window.
-- **Calculating Math Expressions:** Type in a math expression in the calculator window to get the result.
+- **Recording Voice Notes:** Click the microphone icon for audio recording.
+- **Customizing Note Colors:** Select new colors for notes using the color picker.
+- **Tagging and Setting Due Dates:** Use the tag and due date fields in the note toolbar.
+- **Searching and Sorting Notes:** Utilize the search box and "Sort Notes" button for organization.
+- **Interacting with Eliza:** Engage with the chatbot for assistance and information.
+- **Using the Calculator:** Enter mathematical expressions in the calculator for instant results.
 
 ## Customization
 
-- **Theme Toggle:** Use the "Toggle Dark Mode" button to switch between light and dark themes.
-- **Color Customization:** Choose individual colors for each note for easy identification.
+- **Theme Toggle:** Use "Toggle Dark Mode" for theme switching.
+- **Color Customization:** Individual color choices for each note.
 
 ## Data Management
 
-- **Exporting Notes:** Click the "Export Notes" button to download your notes as a JSON file.
-- **Importing Notes:** Use the "Import Notes" button to upload and restore notes from a JSON file.
+- **Export/Import Notes:** Backup and restore notes with JSON file functionality.
 
 ## Future Enhancements
 
 - Real-time collaboration features.
-- Cloud syncing for note management across devices.
-- More customization options including fonts and themes.
-- More advanced math operations for the calculator.
-- More advanced note-taking features including drawing and handwriting recognition.
-- More advanced search features including voice search and image search.
-- More advanced sorting features including sorting by tags and colors.
-- More advanced data management features including cloud storage and data encryption.
-- More advanced note-taking features including drawing and handwriting recognition.
+- Cloud syncing for cross-device note management.
+- Enhanced customization options (fonts, themes).
+- Advanced calculator functionalities.
+- More sophisticated note-taking features (drawing, handwriting recognition).
+- Improved search capabilities (voice, image search).
+- Enhanced sorting (by tags, colors).
+- Advanced data management (cloud storage, encryption).
 
 ## Contributing
 
-If you're interested in contributing to the StickyNotes App, please read our [Contributing Guidelines](CONTRIBUTING.md) for more information on how to get started.
+Contributions to the StickyNotes App are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
 ## Support and Feedback
 
-For support, feedback, or contributions, please refer to the GitHub repository's issues section or contact the developer directly.
+For support, feedback, or contributions, refer to the GitHub repository's issues section or contact the developer directly.
 Author: Son (David) Nguyen.
-
+Email: info@movie-verse.com.
 ---

@@ -34,7 +34,9 @@
 </head>
 
 <header>
-    <h1>The StickyNotes App</h1>
+    <a style="text-decoration: none; cursor: pointer" href="index.html">
+        <h1>The <span class="highlight">StickyNotes</span> App</h1>
+    </a>
     <input type="text" id="searchBox" style="font: inherit" title="Enter any keyword and we'll find automatically your notes for you!" placeholder="Search for a note..." />
     <button class="add" id="add">
         <i class="fas fa-plus"></i> Add A Note!
@@ -57,7 +59,7 @@
         <button onclick="toggleFeedbackForm()" class="feedback-btn" title="Have any feedback? Let us know here!"><i class="fas fa-comment-dots"></i></button>
         <form class="feedback-form" id="feedbackForm">
             <h4 class="feedback-title">Quick Feedback</h4>
-            <textarea name="feedback" id="feedbackText" placeholder="Your feedback..."></textarea>
+            <textarea name="feedback" id="feedbackText" style="font: inherit" placeholder="Your feedback..."></textarea>
             <div class="feedback-actions">
                 <button type="button" onclick="submitFeedback(event)">Submit</button>
                 <button type="button" onclick="toggleFeedbackForm()">Cancel</button>
@@ -82,7 +84,7 @@
         <button onclick="toggleMoodTracker()" class="mood-tracker-toggle-btn" title="Track your mood here!"><i class="fas fa-smile"></i></button>
         <div class="mood-tracker-form" id="moodTrackerForm">
             <h4 class="mood-tracker-title">Mood Tracker</h4>
-            <select id="moodSelect">
+            <select style="font: inherit; font-size: 14px; border-radius: 8px; margin-right: 2px; cursor: pointer" id="moodSelect">
                 <option value="Happy">Happy</option>
                 <option value="Sad">Sad</option>
                 <option value="Stressed">Stressed</option>
@@ -147,7 +149,7 @@
 
     <div id="mini-task-list" class="hover-effect" title="A quick reminder of what you want to get done!">
         <h5>Task List</h5>
-        <input type="text" id="task-input" placeholder="New task..." maxlength="20">
+        <input type="text" id="task-input" style="font: inherit; font-size: 12px" placeholder="New task..." maxlength="20">
         <ul id="task-list"></ul>
     </div>
 
