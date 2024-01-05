@@ -4,6 +4,16 @@
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The StickyNotes Calendar</title>
+    <meta name="description" content="Organize your days: plan, schedule, and remember with ease with our calendar!">
+    <meta name="theme-color" content="#534caf">
+    <meta property="og:title" content="The StickyNotes Calendar" />
+    <meta property="og:description" content="Organize your days: plan, schedule, and remember with ease with our calendar!" />
+    <meta property="og:image" content="../../utils/favicon.ico" />
+    <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/src/html/calendar.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:site_name" content="The StickyNotes App" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
     <script src="../js/script.js"></script>
@@ -126,7 +136,7 @@
         .quick-access-toolbar {
             position: fixed;
             left: 0;
-            top: 39%;
+            top: 50%;
             background: #534caf;
             border-radius: 0 5px 5px 0;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
@@ -134,6 +144,15 @@
             flex-direction: column;
             padding: 10px 5px;
             padding-right: 6px;
+        }
+
+        @media (max-width: 904.5px) {
+            .quick-access-toolbar {
+                top: 32%;
+            }
+            .fc-today-button {
+                margin-left: 39px;
+            }
         }
 
         #noteTitle {
@@ -297,6 +316,7 @@
     </div>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -352,11 +372,15 @@
       }
 
       function loadCalendarEvents() {
+        const today = new Date().toISOString().split('T')[0];
         const notes = JSON.parse(localStorage.getItem("notes")) || [];
-        return notes.map(note => ({
-          title: note.title,
-          start: note.dueDate,
-        }));
+        return notes.map(note => {
+          const dueDate = note.dueDate || today;
+          return {
+            title: note.title,
+            start: dueDate,
+          };
+        });
       }
 
       document.addEventListener("DOMContentLoaded", function() {
@@ -492,7 +516,8 @@
         var modal = document.getElementById("addNoteModal");
         if (modal.style.display === "block") {
           modal.style.display = "none";
-        } else {
+        }
+        else {
           modal.style.display = "block";
         }
       }
