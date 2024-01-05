@@ -1165,16 +1165,18 @@ function fetchWeatherByCoords(lat, lon) {
         });
 }
 
-if (navigator.geolocation) {
+const isMobileDevice = window.innerWidth < 768;
+
+if (!isMobileDevice && navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
         if (error.code === error.PERMISSION_DENIED) {
-            weatherDisplay.innerHTML = "<p>Location Access Denied.</p>";
+            weatherDisplay1.innerHTML = "<p>Location Access Denied.</p>";
         }
-        weatherSearchContainer.classList.remove('weather-hidden');
+        weatherSearchContainer1.classList.remove('weather-hidden');
     });
 }
 else {
-    weatherSearchContainer.classList.remove('weather-hidden');
+    weatherSearchContainer1.classList.remove('weather-hidden');
 }
 
 document.addEventListener("DOMContentLoaded", () => {

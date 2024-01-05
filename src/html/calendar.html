@@ -115,11 +115,25 @@
             border: 0.5px solid #888;
             width: 80%;
             border-radius: 8px;
+            color: white;
         }
 
         .modal-content h2 {
             margin-left: 25px;
             color: #ffa24e;
+        }
+
+        .quick-access-toolbar {
+            position: fixed;
+            left: 0;
+            top: 39%;
+            background: #534caf;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            padding: 10px 5px;
+            padding-right: 6px;
         }
 
         #noteTitle {
@@ -214,6 +228,9 @@
             .weather-container,
             #mini-task-list {
                 display: block;
+            }
+            .fc-today-button {
+                margin-left: 39px;
             }
         }
     </style>
@@ -415,16 +432,18 @@
     `;
       }
 
-      if (navigator.geolocation) {
+      const isMobileDevice1 = window.innerWidth < 768;
+
+      if (!isMobileDevice1 && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
           if (error.code === error.PERMISSION_DENIED) {
             weatherDisplay1.innerHTML = "<p>Location Access Denied.</p>";
           }
-          weatherSearchContainer.classList.remove('weather-hidden');
+          weatherSearchContainer1.classList.remove('weather-hidden');
         });
       }
       else {
-        weatherSearchContainer.classList.remove('weather-hidden');
+        weatherSearchContainer1.classList.remove('weather-hidden');
       }
 
       document.addEventListener("DOMContentLoaded", () => {
