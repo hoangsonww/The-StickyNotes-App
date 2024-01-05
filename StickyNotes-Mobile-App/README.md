@@ -40,7 +40,7 @@ We welcome contributions to improve StickyNotes. Please review our contribution 
 StickyNotes is licensed under MIT.
 
 ## Contact
-For support, feature requests, or queries, reach out to us at hoangson091104@gmail.com.
+For support, feature requests, or queries, reach out to us at [info@movie-verse.com](mailto:info@movie-verse.com).
 
 ## Acknowledgments
 Thanks to all the developers, designers, and users who have contributed to making StickyNotes a helpful tool for thousands of people.

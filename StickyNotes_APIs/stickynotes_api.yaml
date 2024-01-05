@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  title: StickyNotes API
+  description: API for managing notes in the StickyNotes application.
+  version: "1.0.0"
+servers:
+  - url: http://api.stickynotes.com/v1
+    description: Production server
+paths:
+  /notes:
+    get:
+      summary: List all notes
+      operationId: listNotes
+      tags:
+        - notes
+      responses:
+        '200':
+          description: A JSON array of notes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Note'
+    post:
+      summary: Create a new note
+      operationId: createNote
+      tags:
+        - notes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '201':
+          description: Note created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+
+  /notes/{noteId}:
+    get:
+      summary: Get a note by ID
+      operationId: getNote
+      tags:
+        - notes
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          description: The ID of the note to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A note object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '404':
+          description: Note not found
+
+components:
+  schemas:
+    Note:
+      type: object
+      required:
+        - id
+        - title
+        - content
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the note
+        title:
+          type: string
+          description: The title of the note
+        content:
+          type: string
+          description: The content of the note
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the note was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the note was last updated

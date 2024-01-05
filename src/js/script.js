@@ -2,9 +2,18 @@ const notesContainer = document.createElement("div");
 notesContainer.classList.add("notes-container");
 document.body.appendChild(notesContainer);
 
+const calendarBtn = document.createElement("button");
+calendarBtn.innerText = "Calendar";
+calendarBtn.classList.add("about-btn");
+calendarBtn.addEventListener("click", function() {
+    window.location.href = 'src/html/calendar.html';
+});
+document.body.appendChild(calendarBtn);
+
 const aboutBtn = document.createElement("button");
 aboutBtn.innerText = "About This App";
 aboutBtn.classList.add("about-btn");
+aboutBtn.style.marginTop = "0";
 
 aboutBtn.addEventListener("click", function() {
     window.location.href = 'src/html/about.html';
@@ -1158,7 +1167,7 @@ function fetchWeatherByCoords(lat, lon) {
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
-        if (error.code == error.PERMISSION_DENIED) {
+        if (error.code === error.PERMISSION_DENIED) {
             weatherDisplay.innerHTML = "<p>Location Access Denied.</p>";
         }
         weatherSearchContainer.classList.remove('weather-hidden');

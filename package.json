@@ -1,5 +1,5 @@
 {
-  "name": "The-StickyNotes-App",
+  "name": "thestickynotesapp",
   "displayName": "TheStickyNotesApp",
   "version": "1.0.0",
   "description": "A great tool to control all your tasks.",
@@ -42,6 +42,7 @@
     "docker": "^1.0.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "fullcalendar": "^6.1.10",
     "i18next": "^23.7.11",
     "jsonwebtoken": "^9.0.2",
     "kubernetes": "^1.0.0",

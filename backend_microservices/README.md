@@ -98,7 +98,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Son Nguyen Hoang - hoangson091104@gmail.com
+Son Nguyen Hoang - [info@movie-verse.com](mailto:info@movie-verse.com).
 
 Project Link: https://github.com/hoangsonww/The-StickyNotes-App
 

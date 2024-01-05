@@ -336,6 +336,40 @@ h4 {
     color: white;
 }
 
+#calendar {
+    max-width: 900px;
+    margin: 40px auto 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.fc-header-toolbar {
+    background-color: #534caf;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.fc-button-primary {
+    background-color: #534caf;
+    border-color: #534caf;
+}
+
+.fc-button-primary:not(:disabled):hover {
+    background-color: #403890;
+}
+
+.fc-button-active {
+    background-color: #403890;
+}
+
+.fc-button {
+    background-color: #534caf;
+}
+
 #mini-task-list {
     width: 90px;
     height: 160px;
@@ -397,7 +431,7 @@ h4 {
 }
 
 #weather-search-btn:hover {
-    background-color: #403890;
+    background-color: #534caf;
     border-radius: 8px;
 }
 
@@ -956,7 +990,7 @@ button:hover .tooltip {
 }
 
 .quick-access-toolbar button:hover {
-    background-color: #e0e0e0;
+    background-color: #c0c0c0;
 }
 
 .note.pinned {
