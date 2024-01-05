@@ -39,6 +39,7 @@
         header {
             width: 100%;
             box-sizing: border-box;
+            margin-top: 15px;
         }
 
         .calendar-container {
@@ -46,7 +47,7 @@
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            height: calc(100% - 129px);
+            height: calc(100% - 144px);
             padding-top: 0;
             margin-bottom: 20px;
         }
@@ -269,7 +270,7 @@
         <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
     </div>
 
-    <div class="weather-container" style="margin-top: -15px">
+    <div class="weather-container">
         <div id="weather-display" class="weather-display">
         </div>
         <div id="weather-search-container" class="weather-search-container hidden">
@@ -278,9 +279,9 @@
         </div>
     </div>
 
-    <div id="timeContainer" style="margin-top: -15px" class="time-display hover-effect"></div>
+    <div id="timeContainer" class="time-display hover-effect"></div>
 
-    <div id="mini-task-list" style="margin-top: -15px" class="hover-effect" title="A quick reminder of what you want to get done!">
+    <div id="mini-task-list" class="hover-effect" title="A quick reminder of what you want to get done!">
         <h5>Task List</h5>
         <input type="text" id="task-input" style="font: inherit; font-size: 12px" placeholder="New task..." maxlength="20">
         <ul id="task-list"></ul>
