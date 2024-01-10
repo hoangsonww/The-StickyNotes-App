@@ -77,4 +77,5 @@ Contributions to the StickyNotes App are welcome! Please read our [Contributing 
 For support, feedback, or contributions, refer to the GitHub repository's issues section or contact the developer directly.
 Author: Son (David) Nguyen.
 Email: info@movie-verse.com.
+
 ---
