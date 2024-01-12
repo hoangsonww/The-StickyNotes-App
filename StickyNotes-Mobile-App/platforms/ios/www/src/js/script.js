@@ -2,12 +2,21 @@ const notesContainer = document.createElement("div");
 notesContainer.classList.add("notes-container");
 document.body.appendChild(notesContainer);
 
+const calendarBtn = document.createElement("button");
+calendarBtn.innerText = "Calendar";
+calendarBtn.classList.add("about-btn");
+calendarBtn.addEventListener("click", function() {
+    window.location.href = 'src/html/calendar.html';
+});
+document.body.appendChild(calendarBtn);
+
 const aboutBtn = document.createElement("button");
 aboutBtn.innerText = "About This App";
 aboutBtn.classList.add("about-btn");
+aboutBtn.style.marginTop = "0";
 
 aboutBtn.addEventListener("click", function() {
-    window.location.href = 'about.html';
+    window.location.href = 'src/html/about.html';
 });
 
 document.body.appendChild(aboutBtn);
@@ -20,7 +29,10 @@ if (notes) {
         addNewNote(note.title, note.text, note.color, note.tag, note.dueDate, note.voiceNote, note.image, note.isPinned);
     });
     sortNotesByDueDate();
+    sortNotesByPinned()
 }
+
+checkAndDisplayEmptyNotesMessage();
 
 addBtn.addEventListener("click", () => {
     addNewNote();
@@ -39,21 +51,21 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     note.innerHTML = `
         <div class="notes">
             <div class="tools">
-                <input type="text" class="due-date" placeholder="Add Due Date..." onfocus="this.type='date';this.focus();" onblur="if(!this.value)this.type='text';" min="${today}" value="">
-                <input type="text" class="tag" placeholder="Add tag..."/>
+                <input type="text" class="due-date" style="font: inherit" placeholder="Add Due Date..." onfocus="this.type='date';this.focus();" onblur="if(!this.value)this.type='text';" min="${today}" value="">
+                <input type="text" class="tag" style="font: inherit" placeholder="Add tag..."/>
                 <button class="edit"><i class="fas fa-edit"></i></button>
                 <button class="mic"><i class="fas fa-microphone"></i></button>
                 <button class="image-btn"><i class="fas fa-image"></i></button>
                 <input type="file" class="image-upload" accept="image/*" style="display: none;">
                 <audio class="voice-note" controls></audio>
                 <button class="pin">${isPinned ? 'Unpin' : 'Pin'}</button>
-                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                <button id="deletBtn" class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;">
             </div>
             <div class="note-title ${title ? "" : "untitled"}" contenteditable="false">${title}</div>
             <div class="main ${text ? "" : "hidden"}"></div>
             <div class="note-content">
-                <textarea>${text}</textarea>
+                <textarea placeholder="Add note content here..." style="font: inherit">${text}</textarea>
                 <div class="image-container ${image ? "" : "hidden"}">
                     <img src="${image}" class="note-image" />
                     <span class="remove-image">✖</span>
@@ -74,7 +86,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
     noteTitle.addEventListener('click', () => {
         if (noteTitle.classList.contains('untitled')) {
-            noteTitle.textContent = ''; // Clear the default text
+            noteTitle.textContent = '';
         }
         noteTitle.contentEditable = true;
         noteTitle.focus();
@@ -106,7 +118,16 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     pinBtn.title = isPinned ? "Unpin Note" : "Pin Note";
     pinBtn.addEventListener('click', () => {
         const isNotePinned = note.classList.toggle('pinned');
-        pinBtn.innerHTML = isNotePinned ? '<i class="fas fa-thumbtack"></i>' : '<i class="far fa-thumbtack"></i>';
+        if (isNotePinned) {
+            pinBtn.querySelector('i').classList.remove('pin-unpinned');
+            pinBtn.querySelector('i').classList.add('pin-pinned');
+            pinBtn.title = "Unpin Note";
+        }
+        else {
+            pinBtn.querySelector('i').classList.remove('pin-pinned');
+            pinBtn.querySelector('i').classList.add('pin-unpinned');
+            pinBtn.title = "Pin Note";
+        }
         updateLS();
         sortNotesByPinned();
     });
@@ -117,6 +138,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     deleteBtn.addEventListener("click", () => {
         note.remove();
         updateLS();
+        checkAndDisplayEmptyNotesMessage();
     });
 
     colorPicker.addEventListener("input", (e) => {
@@ -170,7 +192,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             reader.onload = function (e) {
                 noteImage.src = e.target.result;
                 imageContainer.classList.remove('hidden');
-                updateLS(); // Update Local Storage with new image data
+                updateLS();
             };
             reader.readAsDataURL(this.files[0]);
         }
@@ -226,12 +248,11 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                         let audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                         let audioUrl = URL.createObjectURL(audioBlob);
 
-                        // Convert blob to Base64
                         const reader = new FileReader();
                         reader.onloadend = function() {
                             let base64data = reader.result;
                             voiceNotePlayer.src = base64data;
-                            updateLS(); // Update Local Storage
+                            updateLS();
                         };
                         reader.readAsDataURL(audioBlob);
 
@@ -240,13 +261,13 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
                     audioChunks = [];
                     mediaRecorder.start();
-                    micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>'; // Update icon to indicate recording
+                    micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
                 });
             recordingStatus.style.display = "block";
         }
         else if (mediaRecorder.state === "recording") {
             mediaRecorder.stop();
-            micBtn.innerHTML = '<i class="fas fa-microphone"></i>'; // Reset icon after recording
+            micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
             recordingStatus.style.display = "none";
         }
     });
@@ -263,14 +284,14 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     const micTooltip = document.createElement("span");
     micTooltip.classList.add("tooltip");
     micTooltip.innerText = "Record a quick voice note instead of typing!";
-    micBtn.style.position = "relative"; // to position tooltip correctly
+    micBtn.style.position = "relative";
     micBtn.appendChild(micTooltip);
 
     const playbackTooltip = document.createElement("span");
     playbackTooltip.classList.add("tooltip");
     playbackTooltip.innerText = "Listen to your voice note!";
-    voiceNotePlayer.style.position = "relative"; // to position tooltip correctly
-    voiceNotePlayer.parentNode.insertBefore(playbackTooltip, voiceNotePlayer.nextSibling); // placing tooltip next to voiceNotePlayer
+    voiceNotePlayer.style.position = "relative";
+    voiceNotePlayer.parentNode.insertBefore(playbackTooltip, voiceNotePlayer.nextSibling);
 
     micBtn.addEventListener("mouseenter", () => {
         micTooltip.classList.add("visible");
@@ -280,7 +301,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         micTooltip.classList.remove("visible");
     });
 
-    // Add event listeners to voice note player
     voiceNotePlayer.addEventListener("mouseenter", () => {
         playbackTooltip.classList.add("visible");
     });
@@ -303,43 +323,18 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     moveDownButton.addEventListener('click', () => moveDown(note));
     note.querySelector('.tools').appendChild(moveDownButton);
 
-    // Drag and Drop
     note.draggable = true;
     note.addEventListener('dragstart', handleDragStart);
     note.addEventListener('dragend', handleDragEnd);
 
     notesContainer.addEventListener('dragover', handleDragOver);
     notesContainer.addEventListener('drop', handleDrop);
-
     notesContainer.appendChild(note);
 
     imageBtn.title = "Upload or remove image";
     micBtn.title = "Record or stop recording voice note";
-}
-
-function sortNotesByPinned() {
-    const pinnedNotes = [];
-    const unpinnedNotes = [];
-
-    document.querySelectorAll(".note").forEach((note) => {
-        if (note.classList.contains('pinned')) {
-            pinnedNotes.push(note);
-        } else {
-            unpinnedNotes.push(note);
-        }
-    });
-
-    pinnedNotes.concat(unpinnedNotes).forEach(note => notesContainer.appendChild(note));
-}
-
-function toggleDarkMode() {
-    const isDarkMode = document.body.classList.toggle('dark-mode');
-    if (isDarkMode) {
-        localStorage.setItem('theme', 'dark-mode');
-    }
-    else {
-        localStorage.removeItem('theme');
-    }
+    updateLS();
+    checkAndDisplayEmptyNotesMessage();
 }
 
 function updateLS() {
@@ -361,26 +356,38 @@ function updateLS() {
     localStorage.setItem("notes", JSON.stringify(notesArr));
 }
 
+function sortNotesByPinned() {
+    const pinnedNotes = [];
+    const unpinnedNotes = [];
+    document.querySelectorAll(".note").forEach((note) => {
+        if (note.classList.contains('pinned')) {
+            pinnedNotes.push(note);
+        }
+        else {
+            unpinnedNotes.push(note);
+        }
+    });
+    pinnedNotes.concat(unpinnedNotes).forEach(note => notesContainer.appendChild(note));
+}
+
 let autoScrollInterval;
 
 function handleWindowDragOver(e) {
     const cursorY = e.clientY;
-    const triggerDistance = 50; // The distance from the edge at which scrolling should start
-
+    const triggerDistance = 50;
     if (cursorY < triggerDistance) {
-        // Cursor is near the top of the viewport
-        startAutoScrolling(-5); // Negative for scrolling up
-    } else if (window.innerHeight - cursorY < triggerDistance) {
-        // Cursor is near the bottom of the viewport
-        startAutoScrolling(5); // Positive for scrolling down
-    } else {
-        stopAutoScrolling(); // Cursor is no longer near the top or bottom
+        startAutoScrolling(-5);
+    }
+    else if (window.innerHeight - cursorY < triggerDistance) {
+        startAutoScrolling(5);
+    }
+    else {
+        stopAutoScrolling();
     }
 }
 
 function startAutoScrolling(amount) {
     if (autoScrollInterval) return;
-
     autoScrollInterval = setInterval(() => {
         window.scrollBy(0, amount);
     }, 50);
@@ -395,7 +402,6 @@ function stopAutoScrolling() {
 
 document.addEventListener('dragover', handleWindowDragOver);
 document.addEventListener('dragend', stopAutoScrolling);
-
 
 function handleDragStart(e) {
     e.target.classList.add('dragging');
@@ -421,6 +427,7 @@ function handleDrop(e) {
         notesContainer.insertBefore(draggable, afterElement);
     }
     draggable.classList.remove('dragging');
+    updateLS();
 }
 
 function getDragAfterElement(container, y) {
@@ -442,6 +449,7 @@ function moveUp(noteElem) {
     const prevNote = noteElem.previousElementSibling;
     if (prevNote) {
         notesContainer.insertBefore(noteElem, prevNote);
+        updateLS();
     }
 }
 
@@ -449,6 +457,7 @@ function moveDown(noteElem) {
     const nextNote = noteElem.nextElementSibling;
     if (nextNote) {
         notesContainer.insertBefore(nextNote, noteElem);
+        updateLS();
     }
 }
 
@@ -456,7 +465,6 @@ function shakeAllNotes() {
     const notes = document.querySelectorAll(".note");
     notes.forEach((note) => {
         note.classList.add("shake-it");
-        // Remove the shake-it class after the animation ends to avoid unwanted repetitions
         note.addEventListener("animationend", () => {
             note.classList.remove("shake-it");
         });
@@ -477,8 +485,6 @@ document.body.appendChild(recordingStatus);
 
 function sortNotesByDueDate() {
     const notesArray = Array.from(document.querySelectorAll('.note'));
-
-    // Sorting function
     notesArray.sort((a, b) => {
         const dateA = a.querySelector(".due-date").value;
         const dateB = b.querySelector(".due-date").value;
@@ -487,21 +493,22 @@ function sortNotesByDueDate() {
 
         if (dateA && dateB) {
             return new Date(dateA) - new Date(dateB);
-        } else if (dateA) {
+        }
+        else if (dateA) {
             return -1;
-        } else if (dateB) {
+        }
+        else if (dateB) {
             return 1;
-        } else {
+        }
+        else {
             return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
         }
     });
-
     notesArray.forEach(note => notesContainer.appendChild(note));
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     const searchBox = document.getElementById("searchBox");
-
     searchBox.addEventListener("input", (e) => {
         const { value } = e.target;
         filterNotes(value);
@@ -514,7 +521,8 @@ function filterNotes(query) {
         const noteContent = note.textContent;
         if (noteContent.toLowerCase().includes(query.toLowerCase())) {
             note.style.display = "block";
-        } else {
+        }
+        else {
             note.style.display = "none";
         }
     });
@@ -524,7 +532,6 @@ const themeToggleButton = document.createElement("button");
 themeToggleButton.innerText = "Toggle Dark Mode";
 themeToggleButton.id = "themeToggle";
 themeToggleButton.className = "button";
-
 themeToggleButton.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
     if (document.body.classList.contains("dark-mode")) {
@@ -535,10 +542,23 @@ themeToggleButton.addEventListener("click", () => {
     }
 });
 
+function toggleDarkMode() {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    if (isDarkMode) {
+        localStorage.setItem('theme', 'dark-mode');
+    }
+    else {
+        localStorage.removeItem('theme');
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark-mode") {
         document.body.classList.add("dark-mode");
+    }
+    else {
+        document.body.classList.remove("dark-mode");
     }
 });
 
@@ -567,7 +587,7 @@ function importNotes(event) {
 
 const exportButton = document.createElement("button");
 exportButton.innerText = "Export Notes";
-exportButton.className = "sticky-button"; // Add this line
+exportButton.className = "sticky-button";
 document.body.appendChild(exportButton);
 exportButton.addEventListener("click", exportNotes);
 exportButton.className = "button";
@@ -575,55 +595,95 @@ exportButton.className = "button";
 const importLabel = document.createElement("label");
 importLabel.innerText = "Import Notes";
 importLabel.setAttribute("for", "import-input");
-importLabel.className = "sticky-button"; // Using the same class for consistency
+importLabel.className = "sticky-button";
 document.body.appendChild(importLabel);
-importLabel.style.transition = "all 0.3s ease-in-out"; // Add a transition for the hover effect
+importLabel.style.transition = "all 0.3s ease-in-out";
 
 importLabel.addEventListener("mouseenter", () => {
-    importLabel.style.transform = "scale(1.1)"; // Scale up on hover
+    importLabel.style.transform = "scale(1.1)";
 });
+
 importLabel.addEventListener("mouseleave", () => {
-    importLabel.style.transform = "scale(1)"; // Scale back to normal on exit
+    importLabel.style.transform = "scale(1)";
 });
 
 const importInput = document.createElement("input");
 importInput.type = "file";
-importInput.id = "import-input"; // ID added for the label to recognize it
+importInput.id = "import-input";
 document.body.appendChild(importInput);
 importInput.addEventListener("change", importNotes);
 importInput.className = "button";
-
 const chatInput = document.querySelector(".chat-input");
 const chatMessages = document.querySelector(".chat-messages");
-
 const chatTitleElem = document.createElement("div");
 chatTitleElem.className = "chat-header chat-title";
 chatTitleElem.innerText = "The StickyNotes Assistant";
 document.querySelector(".chatbot").prepend(chatTitleElem);
-
 chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.target.value.trim()) {
         const question = e.target.value.trim();
-
         const userMsgElem = document.createElement("div");
         userMsgElem.innerText = `You: ${question}`;
         chatMessages.appendChild(userMsgElem);
-
         setTimeout(() => {
             const response = getElizaResponse(question);
             const elizaMsgElem = document.createElement("div");
-            elizaMsgElem.innerText = `Eliza: ${response}`;
+            elizaMsgElem.innerText = `Assistant: ${response}`;
             chatMessages.appendChild(elizaMsgElem);
-        }, 1000); // 1-second delay
-
+        }, 1000);
         e.target.value = '';
     }
 });
 
+function deleteNoteWithTitle(title) {
+    const notes = document.querySelectorAll('.note');
+    notes.forEach(note => {
+        const noteTitle = note.querySelector('.note-title').textContent;
+        if (noteTitle.includes(title)) {
+            note.querySelector('.delete').click();
+        }
+    });
+}
+
+function searchForNote(query) {
+    const searchBox = document.getElementById("searchBox");
+    searchBox.value = query;
+    filterNotes(query);
+}
+
 function getElizaResponse(question) {
     question = question.toLowerCase();
-
     const responses = [
+        {
+            pattern: /add note titled "?([^"]+)"? with content "?([^"]+)"?/i,
+            response: "Adding note titled '{title}' with content '{content}'...",
+            action: (title, content) => addNewNote(title, content)
+        },
+        {
+            pattern: /add note titled "?([^"]+)"?/i,
+            response: "Adding note titled '{title}'...",
+            action: (title, content) => addNewNote(title, content)
+        },
+        {
+            pattern: /dark mode/,
+            response: "Toggling dark mode",
+            action: () => toggleDarkMode()
+        },
+        {
+            pattern: /delete note titled "?([^"]+)"?/i,
+            response: "Deleting note titled '{title}'...",
+            action: (title) => deleteNoteWithTitle(title)
+        },
+        {
+            pattern: /toggle (dark|light) mode/i,
+            response: "Toggling {mode} mode...",
+            action: () => toggleDarkMode()
+        },
+        {
+            pattern: /search for "?([^"]+)"?/i,
+            response: "Searching for '{query}'...",
+            action: (query) => searchForNote(query)
+        },
         { pattern: /hello|hi|hey/, response: "Hello! How can I assist you today?" },
         { pattern: /what is this app|what does this app do/, response: "This app allows you to create, edit, and manage sticky notes." },
         { pattern: /who created this app/, response: "The app was created by David Nguyen in 2023." },
@@ -706,29 +766,28 @@ function getElizaResponse(question) {
         { pattern: /reminders|notifications/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
         { pattern: /archive|archive note/, response: "You can archive notes that you don't need anymore. They'll be hidden from the main view but can be accessed later." },
         { pattern: /mood|emoji/, response: "You can add emojis to your notes. Just click on the 'Add Emoji' button when editing a note." },
-
-        // Default response
+        { pattern: /favorite|favorite note/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
+        { pattern: /recommended|suggested/, response: "You can access recommended notes in the 'Recommended' section. These are notes that you might find useful." },
+        { pattern: /voice|voice note/, response: "You can record voice notes instead of typing. Just click on the 'Record' button to start recording." },
         { pattern: /.*/, response: "I'm not sure about that. Can you be more specific or ask another question?" }
     ];
-
     for (let i = 0; i < responses.length; i++) {
         let match = question.match(responses[i].pattern);
         if (match) {
-            if (match[1] && match[2]) {
-                // Handle creation of a new note if the pattern matches
-                addNewNote(match[2]); // Add the note with the captured content
-                return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]);
-            }
-            return responses[i].response;
+            if (responses[i].action) responses[i].action(...match.slice(1));
+            return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]).replace('{query}', match[1]).replace('{mode}', match[1]);
         }
     }
     return "Sorry, I didn't get that. Could you please rephrase or ask another question?";
 }
 
 const toggleButton = document.createElement("button");
-toggleButton.innerText = "-";
+toggleButton.innerText = "+";
 toggleButton.className = "toggle-chat";
 toggleButton.title="Minimize/Maximize Chatbot";
+
+let isChatbotFirstOpened = true;
+
 toggleButton.onclick = function() {
     const chatMessagesElem = document.querySelector(".chat-messages");
     const chatInputElem = document.querySelector(".chat-input");
@@ -737,16 +796,37 @@ toggleButton.onclick = function() {
         chatMessagesElem.style.display = "";
         chatInputElem.style.display = "";
         toggleButton.innerText = "-";
-    } else {
+
+        if (isChatbotFirstOpened) {
+            sendInstructionalMessage();
+            isChatbotFirstOpened = false;
+        }
+    }
+    else {
         chatMessagesElem.style.display = "none";
         chatInputElem.style.display = "none";
         toggleButton.innerText = "+";
     }
 };
 
+function sendInstructionalMessage() {
+    const instructions = `
+        Welcome to the StickyNotes Assistant! Here's how you can use me: 
+        To add a note, type: "Add note titled 'Your Title' with content 'Your Content'", 
+        to delete a note, type: "Delete note titled 'Your Title'", 
+        to search for a note, type: "Search for 'Your Keyword'", 
+        to toggle dark mode, type: "Toggle dark mode" or "Toggle light mode", 
+        and there are so many other things that you can use me for! 
+        Enjoy managing your notes more efficiently!
+    `;
+
+    const instructionalMsgElem = document.createElement("div");
+    instructionalMsgElem.innerHTML = `Assistant: ${instructions}`;
+    chatMessages.appendChild(instructionalMsgElem);
+}
+
 const chatHeaderElem = document.querySelector(".chat-header");
 chatHeaderElem.appendChild(toggleButton);
-
 const chatMessagesElem = document.querySelector(".chat-messages");
 const chatInputElem = document.querySelector(".chat-input");
 chatMessagesElem.style.display = "none";
@@ -754,9 +834,9 @@ chatInputElem.style.display = "none";
 
 function toggleTyping(enable) {
     let screen = document.getElementById('calcScreen');
-    screen.disabled = !enable; // Enable or disable based on the parameter
+    screen.disabled = !enable;
     if (enable) {
-        screen.focus(); // Focus on the screen if typing is enabled
+        screen.focus();
     }
 }
 
@@ -770,8 +850,8 @@ document.getElementById('calcScreen').addEventListener('blur', function() {
 
 function enableScreen() {
     const screen = document.getElementById('calcScreen');
-    screen.disabled = false; // Make sure the screen is enabled
-    screen.focus(); // Focus on the screen for immediate typing
+    screen.disabled = false;
+    screen.focus();
 }
 
 function clearScreen() {
@@ -801,7 +881,7 @@ function calculate() {
 
 document.getElementById('calcScreen').addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.key === '=') {
-        event.preventDefault(); // Prevent the default action of the Enter key
+        event.preventDefault();
         calculate();
     }
 });
@@ -818,7 +898,6 @@ document.getElementById('calcScreen').addEventListener('input', function(event) 
 function toggleCalculator() {
     const calcBody = document.querySelector('.calc-body');
     const toggleCalcButton = document.getElementById('toggleCalc');
-
     if (calcBody.style.display === 'none') {
         calcBody.style.display = 'block';
         toggleCalcButton.innerText = '-';
@@ -831,7 +910,6 @@ function toggleCalculator() {
 }
 
 document.getElementById('toggleCalc').addEventListener('click', toggleCalculator);
-
 document.querySelector('.calc-body').style.display = 'none';
 document.getElementById('toggleCalc').innerText = '+';
 
@@ -861,13 +939,32 @@ function pressOperation(operation) {
     }
 }
 
-function submitFeedback() {
+function submitFeedback(event) {
+    event.preventDefault();
+
+    const feedbackForm = document.getElementById('feedbackForm');
     const feedbackText = document.getElementById('feedbackText').value;
-    if(feedbackText) {
-        console.log('Feedback submitted:', feedbackText);
-        alert('Thank you for your feedback!');
-        document.getElementById('feedbackText').value = '';
-        toggleFeedbackForm();
+
+    if (feedbackText) {
+        fetch('https://formspree.io/f/mayryobo', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: new FormData(feedbackForm)
+        })
+          .then(response => {
+              if (response.ok) {
+                  alert('Thank you for your feedback!');
+                  document.getElementById('feedbackText').value = '';
+                  toggleFeedbackForm();
+              } else {
+                  alert('Oops! Something went wrong.');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
     }
     else {
         alert('Please enter some feedback before submitting.');
@@ -877,32 +974,38 @@ function submitFeedback() {
 function toggleTimer() {
     const timerForm = document.getElementById('timerForm');
     const timerBtn = document.querySelector('.timer-toggle-btn');
-    const isTimerVisible = timerForm.style.display === 'block';
+    closeAllFormsExcept(timerForm);
 
-    timerForm.style.display = isTimerVisible ? 'none' : 'block';
-    timerBtn.style.display = isTimerVisible ? 'flex' : 'none';
-
-    if (!isTimerVisible && document.getElementById('feedbackForm').style.display === 'block') {
-        toggleFeedbackForm();
+    if (timerForm.style.display === 'block') {
+        timerForm.style.display = 'none';
+        timerBtn.style.display = 'flex';
+    }
+    else {
+        timerForm.style.display = 'block';
+        timerBtn.style.display = 'none';
     }
 }
 
 function toggleFeedbackForm() {
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackBtn = document.querySelector('.feedback-btn');
-    const isFeedbackVisible = feedbackForm.style.display === 'block';
+    const timerBtn = document.querySelector('.timer-toggle-btn');
+    timerBtn.style.display = 'block';
+    closeAllFormsExcept(feedbackForm);
 
-    feedbackForm.style.display = isFeedbackVisible ? 'none' : 'block';
-    feedbackBtn.style.display = isFeedbackVisible ? 'flex' : 'none';
-
-    if (!isFeedbackVisible && document.getElementById('timerForm').style.display === 'block') {
-        toggleTimer();
+    if (feedbackForm.style.display === 'block') {
+        feedbackForm.style.display = 'none';
+        feedbackBtn.style.display = 'block';
+    }
+    else {
+        feedbackForm.style.display = 'block';
+        feedbackBtn.style.display = 'none';
     }
 }
 
 let countdownInterval;
-let defaultTimeInSeconds = 1500; // 25 minutes in seconds
-let totalTimeInSeconds = defaultTimeInSeconds; // Initialize to 25 minutes
+let defaultTimeInSeconds = 1500;
+let totalTimeInSeconds = defaultTimeInSeconds;
 let isTimerPaused = false;
 
 function startTimer() {
@@ -936,26 +1039,24 @@ function stopTimer() {
 }
 
 function resetTimer() {
-    totalTimeInSeconds = defaultTimeInSeconds; // Reset to 25 minutes (1500 seconds)
-    updateTimerDisplay(); // Update the display after resetting
-    stopTimer(); // Stop the timer if it's running
+    totalTimeInSeconds = defaultTimeInSeconds;
+    updateTimerDisplay();
+    stopTimer();
 }
 
 function updateTimerDisplay() {
     let hours = Math.floor(totalTimeInSeconds / 3600);
     let minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
     let seconds = totalTimeInSeconds % 60;
-
     hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-
     document.getElementById('timerDisplay').textContent = `${hours}:${minutes}:${seconds}`;
 }
 
 
 function setTimerManually() {
-    const timeInput = prompt("Set timer (in seconds)", "1800"); // 30 minutes as default
+    const timeInput = prompt("Set timer (in seconds)", "1800");
     if (timeInput && !isNaN(timeInput) && Number(timeInput) >= 0) {
         totalTimeInSeconds = Number(timeInput);
         updateTimerDisplay();
@@ -973,7 +1074,6 @@ function updateCountdownDisplay() {
         resetTimer();
         return;
     }
-
     updateTimerDisplay();
     if (!isTimerPaused) {
         totalTimeInSeconds--;
@@ -981,7 +1081,7 @@ function updateCountdownDisplay() {
 }
 
 function notifyTimerComplete() {
-    playSound('timer-sound.mp3');
+    playSound('utils/timer-sound.mp3');
     setTimeout(function() {
         alert("Timer complete!");
     }, 100);
@@ -995,13 +1095,11 @@ function playSound(filename) {
 document.addEventListener("DOMContentLoaded", function() {
     function updateTime() {
         const now = new Date();
-        const timeParts = now.toLocaleTimeString().split(" "); // Split time and AM/PM
-        const timeString = timeParts[0]; // Time
-        const amPm = timeParts[1]; // AM/PM
-
+        const timeParts = now.toLocaleTimeString().split(" ");
+        const timeString = timeParts[0];
+        const amPm = timeParts[1];
         document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
     }
-
     updateTime();
     setInterval(updateTime, 1000);
 });
@@ -1009,7 +1107,6 @@ document.addEventListener("DOMContentLoaded", function() {
 const weatherSearchContainer = document.getElementById('weather-search-container');
 const weatherSearchInput = document.getElementById('weather-search-input');
 const weatherSearchBtn = document.getElementById('weather-search-btn');
-
 const apiKey = '593309284d3eb093ee96647eb294905b';
 
 async function fetchWeather(city) {
@@ -1026,9 +1123,7 @@ async function fetchWeather(city) {
 function handleGeoLocation(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-
     weatherDisplay.innerHTML = "<p>Loading Weather...</p>";
-
     fetchWeatherByCoords(lat, lon);
 }
 
@@ -1070,16 +1165,18 @@ function fetchWeatherByCoords(lat, lon) {
         });
 }
 
-if (navigator.geolocation) {
+const isMobileDevice = window.innerWidth < 768;
+
+if (!isMobileDevice && navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
-        if (error.code == error.PERMISSION_DENIED) {
-            weatherDisplay.innerHTML = "<p>Please enable location access to view weather in your area.</p>";
+        if (error.code === error.PERMISSION_DENIED) {
+            weatherDisplay1.innerHTML = "<p>Location Access Denied.</p>";
         }
-        weatherSearchContainer.classList.remove('weather-hidden');
+        weatherSearchContainer1.classList.remove('weather-hidden');
     });
 }
 else {
-    weatherSearchContainer.classList.remove('weather-hidden');
+    weatherSearchContainer1.classList.remove('weather-hidden');
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1098,17 +1195,14 @@ taskInput.addEventListener('keydown', (e) => {
 
 function addTask(task) {
     if (task.trim() === '') return;
-
     const li = document.createElement("li");
     li.textContent = task;
-
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "✖";
     deleteBtn.onclick = function() {
         this.parentElement.remove();
         updateLocalStorage();
     };
-
     li.appendChild(deleteBtn);
     taskList.appendChild(li);
     updateLocalStorage();
@@ -1155,159 +1249,170 @@ function getMoodRecommendation(mood) {
     return recommendations[mood] || 'Enjoy your day!';
 }
 
+async function generateRecommendedNote() {
+    const categories = {
+        morning: ["Plan your day ahead", "List three things you are grateful for", "Write a morning affirmation"],
+        afternoon: ["Summarize your morning achievements", "Draft a to-do list for the afternoon", "Reflect on a positive interaction you had today"],
+        evening: ["Plan a relaxing evening activity", "Journal about your day", "Set goals for tomorrow"],
+        weekend: ["Brainstorm a creative project", "Write about your ideal weekend", "Create a list of books or movies you want to explore"],
+        creative: ["Sketch a small drawing", "Write a short poem or story", "Brainstorm business ideas or inventions"],
+        wellness: ["Note down your workout plan", "Meditation or mindfulness exercise", "Track your water intake or diet for the day"],
+        learning: ["Write about a new topic you want to learn", "Reflect on an interesting article or book", "Plan your learning goals for the week"]
+    };
+    const now = new Date();
+    let selectedCategory;
+    let isWeekend = [0, 6].includes(now.getDay());
+    let month = now.getMonth();
+    let isSummer = month >= 5 && month <= 7;
+    if (now.getHours() < 12) {
+        selectedCategory = categories.morning;
+    }
+    else if (now.getHours() < 18) {
+        selectedCategory = categories.afternoon;
+    }
+    else {
+        selectedCategory = categories.evening;
+    }
+    if (isWeekend) {
+        selectedCategory = categories.weekend;
+    }
+    if (Math.random() < 0.2) {
+        selectedCategory = isSummer ? categories.wellness : categories.creative;
+    }
+    const recommendedPrompt = selectedCategory[Math.floor(Math.random() * selectedCategory.length)];
+    createRecommendedNote(recommendedPrompt);
+}
+
+function createRecommendedNote(prompt) {
+    const popup = document.getElementById('recommendedNoteForm');
+    popup.innerHTML = `
+        <h4 class="recommended-note-title">We've got a suggestion!</h4>
+        <p>Based on your recent activities and the time of day, we think you might enjoy this:</p>
+        <p class="recommended-prompt"><strong>${prompt}</strong></p>
+        <button onclick="addNewNote('Recommended: ${prompt}', '${prompt}'); toggleRecommendedNoteForm();">Create This Note</button>
+        <button onclick="toggleRecommendedNoteForm()">Close</button>
+    `;
+    popup.style.display = 'block';
+}
+
 function toggleMoodTracker() {
     const moodForm = document.getElementById('moodTrackerForm');
-    moodForm.style.display = moodForm.style.display === 'none' ? 'block' : 'none';
+    closeAllFormsExcept(moodForm);
+    const timerBtn = document.querySelector('.timer-toggle-btn');
+    timerBtn.style.display = 'flex';
+    moodForm.style.display = moodForm.style.display === 'block' ? 'none' : 'block';
 }
 
-let reminders = [];
-
-function setReminder() {
-    const reminderText = document.getElementById('reminderText').value;
-    const reminderDateTime = new Date(document.getElementById('reminderDateTime').value);
-
-    if (reminderText && reminderDateTime > new Date()) {
-        reminders.push({ text: reminderText, dueTime: reminderDateTime });
-        displayReminders();
-        saveRemindersToLocalStorage();
-        document.getElementById('reminderText').value = ''; // Clear the text input
-        document.getElementById('reminderDateTime').value = ''; // Clear the date input
-    }
-    else {
-        alert("Please enter a valid reminder and future date/time.");
-    }
+function toggleRecommendedNoteForm() {
+    const recommendedNoteForm = document.getElementById('recommendedNoteForm');
+    closeAllFormsExcept(recommendedNoteForm);
+    const timerBtn = document.querySelector('.timer-toggle-btn');
+    timerBtn.style.display = 'flex';
+    recommendedNoteForm.style.display = recommendedNoteForm.style.display === 'block' ? 'none' : 'block';
 }
 
-function displayReminders() {
-    const list = document.getElementById('reminderList');
-    list.innerHTML = '';
+function closeAllFormsExcept(exceptForm) {
+    const allForms = [
+        document.getElementById('timerForm'),
+        document.getElementById('feedbackForm'),
+        document.getElementById('moodTrackerForm'),
+        document.getElementById('recommendedNoteForm')
+    ];
 
-    reminders.forEach((reminder, index) => {
-        const item = document.createElement('li');
-        item.textContent = `${reminder.text} - Due: ${reminder.dueTime.toLocaleString()}`;
-        list.appendChild(item);
+    allForms.forEach(form => {
+        if (form !== exceptForm) {
+            form.style.display = 'none';
+        }
     });
 }
 
-function checkReminders() {
-    const now = new Date();
-    reminders = reminders.filter(reminder => {
-        const timeDiff = reminder.dueTime - now;
-        if (timeDiff <= 0) {
-            return false;
-        }
-        if (timeDiff <= 5 * 60 * 1000) {
-            alert("Reminder: " + reminder.text + " is due in 5 minutes!");
-        }
-        if (timeDiff <= 1 * 60 * 1000) {
-            alert("Reminder: " + reminder.text + " is due in 1 minute!");
-            return false;
-        }
-        return true;
-    });
-    displayReminders();
-    saveRemindersToLocalStorage();
-}
-
-function saveRemindersToLocalStorage() {
-    localStorage.setItem('reminders', JSON.stringify(reminders));
-}
-
-function loadRemindersFromLocalStorage() {
-    const storedReminders = localStorage.getItem('reminders');
-    if (storedReminders) {
-        reminders = JSON.parse(storedReminders).map(reminder => {
-            reminder.dueTime = new Date(reminder.dueTime);
-            return reminder;
+document.addEventListener("DOMContentLoaded", function() {
+    const generateRecommendedNoteBtn = document.getElementById("generateRecommendedNoteBtn");
+    if (generateRecommendedNoteBtn) {
+        generateRecommendedNoteBtn.addEventListener("click", function() {
+            generateRecommendedNote();
         });
-        displayReminders();
-    }
-}
-
-document.getElementById("reminderText").addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        setReminder();
     }
 });
 
-setInterval(checkReminders, 60000);
-
-document.addEventListener('DOMContentLoaded', loadRemindersFromLocalStorage);
-
-function toggleReminderForm() {
-    const form = document.getElementById('reminderForm');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+function updateSignInStatus(isSignedInNow) {
+    isSignedIn = isSignedInNow;
+    updateSignInButton();
 }
 
-setInterval(checkReminders, 60000);
-
-let goals = [];
-
-function toggleGoalsTracker() {
-    const container = document.getElementById('goalsTrackerContainer');
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+function updateSignInButton() {
+    const signInOutButton = document.getElementById('googleSignInBtn');
+    const signInOutText = signInOutButton.querySelector('span');
+    signInOutText.textContent = isSignedIn ? 'Sign Out' : 'Sign In';
+    signInOutButton.querySelector('i').className = isSignedIn ? 'fas fa-sign-out-alt' : 'fas fa-user-alt';
 }
 
-function addGoal() {
-    const goalText = document.getElementById('goalText').value;
-    if (goalText) {
-        goals.push({ text: goalText, completed: false });
-        displayGoals();
-        saveGoalsToLocalStorage();
-        document.getElementById('goalText').value = '';
-    }
-    else {
-        alert("Please enter a goal.");
-    }
-}
-
-function displayGoals() {
-    const inProgressList = document.getElementById('inProgressGoals');
-    const completedList = document.getElementById('completedGoals');
-
-    inProgressList.innerHTML = '';
-    completedList.innerHTML = '';
-
-    goals.forEach((goal, index) => {
-        const item = document.createElement('li');
-        item.textContent = goal.text;
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = goal.completed;
-        checkbox.onchange = () => toggleGoalCompletion(index);
-        item.prepend(checkbox);
-
-        if (goal.completed) {
-            completedList.appendChild(item);
-        }
-        else {
-            inProgressList.appendChild(item);
-        }
+function initClient() {
+    gapi.client.init({
+        clientId: '979580896903-hllisv9ev8pgn302e2959o7mlgkp2k9s',
+        scope: 'email',
+    }).then(() => {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     });
 }
 
-function toggleGoalCompletion(index) {
-    goals[index].completed = !goals[index].completed;
-    saveGoalsToLocalStorage();
-    displayGoals();
-}
+gapi.load('client:auth2', initClient);
 
-function saveGoalsToLocalStorage() {
-    localStorage.setItem('goals', JSON.stringify(goals));
-}
+let isSignedIn = JSON.parse(localStorage.getItem('googleAuthStatus')) || false;
+updateSignInButton();
 
-function loadGoalsFromLocalStorage() {
-    const storedGoals = localStorage.getItem('goals');
-    if (storedGoals) {
-        goals = JSON.parse(storedGoals);
-        displayGoals();
+function handleSignInOut() {
+    const signInOutButton = document.getElementById('googleSignInBtn');
+    const signInOutText = signInOutButton.querySelector('span');
+    const signInOutIcon = signInOutButton.querySelector('i');
+
+    if (!isSignedIn) {
+        signInOutText.textContent = 'Sign Out';
+        signInOutIcon.className = 'fas fa-sign-out-alt';
+        gapi.auth2.getAuthInstance().signIn().catch(error => {
+            console.error("Error during sign-in: ", error);
+        });
     }
+    else {
+        signInOutText.textContent = 'Sign In';
+        signInOutIcon.className = 'fas fa-user-alt';
+        gapi.auth2.getAuthInstance().signOut().catch(error => {
+            console.error("Error during sign-out: ", error);
+        });
+    }
+
+    isSignedIn = !isSignedIn;
+    localStorage.setItem('googleAuthStatus', isSignedIn);
 }
 
-document.getElementById("goalText").addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        addGoal();
+function checkAndDisplayEmptyNotesMessage() {
+    let notesContainer = document.querySelector(".notes-container");
+    let emptyMessage = document.querySelector("#emptyNotesMessage");
+
+    if (!emptyMessage) {
+        emptyMessage = document.createElement("div");
+        emptyMessage.id = "emptyNotesMessage";
+        emptyMessage.textContent = "No notes added yet";
+        emptyMessage.style.textAlign = "center";
+        emptyMessage.style.marginTop = "20px";
+        notesContainer.appendChild(emptyMessage);
     }
+
+    const notes = notesContainer.querySelectorAll(".note");
+    emptyMessage.style.display = notes.length === 0 ? "block" : "none";
+}
+
+document.getElementById("add").addEventListener("click", function() {
+    checkAndDisplayEmptyNotesMessage();
 });
 
-document.addEventListener('DOMContentLoaded', loadGoalsFromLocalStorage);
+document.addEventListener("DOMContentLoaded", function() {
+    checkAndDisplayEmptyNotesMessage();
+});
+
+document.getElementById("toggleAddBtn").addEventListener("click", function() {
+    checkAndDisplayEmptyNotesMessage();
+});
+
+checkAndDisplayEmptyNotesMessage();

@@ -1,0 +1,21 @@
+{
+  "short_name": "The StickyNotes App",
+  "name": "The StickyNotes App - Organize Your Thoughts More Effectively",
+  "icons": [
+    {
+      "src": "utils/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "utils/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#c2e9fb",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#534caf"
+}

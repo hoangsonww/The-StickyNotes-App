@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 
 * {
@@ -48,6 +49,75 @@ h4 {
     font-size: 1rem;
 }
 
+.image-container {
+    position: relative;
+    margin-left: 10px;
+}
+
+.note-image {
+    max-height: 200px;
+    display: block;
+}
+
+.remove-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 50%;
+    display: none;
+}
+
+.image-container:hover .remove-image {
+    display: block;
+}
+
+.tooltip1 {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+    transform: translateY(350%);
+}
+
+.tooltip1.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.note-content {
+    align-items: flex-start;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.note-content textarea {
+    flex: 1;
+    max-height: 200px;
+    resize: none;
+}
+
+.note-content textarea,
+.note-content .image-container {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.note-content .note-image {
+    max-height: 200px;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
 .note {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -58,8 +128,9 @@ h4 {
     padding: 1rem;
     border-radius: 10px;
     cursor: pointer;
-    min-width: 250px;
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .note:hover {
@@ -108,10 +179,11 @@ h4 {
 
 .note .tools {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding: 0.5rem;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .note .tools button,
@@ -122,17 +194,6 @@ h4 {
     font-size: 1rem;
     border-radius: 0.25rem;
     transition: all 0.3s ease;
-    max-width: 100px; /* Adjust as needed */
-    max-height: 40px; /* Adjust as needed */
-    margin: 5px;
-}
-
-@media (max-width: 600px) { /* Example media query for smaller screens */
-    .note .tools button,
-    .note .tools input {
-        max-width: 80px; /* Smaller max-width */
-        font-size: 0.8rem; /* Smaller font-size */
-    }
 }
 
 .note .tools button:hover {
@@ -226,6 +287,11 @@ h4 {
     outline: none;
     padding: 5px;
     width: auto;
+}
+
+.tag {
+    border-radius: 8px;
+    border: #1B1B1B 1px solid;
 }
 
 .time-display {
@@ -337,6 +403,20 @@ h4 {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
+}
+
+.note .tools .tag {
+    font-size: 1rem;
+    margin-right: 10px;
+    outline: none;
+    padding: 5px;
+    width: auto;
+    padding-left: 10px;
+    border: grey 1px solid;
+}
+
+.note .tools .due-date {
+    border: grey 1px solid;
 }
 
 .weather-display, .weather-search-container {
@@ -585,19 +665,19 @@ input[type="date"]:focus {
     opacity: 1;
 }
 
-.tooltip {
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.9em;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 10;
-    pointer-events: none; /* ensure it doesn't interfere with other interactions */
-}
+/*.tooltip {*/
+/*    position: absolute;*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    padding: 5px 10px;*/
+/*    border-radius: 5px;*/
+/*    font-size: 0.9em;*/
+/*    visibility: hidden;*/
+/*    opacity: 0;*/
+/*    transition: opacity 0.3s;*/
+/*    z-index: 10;*/
+/*    pointer-events: none; !* ensure it doesn't interfere with other interactions *!*/
+/*}*/
 
 .tooltip.visible {
     visibility: visible;
@@ -998,7 +1078,7 @@ button:hover .tooltip {
     cursor: pointer;
     position: fixed;
     right: 0;
-    transform: translateY(459%);
+    top: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1017,7 +1097,7 @@ button:hover .tooltip {
     cursor: pointer;
     position: fixed;
     right: 0;
-    transform: translateY(1305%);
+    top: 54%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1035,7 +1115,7 @@ button:hover .tooltip {
     cursor: pointer;
     position: fixed;
     right: 0;
-    transform: translateY(1405%);
+    top: 58%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1249,4 +1329,8 @@ button {
 
 .app-btn:hover {
     background-color: #403890;
+}
+
+.note.pinned {
+    border: 2px solid gold;
 }

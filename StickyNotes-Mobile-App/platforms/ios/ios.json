@@ -9,10 +9,6 @@
         "parents": {
           "/*": [
             {
-              "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Battery\"><param name=\"ios-package\" value=\"CDVBattery\" /></feature>",
               "count": 1
             },
@@ -22,6 +18,22 @@
             },
             {
               "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVWKInAppBrowser\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"NetworkStatus\"><param name=\"ios-package\" value=\"CDVConnection\" /></feature>",
               "count": 1
             },
             {
@@ -37,19 +49,7 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"NetworkStatus\"><param name=\"ios-package\" value=\"CDVConnection\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVWKInAppBrowser\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Vibration\"><param name=\"ios-package\" value=\"CDVVibration\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
               "count": 1
             }
           ]
@@ -58,66 +58,34 @@
     }
   },
   "installed_plugins": {
-    "cordova-plugin-geolocation": {
-      "GPS_REQUIRED": "true",
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-battery-status": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-statusbar": {
+    "cordova-plugin-device": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-network-information": {
+    "cordova-plugin-geolocation": {
+      "GPS_REQUIRED": "true",
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-vibration": {
+    "cordova-plugin-network-information": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-device": {
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-vibration": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
   "dependent_plugins": {},
   "modules": [
-    {
-      "id": "cordova-plugin-geolocation.Coordinates",
-      "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "clobbers": [
-        "Coordinates"
-      ]
-    },
-    {
-      "id": "cordova-plugin-geolocation.PositionError",
-      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "clobbers": [
-        "PositionError"
-      ]
-    },
-    {
-      "id": "cordova-plugin-geolocation.Position",
-      "file": "plugins/cordova-plugin-geolocation/www/Position.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "clobbers": [
-        "Position"
-      ]
-    },
-    {
-      "id": "cordova-plugin-geolocation.geolocation",
-      "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "clobbers": [
-        "navigator.geolocation"
-      ]
-    },
     {
       "id": "cordova-plugin-battery-status.battery",
       "file": "plugins/cordova-plugin-battery-status/www/battery.js",
@@ -159,11 +127,51 @@
       ]
     },
     {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
       "clobbers": [
-        "window.StatusBar"
+        "device"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.Coordinates",
+      "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "Coordinates"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "PositionError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.Position",
+      "file": "plugins/cordova-plugin-geolocation/www/Position.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "Position"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "navigator.geolocation"
+      ]
+    },
+    {
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
+      "clobbers": [
+        "cordova.InAppBrowser.open"
       ]
     },
     {
@@ -183,11 +191,11 @@
       ]
     },
     {
-      "id": "cordova-plugin-inappbrowser.inappbrowser",
-      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-      "pluginId": "cordova-plugin-inappbrowser",
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
       "clobbers": [
-        "cordova.InAppBrowser.open"
+        "window.StatusBar"
       ]
     },
     {
@@ -197,24 +205,16 @@
       "merges": [
         "navigator"
       ]
-    },
-    {
-      "id": "cordova-plugin-device.device",
-      "file": "plugins/cordova-plugin-device/www/device.js",
-      "pluginId": "cordova-plugin-device",
-      "clobbers": [
-        "device"
-      ]
     }
   ],
   "plugin_metadata": {
-    "cordova-plugin-geolocation": "5.0.0",
     "cordova-plugin-battery-status": "2.0.3",
     "cordova-plugin-camera": "7.0.0",
-    "cordova-plugin-statusbar": "4.0.0",
-    "cordova-plugin-network-information": "3.0.0",
+    "cordova-plugin-device": "2.1.0",
+    "cordova-plugin-geolocation": "5.0.0",
     "cordova-plugin-inappbrowser": "6.0.0",
-    "cordova-plugin-vibration": "3.1.1",
-    "cordova-plugin-device": "2.1.0"
+    "cordova-plugin-network-information": "3.0.0",
+    "cordova-plugin-statusbar": "4.0.0",
+    "cordova-plugin-vibration": "3.1.1"
   }
 }

@@ -25,8 +25,31 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Battery">
+        <param name="ios-package" value="CDVBattery" />
+    </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVWKInAppBrowser" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="ios-package" value="CDVConnection" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Vibration">
+        <param name="ios-package" value="CDVVibration" />
     </feature>
     <name>StickyNotes</name>
     <description>Welcome to Your Ultimate Notes Manager</description>
@@ -44,30 +67,7 @@
     <preference name="SuppressesIncrementalRendering" value="false" />
     <preference name="SuppressesLongPressGesture" value="false" />
     <preference name="Suppresses3DTouchGesture" value="false" />
-    <feature name="Battery">
-        <param name="ios-package" value="CDVBattery" />
-    </feature>
-    <feature name="Camera">
-        <param name="ios-package" value="CDVCamera" />
-    </feature>
     <preference name="CameraUsesGeolocation" value="false" />
-    <feature name="StatusBar">
-        <param name="ios-package" value="CDVStatusBar" />
-        <param name="onload" value="true" />
-    </feature>
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="lightcontent" />
-    <feature name="NetworkStatus">
-        <param name="ios-package" value="CDVConnection" />
-    </feature>
-    <feature name="InAppBrowser">
-        <param name="ios-package" value="CDVWKInAppBrowser" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="Vibration">
-        <param name="ios-package" value="CDVVibration" />
-    </feature>
-    <feature name="Device">
-        <param name="ios-package" value="CDVDevice" />
-    </feature>
 </widget>

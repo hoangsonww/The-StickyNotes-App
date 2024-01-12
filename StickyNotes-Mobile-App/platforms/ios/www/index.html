@@ -2,51 +2,80 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="StickyNotes - A versatile and user-friendly app for taking and organizing notes. Keep track of your ideas and tasks easily." />
+    <meta name="keywords" content="StickyNotes, note taking, task management, productivity, note app, reminders" />
+    <meta name="author" content="Son Nguyen Hoang" />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="3 days" />
+    <meta name="rating" content="general" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta name="theme-color" content="#534caf" />
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+    <meta property="og:title" content="StickyNotes App" />
+    <meta property="og:description" content="Manage your tasks and notes efficiently with StickyNotes. Enhance your productivity and keep your ideas organized." />
+    <meta property="og:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <meta name="twitter:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+    <meta name="twitter:title" content="StickyNotes App" />
+    <meta name="twitter:description" content="Your personal space for ideas, tasks, and creativity. Discover StickyNotes and enhance your note-taking experience." />
+    <meta name="twitter:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+
     <title>The StickyNotes App</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="src/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
-    <script src="script.js" defer></script>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-
+    <script src="src/js/script.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="utils/favicon.ico">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <header>
-    <h1>The StickyNotes App</h1>
-    <input type="text" id="searchBox" placeholder="Search for a note..." />
+    <a style="text-decoration: none; cursor: pointer" href="index.html">
+        <h1>The <span class="highlight">StickyNotes</span> App</h1>
+    </a>
+    <input type="text" id="searchBox" style="font: inherit" title="Enter any keyword and we'll find automatically your notes for you!" placeholder="Search for a note..." />
     <button class="add" id="add">
         <i class="fas fa-plus"></i> Add A Note!
     </button>
+    <h4>
+        Your personal space for ideas, tasks, and creativity at your fingertips or mouse clicks!
+    </h4>
     <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
-
 </header>
 
 <body>
-
     <div class="quick-access-toolbar" title="Quick Access Buttons">
-        <button onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
-        <button onclick="document.body.classList.toggle('dark-mode')" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+        <button id="toggleAddBtn" onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
+        <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
         <button id= "toggleCalcBtn" onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
-        <button onclick="sortNotesByDueDate()" title="Sort Notes"><i class="fas fa-sort"></i></button>
+        <button onclick="sortNotesByDueDate()" title="Sort Notes By Due Date"><i class="fas fa-sort"></i></button>
     </div>
 
     <div class="feedback-container">
-        <button onclick="toggleFeedbackForm()" class="feedback-btn"><i class="fas fa-comment-dots"></i></button>
-        <div class="feedback-form" id="feedbackForm">
+        <button onclick="toggleFeedbackForm()" class="feedback-btn" title="Have any feedback? Let us know here!"><i class="fas fa-comment-dots"></i></button>
+        <form class="feedback-form" id="feedbackForm">
             <h4 class="feedback-title">Quick Feedback</h4>
-            <textarea id="feedbackText" placeholder="Your feedback..."></textarea>
+            <textarea name="feedback" id="feedbackText" style="font: inherit" placeholder="Your feedback..."></textarea>
             <div class="feedback-actions">
-                <button onclick="submitFeedback()">Submit</button>
-                <button onclick="toggleFeedbackForm()">Cancel</button>
+                <button type="button" onclick="submitFeedback(event)">Submit</button>
+                <button type="button" onclick="toggleFeedbackForm()">Cancel</button>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="timer-container">
-        <button onclick="toggleTimer()" class="timer-toggle-btn"><i class="fas fa-clock"></i></button>
+        <button onclick="toggleTimer()" class="timer-toggle-btn" title="Time your focus period and get your work done!"><i class="fas fa-clock"></i></button>
         <div class="timer-form" id="timerForm">
             <h4 class="timer-title">Focus Timer</h4>
             <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
@@ -59,10 +88,10 @@
     </div>
 
     <div class="mood-tracker-container">
-        <button onclick="toggleMoodTracker()" class="mood-tracker-toggle-btn"><i class="fas fa-smile"></i></button>
+        <button onclick="toggleMoodTracker()" class="mood-tracker-toggle-btn" title="Track your mood here!"><i class="fas fa-smile"></i></button>
         <div class="mood-tracker-form" id="moodTrackerForm">
             <h4 class="mood-tracker-title">Mood Tracker</h4>
-            <select id="moodSelect">
+            <select style="font: inherit; font-size: 14px; border-radius: 8px; margin-right: 2px; cursor: pointer" id="moodSelect">
                 <option value="Happy">Happy</option>
                 <option value="Sad">Sad</option>
                 <option value="Stressed">Stressed</option>
@@ -73,38 +102,15 @@
         </div>
     </div>
 
-    <button id="toggleReminderBtn" onclick="toggleReminderForm()" title="Add & View your reminders!" class="reminder-toggle-btn"><i class="fas fa-bell"></i></button>
-
-    <div class="reminder-form" id="reminderForm" style="display: none;">
-        <h4 class="reminder-title">Set a Quick Reminder</h4>
-        <input type="text" id="reminderText" placeholder="Your reminder...">
-        <input type="datetime-local" id="reminderDateTime" />
-        <button onclick="setReminder()" id="logMoodBtn">Set Reminder</button>
-        <button onclick="toggleReminderForm()" class="close-btn">Close</button>
-        <div id="upcomingReminders" class="upcoming-reminders">
-            <h4>Upcoming Reminders</h4>
-            <ul id="reminderList"></ul>
-        </div>
-    </div>
-
-    <button id="toggleGoalsTrackerBtn" onclick="toggleGoalsTracker()" title="Track your goals!" class="goals-toggle-btn"><i class="fas fa-tasks"></i></button>
-
-    <div id="goalsTrackerContainer" class="goals-tracker-container" style="display:none;">
-        <div class="goals-tracker-form">
-            <h4 class="goals-tracker-title">Daily Goals Tracker</h4>
-            <input type="text" id="goalText" placeholder="Enter your goal...">
-            <button id="logMoodBtn" onclick="addGoal()">Add Goal</button>
-            <button onclick="toggleGoalsTracker()" class="close-btn">Close</button>
-            <h5>In-Progress Goals</h5>
-            <ul id="inProgressGoals"></ul>
-            <h5>Completed Goals</h5>
-            <ul id="completedGoals"></ul>
+    <div class="recommended-note-container">
+        <button id="generateRecommendedNoteBtn" class="recommended-note-toggle-btn" onclick="toggleRecommendedNoteForm()" title="Generate a Recommended Note!"><i class="fas fa-brain"></i></button>
+        <div class="recommended-note-form" id="recommendedNoteForm">
         </div>
     </div>
 
     <div class="chatbot">
         <div class="chat-messages"></div>
-        <input type="text" placeholder="Ask your assistant..." class="chat-input">
+        <input type="text" placeholder="Ask your assistant..." style="font: inherit" class="chat-input">
     </div>
 
     <div class="calculator" id="calculator">
@@ -113,7 +119,7 @@
             <button class="toggle-calc" id="toggleCalc" title="Maximize/Minimize The Calculator">-</button>
         </div>
         <div class="calc-body">
-            <input type="text" class="calc-screen" id="calcScreen" title="Click on anywhere of the calculator to enable direct typing" disabled>
+            <input type="text" class="calc-screen" id="calcScreen" style="font: inherit; font-size: 19px" title="Click on anywhere of the calculator to enable direct typing" disabled>
             <div class="calc-buttons">
                 <button class="button" onclick="press('1')" title="Press this button to enter 1">1</button>
                 <button class="button" onclick="press('2')" title="Press this button to enter 2">2</button>
@@ -141,22 +147,37 @@
 
     <div class="weather-container">
         <div id="weather-display" class="weather-display">
-            <!-- Weather information will be displayed here -->
         </div>
         <div id="weather-search-container" class="weather-search-container hidden">
-            <input type="text" id="weather-search-input" placeholder="Enter location...">
+            <input type="text" id="weather-search-input" style="font: inherit; font-size: 11px" placeholder="Enter a location...">
             <button id="weather-search-btn">Search</button>
         </div>
     </div>
 
-    <div id="mini-task-list">
+    <div id="mini-task-list" class="hover-effect" title="A quick reminder of what you want to get done!">
         <h5>Task List</h5>
-        <input type="text" id="task-input" placeholder="New task..." maxlength="20">
+        <input type="text" id="task-input" style="font: inherit; font-size: 12px" placeholder="New task..." maxlength="20">
         <ul id="task-list"></ul>
     </div>
 
-    <div id="timeContainer" class="time-display"></div>
+    <div class="google-sign-in-container">
+        <button id="googleSignInBtn" title="Sign in to make the most out of our services!" onclick="handleSignInOut()" style="margin-bottom: 25px">
+            <i class="fas fa-user"></i> <span id="signInOutText">Sign In</span>
+        </button>
+    </div>
 
+    <div id="timeContainer" class="time-display hover-effect"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+
+    <script src="https://apis.google.com/js/api.js"></script>
 </body>
 
 </html>

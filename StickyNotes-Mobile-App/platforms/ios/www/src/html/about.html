@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About StickyNotes App</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../utils/favicon.ico">
 </head>
 
 <style>
@@ -18,7 +18,7 @@
         background-color: #ffffff;
         border-radius: 10px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        text-align: justify;
+        text-align: start;
     }
 
     .about-section {
@@ -113,23 +113,36 @@
 <body>
 
     <header>
-        <h1>About The StickyNotes App</h1>
+        <a style="text-decoration: none; cursor: pointer" title="Back to Home" href="../../index.html">
+            <h1>About <span class="highlight">The StickyNotes</span> App</h1>
+        </a>
+        <h4>
+            Get to know more about StickyNotes, your go-to app for jotting down ideas, reminders, or anything that you need to remember.
+        </h4>
     </header>
 
     <div class="about-container">
         <section class="about-section">
             <h2>Welcome to StickyNotes!</h2>
-            <p>StickyNotes is your go-to app for jotting down ideas, reminders, or anything that you need to remember. Created in 2023 by David Nguyen, our app offers a user-friendly platform to make note-taking a breeze. Whether you're a student, a professional, or anyone in between, StickyNotes is designed to help you keep track of your day-to-day tasks with ease.</p>
+            <p>StickyNotes is your go-to app for jotting down ideas, reminders, or anything that you need to remember. Created in 2023 by David Nguyen, our app offers a user-friendly platform to make note-taking a breeze. Whether you're a student, a professional, or anyone in between, StickyNotes is designed to help you keep track of your day-to-day tasks with ease. Note that you can also take advantage of ALL features using a desktop!</p>
         </section>
 
         <section class="about-section">
             <h2>Features</h2>
             <ul>
-                <li>Create unlimited sticky notes for all your needs.</li>
-                <li>Easy to use – Just click and type!</li>
-                <li>Edit and delete functionality for better note management.</li>
-                <li>Local storage ensures your notes are always with you.</li>
-                <li>Customizable note colors for organization and prioritization.</li>
+                <li>Create unlimited sticky notes for all your note-taking needs.</li>
+                <li>Interactive drag-and-drop functionality to rearrange notes as you wish.</li>
+                <li>Pin your most important notes to the top for easy access.</li>
+                <li>Calendar integration for easy scheduling and event management.</li>
+                <li>Customizable note colors for enhanced organization and visual appeal.</li>
+                <li>Easy editing and deletion options for efficient note management.</li>
+                <li>Local storage ensures your notes are always accessible, even offline.</li>
+                <li>Advanced search feature to quickly find the notes you need.</li>
+                <li>Built-in calculator, mood tracker, and timer for added productivity.</li>
+                <li>Intuitive design for a seamless, user-friendly experience on desktops and mobile devices.</li>
+                <li>Responsive layout that adapts to different screen sizes and orientations.</li>
+                <li>Secure Google Sign-In integration for a more personalized experience.</li>
+                <li>Regular updates with new features based on user feedback.</li>
             </ul>
         </section>
 
@@ -137,27 +150,27 @@
         <ul id="other-apps" style="align-content: center; color: white; margin-bottom: 30px">
             <li>
                 <p style="color: black; text-align: center">Embark on a culinary adventure with RecipeGenie, your go-to database for delightful recipes.</p>
-                <button onclick="window.location.href='https://hoangsonww.github.io/RecipeGenie-App/';" class="app-btn">The RecipeGenie Database</button>
+                <button onclick="window.location.href='https://hoangsonww.github.io/RecipeGenie-App/';" class="app-btn hover-effect">The RecipeGenie Database</button>
             </li>
 
             <li>
                 <p style="color: black; text-align: center">Take a deep dive into the world of movies and cinema!</p>
-                <button onclick="window.location.href='https://hoangsonww.github.io/The-MovieVerse-Database/';" class="app-btn">The MovieVerse Database</button>
+                <button onclick="window.location.href='https://hoangsonww.github.io/The-MovieVerse-Database/';" class="app-btn hover-effect">The MovieVerse Database</button>
             </li>
 
             <li>
                 <p style="color: black; text-align: center">Stay ahead of the weather with WeatherMate, your personal weather forecasting assistant.</p>
-                <button onclick="window.location.href='https://hoangsonww.github.io/WeatherMate-App/';" class="app-btn">The WeatherMate App</button>
+                <button onclick="window.location.href='https://hoangsonww.github.io/WeatherMate-App/';" class="app-btn hover-effect">The WeatherMate App</button>
             </li>
 
             <li>
                 <p style="color: black; text-align: center">Keep track of your tasks and boost productivity with the ToDo App, a straightforward task manager.</p>
-                <button onclick="window.location.href='https://hoangsonww.github.io/The-ToDo-App/';" class="app-btn">The ToDo App</button>
+                <button onclick="window.location.href='https://hoangsonww.github.io/The-ToDo-App/';" class="app-btn hover-effect">The ToDo App</button>
             </li>
 
             <li>
                 <p style="color: black; text-align: center">Plan and manage your events seamlessly with EventHorizon, your ultimate event organizer.</p>
-                <button onclick="window.location.href='https://hoangsonww.github.io/The-Event-Horizon-App/';" class="app-btn">The EventHorizon App</button>
+                <button onclick="window.location.href='https://hoangsonww.github.io/The-Event-Horizon-App/';" class="app-btn hover-effect">The EventHorizon App</button>
             </li>
         </ul>
 
@@ -172,7 +185,7 @@
         </section>
 
         <div class="about-footer">
-            <button onclick="location.href='index.html'" style="font: inherit" class="back-to-app">Back to App</button>
+            <button onclick="location.href='../../index.html'" style="font: inherit" class="back-to-app hover-effect">Back to App</button>
         </div>
     </div>
 
