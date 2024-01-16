@@ -930,6 +930,117 @@ button:hover .tooltip {
     opacity: 1;
 }
 
+.quotes-container {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+#quote {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+#new-quote {
+    background-color: #534caf;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Style for the quote text */
+.quote-text {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+/* Style for the author's name */
+.quote-author {
+    font-size: 0.8rem; /* 2px smaller than the quote text */
+    color: #666;
+}
+
+/* Apply these styles to both user-defined and API fetched quotes */
+#user-quotes div, #quote p {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+#new-quote:hover {
+    background-color: #403890;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-quotes-container, .quotes-container {
+    margin-bottom: 20px;
+}
+
+#user-quotes div {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+#user-quotes button {
+    margin-top: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#user-quotes button:hover {
+    background-color: #ff3333;
+}
+
 #calculator,
 .chatbot,
 #timeContainer,
@@ -938,7 +1049,7 @@ button:hover .tooltip {
     display: none;
 }
 
-@media (min-width: 904.5px) {
+@media (min-width: 905px) {
     #calculator,
     .chatbot,
     #timeContainer,
@@ -948,14 +1059,14 @@ button:hover .tooltip {
     }
 }
 
-@media (min-width: 904.5px) {
+@media (min-width: 905px) {
     #toggleReminderBtn,
     #toggleGoalsTrackerBtn {
         display: inherit;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 905px) {
     #toggleCalcBtn {
         display: none;
     }
@@ -1354,7 +1465,7 @@ button {
     background-color: #403890;
 }
 
-@media (max-width: 888px) {
+@media (max-width: 1200px) {
     .note {
         display: flex;
         flex-direction: column;
@@ -1380,7 +1491,7 @@ button {
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .note .tools .due-date,
     .note .tools .tag {
         box-sizing: border-box;

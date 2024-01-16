@@ -47,6 +47,12 @@ The StickyNotes App is a dynamic, user-friendly web application designed for eff
 - **Searching and Sorting Notes:** Utilize the search box and "Sort Notes" button for organization.
 - **Interacting with Eliza:** Engage with the chatbot for assistance and information.
 - **Using the Calculator:** Enter mathematical expressions in the calculator for instant results.
+- **Using the Mood Tracker:** Select a mood from the dropdown menu to track your feelings.
+- **Using the Pomodoro Timer:** Enter a time in the timer field and click "Start" to begin the countdown.
+- **Switching Themes:** Use "Toggle Dark Mode" for theme switching.
+- **Using the Calendar:** Click the calendar button to view the current date, as well as your notes' due dates on the calendar.
+- **Using the Weather Widget:** Click the weather button to view the current weather in your location.
+- **Using the Quotes Center:** Click the quotes button to view 3 random inspirational quotes.
 
 ## Customization
 

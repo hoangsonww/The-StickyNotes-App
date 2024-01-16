@@ -9,16 +9,23 @@ calendarBtn.addEventListener("click", function() {
     window.location.href = 'src/html/calendar.html';
 });
 document.body.appendChild(calendarBtn);
+calendarBtn.style.marginBottom = "0";
+
+const quotesBtn = document.createElement("button");
+quotesBtn.innerText = "Inspiration";
+quotesBtn.classList.add("about-btn");
+quotesBtn.addEventListener("click", function() {
+    window.location.href = 'src/html/quotes.html';
+});
+document.body.appendChild(quotesBtn);
 
 const aboutBtn = document.createElement("button");
-aboutBtn.innerText = "About This App";
+aboutBtn.innerText = "About";
 aboutBtn.classList.add("about-btn");
-aboutBtn.style.marginTop = "0";
-
+aboutBtn.style.marginTop = "3px";
 aboutBtn.addEventListener("click", function() {
     window.location.href = 'src/html/about.html';
 });
-
 document.body.appendChild(aboutBtn);
 
 const addBtn = document.getElementById("add");
@@ -1004,20 +1011,36 @@ function toggleFeedbackForm() {
 }
 
 let countdownInterval;
-let defaultTimeInSeconds = 1500;
+let defaultTimeInSeconds = 25 * 60;
 let totalTimeInSeconds = defaultTimeInSeconds;
-let isTimerPaused = false;
 
 function startTimer() {
-    if (!countdownInterval && totalTimeInSeconds > 0) {
-        updateCountdownDisplay();
-        countdownInterval = setInterval(updateCountdownDisplay, 1000);
+    if (!countdownInterval) {
+        // Decrement the time and update the display immediately when the timer starts
+        decrementTimeAndUpdateDisplay();
+
+        // Start the countdown interval
+        countdownInterval = setInterval(decrementTimeAndUpdateDisplay, 1000);
+
+        // Update button displays
         document.getElementById('startTimerBtn').style.display = 'none';
         document.getElementById('pauseTimerBtn').style.display = 'inline';
-        document.getElementById('stopTimerBtn').style.display = 'inline';
-        isTimerPaused = false;
     }
 }
+
+function decrementTimeAndUpdateDisplay() {
+    if (totalTimeInSeconds <= 0) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+        notifyTimerComplete();
+        resetTimer();
+        return;
+    }
+
+    totalTimeInSeconds--;
+    updateTimerDisplay();
+}
+
 
 function pauseTimer() {
     if (countdownInterval) {
@@ -1025,23 +1048,16 @@ function pauseTimer() {
         countdownInterval = null;
         document.getElementById('startTimerBtn').style.display = 'inline';
         document.getElementById('pauseTimerBtn').style.display = 'none';
-        isTimerPaused = true;
     }
 }
 
-function stopTimer() {
+function resetTimer() {
     clearInterval(countdownInterval);
     countdownInterval = null;
-    document.getElementById('startTimerBtn').style.display = 'inline';
-    document.getElementById('pauseTimerBtn').style.display = 'none';
-    document.getElementById('stopTimerBtn').style.display = 'none';
-    isTimerPaused = false;
-}
-
-function resetTimer() {
     totalTimeInSeconds = defaultTimeInSeconds;
     updateTimerDisplay();
-    stopTimer();
+    document.getElementById('startTimerBtn').style.display = 'inline';
+    document.getElementById('pauseTimerBtn').style.display = 'none';
 }
 
 function updateTimerDisplay() {
@@ -1054,29 +1070,20 @@ function updateTimerDisplay() {
     document.getElementById('timerDisplay').textContent = `${hours}:${minutes}:${seconds}`;
 }
 
-
 function setTimerManually() {
-    const timeInput = prompt("Set timer (in seconds)", "1800");
-    if (timeInput && !isNaN(timeInput) && Number(timeInput) >= 0) {
-        totalTimeInSeconds = Number(timeInput);
-        updateTimerDisplay();
-    }
-    else {
-        alert("Invalid input. Please enter the time in seconds.");
-    }
-}
+    let hours = parseInt(prompt("Set hours (0-24)", "0"), 10);
+    let minutes = parseInt(prompt("Set minutes (0-59)", "25"), 10);
+    let seconds = parseInt(prompt("Set seconds (0-59)", "0"), 10);
 
-function updateCountdownDisplay() {
-    if (totalTimeInSeconds <= 0) {
-        clearInterval(countdownInterval);
-        countdownInterval = null;
-        notifyTimerComplete();
-        resetTimer();
-        return;
-    }
-    updateTimerDisplay();
-    if (!isTimerPaused) {
-        totalTimeInSeconds--;
+    if (!isNaN(hours) && !isNaN(minutes) && !isNaN(seconds)) {
+        if (hours < 0 || hours > 24 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59) {
+            alert("Invalid input. Hours must be 0-24, minutes and seconds must be 0-59.");
+            return;
+        }
+        totalTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
+        updateTimerDisplay();
+    } else {
+        alert("Invalid input. Please enter numeric values for hours, minutes, and seconds.");
     }
 }
 
@@ -1093,6 +1100,7 @@ function playSound(filename) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    updateTimerDisplay();
     function updateTime() {
         const now = new Date();
         const timeParts = now.toLocaleTimeString().split(" ");
