@@ -25,7 +25,17 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
+        }
+
+        .fc-today-button {
+            background-color: #554ead !important;
+            color: white;
+            border: none !important;
+        }
+
+        .fc-today-button:hover {
+            background-color: #3c3588 !important;
         }
 
         #addNote {
@@ -48,16 +58,24 @@
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            height: calc(100% - 144px);
+            height: calc(100% - 20px);
             padding-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         #calendar {
             width: 90vw;
             max-width: none;
-            height: calc(100% - 120px);
-            margin-bottom: 50px;
+            height: calc(100% - 50px);
+        }
+
+        .fc-button-primary {
+            background-color: #554ead !important;
+            border-color: transparent;
+        }
+
+        .fc-button-primary:hover {
+            background-color: #3c3588 !important;
         }
 
         .fc-toolbar.fc-header-toolbar {
@@ -148,12 +166,31 @@
             padding-right: 6px;
         }
 
-        @media (max-width: 904.5px) {
+        @media (max-width: 905px) {
             .quick-access-toolbar {
-                top: 32%;
+                top: 39%;
             }
             .fc-today-button {
                 margin-left: 39px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .fc-toolbar.fc-header-toolbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .fc-toolbar-chunk {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .fc-today-button {
+                margin: 0 auto;
             }
         }
 
@@ -247,7 +284,7 @@
             display: none;
         }
 
-        @media (min-width: 904.5px) {
+        @media (min-width: 905px) {
             #timeContainer,
             .weather-container,
             #mini-task-list {
