@@ -122,6 +122,10 @@
         </h4>
     </header>
 
+    <div class="quick-access-toolbar" title="Quick Access Buttons">
+        <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+    </div>
+
     <div class="about-container">
         <section class="about-section">
             <h2>Welcome to StickyNotes!</h2>
@@ -185,17 +189,41 @@
             <p>We love hearing from our users! If you have any feedback, suggestions, or questions, please don't hesitate to reach out to us. Your input helps us to continually improve StickyNotes and provide the best experience possible.</p>
         </section>
 
-        <div class="about-footer">
-            <button onclick="location.href='../../index.html'" style="font: inherit" class="back-to-app hover-effect">Back to App</button>
-        </div>
+        <section class="about-section">
+            <h2>Meet the Team</h2>
+            <p>StickyNotes was created by David Nguyen, a full-stack web developer based in North Carolina, USA. David is passionate about creating apps that are both functional and user-friendly. He is also the creator of RecipeGenie, The MovieVerse Database, WeatherMate, The ToDo App, and EventHorizon.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>Useful Links</h2>
+            <div class="about-footer" style="margin-top: -5px">
+                <button onclick="window.location.href='https://github.com/hoangsonww/The-StickyNotes-App';" class="back-to-app hover-effect">GitHub Repo</button>
+                <button onclick="location.href='calendar.html'" style="font: inherit" class="back-to-app hover-effect">Calendar</button>
+                <button onclick="location.href='quotes.html'" style="font: inherit" class="back-to-app hover-effect">Quotes</button>
+                <button onclick="location.href='../../index.html'" style="font: inherit" class="back-to-app hover-effect">Back to Home</button>
+            </div>
+        </section>
     </div>
 
     <script>
+        function toggleDarkMode() {
+          const isDarkMode = document.body.classList.toggle('dark-mode');
+          if (isDarkMode) {
+            localStorage.setItem('theme', 'dark-mode');
+          }
+          else {
+            localStorage.removeItem('theme');
+          }
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark-mode') {
-                document.body.classList.add('dark-mode');
-            }
+          const savedTheme = localStorage.getItem("theme");
+          if (savedTheme === "dark-mode") {
+            document.body.classList.add("dark-mode");
+          }
+          else {
+            document.body.classList.remove("dark-mode");
+          }
         });
     </script>
 

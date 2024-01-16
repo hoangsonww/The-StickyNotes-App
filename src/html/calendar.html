@@ -162,12 +162,14 @@
             border-radius: 8px;
             padding-left: 5px;
             margin-bottom: 20px;
+            border: none;
         }
 
         #noteDescription {
             font: inherit;
             border-radius: 8px;
             padding-left: 5px;
+            border: none;
         }
 
         #noteDueDate {
@@ -175,6 +177,7 @@
             border-radius: 8px;
             padding-left: 5px;
             margin-bottom: 20px;
+            border: none;
         }
 
         .close {
@@ -289,15 +292,15 @@
     </div>
 
     <div class="button-container">
-        <button class="back-to-home1" onclick="window.location.href = '../../index.html'">Back to Home</button>
         <button class="add-note-btn" onclick="toggleAddNoteModal()" title="You can simply click on the calendar or press this button to add a new note!">Add a Note</button>
+        <button class="add-note-btn" onclick="window.location.href = 'quotes.html'" title="Go to our inspiration center!">Inspiration</button>
+        <button class="back-to-home1" onclick="window.location.href = '../../index.html'">Back to Home</button>
     </div>
 
     <div class="calendar-container">
         <div id='calendar'></div>
     </div>
 
-    <!-- Add Note Modal -->
     <div id="addNoteModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -307,7 +310,7 @@
                 <input type="text" id="noteTitle" placeholder="Note Title" required><br>
 
                 <label for="noteDescription">Description</label><br>
-                <textarea id="noteDescription" placeholder="Note Description"></textarea><br>
+                <textarea id="noteDescription" placeholder="Note Description" style="margin-bottom: 10px"></textarea><br>
 
                 <label for="noteDueDate">Due Date</label><br>
                 <input type="date" id="noteDueDate"><br>
