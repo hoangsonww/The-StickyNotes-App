@@ -1351,6 +1351,11 @@ function updateSignInStatus(isSignedInNow) {
     updateSignInButton();
 }
 
+const googleSignInBtn = document.getElementById("googleSignInBtn");
+googleSignInBtn.addEventListener("click", function() {
+    alert("Please ensure your popup blocker is disabled for us to properly sign you in/out. Otherwise, you might not be able to sign in/out successfully! (If you have already disabled your popup blocker, please disregard this message.)");
+});
+
 function updateSignInButton() {
     const signInOutButton = document.getElementById('googleSignInBtn');
     const signInOutText = signInOutButton.querySelector('span');
