@@ -1343,6 +1343,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+let isSignedIn = JSON.parse(localStorage.getItem('isSignedIn')) || false;
+updateSignInButton();
+
 function updateSignInStatus(isSignedInNow) {
     isSignedIn = isSignedInNow;
     updateSignInButton();
@@ -1366,9 +1369,6 @@ function initClient() {
 }
 
 gapi.load('client:auth2', initClient);
-
-let isSignedIn = JSON.parse(localStorage.getItem('googleAuthStatus')) || false;
-updateSignInButton();
 
 function handleSignInOut() {
     const signInOutButton = document.getElementById('googleSignInBtn');
@@ -1424,3 +1424,28 @@ document.getElementById("toggleAddBtn").addEventListener("click", function() {
 });
 
 checkAndDisplayEmptyNotesMessage();
+
+document.addEventListener("DOMContentLoaded", function() {
+    checkAndClearLocalStorage();
+});
+
+function checkAndClearLocalStorage() {
+    const hasCleared = localStorage.getItem('hasUserClearedStickyNotesData');
+    if (!hasCleared) {
+        clearMovieVerseLocalStorage();
+        localStorage.setItem('hasUserClearedStickyNotesData', 'true');
+        window.location.reload();
+    }
+}
+
+/**
+ * Clears the MovieVerse local storage.
+ */
+function clearMovieVerseLocalStorage() {
+    localStorage.removeItem('notes');
+    localStorage.removeItem('watchlists');
+    localStorage.removeItem('quick-tasks');
+    localStorage.removeItem('theme');
+    localStorage.removeItem('isSignedIn');
+    localStorage.removeItem('googleAuthStatus');
+}
