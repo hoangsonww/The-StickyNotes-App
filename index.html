@@ -40,21 +40,20 @@
     <link rel="manifest" href="manifest.json">
 </head>
 
-<header>
-    <a style="text-decoration: none; cursor: pointer" href="index.html">
-        <h1>The <span class="highlight">StickyNotes</span> App</h1>
-    </a>
-    <input type="text" id="searchBox" style="font: inherit" title="Enter any keyword and we'll find automatically your notes for you!" placeholder="Search for a note..." />
-    <button class="add" id="add">
-        <i class="fas fa-plus"></i> Add A Note!
-    </button>
-    <h4>
-        Your personal space for ideas, tasks, and creativity at your fingertips or mouse clicks!
-    </h4>
-    <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
-</header>
-
 <body>
+    <header>
+        <a style="text-decoration: none; cursor: pointer" href="index.html">
+            <h1>The <span class="highlight">StickyNotes</span> App</h1>
+        </a>
+        <input type="text" id="searchBox" style="font: inherit" title="Enter any keyword and we'll find automatically your notes for you!" placeholder="Search for a note..." />
+        <button class="add" id="add">
+            <i class="fas fa-plus"></i> Add A Note!
+        </button>
+        <h4>
+            Your personal space for ideas, tasks, and creativity at your fingertips or mouse clicks!
+        </h4>
+        <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
+    </header>
     <div class="quick-access-toolbar" title="Quick Access Buttons">
         <button id="toggleAddBtn" onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
         <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
@@ -160,9 +159,11 @@
         <ul id="task-list"></ul>
     </div>
 
-    <div class="google-sign-in-container">
-        <button id="googleSignInBtn" title="Sign in to make the most out of our services!" onclick="handleSignInOut()" style="margin-bottom: 25px">
-            <i class="fas fa-user"></i> <span id="signInOutText">Sign In</span>
+    <div class="google-sign-in-container" style="margin-bottom: 20px">
+        <button id="googleSignInBtn" class="nav-btn" onclick="handleSignInOut()" title="Sign In/Out">
+            <span id="signInOutText">Sign In</span>
+            <i class="fas fa-sign-in-alt" id="signInIcon"></i>
+            <i class="fas fa-sign-out-alt" id="signOutIcon" style="display: none;"></i>
         </button>
     </div>
 
@@ -177,7 +178,6 @@
         });
     </script>
 
-    <script src="https://apis.google.com/js/api.js"></script>
 </body>
 
 </html>

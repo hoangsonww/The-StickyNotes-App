@@ -1343,61 +1343,60 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-let isSignedIn = JSON.parse(localStorage.getItem('isSignedIn')) || false;
-updateSignInButton();
-
-function updateSignInStatus(isSignedInNow) {
-    isSignedIn = isSignedInNow;
-    updateSignInButton();
-}
-
-const googleSignInBtn = document.getElementById("googleSignInBtn");
-googleSignInBtn.addEventListener("click", function() {
-    alert("Please ensure your popup blocker is disabled for us to properly sign you in/out. Otherwise, you might not be able to sign in/out successfully! (If you have already disabled your popup blocker, please disregard this message.)");
-});
-
-function updateSignInButton() {
-    const signInOutButton = document.getElementById('googleSignInBtn');
-    const signInOutText = signInOutButton.querySelector('span');
-    signInOutText.textContent = isSignedIn ? 'Sign Out' : 'Sign In';
-    signInOutButton.querySelector('i').className = isSignedIn ? 'fas fa-sign-out-alt' : 'fas fa-user-alt';
-}
-
-function initClient() {
-    gapi.client.init({
-        clientId: '979580896903-hllisv9ev8pgn302e2959o7mlgkp2k9s',
-        scope: 'email',
-    }).then(() => {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
-        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-    });
-}
-
-gapi.load('client:auth2', initClient);
-
 function handleSignInOut() {
-    const signInOutButton = document.getElementById('googleSignInBtn');
-    const signInOutText = signInOutButton.querySelector('span');
-    const signInOutIcon = signInOutButton.querySelector('i');
+    const isSignedIn = JSON.parse(localStorage.getItem('isSignedInStickyNotes')) || false;
 
-    if (!isSignedIn) {
-        signInOutText.textContent = 'Sign Out';
-        signInOutIcon.className = 'fas fa-sign-out-alt';
-        gapi.auth2.getAuthInstance().signIn().catch(error => {
-            console.error("Error during sign-in: ", error);
-        });
+    if (isSignedIn) {
+        localStorage.setItem('isSignedInStickyNotes', JSON.stringify(false));
+        alert('You have been signed out.');
     }
     else {
-        signInOutText.textContent = 'Sign In';
-        signInOutIcon.className = 'fas fa-user-alt';
-        gapi.auth2.getAuthInstance().signOut().catch(error => {
-            console.error("Error during sign-out: ", error);
-        });
+        window.location.href = 'src/html/sign-in.html';
+        return;
     }
 
-    isSignedIn = !isSignedIn;
-    localStorage.setItem('googleAuthStatus', isSignedIn);
+    updateSignInButtonState();
 }
+
+function updateSignInButtonState() {
+    const isSignedIn = JSON.parse(localStorage.getItem('isSignedInStickyNotes')) || false;
+
+    const signInText = document.getElementById('signInOutText');
+    const signInIcon = document.getElementById('signInIcon');
+    const signOutIcon = document.getElementById('signOutIcon');
+
+    if (isSignedIn) {
+        signInText.textContent = 'Sign Out';
+        signInIcon.style.display = 'none';
+        signOutIcon.style.display = 'inline-block';
+    }
+    else {
+        signInText.textContent = 'Sign In';
+        signInIcon.style.display = 'inline-block';
+        signOutIcon.style.display = 'none';
+    }
+
+    const mobileSignInText = document.getElementById('mobileSignInOutText');
+    const mobileSignInIcon = document.getElementById('mobileSignInIcon');
+    const mobileSignOutIcon = document.getElementById('mobileSignOutIcon');
+
+    if (isSignedIn) {
+        mobileSignInText.textContent = 'Sign Out';
+        mobileSignInIcon.style.display = 'none';
+        mobileSignOutIcon.style.display = 'inline-block';
+    }
+    else {
+        mobileSignInText.textContent = 'Sign In';
+        mobileSignInIcon.style.display = 'inline-block';
+        mobileSignOutIcon.style.display = 'none';
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    checkAndClearLocalStorage();
+    updateSignInButtonState();
+    document.getElementById('googleSignInBtn').addEventListener('click', handleSignInOut);
+});
 
 function checkAndDisplayEmptyNotesMessage() {
     let notesContainer = document.querySelector(".notes-container");
