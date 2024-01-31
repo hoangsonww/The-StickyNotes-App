@@ -260,20 +260,6 @@ h4 {
     margin-top: 10px;
 }
 
-.note .tools .color-picker:hover::after {
-    content: 'Change Color for This Note';
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #666;
-    color: #fff;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    white-space: nowrap;
-}
-
 .note .tools .tag {
     font-size: 1rem;
     margin-right: 10px;
@@ -498,7 +484,7 @@ body.dark-mode .note .tools button:hover {
 }
 
 .pin-pinned {
-    color: orange;
+    color: #ffcc00;
 }
 
 .hover-effect:hover {
@@ -655,10 +641,6 @@ input[type="date"]:hover {
 input[type="date"]:focus {
     outline: none;
     border-color: #007BFF;
-}
-
-.note.pinned {
-    border: 3px solid gold;
 }
 
 .toggle-chat {
@@ -915,14 +897,15 @@ input[type="date"]:focus {
     color: white;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 1px;
     position: absolute;
     z-index: 1;
-    bottom: 150%;
+    margin-top: -60px;
     left: 50%;
     margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
+    font-size: 15px;
 }
 
 button:hover .tooltip {
@@ -955,19 +938,16 @@ button:hover .tooltip {
     font-size: 1rem;
 }
 
-/* Style for the quote text */
 .quote-text {
     font-size: 1rem;
     margin-bottom: 5px;
 }
 
-/* Style for the author's name */
 .quote-author {
-    font-size: 0.8rem; /* 2px smaller than the quote text */
+    font-size: 0.8rem;
     color: #666;
 }
 
-/* Apply these styles to both user-defined and API fetched quotes */
 #user-quotes div, #quote p {
     margin-bottom: 15px;
     padding: 10px;
@@ -1105,7 +1085,7 @@ button:hover .tooltip {
 }
 
 .note.pinned {
-    border: 2px solid gold;
+    border: 5px solid gold;
 }
 
 .quick-access-toolbar i {

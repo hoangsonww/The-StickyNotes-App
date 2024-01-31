@@ -67,7 +67,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                 <audio class="voice-note" controls></audio>
                 <button class="pin">${isPinned ? 'Unpin' : 'Pin'}</button>
                 <button id="deletBtn" class="delete"><i class="fas fa-trash-alt"></i></button>
-                <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;">
+                <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;" title="Change color for this note">
             </div>
             <div class="note-title ${title ? "" : "untitled"}" contenteditable="false">${title}</div>
             <div class="main ${text ? "" : "hidden"}"></div>
@@ -211,21 +211,9 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         updateLS();
     });
 
-    const imageTooltip = document.createElement("span");
-    imageTooltip.classList.add("tooltip");
-    imageTooltip.innerText = "Upload or remove image";
-    imageBtn.appendChild(imageTooltip);
-
-    imageBtn.addEventListener("mouseenter", () => {
-        imageTooltip.classList.add("visible");
-    });
-
-    imageBtn.addEventListener("mouseleave", () => {
-        imageTooltip.classList.remove("visible");
-    });
-
     const micBtn = note.querySelector(".mic");
     const voiceNotePlayer = note.querySelector(".voice-note");
+    voiceNotePlayer.title = "Listen to your voice note";
     let mediaRecorder;
     let audioChunks = [];
     const removeRecordingBtn = document.createElement('button');
@@ -287,34 +275,6 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     });
 
     voiceNotePlayer.parentNode.insertBefore(removeRecordingBtn, voiceNotePlayer.nextSibling);
-
-    const micTooltip = document.createElement("span");
-    micTooltip.classList.add("tooltip");
-    micTooltip.innerText = "Record a quick voice note instead of typing!";
-    micBtn.style.position = "relative";
-    micBtn.appendChild(micTooltip);
-
-    const playbackTooltip = document.createElement("span");
-    playbackTooltip.classList.add("tooltip");
-    playbackTooltip.innerText = "Listen to your voice note!";
-    voiceNotePlayer.style.position = "relative";
-    voiceNotePlayer.parentNode.insertBefore(playbackTooltip, voiceNotePlayer.nextSibling);
-
-    micBtn.addEventListener("mouseenter", () => {
-        micTooltip.classList.add("visible");
-    });
-
-    micBtn.addEventListener("mouseleave", () => {
-        micTooltip.classList.remove("visible");
-    });
-
-    voiceNotePlayer.addEventListener("mouseenter", () => {
-        playbackTooltip.classList.add("visible");
-    });
-
-    voiceNotePlayer.addEventListener("mouseleave", () => {
-        playbackTooltip.classList.remove("visible");
-    });
 
     const moveUpButton = document.createElement('button');
     moveUpButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
