@@ -76,12 +76,14 @@ The StickyNotes App is a dynamic, user-friendly web application designed for eff
 
 ## Contributing
 
-Contributions to the StickyNotes App are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
+Contributions to the StickyNotes App are welcome! Please read our [Contributing Guidelines](.github/CONTRIBUTING.md) for more information.
 
 ## Support and Feedback
 
 For support, feedback, or contributions, refer to the GitHub repository's issues section or contact the developer directly.
+
 Author: Son (David) Nguyen.
+
 Email: info@movie-verse.com.
 
 ---
