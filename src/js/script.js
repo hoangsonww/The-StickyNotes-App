@@ -123,6 +123,16 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     const pinBtn = note.querySelector('.pin');
     pinBtn.innerHTML = '<i class="fas fa-thumbtack"></i>';
     pinBtn.title = isPinned ? "Unpin Note" : "Pin Note";
+    if (isPinned) {
+        pinBtn.classList.add('pin-pinned');
+        pinBtn.classList.remove('pin-unpinned');
+        pinBtn.title = "Unpin Note";
+    }
+    else {
+        pinBtn.classList.remove('pin-pinned');
+        pinBtn.classList.add('pin-unpinned');
+        pinBtn.title = "Pin Note";
+    }
     pinBtn.addEventListener('click', () => {
         const isNotePinned = note.classList.toggle('pinned');
         if (isNotePinned) {
@@ -1388,28 +1398,3 @@ document.getElementById("toggleAddBtn").addEventListener("click", function() {
 });
 
 checkAndDisplayEmptyNotesMessage();
-
-document.addEventListener("DOMContentLoaded", function() {
-    checkAndClearLocalStorage();
-});
-
-function checkAndClearLocalStorage() {
-    const hasCleared = localStorage.getItem('hasUserClearedStickyNotesData');
-    if (!hasCleared) {
-        clearMovieVerseLocalStorage();
-        localStorage.setItem('hasUserClearedStickyNotesData', 'true');
-        window.location.reload();
-    }
-}
-
-/**
- * Clears the MovieVerse local storage.
- */
-function clearMovieVerseLocalStorage() {
-    localStorage.removeItem('notes');
-    localStorage.removeItem('watchlists');
-    localStorage.removeItem('quick-tasks');
-    localStorage.removeItem('theme');
-    localStorage.removeItem('isSignedIn');
-    localStorage.removeItem('googleAuthStatus');
-}
