@@ -123,6 +123,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     const pinBtn = note.querySelector('.pin');
     pinBtn.innerHTML = '<i class="fas fa-thumbtack"></i>';
     pinBtn.title = isPinned ? "Unpin Note" : "Pin Note";
+
     if (isPinned) {
         pinBtn.classList.add('pin-pinned');
         pinBtn.classList.remove('pin-unpinned');
