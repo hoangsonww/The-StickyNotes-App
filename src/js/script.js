@@ -454,7 +454,7 @@ shakeButton.innerText = "Shake Notes!";
 document.body.appendChild(shakeButton);
 shakeButton.addEventListener("click", shakeAllNotes);
 shakeButton.className = "button";
-shakeButton.title = "Shake all notes!";
+shakeButton.title = "Shake all notes for a fun effect!";
 
 const recordingStatus = document.createElement("div");
 recordingStatus.innerText = "Recording...";
@@ -565,6 +565,7 @@ function importNotes(event) {
 
 const exportButton = document.createElement("button");
 exportButton.innerText = "Export Notes";
+exportButton.title = "Export all current notes in a single JSON file!";
 exportButton.className = "sticky-button";
 document.body.appendChild(exportButton);
 exportButton.addEventListener("click", exportNotes);
@@ -572,6 +573,7 @@ exportButton.className = "button";
 
 const importLabel = document.createElement("label");
 importLabel.innerText = "Import Notes";
+importLabel.title = "Import notes from any data file (accepted file type: JSON)";
 importLabel.setAttribute("for", "import-input");
 importLabel.className = "sticky-button";
 document.body.appendChild(importLabel);
@@ -591,6 +593,7 @@ importInput.id = "import-input";
 document.body.appendChild(importInput);
 importInput.addEventListener("change", importNotes);
 importInput.className = "button";
+
 const chatInput = document.querySelector(".chat-input");
 const chatMessages = document.querySelector(".chat-messages");
 const chatTitleElem = document.createElement("div");
