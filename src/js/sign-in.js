@@ -24,6 +24,7 @@ const themeToggleButton = document.createElement("button");
 themeToggleButton.innerText = "Toggle Dark Mode";
 themeToggleButton.id = "themeToggle";
 themeToggleButton.className = "button";
+
 themeToggleButton.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   if (document.body.classList.contains("dark-mode")) {

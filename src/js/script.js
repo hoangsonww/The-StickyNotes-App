@@ -15,7 +15,7 @@ const quotesBtn = document.createElement("button");
 quotesBtn.innerText = "Inspiration";
 quotesBtn.classList.add("about-btn");
 quotesBtn.addEventListener("click", function() {
-    window.location.href = 'src/html/quotes.html';
+    window.location.href = 'src/html/inspiration.html';
 });
 document.body.appendChild(quotesBtn);
 
@@ -1349,25 +1349,9 @@ function updateSignInButtonState() {
         signInIcon.style.display = 'inline-block';
         signOutIcon.style.display = 'none';
     }
-
-    const mobileSignInText = document.getElementById('mobileSignInOutText');
-    const mobileSignInIcon = document.getElementById('mobileSignInIcon');
-    const mobileSignOutIcon = document.getElementById('mobileSignOutIcon');
-
-    if (isSignedIn) {
-        mobileSignInText.textContent = 'Sign Out';
-        mobileSignInIcon.style.display = 'none';
-        mobileSignOutIcon.style.display = 'inline-block';
-    }
-    else {
-        mobileSignInText.textContent = 'Sign In';
-        mobileSignInIcon.style.display = 'inline-block';
-        mobileSignOutIcon.style.display = 'none';
-    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    checkAndClearLocalStorage();
     updateSignInButtonState();
     document.getElementById('googleSignInBtn').addEventListener('click', handleSignInOut);
 });
