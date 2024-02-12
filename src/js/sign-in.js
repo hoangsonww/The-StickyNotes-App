@@ -27,7 +27,7 @@ document.getElementById('signInForm').addEventListener('submit', async function(
   if (!querySnapshot.empty) {
     alert('Successfully signed in!');
     localStorage.setItem('isSignedInStickyNotes', JSON.stringify(true));
-    localStorage.setItem('currentUserEmail', email);
+    localStorage.setItem('currentlySignedInStickyNotesUser', email);
     window.location.href = '../../index.html';
   }
   else {
