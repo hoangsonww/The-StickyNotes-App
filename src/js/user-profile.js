@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function handleProfileDisplay() {
-  const isSignedIn = JSON.parse(localStorage.getItem('isSignedIn')) || false;
+  const isSignedIn = JSON.parse(localStorage.getItem('isSignedInStickyNotes')) || false;
   const userEmail = localStorage.getItem('currentlySignedInStickyNotesUser');
   const profileKey = `profileInfo-${userEmail}`;
   const profile = JSON.parse(localStorage.getItem(profileKey)) || {};
@@ -165,6 +165,8 @@ function handleProfileDisplay() {
     profileContainer.style.display = 'none';
     signInPrompt.textContent = 'Please sign in to view your profile';
     signInPrompt.style.fontWeight = '800';
+    signInPrompt.style.marginBottom = '50px';
+    signInPrompt.style.color = '#e0690f'
   }
 }
 
