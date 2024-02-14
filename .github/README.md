@@ -2,7 +2,7 @@
 
 ## Overview
 
-The StickyNotes App is a dynamic, user-friendly web application designed for effective note-taking and task management. Developed by Son (David) Nguyen in 2023, it offers a versatile suite of features, including voice note recording, color customization, tagging, and more. Suitable for both personal and professional use, StickyNotes stands out with its intuitive design and robust functionality. A mobile app version is also under development, leveraging Apache Cordova and React Native, with a planned release in the near future.
+The StickyNotes App is a dynamic, user-friendly web application designed for effective note-taking and task management. Developed by Son Nguyen in 2023, it offers a versatile suite of features, including voice note recording, color customization, tagging, and more. Suitable for both personal and professional use, StickyNotes stands out with its intuitive design and robust functionality. A mobile app version is also under development, leveraging Apache Cordova and React Native, with a planned release in the near future.
 
 ## Features
 
@@ -76,7 +76,7 @@ The StickyNotes App is a dynamic, user-friendly web application designed for eff
 
 ## Contributing
 
-Contributions to the StickyNotes App are welcome! Please read our [Contributing Guidelines](.github/CONTRIBUTING.md) for more information.
+Contributions to the StickyNotes App are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
 ## Support and Feedback
 
