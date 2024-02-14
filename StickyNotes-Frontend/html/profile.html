@@ -29,7 +29,7 @@
     <meta name="twitter:description" content="Your personal space for ideas, tasks, and creativity. Discover StickyNotes and enhance your note-taking experience." />
     <meta name="twitter:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
     <link rel="manifest" href="../../manifest.json">
-    <script src="../js/user-profile.js"></script>
+    <script src="../js/user-profile.js" type="module"></script>
     <style>
         .account-creation-form-container {
             max-width: 400px;
@@ -478,6 +478,52 @@
         const tasks = JSON.parse(localStorage.getItem("quick-tasks")) || [];
         tasks.forEach(task => addTask(task));
       }
+
+      const themeToggleButton = document.createElement("button");
+      themeToggleButton.innerText = "Toggle Dark Mode";
+      themeToggleButton.id = "themeToggle";
+      themeToggleButton.className = "button";
+      themeToggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark-mode");
+        }
+        else {
+          localStorage.removeItem("theme");
+        }
+      });
+
+      function toggleDarkMode() {
+        const isDarkMode = document.body.classList.toggle('dark-mode');
+        if (isDarkMode) {
+          localStorage.setItem('theme', 'dark-mode');
+        }
+        else {
+          localStorage.removeItem('theme');
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        function updateTime() {
+          const now = new Date();
+          const timeParts = now.toLocaleTimeString().split(" ");
+          const timeString = timeParts[0];
+          const amPm = timeParts[1];
+          document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark-mode") {
+          document.body.classList.add("dark-mode");
+        }
+        else {
+          document.body.classList.remove("dark-mode");
+        }
+      });
     </script>
 </body>
 
