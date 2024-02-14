@@ -6,7 +6,7 @@ const calendarBtn = document.createElement("button");
 calendarBtn.innerText = "Calendar";
 calendarBtn.classList.add("about-btn");
 calendarBtn.addEventListener("click", function() {
-    window.location.href = 'src/html/calendar.html';
+    window.location.href = 'StickyNotes-Frontend/html/calendar.html';
 });
 document.body.appendChild(calendarBtn);
 calendarBtn.style.marginBottom = "0";
@@ -15,7 +15,7 @@ const quotesBtn = document.createElement("button");
 quotesBtn.innerText = "Inspiration";
 quotesBtn.classList.add("about-btn");
 quotesBtn.addEventListener("click", function() {
-    window.location.href = 'src/html/inspiration.html';
+    window.location.href = 'StickyNotes-Frontend/html/inspiration.html';
 });
 document.body.appendChild(quotesBtn);
 
@@ -24,7 +24,7 @@ aboutBtn.innerText = "About";
 aboutBtn.classList.add("about-btn");
 aboutBtn.style.marginTop = "3px";
 aboutBtn.addEventListener("click", function() {
-    window.location.href = 'src/html/about.html';
+    window.location.href = 'StickyNotes-Frontend/html/about.html';
 });
 document.body.appendChild(aboutBtn);
 
@@ -1325,7 +1325,7 @@ function handleSignInOut() {
         alert('You have been signed out.');
     }
     else {
-        window.location.href = 'src/html/sign-in.html';
+        window.location.href = 'StickyNotes-Frontend/html/sign-in.html';
         return;
     }
 
