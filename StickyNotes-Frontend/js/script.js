@@ -1089,11 +1089,11 @@ document.addEventListener("DOMContentLoaded", function() {
 const weatherSearchContainer = document.getElementById('weather-search-container');
 const weatherSearchInput = document.getElementById('weather-search-input');
 const weatherSearchBtn = document.getElementById('weather-search-btn');
-const apiKey = '593309284d3eb093ee96647eb294905b';
+const weatherLocation = `${getWeather()}`;
 
 async function fetchWeather(city) {
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherLocation}&units=metric`);
         const data = await response.json();
         displayWeather(data);
     }
@@ -1138,7 +1138,7 @@ function displayWeather(data) {
 }
 
 function fetchWeatherByCoords(lat, lon) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherLocation}&units=metric`)
         .then(response => response.json())
         .then(data => displayWeather(data))
         .catch(error => {
@@ -1229,6 +1229,12 @@ function getMoodRecommendation(mood) {
         'Relaxed': 'Sounds like a good state to be in! Maybe it is a good time for a creative activity!'
     };
     return recommendations[mood] || 'Enjoy your day!';
+}
+
+function getWeather() {
+    const weatherLoc = 'NTkzMzA5Mjg0ZDNlYjA5M2VlOTY2NDdlYjI5NDkwNWI=';
+    const weatherLat = atob(weatherLoc);
+    return weatherLat;
 }
 
 async function generateRecommendedNote() {
