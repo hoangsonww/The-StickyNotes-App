@@ -26,6 +26,13 @@ The StickyNotes App is a dynamic, user-friendly web application designed for eff
 - **Middleware:** Express, Django REST Framework.
 - **APIs:** Google Cloud Speech-to-Text, Text-to-Speech, Translation, Natural Language, Personalized Recommendations, and Notes Storage for Users.
 
+## Project Structure
+- **`StickyNotes-Frontend` Directory:** Contains the frontend codebase for the StickyNotes App.
+- **`StickyNotes-Backend` Directory:** Contains the backend codebase for the StickyNotes App.
+- **`StickyNotes-Mobile-App` Directory:** Contains the mobile app codebase for the StickyNotes App.
+- **`.github` Directory:** Contains the documentation for the StickyNotes App.
+- **`utils` Directory:** Contains utility scripts and tools for the StickyNotes App.
+
 ## Installation and Setup
 
 1. Clone the repository from [GitHub](https://github.com/hoangsonww/The-StickyNotes-App).
