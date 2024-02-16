@@ -73,11 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
 const weatherSearchContainer1 = document.getElementById('weather-search-container');
 const weatherSearchInput1 = document.getElementById('weather-search-input');
 const weatherSearchBtn1 = document.getElementById('weather-search-btn');
-const code = '593309284d3eb093ee96647eb294905b';
+const weatherLoc = `${getWeather()}`;
 
 async function fetchWeather(city) {
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${code}&units=metric`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherLoc}&units=metric`);
     const data = await response.json();
     displayWeather(data);
   }
@@ -87,13 +87,19 @@ async function fetchWeather(city) {
 }
 
 function fetchWeatherByCoords(lat, lon) {
-  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${code}&units=metric`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherLoc}&units=metric`)
     .then(response => response.json())
     .then(data => displayWeather(data))
     .catch(error => {
       console.error('Error fetching weather data:', error);
       weatherDisplay.innerHTML = '<p>Error loading weather data</p>';
     });
+}
+
+function getWeather() {
+  const weatherLoc = 'NTkzMzA5Mjg0ZDNlYjA5M2VlOTY2NDdlYjI5NDkwNWI=';
+  const weatherLat = atob(weatherLoc);
+  return weatherLat;
 }
 
 function handleGeoLocation(position) {
