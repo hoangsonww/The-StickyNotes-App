@@ -55,7 +55,7 @@ for (const key in Camera) {
  * //
  * function cameraCallback(imageData) {
  *    var image = document.getElementById('myImage');
- *    image.src = "data:image/jpeg;base64," + imageData;
+ *    image.StickyNotes-Frontend = "data:image/jpeg;base64," + imageData;
  * }
  */
 

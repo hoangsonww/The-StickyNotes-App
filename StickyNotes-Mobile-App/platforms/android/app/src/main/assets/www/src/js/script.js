@@ -6,7 +6,7 @@ const calendarBtn = document.createElement("button");
 calendarBtn.innerText = "Calendar";
 calendarBtn.classList.add("about-btn");
 calendarBtn.addEventListener("click", function() {
-    window.location.href = 'src/html/calendar.html';
+    window.location.href = '../../../../../../../../../../StickyNotes-Frontend/html/calendar.html';
 });
 document.body.appendChild(calendarBtn);
 
@@ -16,7 +16,7 @@ aboutBtn.classList.add("about-btn");
 aboutBtn.style.marginTop = "0";
 
 aboutBtn.addEventListener("click", function() {
-    window.location.href = 'src/html/about.html';
+    window.location.href = '../../../../../../../../../../StickyNotes-Frontend/html/about.html';
 });
 
 document.body.appendChild(aboutBtn);
