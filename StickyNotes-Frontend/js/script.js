@@ -69,9 +69,9 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
                 <button id="deletBtn" class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;" title="Change color for this note">
             </div>
-            <div class="note-title ${title ? "" : "untitled"}" contenteditable="false">${title}</div>
+            <div class="note-title ${title ? "" : "untitled"}" contenteditable="false" title="Add or change the title for this note">${title}</div>
             <div class="main ${text ? "" : "hidden"}"></div>
-            <div class="note-content">
+            <div class="note-content" title="Add or change the content for this note">
                 <textarea placeholder="Add note content here..." style="font: inherit">${text}</textarea>
                 <div class="image-container ${image ? "" : "hidden"}">
                     <img src="${image}" class="note-image" />
