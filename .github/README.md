@@ -17,7 +17,7 @@ The StickyNotes App is a dynamic, user-friendly web application designed for eff
 - **Import/Export Functionality:** Easily back up or transfer notes with JSON file import/export options.
 - **Auto-Save:** Automatically saves notes to local storage to prevent data loss.
 - **Calculator, Mood Tracker, and Timer:** Built-in tools for enhanced productivity.
-- **Chatbot Integration:** A chatbot that assists with user queries about the app.
+- **Chatbot Integration:** A great chatbot that assists with user queries about the app.
 
 ## Technology Stack
 - **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, Vue.js (Micro-frontends).
