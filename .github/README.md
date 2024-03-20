@@ -91,6 +91,6 @@ For support, feedback, or contributions, refer to the GitHub repository's issues
 
 Author: Son (David) Nguyen.
 
-Email: info@movie-verse.com.
+Email: [info@movie-verse.com](mailto:info@movie-verse.com).
 
 ---
