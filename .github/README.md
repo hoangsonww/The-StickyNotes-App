@@ -4,6 +4,14 @@
 
 The StickyNotes App is a dynamic, user-friendly web application designed for effective note-taking and task management. Developed by Son Nguyen in 2023, it offers a versatile suite of features, including voice note recording, color customization, tagging, and more. Suitable for both personal and professional use, StickyNotes stands out with its intuitive design and robust functionality. A mobile app version is also under development, leveraging Apache Cordova and React Native, with a planned release in the near future.
 
+## User Interface
+
+<p align="center" style="cursor: pointer">
+  <a href="https://hoangsonww.github.io/The-StickyNotes-App/">
+    <img src="../utils/StickyNotes-UI.png" alt="The StickyNotes App Interface"/>
+  </a>
+</p>
+
 ## Features
 
 - **Note Creation and Editing:** Easy-to-use interface for creating and modifying notes. Supports markdown for enhanced formatting.
@@ -91,6 +99,6 @@ For support, feedback, or contributions, refer to the GitHub repository's issues
 
 Author: Son (David) Nguyen.
 
-Email: info@movie-verse.com.
+Email: [info@movie-verse.com](mailto:info@movie-verse.com).
 
 ---
