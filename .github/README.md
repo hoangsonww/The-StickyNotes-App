@@ -75,6 +75,9 @@ In the meantime, feel free to explore the web app and discover its many capabili
 
 - **Theme Toggle:** Use "Toggle Dark Mode" for theme switching.
 - **Color Customization:** Individual color choices for each note.
+- **Tagging and Due Dates:** Organize notes with tags and due dates.
+- **Drag and Drop Functionality:** Rearrange notes by dragging them to different positions.
+- **Move Notes**: Prefer not to use drag and drop? Use the "Move Notes" buttons to move notes around.
 
 ## Data Management
 
