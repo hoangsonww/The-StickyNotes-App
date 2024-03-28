@@ -78,6 +78,7 @@ In the meantime, feel free to explore the web app and discover its many capabili
 - **Tagging and Due Dates:** Organize notes with tags and due dates.
 - **Drag and Drop Functionality:** Rearrange notes by dragging them to different positions.
 - **Move Notes**: Prefer not to use drag and drop? Use the "Move Notes" buttons to move notes around.
+- **Pinning Notes:** Pin important notes to the top of the screen for easy access.
 
 ## Data Management
 
