@@ -47,7 +47,7 @@ In the meantime, feel free to explore the web app and discover its many capabili
 
 1. Clone the repository from [GitHub](https://github.com/hoangsonww/The-StickyNotes-App).
 2. Install necessary dependencies with `npm install`.
-3. Simply pen `index.html` or run `npm start` in a web browser to start using the app. Alternatively, deploy the app on a web server for public access.
+3. Simply open `index.html` or run `npm start` in a web browser to start using the app. Alternatively, deploy the app on a web server for public access.
 
 ## Usage
 
