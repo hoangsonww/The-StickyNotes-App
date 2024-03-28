@@ -30,9 +30,9 @@ In the meantime, feel free to explore the web app and discover its many capabili
 - **Chatbot Integration:** A great chatbot that assists with user queries about the app.
 
 ## Technology Stack
-- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, Vue.js (Micro-frontends).
-- **Backend:** Node.js, Django, Flask (Micro-services).
-- **Database:** Apache Cassandra, MySQL.
+- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, Vue.js (Micro-frontends Architecture).
+- **Backend:** Node.js, Django, Flask (Micro-services Architecture).
+- **Database:** Google Firebase, MySQL.
 - **Middleware:** Express, Django REST Framework.
 - **APIs:** Google Cloud Speech-to-Text, Text-to-Speech, Translation, Natural Language, Personalized Recommendations, and Notes Storage for Users.
 
