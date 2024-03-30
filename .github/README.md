@@ -34,7 +34,7 @@ In the meantime, feel free to explore the web app and discover its many capabili
 - **Backend:** Node.js, Django, Flask (Micro-services Architecture).
 - **Database:** Google Firebase, MySQL.
 - **Middleware:** Express, Django REST Framework.
-- **APIs:** Google Cloud Speech-to-Text, Text-to-Speech, Translation, Natural Language, Personalized Recommendations, and Notes Storage for Users.
+- **APIs:** Google Cloud Speech-to-Text, Translation, Natural Language, Personalized Recommendations, and Notes Storage for Users.
 
 ## Project Structure
 - **`StickyNotes-Frontend` Directory:** Contains the frontend codebase for the StickyNotes App.
@@ -109,3 +109,5 @@ Author: [Son Nguyen](https://github.com/hoangsonww).
 Email: [info@movie-verse.com](mailto:info@movie-verse.com).
 
 ---
+
+Created with ❤️ by Son Nguyen in 2024. All rights reserved.
