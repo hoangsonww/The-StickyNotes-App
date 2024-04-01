@@ -3,7 +3,7 @@
   "displayName": "TheStickyNotesApp",
   "version": "1.0.0",
   "description": "A great tool to control all your tasks.",
-  "main": "src/js/script.js",
+  "main": "StickyNotes-Frontend/js/script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

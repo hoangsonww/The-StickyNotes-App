@@ -1,4 +1,4 @@
-# Source Directory
+# StickyNotes App - Frontend
 
 The `src` directory is the main hub for the application's frontend resources, including HTML pages, CSS stylesheets, and JavaScript files. It's organized to separate concerns and enhance maintainability.
 

@@ -1,4 +1,4 @@
-# Pull Request for The MovieVerse
+# Pull Request for The StickyNotes
 
 ## Overview
 Briefly describe the purpose of this pull request. What features or bug fixes are included?

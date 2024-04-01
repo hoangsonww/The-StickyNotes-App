@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="StickyNotes - A versatile and user-friendly app for taking and organizing notes. Keep track of your ideas and tasks easily." />
     <meta name="keywords" content="StickyNotes, note taking, task management, productivity, note app, reminders" />
@@ -30,30 +31,33 @@
     <meta name="twitter:title" content="StickyNotes App" />
     <meta name="twitter:description" content="Your personal space for ideas, tasks, and creativity. Discover StickyNotes and enhance your note-taking experience." />
     <meta name="twitter:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <title>The StickyNotes App</title>
-    <link rel="stylesheet" href="src/css/style.css" />
+    <!-- Other Essential Tags -->
+    <title>The StickyNotes App: Your Ultimate Note-Taking & Task Management App</title>
+    <link rel="stylesheet" href="StickyNotes-Frontend/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
-    <script src="src/js/script.js" defer></script>
+    <script src="StickyNotes-Frontend/js/script.js" defer></script>
     <link rel="icon" type="image/x-icon" href="utils/favicon.ico">
     <link rel="manifest" href="manifest.json">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SDFD28LEQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-5SDFD28LEQ');
-    </script>
 </head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5SDFD28LEQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5SDFD28LEQ');
+</script>
 
 <body>
     <header>
         <a style="text-decoration: none; cursor: pointer" href="index.html">
             <h1>The <span class="highlight">StickyNotes</span> App</h1>
         </a>
-        <input type="text" id="searchBox" style="font: inherit" title="Enter any keyword and we'll find automatically your notes for you!" placeholder="Search for a note..." />
+        <input type="text" id="searchBox" style="font: inherit" title="Enter any keyword and we'll find automatically your notes for you!" placeholder="Search for a note by its title..." />
         <button class="add" id="add">
             <i class="fas fa-plus"></i> Add A Note!
         </button>
@@ -172,6 +176,10 @@
             <span id="signInOutText">Sign In</span>
             <i class="fas fa-sign-in-alt" id="signInIcon"></i>
             <i class="fas fa-sign-out-alt" id="signOutIcon" style="display: none;"></i>
+        </button>
+        <button id="profileBtn" class="nav-btn" onclick="window.location.href='StickyNotes-Frontend/html/profile.html'" title="View Profile">
+            <span id="profileText" style="margin-right: 5px">Profile</span>
+            <i class="fas fa-user"></i>
         </button>
     </div>
 

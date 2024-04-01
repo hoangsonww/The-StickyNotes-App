@@ -299,6 +299,11 @@ h4 {
     transform: scale(1.03);
 }
 
+#profileBtn:hover {
+    background-color: #403890;
+    transform: scale(1.03);
+}
+
 .weather-container {
     position: fixed;
     top: 15px;
