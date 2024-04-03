@@ -48,6 +48,7 @@ addBtn.addEventListener("click", () => {
 function addNewNote(title = "Untitled Note - Click here to give it a name!", text = "", color = "#ffffff", tag = "", dueDate = "", voiceNote = "", image = "", isPinned = false) {
     const note = document.createElement("div");
     note.classList.add("note");
+    note.title = "Drag to reposition this note";
     note.style.backgroundColor = color;
     let today = new Date().toISOString().split('T')[0];
 
