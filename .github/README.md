@@ -2,7 +2,17 @@
 
 ## Overview
 
-The StickyNotes App is a dynamic, user-friendly web application designed for effective note-taking and task management. Developed by Son Nguyen in 2023, it offers a versatile suite of features, including voice note recording, color customization, tagging, and more. Suitable for both personal and professional use, StickyNotes stands out with its intuitive design and robust functionality. A mobile app version is also under development, leveraging Apache Cordova and React Native, with a planned release in the near future.
+The StickyNotes App is a dynamic, user-friendly web application designed for effective note-taking and task management. Developed by [Son Nguyen](https://github.com/hoangsonww) in 2023, it offers a versatile suite of features, including voice note recording, color customization, tagging, and more. Suitable for both personal and professional use, StickyNotes hopes to provide you with its intuitive design and robust functionality. A mobile app version is also under development, leveraging Apache Cordova and React Native, with a planned release in the near future.
+
+In the meantime, feel free to explore the web app and discover its many capabilities at [this link](https://hoangsonww.github.io/The-StickyNotes-App/). Whether you're a student, professional, or creative individual, StickyNotes is here to help you stay organized and productive!
+
+## User Interface
+
+<p align="center" style="cursor: pointer">
+  <a href="https://hoangsonww.github.io/The-StickyNotes-App/">
+    <img src="../utils/StickyNotes-UI.png" alt="The StickyNotes App Interface"/>
+  </a>
+</p>
 
 ## Features
 
@@ -20,11 +30,11 @@ The StickyNotes App is a dynamic, user-friendly web application designed for eff
 - **Chatbot Integration:** A great chatbot that assists with user queries about the app.
 
 ## Technology Stack
-- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, Vue.js (Micro-frontends).
-- **Backend:** Node.js, Django, Flask (Micro-services).
-- **Database:** Apache Cassandra, MySQL.
+- **Frontend:** HTML, CSS, JavaScript, jQuery, Bootstrap, Font Awesome, React, Vue.js (Micro-frontends Architecture).
+- **Backend:** Node.js, Django, Flask (Micro-services Architecture).
+- **Database:** Google Firebase, MySQL.
 - **Middleware:** Express, Django REST Framework.
-- **APIs:** Google Cloud Speech-to-Text, Text-to-Speech, Translation, Natural Language, Personalized Recommendations, and Notes Storage for Users.
+- **APIs:** Google Cloud Speech-to-Text, Translation, Natural Language, Personalized Recommendations, and Notes Storage for Users.
 
 ## Project Structure
 - **`StickyNotes-Frontend` Directory:** Contains the frontend codebase for the StickyNotes App.
@@ -43,7 +53,7 @@ To view the mobile app development progress, refer to the `StickyNotes-Mobile-Ap
 
 1. Clone the repository from [GitHub](https://github.com/hoangsonww/The-StickyNotes-App).
 2. Install necessary dependencies with `npm install`.
-3. Simply pen `index.html` or run `npm start` in a web browser to start using the app. Alternatively, deploy the app on a web server for public access.
+3. Simply open `index.html` or run `npm start` in a web browser to start using the app. Alternatively, deploy the app on a web server for public access.
 
 ## Usage
 
@@ -71,10 +81,15 @@ To view the mobile app development progress, refer to the `StickyNotes-Mobile-Ap
 
 - **Theme Toggle:** Use "Toggle Dark Mode" for theme switching.
 - **Color Customization:** Individual color choices for each note.
+- **Tagging and Due Dates:** Organize notes with tags and due dates.
+- **Drag and Drop Functionality:** Rearrange notes by dragging them to different positions.
+- **Move Notes**: Prefer not to use drag and drop? Use the "Move Notes" buttons to move notes around.
+- **Pinning Notes:** Pin important notes to the top of the screen for easy access.
 
 ## Data Management
 
 - **Export/Import Notes:** Backup and restore notes with JSON file functionality.
+- **Profile and Note Data Cloud Storage:** Securely store user data in the cloud for easy access and synchronization using Firebase.
 
 ## Future Enhancements
 
@@ -95,8 +110,10 @@ Contributions to the StickyNotes App are welcome! Please read our [Contributing 
 
 For support, feedback, or contributions, refer to the GitHub repository's issues section or contact the developer directly.
 
-Author: Son (David) Nguyen.
+Author: [Son Nguyen](https://github.com/hoangsonww).
 
 Email: [info@movie-verse.com](mailto:info@movie-verse.com).
 
 ---
+
+Created with ❤️ by Son Nguyen in 2024. All rights reserved.
