@@ -43,6 +43,12 @@ In the meantime, feel free to explore the web app and discover its many capabili
 - **`.github` Directory:** Contains the documentation for the StickyNotes App.
 - **`utils` Directory:** Contains utility scripts and tools for the StickyNotes App.
 
+## Mobile App Development
+
+The StickyNotes App is also available as a mobile app, developed using Apache Cordova and React Native. The mobile app version offers the same features as the web app, with additional enhancements for mobile devices. The mobile app is currently under development and is expected to be released in the near future.
+
+To view the mobile app development progress, refer to the `StickyNotes-Mobile-App` directory in the project repository at [this link](../StickyNotes-Mobile-App).
+
 ## Installation and Setup
 
 1. Clone the repository from [GitHub](https://github.com/hoangsonww/The-StickyNotes-App).
