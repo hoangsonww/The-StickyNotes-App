@@ -5,13 +5,16 @@ document.addEventListener('DOMContentLoaded', function () {
   async function fetchQuotes() {
     try {
       quoteContainer.innerHTML = '';
+      const response = await axios.get('https://type.fit/api/quotes');
+      const quotes = response.data;
       for (let i = 0; i < 3; i++) {
-        const response = await axios.get('https://api.quotable.io/random');
-        const quote = response.data;
+        const quoteIndex = Math.floor(Math.random() * quotes.length);
+        const quote = quotes[quoteIndex];
+        const author = quote.author ? quote.author.replace(', type.fit', '') : "Unknown";
         quoteContainer.innerHTML += `
         <p>
-            <span class="quote-text">${quote.content}</span><br>
-            <span class="quote-author">— ${quote.author}</span>
+            <span class="quote-text">${quote.text}</span><br>
+            <span class="quote-author">— ${author}</span>
         </p>`;
       }
     }

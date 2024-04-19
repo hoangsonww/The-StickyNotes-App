@@ -803,7 +803,7 @@ input[type="date"]:focus {
     position: fixed;
     bottom: 10px;
     left: 10px;
-    width: 15vw;
+    width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
