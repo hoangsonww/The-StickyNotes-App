@@ -10,7 +10,7 @@ In the meantime, feel free to explore the web app and discover its many capabili
 
 <p align="center" style="cursor: pointer">
   <a href="https://hoangsonww.github.io/The-StickyNotes-App/">
-    <img src="../utils/StickyNotes-UI.png" alt="The StickyNotes App Interface"/>
+    <img src="../utils/StickyNotes-UI.png" alt="The StickyNotes App Interface" width="100%"/>
   </a>
 </p>
 
@@ -46,8 +46,22 @@ In the meantime, feel free to explore the web app and discover its many capabili
 ## Installation and Setup
 
 1. Clone the repository from [GitHub](https://github.com/hoangsonww/The-StickyNotes-App).
+
+    ```bash
+    git clone https://github.com/hoangsonww/The-StickyNotes-App.git
+    cd The-StickyNotes-App
+    ```
+
 2. Install necessary dependencies with `npm install`.
+
+    ```bash
+    npm install
+    ```
+
 3. Simply open `index.html` or run `npm start` in a web browser to start using the app. Alternatively, deploy the app on a web server for public access.
+    ```bash
+    npm start
+    ```
 
 ## Usage
 
@@ -110,4 +124,4 @@ Email: [info@movie-verse.com](mailto:info@movie-verse.com).
 
 ---
 
-Created with ❤️ by Son Nguyen in 2024. All rights reserved.
+Created with ❤️ by [Son Nguyen](https://github.com/hoangsonww) in 2024. All rights reserved.
