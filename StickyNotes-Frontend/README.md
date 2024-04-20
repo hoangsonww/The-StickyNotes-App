@@ -11,9 +11,16 @@ The `src` directory is the main hub for the application's frontend resources, in
   - `about.html`: Provides information about the application and its usage.
   - `calendar.html`: Implements the calendar feature of the application, allowing users to manage events and notes.
   - `privacy-policy.html`: Contains the privacy policy for the application.
+  - `inspiration.html`: Displays inspirational quotes to motivate users.
+  - `create-account.html`: Allows users to create an account to save their notes and settings.
+  - `sign-in.html`: Provides a login form for users to access their accounts.
 
 - `js`: Holds the JavaScript files that add interactivity to the application.
   - `script.js`: The main script file that contains logic for dynamic behavior and client-side functionality.
+  - `quotes.js`: Contains functions to fetch and display inspirational quotes on the `inspiration.html` page.
+  - `reset-password.js`: Implements the password reset functionality for users.
+  - `sign-in.js`: Handles user authentication and login functionality.
+  - `create-account.js`: Manages user registration and account creation.
 
 ## Guidelines
 
