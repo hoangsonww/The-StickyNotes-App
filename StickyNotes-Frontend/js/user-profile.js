@@ -26,8 +26,9 @@ function removeProfileImage() {
   const profileImageKey = `profileImage-${userEmail}`;
 
   localStorage.removeItem(profileImageKey);
-  document.getElementById('profileImage').src = '../../images/user-default.png';
+  document.getElementById('profileImage').src = '../../utils/user-default.png';
   document.getElementById('removeProfileImage').style.display = 'none';
+  window.location.reload();
 }
 
 function setupEventListeners() {
