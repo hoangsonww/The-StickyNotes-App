@@ -1373,6 +1373,7 @@ function checkAndDisplayEmptyNotesMessage() {
         emptyMessage.textContent = "No notes added yet";
         emptyMessage.style.textAlign = "center";
         emptyMessage.style.marginTop = "20px";
+        emptyMessage.style.fontWeight = "bold";
         notesContainer.appendChild(emptyMessage);
     }
 
