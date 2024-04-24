@@ -104,6 +104,7 @@ To view the mobile app development progress, refer to the `StickyNotes-Mobile-Ap
 
 - **Export/Import Notes:** Backup and restore notes with JSON file functionality.
 - **Profile and Note Data Cloud Storage:** Securely store user data in the cloud for easy access and synchronization using Firebase.
+- **Local Storage:** Automatically saves notes to local storage to prevent data loss, in case of cloud storage failure.
 
 ## Future Enhancements
 
