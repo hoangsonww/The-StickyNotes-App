@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - The StickyNotes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="icon" href="../../utils/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <meta name="description" content="StickyNotes - A versatile and user-friendly app for taking and organizing notes. Keep track of your ideas and tasks easily." />
+    <meta name="keywords" content="StickyNotes, note taking, task management, productivity, note app, reminders" />
+    <meta name="author" content="Son Nguyen Hoang" />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="3 days" />
+    <meta name="rating" content="general" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta name="theme-color" content="#534caf" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+    <meta property="og:title" content="StickyNotes App" />
+    <meta property="og:description" content="Manage your tasks and notes efficiently with StickyNotes. Enhance your productivity and keep your ideas organized." />
+    <meta property="og:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <meta name="twitter:card" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <meta name="twitter:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+    <meta name="twitter:title" content="StickyNotes App" />
+    <meta name="twitter:description" content="Your personal space for ideas, tasks, and creativity. Discover StickyNotes and enhance your note-taking experience." />
+    <meta name="twitter:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <link rel="manifest" href="../../manifest.json">
+    <script src="../js/user-profile.js"></script>
+    <style>
+        .account-creation-form-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .account-creation-form-container input[type="email"],
+        .account-creation-form-container input[type="password"],
+        .account-creation-form-container button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font: inherit;
+        }
+
+        .account-creation-form-container button[type="submit"] {
+            background-color: #534caf;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .account-creation-form-container button:hover {
+            background-color: #22254b;
+            color: white;
+        }
+
+        .account-creation-form-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .account-creation-form-container h2 {
+            color: black;
+        }
+
+        h1 {
+            color: #ff8623;
+        }
+
+        .profile-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(211, 211, 211, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .profile-container input[type="text"],
+        .profile-container input[type="date"],
+        .profile-container input[type="file"],
+        .profile-container button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font: inherit;
+        }
+
+        .profile-container button {
+            background-color: #7378c5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-container button:hover {
+            background-color: #ff8623;
+            color: white;
+        }
+
+        .profile-container h2, .profile-container p {
+            color: black;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #editProfileForm input {
+            font: inherit;
+        }
+
+        #editProfileBtn {
+            background-color: #534caf;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #editProfileBtn:hover {
+            background-color: #22254b;
+            color: white;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .modal-content {
+            padding-bottom: 20px;
+        }
+
+        .dob-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 4px;
+        }
+
+        .dob-container label {
+            margin-right: 10px;
+            margin-top: 10px;
+            color: black;
+        }
+
+        .dob-container input[type="date"] {
+            flex-grow: 1;
+        }
+
+        input[type="text"] {
+            font: inherit;
+            border-radius: 8px;
+            padding-left: 10px;
+            margin-top: 5px;
+            margin-bottom: 2px;
+            border: 1px solid #888;
+        }
+
+        #removeProfileImage {
+            position: absolute;
+            top: 0;
+            background: none;
+            border: none;
+            color: red;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            margin: 0;
+        }
+
+        #removeProfileImage:hover {
+            color: #ff8623;
+        }
+
+        .profile-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        #profileImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #imageUpload {
+            display: none;
+        }
+
+        #uploadButton {
+            width: 250px;
+            background-color: #534caf;
+        }
+
+        #uploadButton:hover {
+            background-color: #22254b;
+        }
+    </style>
+</head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5SDFD28LEQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5SDFD28LEQ');
+</script>
+
+<body>
+    <header>
+        <a style="text-decoration: none; cursor: pointer" href="../../index.html">
+            <h1 style="color: white">The <span class="highlight">StickyNotes</span> Profile</h1>
+        </a>
+        <h4>
+            Update your profile information and manage your account settings across all our services.
+        </h4>
+        <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
+    </header>
+
+    <div class="quick-access-toolbar" title="Quick Access Buttons">
+        <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+    </div>
+
+    <div class="weather-container">
+        <div id="weather-display" class="weather-display">
+        </div>
+        <div id="weather-search-container" class="weather-search-container hidden">
+            <input type="text" id="weather-search-input" style="font: inherit; font-size: 11px" placeholder="Enter a location...">
+            <button id="weather-search-btn">Search</button>
+        </div>
+    </div>
+
+    <div id="timeContainer" class="time-display hover-effect"></div>
+
+    <div id="mini-task-list" class="hover-effect" title="A quick reminder of what you want to get done!">
+        <h5>Task List</h5>
+        <input type="text" id="task-input" style="font: inherit; font-size: 12px" placeholder="New task..." maxlength="20">
+        <ul id="task-list"></ul>
+    </div>
+
+    <h1 id="welcomeMessage" style="text-align: center; margin-top: 30px;"></h1>
+
+    <div id="profileContainer" class="profile-container">
+        <div class="profile-image-container">
+            <img id="profileImage" style="cursor: pointer" title="Click to upload a new profile image" onclick="document.getElementById('imageUpload').click()" src="../../utils/user-default.png" alt="Profile Image" />
+            <button id="removeProfileImage" title="Click to remove the current profile image" onclick="removeProfileImage()" style="display: none;">&times;</button>
+        </div>
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="uploadImage()" />
+        <button id="uploadButton" onclick="document.getElementById('imageUpload').click()">Upload Profile Image</button>
+
+        <div class="profile-info">
+            <p id="usernameDisplay">Username: <span></span></p>
+            <p id="dobDisplay">Date of Birth: <span></span></p>
+            <p id="bioDisplay">Bio: <span></span></p>
+            <p id="locationDisplay"><strong>Location:</strong> <span></span></p>
+            <p id="hobbiesDisplay"><strong>Hobbies:</strong> <span></span></p>
+            <p id="personalQuoteDisplay"><strong>Personal Quote:</strong> <span></span></p>
+        </div>
+        <button id="editProfileBtn">Edit Profile Details</button>
+    </div>
+
+    <p id="signInPrompt" style="text-align: center; font-size: 24px; margin-top: 100px;"></p>
+
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="editProfileForm">
+                <input type="text" id="editUsername" placeholder="Username">
+                <div class="dob-container">
+                    <label for="editDob">Date of Birth:</label>
+                    <input type="date" id="editDob">
+                </div>
+                <input type="text" id="editBio" placeholder="Bio">
+                <input type="text" id="editLocation" placeholder="Location">
+                <input type="text" id="editHobbies" placeholder="Hobbies">
+                <input type="text" id="editPersonalQuote" placeholder="Personal Quote">
+                <br/>
+                <button type="button" id="saveChanges" onclick="saveProfileChanges()">Save Changes</button>
+                <button type="button" id="cancelEdit" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <button class="back-to-home" onclick="window.location.href = 'calendar.html'">Calendar</button>
+    <button class="back-to-home" onclick="window.location.href = 'inspiration.html'">Inspiration</button>
+    <button class="back-to-home" onclick="window.location.href = '../../index.html'" style="margin-bottom: 120px">Back to Home</button>
+
+    <script>
+      const weatherSearchContainer1 = document.getElementById('weather-search-container');
+      const weatherSearchInput1 = document.getElementById('weather-search-input');
+      const weatherSearchBtn1 = document.getElementById('weather-search-btn');
+      const code = '593309284d3eb093ee96647eb294905b';
+
+      async function fetchWeather(city) {
+        try {
+          const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${code}&units=metric`);
+          const data = await response.json();
+          displayWeather(data);
+        }
+        catch (error) {
+          console.error('Error fetching weather data:', error);
+        }
+      }
+
+      function fetchWeatherByCoords(lat, lon) {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${code}&units=metric`)
+          .then(response => response.json())
+          .then(data => displayWeather(data))
+          .catch(error => {
+            console.error('Error fetching weather data:', error);
+            weatherDisplay.innerHTML = '<p>Error loading weather data</p>';
+          });
+      }
+
+      function handleGeoLocation(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        weatherDisplay1.innerHTML = "<p>Loading Weather...</p>";
+        fetchWeatherByCoords(lat, lon);
+      }
+
+      weatherSearchBtn1.addEventListener('click', () => {
+        const city = weatherSearchInput1.value;
+        fetchWeather(city);
+      });
+
+      weatherSearchInput1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const city = weatherSearchInput1.value;
+          fetchWeather(city);
+        }
+      });
+
+      const weatherDisplay1 = document.getElementById('weather-display');
+      weatherDisplay1.innerHTML = "<p>Loading Weather...</p>";
+
+      function displayWeather(data) {
+        if (data.cod !== 200) {
+          weatherDisplay1.innerHTML = '<p>Weather data not found</p>';
+          return;
+        }
+        const temp = data.main.temp.toFixed(0);
+        weatherDisplay1.innerHTML = `
+        <strong style="text-align: center; margin-top: -5px">${data.name}</strong>
+        <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather icon">
+        <span>${temp}°C</span>
+    `;
+      }
+
+      const isMobileDevice1 = window.innerWidth < 768;
+
+      if (!isMobileDevice1 && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            weatherDisplay1.innerHTML = "<p>Location Access Denied.</p>";
+          }
+          weatherSearchContainer1.classList.remove('weather-hidden');
+        });
+      }
+      else {
+        weatherSearchContainer1.classList.remove('weather-hidden');
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadTasksFromLocalStorage();
+      });
+
+      const taskInput1 = document.getElementById("task-input");
+      const taskList1 = document.getElementById("task-list");
+
+      taskInput1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          addTask(taskInput1.value);
+          taskInput1.value = '';
+        }
+      });
+
+      function addTask(task) {
+        if (task.trim() === '') return;
+        const li = document.createElement("li");
+        li.textContent = task;
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "✖";
+        deleteBtn.onclick = function() {
+          this.parentElement.remove();
+          updateLocalStorage();
+        };
+        li.appendChild(deleteBtn);
+        taskList1.appendChild(li);
+        updateLocalStorage();
+        deleteBtn.style.top = '50px';
+      }
+
+      function updateLocalStorage() {
+        const tasks = [];
+        document.querySelectorAll("#task-list li").forEach(li => {
+          tasks.push(li.textContent.replace("✖", "").trim());
+        });
+        localStorage.setItem("quick-tasks", JSON.stringify(tasks));
+      }
+
+      function loadTasksFromLocalStorage() {
+        const tasks = JSON.parse(localStorage.getItem("quick-tasks")) || [];
+        tasks.forEach(task => addTask(task));
+      }
+    </script>
+</body>
+
+</html>

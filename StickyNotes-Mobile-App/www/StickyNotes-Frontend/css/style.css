@@ -1,0 +1,1488 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    padding-top: 1rem;
+    width: 100%;
+}
+
+.note .tools .due-date {
+    border: 1px solid grey;
+}
+
+.note .tools .tag {
+    border: 1px solid grey;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #534caf;
+    color: white;
+    border-radius: 10px;
+    max-width: 89vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    color: #ffa24e;
+    margin-top: 0.5rem;
+}
+
+#searchBox {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 80%;
+    outline: none;
+    font-size: 1rem;
+}
+
+.image-container {
+    position: relative;
+    margin-left: 10px;
+}
+
+.note-image {
+    max-height: 200px;
+    display: block;
+}
+
+.remove-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 50%;
+    display: none;
+}
+
+.image-container:hover .remove-image {
+    display: block;
+}
+
+.tooltip1 {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+    transform: translateY(350%);
+}
+
+.tooltip1.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.note-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.note-content textarea {
+    flex: 1;
+    max-height: 200px;
+    resize: none;
+}
+
+.note-content .note-image {
+    max-height: 200px;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.note {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    max-width: 90vw;
+    transition: transform 0.2s;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.note:hover {
+    transform: scale(1.03);
+}
+
+.note textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 1rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.add {
+    background-color: #534caf;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+.add:hover {
+    background-color: #403890;
+}
+
+.note .tools button {
+    background-color: transparent;
+    border: none;
+    color: #534caf;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    transition: color 0.3s;
+}
+
+.note .tools button:hover {
+    color: #403890;
+}
+
+.note .tools {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.note .tools button,
+.note .tools input {
+    border: none;
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.note .tools button:hover {
+    background-color: #f2f2f2;
+}
+
+.note .tools input[type="color"] {
+    padding: 0;
+    border: none;
+    width: 30px;
+    height: 30px;
+    background: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 0.5rem;
+    }
+
+    #searchBox,
+    .add,
+    .note {
+        width: 95%;
+    }
+
+    .note textarea {
+        min-height: 150px;
+    }
+}
+
+.about-btn {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    transition: transform 1s;
+}
+
+.add {
+    transition: transform 1s;
+}
+
+.add:hover {
+    transform: scale(1.03);
+}
+
+.about-btn, .add {
+    background-color: #6c5ce7;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.about-btn:hover {
+    transform: scale(1.03);
+}
+
+.about-btn:hover, .add:hover {
+    background-color: #5a51d6;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.note .tools .color-picker {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.note .tools .tag {
+    font-size: 1rem;
+    margin-right: 10px;
+    outline: none;
+    padding: 5px;
+    width: auto;
+    padding-left: 10px;
+}
+
+.tag {
+    border-radius: 8px;
+    border: #1B1B1B 1px solid;
+}
+
+.time-display {
+    position: fixed;
+    top: 15px;
+    right: 7.5px;
+    width: 90px;
+    height: auto;
+    text-align: center;
+    background-color: #534caf;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#googleSignInBtn:hover {
+    background-color: #403890;
+    transform: scale(1.03);
+}
+
+#profileBtn:hover {
+    background-color: #403890;
+    transform: scale(1.03);
+}
+
+.weather-container {
+    position: fixed;
+    top: 15px;
+    left: 7.5px;
+    width: 90px;
+    height: 203px;
+    background-color: #534caf;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dark-mode #emptyNotesMessage {
+    color: white;
+}
+
+#calendar {
+    max-width: 900px;
+    margin: 40px auto 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.fc-header-toolbar {
+    background-color: #534caf;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.fc-button-primary {
+    background-color: #534caf;
+    border-color: #534caf;
+}
+
+.fc-button-primary:not(:disabled):hover {
+    background-color: #403890;
+}
+
+.fc-button-active {
+    background-color: #403890;
+}
+
+.fc-button {
+    background-color: #534caf;
+}
+
+#mini-task-list {
+    width: 90px;
+    height: 160px;
+    position: fixed;
+    top: 75px;
+    right: 7.5px;
+    background: #534caf;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+#task-input {
+    width: 80px;
+    margin-bottom: 0;
+    border-radius: 5px;
+    padding-left: 2px;
+}
+
+#task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#task-list li {
+    font-size: 0.8rem;
+    margin-bottom: -15px;
+    color: white;
+}
+
+#mini-task-list h5 {
+    margin: 0;
+    margin-bottom: 1px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: white;
+}
+
+#task-list button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    margin-left: 1px;
+    padding: 5px;
+}
+
+#task-list button:hover {
+    background-color: #5a51d6;
+}
+
+#weather-search-btn {
+    height: 40px;
+    width: 90px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#weather-search-btn:hover {
+    background-color: #534caf;
+    border-radius: 8px;
+}
+
+#weather-search-input {
+    width: 105%;
+    padding: 0.25rem;
+    margin-top: 0.25rem;
+    margin-bottom: -0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.weather-display, .weather-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-hidden {
+    display: none;
+}
+
+body.dark-mode {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: black;
+}
+
+body.dark-mode header {
+    background-color: #34495e;
+}
+
+body.dark-mode .note {
+    background-color: #2c3e50;
+    color: black;
+}
+
+body.dark-mode .about-btn, body.dark-mode .add {
+    background-color: #e74c3c;
+}
+
+body.dark-mode .about-btn:hover, body.dark-mode .add:hover {
+    background-color: #c0392b;
+}
+
+body.dark-mode .note .tools button {
+    color: #e74c3c;
+}
+
+body.dark-mode .note .tools button:hover {
+    color: #c0392b;
+}
+
+.button {
+    transition: transform 0.1s;
+}
+
+.button:hover {
+    transform: scale(1.023);
+}
+
+.pin-unpinned {
+    color: #403890;
+}
+
+.pin-pinned {
+    color: #ffcc00;
+}
+
+.hover-effect:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+    background-color: #403890;
+}
+
+.chatbot {
+    z-index: 100000;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.highlight {
+    color: #ffa24e;
+}
+
+.chatbot:hover {
+    transform: scale(1.03);
+}
+
+.chat-messages {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+}
+
+.chat-messages div {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.chat-messages div:nth-child(odd) {
+    background-color: #e1e1e1;
+    align-self: flex-end;
+    margin-right: 10%;
+}
+
+.chat-messages div:nth-child(even) {
+    background-color: #c4c4ff;
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #534caf;
+    color: white;
+    outline: none;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input::placeholder {
+    color: #c4c4c4;
+}
+
+.chat-header {
+    background-color: #534caf;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid #403890;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.chat-title {
+    font-weight: 400;
+    font-size: 16.5px;
+}
+
+button, input[type="button"], input[type="submit"], input[type="file"] {
+    background-color: #534caf;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 1rem;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+    outline: none;
+    display: inline-block;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+    background-color: #403890;
+}
+
+input[type="file"] {
+    color: transparent;
+    position: relative;
+}
+
+input[type="file"]::before {
+    content: 'Choose Files';
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #534caf;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    display: inline-block;
+    transition: background-color 0.3s;
+    pointer-events: none;
+}
+
+input[type="file"]:hover::before {
+    background-color: #403890;
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+input[type="date"]:hover {
+    background-color: #f7f7f7;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: #007BFF;
+}
+
+.toggle-chat {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: -2.5px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.toggle-chat:hover {
+    background-color: #403890;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -50px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.toggle-chat:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.sticky-button {
+    background-color: #534caf;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sticky-button:hover {
+    background-color: #403890;
+}
+
+#import-input {
+    display: none;
+}
+
+#import-label {
+    background-color: #534caf;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#import-label:hover {
+    background-color: #403890;
+}
+
+.mic {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    z-index: 0;
+}
+
+.mic:focus {
+    outline: none;
+}
+
+.recording-status {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0px); }
+}
+
+.shake-it {
+    animation: shake 0.5s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+.pulse-effect {
+    animation: pulse 1s infinite;
+}
+
+.note.highlighted {
+    border: 3px solid gold;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+.highlight-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.calculator {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.calculator:hover {
+    transform: scale(1.03);
+}
+
+.calc-header {
+    background-color: #534caf;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid #403890;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calc-title {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.toggle-calc {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.toggle-calc:hover {
+    background-color: #403890;
+}
+
+.calc-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.calc-screen {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: right;
+    font-size: 1.5rem;
+    cursor: text;
+    transform: translateX(5%);
+}
+
+.calc-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.calc-buttons button {
+    width: 20%;
+    padding: 10px 0;
+    margin: 5px 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: black;
+}
+
+.calc-buttons button:hover {
+    background-color: #eaeaea;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 1px;
+    position: absolute;
+    z-index: 1;
+    margin-top: -60px;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 15px;
+}
+
+button:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.quotes-container {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+#quote {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+#new-quote {
+    background-color: #534caf;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.quote-text {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.quote-author {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+#user-quotes div, #quote p {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+#new-quote:hover {
+    background-color: #403890;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-quotes-container, .quotes-container {
+    margin-bottom: 20px;
+}
+
+#user-quotes div {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+#user-quotes button {
+    margin-top: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#user-quotes button:hover {
+    background-color: #ff3333;
+}
+
+#calculator,
+.chatbot,
+#timeContainer,
+.weather-container,
+#mini-task-list {
+    display: none;
+}
+
+@media (min-width: 905px) {
+    #calculator,
+    .chatbot,
+    #timeContainer,
+    .weather-container,
+    #mini-task-list {
+        display: block;
+    }
+}
+
+@media (min-width: 905px) {
+    #toggleReminderBtn,
+    #toggleGoalsTrackerBtn {
+        display: inherit;
+    }
+}
+
+@media (max-width: 905px) {
+    #toggleCalcBtn {
+        display: none;
+    }
+}
+
+.quick-access-toolbar {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #534caf;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5px;
+    padding-right: 6px;
+}
+
+.quick-access-toolbar button {
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.quick-access-toolbar button:hover {
+    background-color: #c0c0c0;
+}
+
+.note.pinned {
+    border: 5px solid gold;
+}
+
+.quick-access-toolbar i {
+    color: #333;
+}
+
+.feedback-container {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    z-index: 10000;
+}
+
+.reminder-container {
+    position: fixed;
+    right: 0;
+    top: 54%;
+    transform: translateY(-50%);
+    width: 200px;
+    z-index: 1000;
+}
+
+.feedback-btn {
+    position: absolute;
+    right: 0;
+    top: -40px;
+    background: #534caf;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-title {
+    color: #534caf;
+}
+
+#feedbackText {
+    border-radius: 8px;
+}
+
+.feedback-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.feedback-form h4.feedback-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.feedback-form textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.feedback-form .feedback-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedback-form button {
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #534caf;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+    outline: none;
+    display: inline-block;
+}
+
+.feedback-form button:hover {
+    background-color: #403890;
+}
+
+.mood-tracker-toggle-btn {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    padding-top: 12.9px;
+}
+
+.mood-tracker-toggle-btn:hover {
+    background-color: #403890;
+}
+
+.mood-tracker-form {
+    position: fixed;
+    right: 45px;
+    top: 50%;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: none;
+    z-index: 1000;
+}
+
+.recommended-note-container {
+    position: fixed;
+    right: 0;
+    top: calc(50% + 40px);
+    z-index: 1000;
+}
+
+.recommended-note-toggle-btn {
+    background-color: #534caf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    right: -20px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.recommended-note-toggle-btn:hover {
+    background-color: #403890;
+}
+
+.recommended-note-form {
+    display: none;
+    position: fixed;
+    right: 45px;
+    top: calc(50% + 60px);
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10000000000000;
+    text-align: center;
+}
+
+.recommended-note-form h4.recommended-note-title {
+    color: #534caf;
+}
+
+.recommended-note-form p {
+    margin-bottom: 10px;
+}
+
+.recommended-note-form .recommended-prompt {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #ffa24e;
+}
+
+.recommended-note-form button {
+    background: #534caf;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.recommended-note-form button:hover {
+    background-color: #403890;
+}
+
+.upcoming-reminders ul {
+    list-style: none;
+}
+
+#goalText {
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+li {
+    list-style: none;
+}
+
+#goalsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#logMoodBtn {
+    height: 35px;
+    font-size: 14px;
+    padding: 0;
+    line-height: 35px;
+    text-align: center;
+    border: none;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.close-btn {
+    height: 35px;
+    font-size: 15px;
+    padding: 0;
+    line-height: 35px;
+    text-align: center;
+    border: none;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.close-btn:hover {
+    background-color: #403890;
+}
+
+.timer-container {
+    position: fixed;
+    right: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    z-index: 100;
+}
+
+.timer-toggle-btn {
+    position: absolute;
+    right: -45px;
+    top: -80px;
+    background-color: #534caf;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.timer-form h4.timer-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #534caf;
+}
+
+.timer-form .timer-display {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.timer-form button {
+    background: #534caf;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.timer-form button:hover {
+    background-color: #403890;
+}
+
+.timer-display {
+    cursor: pointer;
+}
+
+#closeTimerBtn, #setTimerBtn {
+    background: #534caf;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#closeTimerBtn:hover, #setTimerBtn:hover {
+    background-color: #403890;
+}
+
+#other-apps li {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    color: black;
+    align-items: center;
+    list-style-type: none;
+}
+
+button {
+    font: inherit;
+}
+
+.app-btn {
+    background-color: #534caf;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    display: block;
+    width: auto;
+    margin: 10px auto;
+}
+
+.app-btn:hover {
+    background-color: #403890;
+}
+
+@media (max-width: 1200px) {
+    .note {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .note-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .note-content textarea,
+    .note-content .image-container {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    .note .tools {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0.5rem;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .note .tools .due-date,
+    .note .tools .tag {
+        box-sizing: border-box;
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 5px;
+    }
+}
