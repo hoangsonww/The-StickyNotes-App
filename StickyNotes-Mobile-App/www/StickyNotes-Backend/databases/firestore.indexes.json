@@ -1,0 +1,25 @@
+{
+  "indexes": [
+    {
+      "index": "notes",
+      "kind": "HISTORY",
+      "fields": [
+        "note"
+      ]
+    },
+    {
+      "index": "users",
+      "kind": "HISTORY",
+      "fields": [
+        "name"
+      ],
+      "fieldOverrides": [
+        {
+          "field": "name",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

@@ -14,6 +14,7 @@ body {
     font-family: "Poppins", sans-serif;
     padding-top: 1rem;
     width: 100%;
+    scroll-behavior: smooth;
 }
 
 .note .tools .due-date {
