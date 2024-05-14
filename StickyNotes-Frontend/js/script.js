@@ -51,6 +51,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     note.classList.add("note");
     note.title = "Drag to reposition this note";
     note.style.backgroundColor = color;
+
     let today = new Date().toISOString().split('T')[0];
 
     if (isPinned) {
