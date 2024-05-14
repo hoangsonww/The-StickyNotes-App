@@ -513,6 +513,7 @@ themeToggleButton.id = "themeToggle";
 themeToggleButton.className = "button";
 themeToggleButton.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
+
     if (document.body.classList.contains("dark-mode")) {
         localStorage.setItem("theme", "dark-mode");
     }
@@ -523,6 +524,7 @@ themeToggleButton.addEventListener("click", () => {
 
 function toggleDarkMode() {
     const isDarkMode = document.body.classList.toggle('dark-mode');
+
     if (isDarkMode) {
         localStorage.setItem('theme', 'dark-mode');
     }
@@ -601,6 +603,7 @@ const chatTitleElem = document.createElement("div");
 chatTitleElem.className = "chat-header chat-title";
 chatTitleElem.innerText = "The StickyNotes Assistant";
 document.querySelector(".chatbot").prepend(chatTitleElem);
+
 chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.target.value.trim()) {
         const question = e.target.value.trim();
@@ -753,6 +756,7 @@ function getElizaResponse(question) {
         { pattern: /voice|voice note/, response: "You can record voice notes instead of typing. Just click on the 'Record' button to start recording." },
         { pattern: /.*/, response: "I'm not sure about that. Can you be more specific or ask another question?" }
     ];
+
     for (let i = 0; i < responses.length; i++) {
         let match = question.match(responses[i].pattern);
         if (match) {
@@ -760,6 +764,7 @@ function getElizaResponse(question) {
             return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]).replace('{query}', match[1]).replace('{mode}', match[1]);
         }
     }
+
     return "Sorry, I didn't get that. Could you please rephrase or ask another question?";
 }
 
@@ -817,6 +822,7 @@ chatInputElem.style.display = "none";
 function toggleTyping(enable) {
     let screen = document.getElementById('calcScreen');
     screen.disabled = !enable;
+
     if (enable) {
         screen.focus();
     }
@@ -1193,6 +1199,7 @@ function addTask(task) {
 
 function updateLocalStorage() {
     const tasks = [];
+
     document.querySelectorAll("#task-list li").forEach(li => {
         tasks.push(li.textContent.replace("✖", "").trim());
     });
@@ -1208,6 +1215,7 @@ function logMood() {
     const mood = document.getElementById('moodSelect').value;
     const moodLog = JSON.parse(localStorage.getItem('moodLog')) || {};
     moodLog[mood] = (moodLog[mood] || 0) + 1;
+
     localStorage.setItem('moodLog', JSON.stringify(moodLog));
     provideMoodRecommendation(moodLog);
 }
@@ -1248,11 +1256,13 @@ async function generateRecommendedNote() {
         wellness: ["Note down your workout plan", "Meditation or mindfulness exercise", "Track your water intake or diet for the day"],
         learning: ["Write about a new topic you want to learn", "Reflect on an interesting article or book", "Plan your learning goals for the week"]
     };
+
     const now = new Date();
     let selectedCategory;
     let isWeekend = [0, 6].includes(now.getDay());
     let month = now.getMonth();
     let isSummer = month >= 5 && month <= 7;
+
     if (now.getHours() < 12) {
         selectedCategory = categories.morning;
     }
@@ -1262,12 +1272,15 @@ async function generateRecommendedNote() {
     else {
         selectedCategory = categories.evening;
     }
+
     if (isWeekend) {
         selectedCategory = categories.weekend;
     }
+
     if (Math.random() < 0.2) {
         selectedCategory = isSummer ? categories.wellness : categories.creative;
     }
+
     const recommendedPrompt = selectedCategory[Math.floor(Math.random() * selectedCategory.length)];
     createRecommendedNote(recommendedPrompt);
 }
@@ -1317,6 +1330,7 @@ function closeAllFormsExcept(exceptForm) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const generateRecommendedNoteBtn = document.getElementById("generateRecommendedNoteBtn");
+
     if (generateRecommendedNoteBtn) {
         generateRecommendedNoteBtn.addEventListener("click", function() {
             generateRecommendedNote();
