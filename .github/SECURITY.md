@@ -52,7 +52,7 @@ For users of StickyNotes, we recommend the following best practices to ensure yo
 - Be cautious with third-party plugins or modifications.
 - Use strong, unique passwords for your StickyNotes account.
 - Enable two-factor authentication if available.
-- Report any suspicious activity or security concerns to the StickyNotes team (now it's only me..).
+- Report any suspicious activity or security concerns to the StickyNotes team (now it's only me...).
 
 ---
 
