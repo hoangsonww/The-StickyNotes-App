@@ -123,7 +123,7 @@ Contributions to the StickyNotes App are welcome! Please read our [Contributing 
 
 ## Support and Feedback
 
-For support, feedback, or contributions, refer to the GitHub repository's issues section or contact the developer directly.
+For support, feedback, or contributions, refer to this GitHub repository's issues section or contact the developer directly:
 
 Author: [Son Nguyen](https://github.com/hoangsonww).
 
