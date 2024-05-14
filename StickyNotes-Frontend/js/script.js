@@ -76,7 +76,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             <div class="note-content" title="Add or change the content for this note">
                 <textarea placeholder="Add note content here..." style="font: inherit">${text}</textarea>
                 <div class="image-container ${image ? "" : "hidden"}">
-                    <img src="${image}" class="note-image" alt="Note Image"/>
+                    <img src="${image}" class="note-image" alt="Note Image" />
                     <span class="remove-image">✖</span>
                 </div>
             </div>
