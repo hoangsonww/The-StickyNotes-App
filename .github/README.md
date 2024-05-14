@@ -1,6 +1,6 @@
 # The StickyNotes App
 
-## Overview
+## App Overview
 
 The StickyNotes App is a dynamic, user-friendly web application designed for effective note-taking and task management. Developed by [Son Nguyen](https://github.com/hoangsonww) in 2023, it offers a versatile suite of features, including voice note recording, color customization, tagging, and more. Suitable for both personal and professional use, StickyNotes hopes to provide you with its intuitive design and robust functionality. A mobile app version is also under development, leveraging Apache Cordova and React Native, with a planned release in the near future.
 
