@@ -333,12 +333,14 @@ function updateLS() {
             isPinned: note.classList.contains('pinned')
         });
     });
+
     localStorage.setItem("notes", JSON.stringify(notesArr));
 }
 
 function sortNotesByPinned() {
     const pinnedNotes = [];
     const unpinnedNotes = [];
+
     document.querySelectorAll(".note").forEach((note) => {
         if (note.classList.contains('pinned')) {
             pinnedNotes.push(note);
