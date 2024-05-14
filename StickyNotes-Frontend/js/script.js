@@ -319,6 +319,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
 function updateLS() {
     const notesArr = [];
+
     document.querySelectorAll(".note").forEach((note) => {
         const imageData = note.querySelector('.note-image').src;
         const voiceData = note.querySelector('.voice-note').src;
