@@ -10,7 +10,7 @@ In the meantime, feel free to explore the web app and discover its many capabili
 
 <p align="center" style="cursor: pointer">
   <a href="https://hoangsonww.github.io/The-StickyNotes-App/">
-    <img src="../utils/StickyNotes-UI.png" alt="The StickyNotes App Interface" width="100%"/>
+    <img src="../utils/StickyNotes-UI.png" alt="The StickyNotes App Interface" width="100%" style="border-radius: 8px"/>
   </a>
 </p>
 
