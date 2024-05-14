@@ -35,6 +35,7 @@ if (notes) {
     notes.forEach((note) => {
         addNewNote(note.title, note.text, note.color, note.tag, note.dueDate, note.voiceNote, note.image, note.isPinned);
     });
+
     sortNotesByDueDate();
     sortNotesByPinned()
 }
