@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   fetchQuotes();
+
   newQuoteButton.addEventListener('click', fetchQuotes);
 });
 
