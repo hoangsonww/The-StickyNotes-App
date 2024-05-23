@@ -62,6 +62,10 @@ h4 {
     margin-left: 10px;
 }
 
+.image-container .hidden {
+    display: none;
+}
+
 .note-image {
     max-height: 200px;
     display: block;
@@ -72,9 +76,9 @@ h4 {
     top: 0;
     right: 0;
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 2px 5px;
+    background: transparent;
+    color: red;
+    padding: 5px 5px;
     border-radius: 50%;
     display: none;
 }
@@ -450,7 +454,7 @@ h4 {
 
 body.dark-mode {
     background: linear-gradient(to right, #2c3e50, #34495e);
-    transition: background 3.3s, color 3.3s;
+    transition: background 3.3s, color 0.5s;
     color: white;
 }
 
@@ -508,10 +512,14 @@ body.dark-mode .note .tools button:hover {
     width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.2s;
+}
+
+.hidden {
+    display: none;
 }
 
 .highlight {
