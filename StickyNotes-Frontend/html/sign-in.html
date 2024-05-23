@@ -51,6 +51,7 @@
 
         .sign-in-form-container input[type="email"],
         .sign-in-form-container input[type="password"],
+        .sign-in-form-container input[type="text"],
         .sign-in-form-container button {
             width: 90%;
             padding: 10px;
@@ -147,6 +148,10 @@
             <p style="margin-bottom: 10px">Please be assured that we do not store your password in our database, but use advanced authentication to securely store your password.</p>
             <input type="email" id="signInEmail" placeholder="Email" required>
             <input type="password" id="signInPassword" placeholder="Password" required>
+            <label for="showPassword" style="color: black">
+                <input type="checkbox" id="showPassword" style="margin-top: 10px;">
+                Show Password
+            </label>
             <button type="submit">Sign In</button>
             <button type="button" id="createAccountBtn">Create an Account</button>
             <button type="button" id="resetPasswordBtn" onclick="window.location.href='reset-password.html'">Reset Password</button>
@@ -155,6 +160,18 @@
 
     <button class="back-to-home" onclick="window.location.href = '../../index.html'">Back to Home</button>
     <script src="../js/sign-in.js" type="module"></script>
+
+    <script>
+      document.getElementById('showPassword').addEventListener('change', function() {
+        const passwordInput = document.getElementById('signInPassword');
+        if (this.checked) {
+          passwordInput.type = 'text';
+        } else {
+          passwordInput.type = 'password';
+        }
+      });
+    </script>
+
     <script>
       document.getElementById('createAccountBtn').addEventListener('click', function() {
         window.location.href = 'create-account.html';

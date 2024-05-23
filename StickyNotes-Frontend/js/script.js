@@ -58,27 +58,28 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         note.classList.add("pinned");
     }
 
+    const imageDisplayStyle = image ? 'block' : 'none';
+
     note.innerHTML = `
         <div class="notes">
             <div class="tools">
-                <input type="text" class="due-date" style="font: inherit" placeholder="Add Due Date..." onfocus="this.type='date';this.focus();" onblur="if(!this.value)this.type='text';" min="${today}" value="">
-                <input type="text" class="tag" style="font: inherit" placeholder="Add tag..."/>
+                <input type="text" class="due-date" style="font: inherit" placeholder="Add Due Date..." onfocus="this.type='date';this.focus();" onblur="if(!this.value)this.type='text';" min="${today}" value="${dueDate}">
+                <input type="text" class="tag" style="font: inherit" placeholder="Add tag..." value="${tag}"/>
                 <button class="edit"><i class="fas fa-edit"></i></button>
                 <button class="mic"><i class="fas fa-microphone"></i></button>
                 <button class="image-btn"><i class="fas fa-image"></i></button>
                 <input type="file" class="image-upload" accept="image/*" style="display: none;">
-                <audio class="voice-note" controls></audio>
+                <audio class="voice-note" controls src="${voiceNote}"></audio>
                 <button class="pin">${isPinned ? 'Unpin' : 'Pin'}</button>
-                <button id="deletBtn" class="delete"><i class="fas fa-trash-alt"></i></button>
+                <button class="delete"><i class="fas fa-trash-alt"></i></button>
                 <input type="color" class="color-picker" value="${color}" style="border: 1px solid #000000;" title="Change color for this note">
             </div>
-            <div class="note-title ${title ? "" : "untitled"}" contenteditable="false" title="Add or change the title for this note">${title}</div>
-            <div class="main ${text ? "" : "hidden"}"></div>
-            <div class="note-content" title="Add or change the content for this note">
-                <textarea placeholder="Add note content here..." style="font: inherit">${text}</textarea>
-                <div class="image-container ${image ? "" : "hidden"}">
-                    <img src="${image}" class="note-image" alt="Note Image" />
-                    <span class="remove-image">✖</span>
+            <div class="note-title ${title ? "" : "untitled"}" contenteditable="true">${title}</div>
+            <div class="note-content">
+                <textarea style="font: inherit" placeholder="Add note content here..." style="width: 100%;">${text}</textarea>
+                <div class="image-container" style="display: ${imageDisplayStyle}; position: relative; text-align: center; height: auto; margin-top: 15px;">
+                    <img src="${image}" class="note-image" alt="Note Image" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                    <span class="remove-image" style="position: absolute; top: 0; right: 0; color: red; font-weight: bolder; font-size: 20px; cursor: pointer; background: none">✖</span>
                 </div>
             </div>
         </div>
@@ -137,8 +138,10 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
         pinBtn.classList.add('pin-unpinned');
         pinBtn.title = "Pin Note";
     }
+
     pinBtn.addEventListener('click', () => {
         const isNotePinned = note.classList.toggle('pinned');
+
         if (isNotePinned) {
             pinBtn.querySelector('i').classList.remove('pin-unpinned');
             pinBtn.querySelector('i').classList.add('pin-pinned');
@@ -198,13 +201,12 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     const noteImage = note.querySelector('.note-image');
     const removeImageIcon = note.querySelector('.remove-image');
 
-    if (image) {
-        noteImage.src = image;
-        imageContainer.classList.remove('hidden');
-    }
-
     imageBtn.addEventListener('click', () => {
         imageUploadInput.click();
+    });
+
+    imageUploadInput.addEventListener('click', function() {
+        this.value = null;
     });
 
     imageUploadInput.addEventListener('change', function () {
@@ -212,7 +214,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             const reader = new FileReader();
             reader.onload = function (e) {
                 noteImage.src = e.target.result;
-                imageContainer.classList.remove('hidden');
+                imageContainer.style.display = 'block';
                 updateLS();
             };
             reader.readAsDataURL(this.files[0]);
@@ -221,7 +223,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
     removeImageIcon.addEventListener('click', () => {
         noteImage.src = '';
-        imageContainer.classList.add('hidden');
+        imageContainer.style.display = 'none';
         updateLS();
     });
 
@@ -232,16 +234,17 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     let audioChunks = [];
     const removeRecordingBtn = document.createElement('button');
     removeRecordingBtn.innerHTML = '✖';
-    removeRecordingBtn.className = 'remove-recording hidden';
+    removeRecordingBtn.style.display = 'none';
     removeRecordingBtn.title = "Remove Voice Note";
 
-    if (voiceNote) {
-        note.querySelector('.voice-note').src = voiceNote;
+    if (voiceNote || voiceNote !== '') {
+        voiceNotePlayer.src = voiceNote;
+        removeRecordingBtn.style.display = 'inline';
     }
 
     if (voiceNote.src) {
         micBtn.disabled = true;
-        removeRecordingBtn.classList.remove('hidden');
+        removeRecordingBtn.style.display = 'inline';
     }
 
     micBtn.addEventListener("click", () => {
@@ -278,12 +281,13 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             mediaRecorder.stop();
             micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
             recordingStatus.style.display = "none";
+            removeRecordingBtn.style.display = 'inline';
         }
     });
 
     removeRecordingBtn.addEventListener('click', () => {
         voiceNotePlayer.src = '';
-        removeRecordingBtn.classList.add('hidden');
+        removeRecordingBtn.style.display = 'none';
         micBtn.disabled = false;
         updateLS();
     });
@@ -305,6 +309,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
     note.querySelector('.tools').appendChild(moveDownButton);
 
     note.draggable = true;
+    note.style.cursor = "grab";
     note.addEventListener('dragstart', handleDragStart);
     note.addEventListener('dragend', handleDragEnd);
 
@@ -314,6 +319,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
 
     imageBtn.title = "Upload or remove image";
     micBtn.title = "Record or stop recording voice note";
+
     updateLS();
     checkAndDisplayEmptyNotesMessage();
 }
@@ -384,21 +390,31 @@ function stopAutoScrolling() {
     }
 }
 
-document.addEventListener('dragover', handleWindowDragOver);
-document.addEventListener('dragend', stopAutoScrolling);
-
 function handleDragStart(e) {
     e.target.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
 }
 
 function handleDragEnd(e) {
     e.target.classList.remove('dragging');
     const draggableElements = [...notesContainer.querySelectorAll('.note:not(.dragging)')];
-    draggableElements.forEach(child => child.style.borderTop = 'none');
+    draggableElements.forEach(child => child.style.borderTop = '');
 }
 
 function handleDragOver(e) {
     e.preventDefault();
+    const afterElement = getDragAfterElement(notesContainer, e.clientY);
+    const draggingElement = document.querySelector('.dragging');
+    const draggableElements = [...notesContainer.querySelectorAll('.note:not(.dragging)')];
+
+    draggableElements.forEach(element => {
+        if (element === afterElement) {
+            element.style.borderTop = '2px solid white';
+        }
+        else {
+            element.style.borderTop = '';
+        }
+    });
 }
 
 function handleDrop(e) {
@@ -407,7 +423,8 @@ function handleDrop(e) {
     const draggable = document.querySelector('.dragging');
     if (afterElement == null) {
         notesContainer.appendChild(draggable);
-    } else {
+    }
+    else {
         notesContainer.insertBefore(draggable, afterElement);
     }
     draggable.classList.remove('dragging');
@@ -419,7 +436,7 @@ function getDragAfterElement(container, y) {
 
     return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
+        const offset = y - box.top - (box.height * 0.25);
         if (offset < 0 && offset > closest.offset) {
             return { offset: offset, element: child };
         }
@@ -428,6 +445,9 @@ function getDragAfterElement(container, y) {
         }
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
+
+document.addEventListener('dragover', handleWindowDragOver);
+document.addEventListener('dragend', stopAutoScrolling);
 
 function moveUp(noteElem) {
     const prevNote = noteElem.previousElementSibling;

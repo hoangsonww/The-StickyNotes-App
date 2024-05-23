@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const author = quote.author ? quote.author.replace(', type.fit', '') : "Unknown";
         quoteContainer.innerHTML += `
         <p>
-            <span class="quote-text">${quote.text}</span><br>
+            <span class="quote-text" style="color: black">${quote.text}</span><br>
             <span class="quote-author">— ${author}</span>
         </p>`;
       }

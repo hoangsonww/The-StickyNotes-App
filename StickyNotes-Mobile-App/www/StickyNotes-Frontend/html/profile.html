@@ -342,14 +342,22 @@
                 <span class="close" onclick="closeModal()">&times;</span>
             </div>
             <form id="editProfileForm">
+                <label for="editUsername">Username:</label>
                 <input type="text" id="editUsername" placeholder="Username">
                 <div class="dob-container">
                     <label for="editDob">Date of Birth:</label>
                     <input type="date" id="editDob">
                 </div>
+                <label for="editBio">Bio:</label>
                 <input type="text" id="editBio" placeholder="Bio">
+                <br/>
+                <label for="editLocation">Location:</label>
                 <input type="text" id="editLocation" placeholder="Location">
+                <br/>
+                <label for="editHobbies">Hobbies:</label>
                 <input type="text" id="editHobbies" placeholder="Hobbies">
+                <br/>
+                <label for="editPersonalQuote">Personal Quote:</label>
                 <input type="text" id="editPersonalQuote" placeholder="Personal Quote">
                 <br/>
                 <button type="button" id="saveChanges" onclick="saveProfileChanges()">Save Changes</button>
