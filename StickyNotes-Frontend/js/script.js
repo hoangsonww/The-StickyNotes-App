@@ -76,7 +76,7 @@ function addNewNote(title = "Untitled Note - Click here to give it a name!", tex
             </div>
             <div class="note-title ${title ? "" : "untitled"}" contenteditable="true">${title}</div>
             <div class="note-content">
-                <textarea placeholder="Add note content here..." style="width: 100%;">${text}</textarea>
+                <textarea style="font: inherit" placeholder="Add note content here..." style="width: 100%;">${text}</textarea>
                 <div class="image-container" style="display: ${imageDisplayStyle}; position: relative; text-align: center; height: auto; margin-top: 15px;">
                     <img src="${image}" class="note-image" alt="Note Image" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
                     <span class="remove-image" style="position: absolute; top: 0; right: 0; color: red; font-weight: bolder; font-size: 20px; cursor: pointer; background: none">✖</span>
