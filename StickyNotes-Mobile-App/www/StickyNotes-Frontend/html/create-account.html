@@ -43,6 +43,7 @@
 
         .account-creation-form-container input[type="email"],
         .account-creation-form-container input[type="password"],
+        .account-creation-form-container input[type="text"],
         .account-creation-form-container button {
             width: 90%;
             padding: 10px;
@@ -123,10 +124,14 @@
     <div class="account-creation-form-container">
         <form id="createAccountForm">
             <h2>Create Account</h2>
-            <p style="margin-bottom: 10px">Become a member of The StickyNotes community and start saving your notes!</p>
+            <p style="margin-bottom: 10px; color: black">Become a member of The StickyNotes community and start saving your notes!</p>
             <input type="email" id="newEmail" placeholder="Email" required>
             <input type="password" id="newPassword" placeholder="Password" required>
             <input type="password" id="confirmPassword" placeholder="Re-type Password" required>
+            <label for="showPassword" style="color: black">
+                <input type="checkbox" id="showPassword" style="margin-top: 10px;">
+                Show Password
+            </label>
             <button type="submit">Create Account</button>
         </form>
     </div>
@@ -134,6 +139,22 @@
     <button class="back-to-home" onclick="window.location.href = '../../index.html'">Back to Home</button>
     <button class="back-to-home" onclick="window.location.href = '../html/sign-in.html'">Back to Sign In</button>
     <script src="../js/create-account.js" type="module"></script>
+
+    <script>
+      document.getElementById('showPassword').addEventListener('change', function() {
+        const passwordInput = document.getElementById('newPassword');
+        const passwordConfirm = document.getElementById('confirmPassword');
+
+        if (this.checked) {
+            passwordInput.type = 'text';
+            passwordConfirm.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+            passwordConfirm.type = 'password';
+        }
+      });
+    </script>
+
     <script>
       const themeToggleButton = document.createElement("button");
       themeToggleButton.innerText = "Toggle Dark Mode";

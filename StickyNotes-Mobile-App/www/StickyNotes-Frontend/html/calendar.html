@@ -39,12 +39,12 @@
         }
 
         #addNote {
-            background-color: #ffa24e;
+            background-color: #dc6800;
             font: inherit;
         }
 
         #addNote:hover {
-            background-color: #ff8a24;
+            background-color: #b15200;
         }
 
         header {
@@ -149,7 +149,7 @@
 
         .modal-content h2 {
             margin-left: 25px;
-            color: #ffa24e;
+            color: #dc6800;
         }
 
         .quick-access-toolbar {
@@ -347,19 +347,20 @@
         <div id='calendar'></div>
     </div>
 
-    <div id="addNoteModal" class="modal">
-        <div class="modal-content" style="background-color: #7378c5">
+    <div id="addNoteModal" class="modal" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
+        <div class="modal-content" style="background-color: #f8f8f8">
             <span class="close">&times;</span>
             <h2 style="margin-bottom: 10px">Add New Note</h2>
             <form id="addNoteForm">
-                <label for="noteTitle">Title</label><br>
-                <input type="text" id="noteTitle" placeholder="Note Title" required><br>
+                <label for="noteTitle" style="color: black; margin-bottom: 10px">Title</label><br>
+                <input type="text" id="noteTitle" placeholder="Note Title" required style="border: 1px solid #000"><br>
 
-                <label for="noteDescription">Description</label><br>
-                <textarea id="noteDescription" placeholder="Note Description" style="margin-bottom: 10px"></textarea><br>
+                <label for="noteDescription" style="color: black">Description</label><br>
+                <textarea id="noteDescription" placeholder="Note Description" style="margin-bottom: 10px; border: 1px solid #000"></textarea><br>
 
-                <label for="noteDueDate">Due Date</label><br>
-                <input type="date" id="noteDueDate"><br>
+                <label for="noteDueDate" style="color: black">Due Date</label><br>
+                <input type="date" id="noteDueDate" style="margin-bottom: 10px; border: 1px solid #000"><br>
+                <br/>
 
                 <input type="submit" id="addNote" value="Add Note">
             </form>
