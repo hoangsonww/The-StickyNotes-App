@@ -42,6 +42,7 @@ function setupEventListeners() {
 function openEditModal() {
     const profile = JSON.parse(localStorage.getItem('profileInfoStickyNotes')) || {};
     document.getElementById('editUsername').value = profile.username || '';
+
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('editDob').setAttribute('max', today);
     document.getElementById('editBio').value = profile.bio || '';
