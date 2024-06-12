@@ -188,6 +188,7 @@ themeToggleButton.addEventListener("click", () => {
 
 function toggleDarkMode() {
     const isDarkMode = document.body.classList.toggle('dark-mode');
+
     if (isDarkMode) {
         localStorage.setItem('theme', 'dark-mode');
     }
@@ -204,12 +205,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const amPm = timeParts[1];
         document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
     }
+
     updateTime();
     setInterval(updateTime, 1000);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
+
     if (savedTheme === "dark-mode") {
         document.body.classList.add("dark-mode");
     }
