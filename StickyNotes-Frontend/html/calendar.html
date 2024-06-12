@@ -371,8 +371,8 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
           events: loadCalendarEvents(),
           dateClick: function(info) {
@@ -572,7 +572,7 @@
       }
 
       function toggleAddNoteModal() {
-        var modal = document.getElementById("addNoteModal");
+        let modal = document.getElementById("addNoteModal");
         if (modal.style.display === "block") {
           modal.style.display = "none";
         }
