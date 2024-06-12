@@ -1048,7 +1048,6 @@ function decrementTimeAndUpdateDisplay() {
     updateTimerDisplay();
 }
 
-
 function pauseTimer() {
     if (countdownInterval) {
         clearInterval(countdownInterval);
