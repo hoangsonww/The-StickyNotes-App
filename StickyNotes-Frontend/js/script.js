@@ -914,6 +914,7 @@ document.getElementById('calcScreen').addEventListener('input', function(event) 
 function toggleCalculator() {
     const calcBody = document.querySelector('.calc-body');
     const toggleCalcButton = document.getElementById('toggleCalc');
+
     if (calcBody.style.display === 'none') {
         calcBody.style.display = 'block';
         toggleCalcButton.innerText = '-';
