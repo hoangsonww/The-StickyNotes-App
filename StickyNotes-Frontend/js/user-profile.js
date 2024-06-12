@@ -10,6 +10,7 @@ function loadProfile() {
 
     const profile = JSON.parse(localStorage.getItem(profileKey)) || {};
     const profileImage = localStorage.getItem(profileImageKey) || '../../utils/user-default.png';
+
     document.getElementById('profileImage').src = profileImage;
     document.getElementById('removeProfileImage').style.display = profileImage !== '../../utils/user-default.png' ? 'inline' : 'none';
     document.getElementById('profileImage').src = profileImage;
