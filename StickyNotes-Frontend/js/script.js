@@ -840,6 +840,7 @@ function sendInstructionalMessage() {
 
 const chatHeaderElem = document.querySelector(".chat-header");
 chatHeaderElem.appendChild(toggleButton);
+
 const chatMessagesElem = document.querySelector(".chat-messages");
 const chatInputElem = document.querySelector(".chat-input");
 chatMessagesElem.style.display = "none";
