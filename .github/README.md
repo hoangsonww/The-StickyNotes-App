@@ -40,8 +40,11 @@ In the meantime, feel free to explore the web app and discover its many capabili
 - **`StickyNotes-Frontend` Directory:** Contains the frontend codebase for the StickyNotes App.
 - **`StickyNotes-Backend` Directory:** Contains the backend codebase for the StickyNotes App.
 - **`StickyNotes-Mobile-App` Directory:** Contains the mobile app codebase for the StickyNotes App.
+- **`StickyNotes-Middleware` Directory:** Contains the middleware codebase for the StickyNotes App.
+- **`StickyNotes-APIs` Directory:** Contains the APIs codebase for the StickyNotes App.
 - **`.github` Directory:** Contains the documentation for the StickyNotes App.
 - **`utils` Directory:** Contains utility scripts and tools for the StickyNotes App.
+- **`shell-scripts` Directory:** Contains shell scripts for automating tasks in the StickyNotes App.
 
 ## Mobile App Development
 
