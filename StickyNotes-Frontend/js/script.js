@@ -875,6 +875,7 @@ function clearScreen() {
 
 function press(num) {
     const screen = document.getElementById('calcScreen');
+
     if (num === '%') {
         screen.value = (eval(screen.value) / 100).toString();
     }
