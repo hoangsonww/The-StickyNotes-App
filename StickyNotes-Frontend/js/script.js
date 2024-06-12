@@ -1026,13 +1026,10 @@ let totalTimeInSeconds = defaultTimeInSeconds;
 
 function startTimer() {
     if (!countdownInterval) {
-        // Decrement the time and update the display immediately when the timer starts
         decrementTimeAndUpdateDisplay();
 
-        // Start the countdown interval
         countdownInterval = setInterval(decrementTimeAndUpdateDisplay, 1000);
 
-        // Update button displays
         document.getElementById('startTimerBtn').style.display = 'none';
         document.getElementById('pauseTimerBtn').style.display = 'inline';
     }
