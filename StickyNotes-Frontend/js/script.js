@@ -560,6 +560,7 @@ function toggleDarkMode() {
 
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
+
     if (savedTheme === "dark-mode") {
         document.body.classList.add("dark-mode");
     }
