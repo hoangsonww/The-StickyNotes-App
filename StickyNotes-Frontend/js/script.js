@@ -1070,6 +1070,7 @@ function updateTimerDisplay() {
     let hours = Math.floor(totalTimeInSeconds / 3600);
     let minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
     let seconds = totalTimeInSeconds % 60;
+
     hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
@@ -1088,7 +1089,8 @@ function setTimerManually() {
         }
         totalTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
         updateTimerDisplay();
-    } else {
+    }
+    else {
         alert("Invalid input. Please enter numeric values for hours, minutes, and seconds.");
     }
 }
@@ -1283,6 +1285,7 @@ async function generateRecommendedNote() {
     };
 
     const now = new Date();
+
     let selectedCategory;
     let isWeekend = [0, 6].includes(now.getDay());
     let month = now.getMonth();
@@ -1325,6 +1328,7 @@ function createRecommendedNote(prompt) {
 function toggleMoodTracker() {
     const moodForm = document.getElementById('moodTrackerForm');
     closeAllFormsExcept(moodForm);
+
     const timerBtn = document.querySelector('.timer-toggle-btn');
     timerBtn.style.display = 'flex';
     moodForm.style.display = moodForm.style.display === 'block' ? 'none' : 'block';
@@ -1333,6 +1337,7 @@ function toggleMoodTracker() {
 function toggleRecommendedNoteForm() {
     const recommendedNoteForm = document.getElementById('recommendedNoteForm');
     closeAllFormsExcept(recommendedNoteForm);
+
     const timerBtn = document.querySelector('.timer-toggle-btn');
     timerBtn.style.display = 'flex';
     recommendedNoteForm.style.display = recommendedNoteForm.style.display === 'block' ? 'none' : 'block';
