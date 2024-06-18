@@ -8,12 +8,20 @@
     <platform name="ios">
         <!-- iOS icons -->
         <icon src="www/icons/StickyNotesAppiOSIcon.png" width="180" height="180"/>
+        <preference name="StatusBarOverlaysWebView" value="false" />
+        <preference name="StatusBarBackgroundColor" value="#000000" />
+        <preference name="StatusBarStyle" value="default" />
+        <preference name="deployment-target" value="17.0" />
+        <preference name="Orientation" value="portrait" />
     </platform>
     <platform name="android">
         <!-- Android icons -->
         <icon src="www/icons/StickyNotesAppAndroidIcon.png" density="xxxhdpi"/>
+        <preference name="StatusBarOverlaysWebView" value="false" />
+        <preference name="StatusBarBackgroundColor" value="#000000" />
+        <preference name="StatusBarStyle" value="default" />
+        <preference name="Orientation" value="portrait" />
     </platform>
     <content src="index.html" />
-    <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 </widget>

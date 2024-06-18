@@ -10,6 +10,7 @@ function loadProfile() {
 
     const profile = JSON.parse(localStorage.getItem(profileKey)) || {};
     const profileImage = localStorage.getItem(profileImageKey) || '../../utils/user-default.png';
+
     document.getElementById('profileImage').src = profileImage;
     document.getElementById('removeProfileImage').style.display = profileImage !== '../../utils/user-default.png' ? 'inline' : 'none';
     document.getElementById('profileImage').src = profileImage;
@@ -41,6 +42,7 @@ function setupEventListeners() {
 function openEditModal() {
     const profile = JSON.parse(localStorage.getItem('profileInfoStickyNotes')) || {};
     document.getElementById('editUsername').value = profile.username || '';
+
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('editDob').setAttribute('max', today);
     document.getElementById('editBio').value = profile.bio || '';
@@ -187,6 +189,7 @@ themeToggleButton.addEventListener("click", () => {
 
 function toggleDarkMode() {
     const isDarkMode = document.body.classList.toggle('dark-mode');
+
     if (isDarkMode) {
         localStorage.setItem('theme', 'dark-mode');
     }
@@ -203,12 +206,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const amPm = timeParts[1];
         document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
     }
+
     updateTime();
     setInterval(updateTime, 1000);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
+
     if (savedTheme === "dark-mode") {
         document.body.classList.add("dark-mode");
     }

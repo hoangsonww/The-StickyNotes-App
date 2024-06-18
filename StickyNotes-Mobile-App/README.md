@@ -24,11 +24,29 @@ StickyNotes is an intuitive and versatile mobile application designed to enhance
 3. Configure signing and capabilities.
 4. Build and run on an iOS device or emulator.
 
+Note: If you change the code, you must remove iOS platform and add it again using the following commands in order for these changes to take effect:
+```bash
+cordova platforms rm ios
+cordova platforms add ios
+```
+
 ### Android
 1. Clone the repository.
-2. Open the project in Android Studio.
+2. Open the project `StickyNotes-Mobile-App` in Android Studio.
 3. Synchronize Gradle dependencies.
 4. Build and run on an Android device or emulator.
+
+If your installation is successful, you should see the following output: 
+
+#### iOS
+<p align="center" style="cursor: pointer">
+    <img src="../utils/mobileios.png" alt="The StickyNotes App Interface" width="80%" style="border-radius: 8px"/>
+</p>
+
+#### Android
+<p align="center" style="cursor: pointer">
+    <img src="../utils/mobileandroid.png" alt="The StickyNotes App Interface" width="80%" style="border-radius: 8px"/>
+</p>
 
 ## Usage
 After launching StickyNotes, you can start creating notes right away. The app's home screen displays your notes, which you can customize, categorize, and search through. The intuitive interface allows for easy navigation and management of your tasks and ideas.

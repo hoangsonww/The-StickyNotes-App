@@ -503,10 +503,10 @@
         }
         const temp = data.main.temp.toFixed(0);
         weatherDisplay1.innerHTML = `
-        <strong style="text-align: center; margin-top: -5px">${data.name}</strong>
-        <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather icon">
-        <span>${temp}°C</span>
-    `;
+            <strong style="text-align: center; margin-top: -5px">${data.name}</strong>
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather icon">
+            <span>${temp}°C</span>
+        `;
       }
 
       const isMobileDevice1 = window.innerWidth < 768;
@@ -589,5 +589,4 @@
       });
     </script>
 </body>
-
 </html>

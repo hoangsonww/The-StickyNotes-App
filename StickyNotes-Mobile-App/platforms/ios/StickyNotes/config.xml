@@ -57,7 +57,6 @@
         David Nguyen
     </author>
     <content src="index.html" />
-    <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <icon height="180" src="www/icons/StickyNotesAppiOSIcon.png" width="180" />
     <preference name="AllowInlineMediaPlayback" value="false" />
@@ -68,6 +67,9 @@
     <preference name="SuppressesLongPressGesture" value="false" />
     <preference name="Suppresses3DTouchGesture" value="false" />
     <preference name="CameraUsesGeolocation" value="false" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
-    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarStyle" value="default" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="deployment-target" value="17.0" />
+    <preference name="Orientation" value="portrait" />
 </widget>

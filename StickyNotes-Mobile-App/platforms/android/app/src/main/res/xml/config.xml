@@ -28,9 +28,11 @@
         David Nguyen
     </author>
     <content src="index.html" />
-    <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <icon density="xxxhdpi" src="www/icons/StickyNotesAppAndroidIcon.png" />
     <preference name="loglevel" value="DEBUG" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="default" />
+    <preference name="Orientation" value="portrait" />
 </widget>
