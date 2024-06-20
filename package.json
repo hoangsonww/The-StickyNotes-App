@@ -8,10 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "ecosystem:cordova"
+    "StickyNotes",
+    "Tasks",
+    "Control"
   ],
-  "author": "Son Nguyen Hoang",
-  "license": "Apache-2.0",
+  "author": "Son Nguyen",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
@@ -27,22 +29,17 @@
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
-  "cordova": {
-    "platforms": [
-      "android",
-      "ios"
-    ]
-  },
   "dependencies": {
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "django": "^1.0.0",
-    "docker": "^1.0.0",
+    "docker": "^0.2.14",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "fullcalendar": "^6.1.10",
+    "http-server": "^14.1.1",
     "i18next": "^23.7.11",
     "jsonwebtoken": "^9.0.2",
     "kubernetes": "^1.0.0",
