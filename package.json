@@ -1,11 +1,19 @@
 {
   "name": "thestickynotesapp",
-  "displayName": "TheStickyNotesApp",
-  "version": "1.0.0",
+  "displayName": "The StickyNotes App",
+  "version": "1.1.0",
   "description": "A great tool to control all your tasks.",
   "main": "StickyNotes-Frontend/js/script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install-deps": "npm install",
+    "start": "http-server -o",
+    "build": "npm run start",
+    "test": "http-server -o",
+    "serve": "http-server -o",
+    "dev:android": "cd StickyNotes-Mobile-App && cordova run android",
+    "dev:ios": "cd StickyNotes-Mobile-App && cordova run ios",
+    "build:android": "cd StickyNotes-Mobile-App && cordova build android",
+    "build:ios": "cd StickyNotes-Mobile-App && cordova build ios"
   },
   "keywords": [
     "StickyNotes",
