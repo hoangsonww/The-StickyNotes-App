@@ -636,8 +636,8 @@ chatInput.addEventListener("keydown", (e) => {
         const userMsgElem = document.createElement("div");
         userMsgElem.innerText = `You: ${question}`;
         chatMessages.appendChild(userMsgElem);
-        setTimeout(() => {
-            const response = getElizaResponse(question);
+        setTimeout(async () => {
+            const response = await getElizaResponse(question);
             const elizaMsgElem = document.createElement("div");
             elizaMsgElem.innerText = `Assistant: ${response}`;
             chatMessages.appendChild(elizaMsgElem);
@@ -662,7 +662,7 @@ function searchForNote(query) {
     filterNotes(query);
 }
 
-function getElizaResponse(question) {
+async function getElizaResponse(question) {
     question = question.toLowerCase();
     const responses = [
         {
@@ -695,92 +695,7 @@ function getElizaResponse(question) {
             response: "Searching for '{query}'...",
             action: (query) => searchForNote(query)
         },
-        { pattern: /hello|hi|hey/, response: "Hello! How can I assist you today?" },
-        { pattern: /what is this app|what does this app do/, response: "This app allows you to create, edit, and manage sticky notes." },
-        { pattern: /who created this app/, response: "The app was created by David Nguyen in 2023." },
-        { pattern: /thank you|thanks/, response: "You're welcome! If you have more questions, just ask." },
-        { pattern: /dark mode/, response: "Click the 'Toggle Dark Mode' button to switch between themes." },
-        { pattern: /export notes/, response: "You can export your notes by clicking the 'Export Notes' button. It'll save as a JSON file." },
-        { pattern: /import notes/, response: "Click on the 'Choose Files' button to select and upload your notes." },
-        { pattern: /how are you/, response: "I'm a computer program, so I don't have feelings, but I'm operating at full capacity. How can I help?" },
-        { pattern: /what can you do/, response: "I'm here to answer your questions about the app. Just ask away!" },
-        { pattern: /create note|new note/, response: "To create a new note, click on the 'Add New Note' button and start typing." },
-        { pattern: /delete note/, response: "You can delete a note by selecting it and clicking the 'Delete' button (Trash icon)." },
-        { pattern: /edit note/, response: "Simply click on a note to start editing its content." },
-        { pattern: /save note/, response: "Your notes are saved automatically once you stop typing." },
-        { pattern: /lost note|recover note/, response: "If you've exported your notes previously, you can re-import them. Otherwise, deleted notes cannot be recovered." },
-        { pattern: /how many notes/, response: "You can have as many notes as you like in the app. There's no set limit!" },
-        { pattern: /search note/, response: "Use the search bar at the top of the app to find specific notes by their content." },
-        { pattern: /shortcut|keyboard shortcut/, response: "Use 'Ctrl + N' for a new note, 'Ctrl + S' to save, and 'Ctrl + D' to delete a note." },
-        { pattern: /share note/, response: "Currently, this app doesn't support direct note sharing. You can export and send the JSON file manually." },
-        { pattern: /cloud|sync/, response: "We don't have cloud syncing at the moment, but it's a feature we're considering for future versions." },
-        { pattern: /security|privacy/, response: "Your notes are stored locally on your device. We don't access or store them on any external servers." },
-        { pattern: /can i customize/, response: "At the moment, customization is limited to dark and light themes. We're working on more personalization features!" },
-        { pattern: /feedback|suggestion/, response: "We appreciate feedback and suggestions! There's a 'Feedback' button in the settings where you can submit yours." },
-        { pattern: /language|translate/, response: "Currently, the app is in English only, but multi-language support is in our roadmap." },
-        { pattern: /update|new version/, response: "Keep an eye on the 'Updates' section in settings for any new versions or features." },
-        { pattern: /bug|issue/, response: "Sorry for the inconvenience. Please report any bugs through the 'Feedback' section so we can address them." },
-        { pattern: /cost|price/, response: "The basic version of the app is free, but there might be premium features available for purchase in the future." },
-        { pattern: /tutorial|guide/, response: "There's a 'Help' section in the app that provides a step-by-step guide on how to use the various features." },
-        { pattern: /favorite note|bookmark/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
-        { pattern: /how does this app work/, response: "This app allows you to create, edit, and manage sticky notes." },
-        { pattern: /search notes/, response: "You can use the search bar at the top to quickly find any note by its content or title." },
-        { pattern: /who created this app/, response: "The app was created by David Nguyen in 2023." },
-        { pattern: /thank you|thanks/, response: "You're welcome! If you have more questions, just ask." },
-        { pattern: /dark mode/, response: "Click the 'Toggle Dark Mode' button to switch between themes." },
-        { pattern: /export notes/, response: "You can export your notes by clicking the 'Export Notes' button. It'll save as a JSON file." },
-        { pattern: /import notes/, response: "Click on the 'Choose Files' button to select and upload your notes." },
-        { pattern: /how are you/, response: "I'm a computer program, so I don't have feelings, but I'm operating at full capacity. How can I help?" },
-        { pattern: /what can you do/, response: "I'm here to answer your questions about the app. Just ask away!" },
-        { pattern: /create note|new note/, response: "To create a new note, click on the 'New Note' button and start typing." },
-        { pattern: /delete note/, response: "You can delete a note by selecting it and clicking the 'Delete' button." },
-        { pattern: /edit note/, response: "Simply click on a note to start editing its content." },
-        { pattern: /save note/, response: "Your notes are saved automatically once you stop typing." },
-        { pattern: /lost note|recover note/, response: "If you've exported your notes previously, you can re-import them. Otherwise, deleted notes cannot be recovered." },
-        { pattern: /how many notes/, response: "You can have as many notes as you like in the app. There's no set limit!" },
-        { pattern: /search note/, response: "Use the search bar at the top of the app to find specific notes by their content." },
-        { pattern: /shortcut|keyboard shortcut/, response: "Use 'Ctrl + N' for a new note, 'Ctrl + S' to save, and 'Ctrl + D' to delete a note." },
-        { pattern: /share note/, response: "Currently, this app doesn't support direct note sharing. You can export and send the JSON file manually." },
-        { pattern: /cloud|sync/, response: "We don't have cloud syncing at the moment, but it's a feature we're considering for future versions." },
-        { pattern: /security|privacy/, response: "Your notes are stored locally on your device. We don't access or store them on any external servers." },
-        { pattern: /can i customize/, response: "At the moment, customization is limited to dark and light themes. We're working on more personalization features!" },
-        { pattern: /feedback|suggestion/, response: "We appreciate feedback and suggestions! There's a 'Feedback' button in the settings where you can submit yours." },
-        { pattern: /language|translate/, response: "Currently, the app is in English only, but multi-language support is in our roadmap." },
-        { pattern: /update|new version/, response: "Keep an eye on the 'Updates' section in settings for any new versions or features." },
-        { pattern: /bug|issue/, response: "Sorry for the inconvenience. Please report any bugs through the 'Feedback' section so we can address them." },
-        { pattern: /cost|price/, response: "The basic version of the app is free, but there might be premium features available for purchase in the future." },
-        { pattern: /tutorial|guide/, response: "There's a 'Help' section in the app that provides a step-by-step guide on how to use the various features." },
-        { pattern: /favorite note|bookmark/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
-        { pattern: /search notes/, response: "You can use the search bar at the top to quickly find any note by its content or title." },
-        { pattern: /collaborate|team/, response: "The current version doesn't support real-time collaboration. It's a feature we might consider in the future." },
-        { pattern: /notification|alert/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
-        { pattern: /due date|reminder/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
-        { pattern: /calendar/, response: "The app doesn't have a calendar view at the moment, but it's a feature we're considering for future versions." },
-        { pattern: /archive|archive note/, response: "You can archive notes that you don't need anymore. They'll be hidden from the main view but can be accessed later." },
-        { pattern: /favorite|favorite note/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
-        { pattern: /voice|voice note/, response: "You can record voice notes instead of typing. Just click on the 'Record' button to start recording." },
-        { pattern: /voice command|voice activation/, response: "Voice commands are not supported currently, but it's an interesting idea for future versions!" },
-        { pattern: /offline/, response: "Yes, the app works offline. Any changes you make will be synced when you go online next." },
-        { pattern: /backup/, response: "It's a good practice to regularly export and back up your notes. This ensures you don't lose any important information." },
-        { pattern: /limit|maximum notes/, response: "There's no set limit to the number of notes you can create. However, device storage can be a limiting factor." },
-        { pattern: /tags|categories/, response: "Yes, you can categorize your notes using tags. This helps in organizing and quickly accessing related notes." },
-        { pattern: /mobile|tablet/, response: "The app is optimized for both desktop and mobile devices. You'll have a seamless experience across all devices." },
-        { pattern: /attachment|image/, response: "You can attach images or files to your notes. Just click on the 'Add Attachment' button when editing a note." },
-        { pattern: /lost notes|recovery/, response: "If you've exported and backed up your notes, you can easily recover them using the import function." },
-        { pattern: /fonts|text style/, response: "While the current version offers a standard font, we're considering font customization options in the future." },
-        { pattern: /printing/, response: "Yes, you can print your notes directly from the app. Just open the note and click on the 'Print' option." },
-        { pattern: /create note titled (.*) with content (.*)/, response: "Creating note titled '{title}' with content '{content}'..." },
-        { pattern: /create note titled (.*)/, response: "Creating note titled '{title}'..." },
-        { pattern: /goals|goal/, response: "You can set goals for yourself and track your progress. Just click on the 'Goals' button in the settings." },
-        { pattern: /settings/, response: "You can access the app settings by clicking on the 'Settings' button in the top-right corner." },
-        { pattern: /help|guide/, response: "You can access the app guide by clicking on the 'Help' button in the top-right corner." },
-        { pattern: /reminders|notifications/, response: "You can set reminders for your notes. Once set, you'll receive notifications at the specified time." },
-        { pattern: /archive|archive note/, response: "You can archive notes that you don't need anymore. They'll be hidden from the main view but can be accessed later." },
-        { pattern: /mood|emoji/, response: "You can add emojis to your notes. Just click on the 'Add Emoji' button when editing a note." },
-        { pattern: /favorite|favorite note/, response: "You can 'star' or mark your favorite notes to easily find them later in the 'Favorites' section." },
-        { pattern: /recommended|suggested/, response: "You can access recommended notes in the 'Recommended' section. These are notes that you might find useful." },
-        { pattern: /voice|voice note/, response: "You can record voice notes instead of typing. Just click on the 'Record' button to start recording." },
-        { pattern: /.*/, response: "I'm not sure about that. Can you be more specific or ask another question?" }
+        {pattern: /hello|hi|hey/, response: "Hello! How can I assist you today?"}
     ];
 
     for (let i = 0; i < responses.length; i++) {
@@ -791,7 +706,45 @@ function getElizaResponse(question) {
         }
     }
 
-    return "Sorry, I didn't get that. Could you please rephrase or ask another question?";
+    const conversationHistory = [];
+    let fullResponse = "Loading...";
+
+    try {
+        const genAI = new GoogleGenerativeAI(getAIResponse());
+        const model = genAI.getGenerativeModel({
+            model: "gemini-1.5-flash",
+            systemInstruction: "You are a StickyNotes Assistant. Help users manage their notes efficiently. Provide helpful responses to user queries and instructions, and any other general queries. Be friendly and professional.",
+        });
+
+        conversationHistory.push({role: "user", parts: [{text: question}]});
+
+        const chatSession = model.startChat({
+            generationConfig: {
+                temperature: 1,
+                topP: 0.95,
+                topK: 64,
+                maxOutputTokens: 8192,
+                responseMimeType: "text/plain"
+            },
+            safetySettings: [
+                {category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE},
+                {category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE},
+                {category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE},
+                {category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE}
+            ],
+            history: conversationHistory
+        });
+
+        const result = await chatSession.sendMessage(question);
+        fullResponse = result.response.text();
+        conversationHistory.push({role: "model", parts: [{text: fullResponse}]});
+    }
+    catch (error) {
+        console.error('Error fetching response:', error.message);
+        fullResponse = "An error occurred while generating the response, possibly due to high traffic or safety concerns. Please understand that I am trained by MovieVerse to provide safe and helpful responses within my limitations. I apologize for any inconvenience caused. Please try again with a different query or contact MovieVerse support for further assistance.";
+    }
+
+    return removeMarkdown(fullResponse);
 }
 
 const toggleButton = document.createElement("button");
@@ -901,6 +854,19 @@ document.getElementById('calcScreen').addEventListener('keydown', function(event
         calculate();
     }
 });
+
+function getAIResponse() {
+    const response = 'QUl6YVN5Q1RoUWVFdmNUb01ka0NqWlM3UTNxNzZBNUNlNjVyMW9r';
+    return atob(response);
+}
+
+function removeMarkdown(text) {
+    const converter = new showdown.Converter();
+    const html = converter.makeHtml(text);
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || tempDiv.innerText || '';
+}
 
 document.getElementById('calcScreen').addEventListener('click', enableScreen);
 

@@ -16,7 +16,14 @@
     <meta name="rating" content="general" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="theme-color" content="#534caf" />
-
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
@@ -41,6 +48,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
     <script src="StickyNotes-Frontend/js/script.js" defer></script>
+    <script src="StickyNotes-Frontend/js/chatbot.js" type="module" defer></script>
     <link rel="icon" type="image/x-icon" href="utils/favicon.ico">
     <link rel="manifest" href="manifest.json">
     <style>
