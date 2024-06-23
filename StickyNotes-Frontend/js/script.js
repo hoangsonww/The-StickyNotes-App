@@ -939,7 +939,7 @@ async function fetchWeather(city) {
 function handleGeoLocation(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-    weatherDisplay.innerHTML = "<p>Loading Weather...</p>";
+    weatherDisplay.innerHTML = "<p>Loading Local Weather...</p>";
     fetchWeatherByCoords(lat, lon);
 }
 
