@@ -149,6 +149,7 @@ const chatHeaderElem = document.querySelector(".chat-header");
 chatHeaderElem.appendChild(toggleButton);
 
 const chatMessagesElem = document.querySelector(".chat-messages");
+chatMessages.style.color = "black";
 const chatInputElem = document.querySelector(".chat-input");
 chatMessagesElem.style.display = "none";
 chatInputElem.style.display = "none";
