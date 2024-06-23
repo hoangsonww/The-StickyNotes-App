@@ -986,7 +986,7 @@ const isMobileDevice = window.innerWidth < 768;
 if (!isMobileDevice && navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
         if (error.code === error.PERMISSION_DENIED) {
-            weatherDisplay1.innerHTML = "<p>Location Access Denied.</p>";
+            weatherDisplay.innerHTML = "<p>Location Access Denied.</p>";
         }
         weatherSearchContainer1.classList.remove('weather-hidden');
     });
