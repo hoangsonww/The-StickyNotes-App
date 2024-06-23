@@ -988,11 +988,11 @@ if (!isMobileDevice && navigator.geolocation) {
         if (error.code === error.PERMISSION_DENIED) {
             weatherDisplay.innerHTML = "<p>Location Access Denied.</p>";
         }
-        weatherSearchContainer1.classList.remove('weather-hidden');
+        weatherSearchContainer.classList.remove('weather-hidden');
     });
 }
 else {
-    weatherSearchContainer1.classList.remove('weather-hidden');
+    weatherSearchContainer.classList.remove('weather-hidden');
 }
 
 document.addEventListener("DOMContentLoaded", () => {
