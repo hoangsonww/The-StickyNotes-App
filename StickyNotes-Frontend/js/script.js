@@ -630,22 +630,6 @@ chatTitleElem.className = "chat-header chat-title";
 chatTitleElem.innerText = "The StickyNotes Assistant";
 document.querySelector(".chatbot").prepend(chatTitleElem);
 
-chatInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && e.target.value.trim()) {
-        const question = e.target.value.trim();
-        const userMsgElem = document.createElement("div");
-        userMsgElem.innerText = `You: ${question}`;
-        chatMessages.appendChild(userMsgElem);
-        setTimeout(async () => {
-            const response = await getElizaResponse(question);
-            const elizaMsgElem = document.createElement("div");
-            elizaMsgElem.innerText = `Assistant: ${response}`;
-            chatMessages.appendChild(elizaMsgElem);
-        }, 1000);
-        e.target.value = '';
-    }
-});
-
 function deleteNoteWithTitle(title) {
     const notes = document.querySelectorAll('.note');
     notes.forEach(note => {
@@ -661,143 +645,6 @@ function searchForNote(query) {
     searchBox.value = query;
     filterNotes(query);
 }
-
-async function getElizaResponse(question) {
-    question = question.toLowerCase();
-    const responses = [
-        {
-            pattern: /add note titled "?([^"]+)"? with content "?([^"]+)"?/i,
-            response: "Adding note titled '{title}' with content '{content}'...",
-            action: (title, content) => addNewNote(title, content)
-        },
-        {
-            pattern: /add note titled "?([^"]+)"?/i,
-            response: "Adding note titled '{title}'...",
-            action: (title, content) => addNewNote(title, content)
-        },
-        {
-            pattern: /dark mode/,
-            response: "Toggling dark mode",
-            action: () => toggleDarkMode()
-        },
-        {
-            pattern: /delete note titled "?([^"]+)"?/i,
-            response: "Deleting note titled '{title}'...",
-            action: (title) => deleteNoteWithTitle(title)
-        },
-        {
-            pattern: /toggle (dark|light) mode/i,
-            response: "Toggling {mode} mode...",
-            action: () => toggleDarkMode()
-        },
-        {
-            pattern: /search for "?([^"]+)"?/i,
-            response: "Searching for '{query}'...",
-            action: (query) => searchForNote(query)
-        },
-        {pattern: /hello|hi|hey/, response: "Hello! How can I assist you today?"}
-    ];
-
-    for (let i = 0; i < responses.length; i++) {
-        let match = question.match(responses[i].pattern);
-        if (match) {
-            if (responses[i].action) responses[i].action(...match.slice(1));
-            return responses[i].response.replace('{title}', match[1]).replace('{content}', match[2]).replace('{query}', match[1]).replace('{mode}', match[1]);
-        }
-    }
-
-    const conversationHistory = [];
-    let fullResponse = "Loading...";
-
-    try {
-        const genAI = new GoogleGenerativeAI(getAIResponse());
-        const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
-            systemInstruction: "You are a StickyNotes Assistant. Help users manage their notes efficiently. Provide helpful responses to user queries and instructions, and any other general queries. Be friendly and professional.",
-        });
-
-        conversationHistory.push({role: "user", parts: [{text: question}]});
-
-        const chatSession = model.startChat({
-            generationConfig: {
-                temperature: 1,
-                topP: 0.95,
-                topK: 64,
-                maxOutputTokens: 8192,
-                responseMimeType: "text/plain"
-            },
-            safetySettings: [
-                {category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE},
-                {category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE},
-                {category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE},
-                {category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE}
-            ],
-            history: conversationHistory
-        });
-
-        const result = await chatSession.sendMessage(question);
-        fullResponse = result.response.text();
-        conversationHistory.push({role: "model", parts: [{text: fullResponse}]});
-    }
-    catch (error) {
-        console.error('Error fetching response:', error.message);
-        fullResponse = "An error occurred while generating the response, possibly due to high traffic or safety concerns. Please understand that I am trained by MovieVerse to provide safe and helpful responses within my limitations. I apologize for any inconvenience caused. Please try again with a different query or contact MovieVerse support for further assistance.";
-    }
-
-    return removeMarkdown(fullResponse);
-}
-
-const toggleButton = document.createElement("button");
-toggleButton.innerText = "+";
-toggleButton.className = "toggle-chat";
-toggleButton.title="Minimize/Maximize Chatbot";
-
-let isChatbotFirstOpened = true;
-
-toggleButton.onclick = function() {
-    const chatMessagesElem = document.querySelector(".chat-messages");
-    const chatInputElem = document.querySelector(".chat-input");
-
-    if (chatMessagesElem.style.display === "none") {
-        chatMessagesElem.style.display = "";
-        chatInputElem.style.display = "";
-        toggleButton.innerText = "-";
-
-        if (isChatbotFirstOpened) {
-            sendInstructionalMessage();
-            isChatbotFirstOpened = false;
-        }
-    }
-    else {
-        chatMessagesElem.style.display = "none";
-        chatInputElem.style.display = "none";
-        toggleButton.innerText = "+";
-    }
-};
-
-function sendInstructionalMessage() {
-    const instructions = `
-        Welcome to the StickyNotes Assistant! Here's how you can use me: 
-        To add a note, type: "Add note titled 'Your Title' with content 'Your Content'", 
-        to delete a note, type: "Delete note titled 'Your Title'", 
-        to search for a note, type: "Search for 'Your Keyword'", 
-        to toggle dark mode, type: "Toggle dark mode" or "Toggle light mode", 
-        and there are so many other things that you can use me for! 
-        Enjoy managing your notes more efficiently!
-    `;
-
-    const instructionalMsgElem = document.createElement("div");
-    instructionalMsgElem.innerHTML = `Assistant: ${instructions}`;
-    chatMessages.appendChild(instructionalMsgElem);
-}
-
-const chatHeaderElem = document.querySelector(".chat-header");
-chatHeaderElem.appendChild(toggleButton);
-
-const chatMessagesElem = document.querySelector(".chat-messages");
-const chatInputElem = document.querySelector(".chat-input");
-chatMessagesElem.style.display = "none";
-chatInputElem.style.display = "none";
 
 function toggleTyping(enable) {
     let screen = document.getElementById('calcScreen');
@@ -854,19 +701,6 @@ document.getElementById('calcScreen').addEventListener('keydown', function(event
         calculate();
     }
 });
-
-function getAIResponse() {
-    const response = 'QUl6YVN5Q1RoUWVFdmNUb01ka0NqWlM3UTNxNzZBNUNlNjVyMW9r';
-    return atob(response);
-}
-
-function removeMarkdown(text) {
-    const converter = new showdown.Converter();
-    const html = converter.makeHtml(text);
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
-    return tempDiv.textContent || tempDiv.innerText || '';
-}
 
 document.getElementById('calcScreen').addEventListener('click', enableScreen);
 
