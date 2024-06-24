@@ -26,7 +26,7 @@ In the meantime, feel free to explore the web app and discover its many capabili
 - **Dark Mode:** Switch between light and dark themes for an optimal visual experience.
 - **Import/Export Functionality:** Easily back up or transfer notes with JSON file import/export options.
 - **Auto-Save:** Automatically saves notes to local storage to prevent data loss.
-- **Calculator, Mood Tracker, and Timer:** Built-in tools for enhanced productivity.
+- **Calculator, Mood Tracker, and Timer:** Various built-in tools for enhanced productivity.
 - **Chatbot Integration:** A great chatbot that assists with user queries about the app.
 
 ## Technology Stack
