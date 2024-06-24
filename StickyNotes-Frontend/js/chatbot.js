@@ -87,7 +87,7 @@ async function getElizaResponse(question) {
         const genAI = new GoogleGenerativeAI(getAIResponse());
         const model = genAI.getGenerativeModel({
             model: "gemini-1.5-flash",
-            systemInstruction: "You are a StickyNotes Assistant. Help users manage their notes efficiently. Provide helpful responses to user queries and instructions, and any other general queries. Be friendly and professional.",
+            systemInstruction: "You are a StickyNotes Assistant, for the app named The StickyNotes App created by Son Nguyen in 2023 that includes various productivity tools. Your task is to help users manage their notes efficiently and enhance their productivity. Provide helpful responses to user queries and instructions, and to any other general queries the user may have. Be friendly and professional.",
         });
 
         conversationHistory.push({role: "user", parts: [{text: question}]});
