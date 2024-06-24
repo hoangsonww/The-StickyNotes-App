@@ -163,6 +163,7 @@ function sendInstructionalMessage() {
     const instructionalMsgElem = document.createElement("div");
     instructionalMsgElem.innerHTML = `Assistant: ${instructions}`;
     chatMessages.appendChild(instructionalMsgElem);
+    scrollToBottom();
 }
 
 const chatHeaderElem = document.querySelector(".chat-header");
