@@ -20,7 +20,9 @@
     "Tasks",
     "Control"
   ],
-  "repository": ,
+  "repository": {
+
+  },
   "author": "Son Nguyen",
   "license": "MIT",
   "devDependencies": {
