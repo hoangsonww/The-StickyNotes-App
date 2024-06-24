@@ -87,7 +87,7 @@ async function getElizaResponse(question) {
         const genAI = new GoogleGenerativeAI(getAIResponse());
         const model = genAI.getGenerativeModel({
             model: "gemini-1.5-flash",
-            systemInstruction: "You are a StickyNotes Assistant. Help users manage their notes efficiently. Provide helpful responses to user queries and instructions, and any other general queries. Be friendly and professional.",
+            systemInstruction: "You are a StickyNotes Assistant, for the app named The StickyNotes App created by Son Nguyen in 2023 that includes various productivity tools. Your task is to help users manage their notes efficiently and enhance their productivity. Provide helpful responses to user queries and instructions, and to any other general queries the user may have. Be friendly and professional.",
         });
 
         conversationHistory.push({role: "user", parts: [{text: question}]});
@@ -151,13 +151,13 @@ toggleButton.onclick = function() {
 
 function sendInstructionalMessage() {
     const instructions = `
-        Welcome to the StickyNotes Assistant! Here's how you can use me: 
+        Welcome to the StickyNotes Assistant 🚀! Here's how you can use me: 
         To add a note, type: "Add note titled 'Your Title' with content 'Your Content'", 
         to delete a note, type: "Delete note titled 'Your Title'", 
         to search for a note, type: "Search for 'Your Keyword'", 
         to toggle dark mode, type: "Toggle dark mode" or "Toggle light mode", 
         and there are so many other things that you can use me for! 
-        Enjoy managing your notes more efficiently!
+        Enjoy managing your notes more efficiently! 🚀
     `;
 
     const instructionalMsgElem = document.createElement("div");
