@@ -11,6 +11,10 @@ function hideLoadingMessage() {
     if (loadingMsgElem) loadingMsgElem.remove();
 }
 
+function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.target.value.trim()) {
         const question = e.target.value.trim();
@@ -32,7 +36,6 @@ chatInput.addEventListener("keydown", (e) => {
 
 
 async function getElizaResponse(question) {
-    showLoadingMessage();
     question = question.toLowerCase();
     const responses = [
         {
@@ -108,7 +111,6 @@ async function getElizaResponse(question) {
         const result = await chatSession.sendMessage(question);
         fullResponse = result.response.text();
         conversationHistory.push({role: "model", parts: [{text: fullResponse}]});
-        hideLoadingMessage();
     }
     catch (error) {
         console.error('Error fetching response:', error.message);
