@@ -21,7 +21,8 @@
     "Control"
   ],
   "repository": {
-
+    "type": "git",
+    "url": "git+
   },
   "author": "Son Nguyen",
   "license": "MIT",
