@@ -151,13 +151,13 @@ toggleButton.onclick = function() {
 
 function sendInstructionalMessage() {
     const instructions = `
-        Welcome to the StickyNotes Assistant! Here's how you can use me: 
+        Welcome to the StickyNotes Assistant 🚀! Here's how you can use me: 
         To add a note, type: "Add note titled 'Your Title' with content 'Your Content'", 
         to delete a note, type: "Delete note titled 'Your Title'", 
         to search for a note, type: "Search for 'Your Keyword'", 
         to toggle dark mode, type: "Toggle dark mode" or "Toggle light mode", 
         and there are so many other things that you can use me for! 
-        Enjoy managing your notes more efficiently!
+        Enjoy managing your notes more efficiently! 🚀
     `;
 
     const instructionalMsgElem = document.createElement("div");
