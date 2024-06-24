@@ -34,7 +34,6 @@ chatInput.addEventListener("keydown", (e) => {
     }
 });
 
-
 async function getElizaResponse(question) {
     question = question.toLowerCase();
     const responses = [
