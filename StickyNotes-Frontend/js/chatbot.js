@@ -4,6 +4,7 @@ function showLoadingMessage() {
     const loadingMsgElem = document.createElement("div");
     loadingMsgElem.innerText = "Loading...";
     chatMessages.appendChild(loadingMsgElem);
+    scrollToBottom();
 }
 
 function hideLoadingMessage() {
@@ -29,6 +30,7 @@ chatInput.addEventListener("keydown", (e) => {
             const elizaMsgElem = document.createElement("div");
             elizaMsgElem.innerText = `Assistant: ${response}`;
             chatMessages.appendChild(elizaMsgElem);
+            scrollToBottom();
         }, 1000);
         e.target.value = '';
     }
