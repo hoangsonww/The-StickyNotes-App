@@ -82,18 +82,15 @@
             background-color: #d3d3d3;
             color: #1B1B1B;
         }
-
         .sign-in-form-container button:hover {
             background-color: #ff8623;
             color: white;
         }
-
         .sign-in-form-container form {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         .sign-in-form-container h2 {
             color: black;
             margin-bottom: 20px;
@@ -106,7 +103,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-5SDFD28LEQ');
 </script>
 
@@ -166,7 +162,8 @@
         const passwordInput = document.getElementById('signInPassword');
         if (this.checked) {
           passwordInput.type = 'text';
-        } else {
+        }
+        else {
           passwordInput.type = 'password';
         }
       });
