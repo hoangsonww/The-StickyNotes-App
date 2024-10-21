@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="StickyNotes App - A versatile and user-friendly app for taking and organizing notes. Keep track of your ideas and tasks easily." />
+        <meta name="keywords" content="StickyNotes, note taking, task management, productivity, note app, reminders" />
+        <meta name="author" content="Son Nguyen Hoang" />
+        <meta http-equiv="content-language" content="en" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="distribution" content="global" />
+        <meta name="revisit-after" content="3 days" />
+        <meta name="rating" content="general" />
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+        <meta name="theme-color" content="#534caf" />
+        <script type="importmap">
+            {
+              "imports": {
+                "@google/generative-ai": "https://esm.run/@google/generative-ai"
+              }
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+        <meta property="og:title" content="The StickyNotes App - Your Ultimate Note-Taking & Task Management App" />
+        <meta property="og:description" content="Manage your tasks and notes efficiently with StickyNotes. Enhance your productivity and keep your ideas organized." />
+        <meta property="og:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="The StickyNotes App" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@hoangsonw" />
+        <meta name="twitter:creator" content="@hoangsonw" />
+        <meta name="twitter:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+        <meta name="twitter:title" content="The StickyNotes App - Your Ultimate Note-Taking & Task Management App" />
+        <meta name="twitter:description" content="Your personal space for ideas, tasks, and creativity. Discover StickyNotes and enhance your note-taking experience." />
+        <meta name="twitter:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+        <title>The StickyNotes App - Your Ultimate Note-Taking & Task Management App</title>
+        <link rel="stylesheet" href="https://hoangsonww.github.io/The-StickyNotes-App/StickyNotes-Frontend/css/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
+        <script src="StickyNotes-Frontend/js/script.js" defer></script>
+        <script src="StickyNotes-Frontend/js/chatbot.js" type="module" defer></script>
+        <link rel="icon" type="image/x-icon" href="utils/favicon.ico">
+        <link rel="manifest" href="manifest.json">
+        <style>
+            body {
+                transition: color 0.3s;
+                position: relative;
+            }
+            body::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(to right, #2c3e50, #34495e);
+                transition: opacity 0.3s ease;
+                z-index: -1;
+                opacity: 0;
+            }
+            body.dark-mode::before {
+                opacity: 1;
+            }
+            body.dark-mode {
+                color: white;
+            }
+            body.dark-mode header {
+                background-color: #34495e;
+            }
+            body.dark-mode .note {
+                background-color: #2c3e50;
+                color: black;
+            }
+            body.dark-mode .about-btn, body.dark-mode .add {
+                background-color: #e74c3c;
+            }
+            body.dark-mode .about-btn:hover, body.dark-mode .add:hover {
+                background-color: #c0392b;
+            }
+            body.dark-mode .note .tools button {
+                color: #e74c3c;
+            }
+            body.dark-mode .note .tools button:hover {
+                color: #c0392b;
+            }
+        </style>
+    </head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SDFD28LEQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5SDFD28LEQ');
+    </script>
+
+    <body>
+        <header>
+            <a style="text-decoration: none; cursor: pointer" href="index.html">
+                <h1>The <span class="highlight">StickyNotes</span> App</h1>
+            </a>
+            <input type="text" id="searchBox" style="font: inherit" title="Enter any keyword and we'll find automatically your notes for you!" placeholder="Search for a note by its title..." />
+            <button class="add" id="add" title="Click here to add a new note at the end of the list!">
+                <i class="fas fa-plus"></i> Add A Note!
+            </button>
+            <h4>
+                Your personal space for ideas, tasks, and creativity at your fingertips!
+            </h4>
+            <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
+        </header>
+
+        <div class="quick-access-toolbar" title="Quick Access Buttons">
+            <button id="toggleAddBtn" onclick="addNewNote()" title="Add New Note"><i class="fas fa-sticky-note"></i></button>
+            <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+            <button id= "toggleCalcBtn" onclick="toggleCalculator()" title="Open Calculator"><i class="fas fa-calculator"></i></button>
+            <button onclick="sortNotesByDueDate()" title="Sort Notes By Due Date"><i class="fas fa-sort"></i></button>
+        </div>
+
+        <div class="feedback-container">
+            <button onclick="toggleFeedbackForm()" class="feedback-btn" title="Have any feedback? Let us know here!"><i class="fas fa-comment-dots"></i></button>
+            <form class="feedback-form" id="feedbackForm">
+                <h4 class="feedback-title">Quick Feedback</h4>
+                <textarea name="feedback" id="feedbackText" style="font: inherit" placeholder="Your feedback..."></textarea>
+                <div class="feedback-actions">
+                    <button type="button" onclick="submitFeedback(event)">Submit</button>
+                    <button type="button" onclick="toggleFeedbackForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="timer-container">
+            <button onclick="toggleTimer()" class="timer-toggle-btn" title="Time your focus period and get your work done!"><i class="fas fa-clock"></i></button>
+            <div class="timer-form" id="timerForm">
+                <h4 class="timer-title">Pomodoro Timer</h4>
+                <div class="timer-display" id="timerDisplay" onclick="setTimerManually()">00:00:00</div>
+                <button onclick="startTimer()" id="startTimerBtn">Start</button>
+                <button onclick="toggleTimer()" id="closeTimerBtn">Close</button>
+                <button onclick="pauseTimer()" id="pauseTimerBtn" style="display:none;">Pause</button>
+                <button onclick="resetTimer()">Reset</button>
+                <button onclick="setTimerManually()" id="setTimerBtn">Set Timer</button>
+            </div>
+        </div>
+
+        <div class="mood-tracker-container">
+            <button onclick="toggleMoodTracker()" class="mood-tracker-toggle-btn" title="Track your mood here!"><i class="fas fa-smile"></i></button>
+            <div class="mood-tracker-form" id="moodTrackerForm">
+                <h4 class="mood-tracker-title">Mood Tracker</h4>
+                <select style="font: inherit; font-size: 14px; border-radius: 8px; margin-right: 2px; cursor: pointer" id="moodSelect">
+                    <option value="Happy">Happy</option>
+                    <option value="Sad">Sad</option>
+                    <option value="Stressed">Stressed</option>
+                    <option value="Relaxed">Relaxed</option>
+                </select>
+                <button id="logMoodBtn" onclick="logMood()">Log Mood</button>
+                <button onclick="toggleMoodTracker()" class="close-btn">Close</button>
+            </div>
+        </div>
+
+        <div class="recommended-note-container">
+            <button id="generateRecommendedNoteBtn" class="recommended-note-toggle-btn" onclick="toggleRecommendedNoteForm()" title="Generate a Recommended Note!"><i class="fas fa-brain"></i></button>
+            <div class="recommended-note-form" id="recommendedNoteForm">
+            </div>
+        </div>
+
+        <div class="chatbot">
+            <div class="chat-messages"></div>
+            <input type="text" placeholder="Ask your assistant..." style="font: inherit" class="chat-input">
+        </div>
+
+        <div class="calculator" id="calculator">
+            <div class="calc-header">
+                <span class="calc-title">Calculator</span>
+                <button class="toggle-calc" id="toggleCalc" title="Maximize/Minimize The Calculator">-</button>
+            </div>
+            <div class="calc-body">
+                <input type="text" class="calc-screen" id="calcScreen" style="font: inherit; font-size: 19px" title="Click on anywhere of the calculator to enable direct typing" disabled>
+                <div class="calc-buttons">
+                    <button class="button" onclick="press('1')" title="Press this button to enter 1">1</button>
+                    <button class="button" onclick="press('2')" title="Press this button to enter 2">2</button>
+                    <button class="button" onclick="press('3')" title="Press this button to enter 3">3</button>
+                    <button class="button" onclick="press('/')" title="Divide a number by another">/</button>
+                    <button class="button" onclick="press('4')" title="Press this button to enter 4">4</button>
+                    <button class="button" onclick="press('5')" title="Press this button to enter 5">5</button>
+                    <button class="button" onclick="press('6')" title="Press this button to enter 6">6</button>
+                    <button class="button" onclick="press('*')" title="Multiply a number by another">*</button>
+                    <button class="button" onclick="press('7')" title="Press this button to enter 7">7</button>
+                    <button class="button" onclick="press('8')" title="Press this button to enter 8">8</button>
+                    <button class="button" onclick="press('9')" title="Press this button to enter 9">9</button>
+                    <button class="button" onclick="press('-')" title="Subtract a number by another">-</button>
+                    <button class="button" onclick="press('0')" title="Press this button to enter 0">0</button>
+                    <button class="button" onclick="press('.')" title="Enter a non-integer (e.g. 0.99)">.</button>
+                    <button class="button" onclick="calculate()" title="Press this button to evaluate the entered expression">=</button>
+                    <button class="button" onclick="press('+')" title="Sum a number with another">+</button>
+                    <button onclick="press('%')" title="Convert any number to its percentage (choose a number then press this symbol)">%</button>
+                    <button onclick="pressOperation('pow')" title="Raise to power (use ^ for exponentiation, e.g. 9^9)">^</button>
+                    <button onclick="pressOperation('sqrt')" title="Calculate the square root of any number(choose a number then press this symbol)">√</button>
+                    <button onclick="clearScreen()" title="Clear the calculator's screen">C</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="weather-container">
+            <div id="weather-display" class="weather-display"></div>
+            <div id="weather-search-container" class="weather-search-container hidden">
+                <input type="text" id="weather-search-input" style="font: inherit; font-size: 11px" placeholder="Enter a location...">
+                <button id="weather-search-btn">Search</button>
+            </div>
+        </div>
+
+        <div id="mini-task-list" title="A quick reminder of what you want to get done!">
+            <h5>Task List</h5>
+            <input type="text" id="task-input" style="font: inherit; border: none; font-size: 12px" placeholder="New task..." maxlength="20">
+            <ul id="task-list"></ul>
+        </div>
+
+        <div class="google-sign-in-container" style="margin-bottom: 20px">
+            <button id="googleSignInBtn" class="nav-btn" onclick="handleSignInOut()" title="Sign In/Out">
+                <span id="signInOutText">Sign In</span>
+                <i class="fas fa-sign-in-alt" id="signInIcon"></i>
+                <i class="fas fa-sign-out-alt" id="signOutIcon" style="display: none;"></i>
+            </button>
+            <button id="profileBtn" class="nav-btn" onclick="window.location.href='StickyNotes-Frontend/html/profile.html'" title="View Profile">
+                <span id="profileText" style="margin-right: 5px">Profile</span>
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+
+        <div id="timeContainer" class="time-display"></div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark-mode') {
+                    document.body.classList.add('dark-mode');
+                }
+            });
+        </script>
+    </body>
+</html>

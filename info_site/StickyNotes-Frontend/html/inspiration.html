@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>The StickyNotes Inspiration</title>
+    <meta name="description" content="Get inspired with some great, inspirational quotes for the day!">
+    <meta name="theme-color" content="#534caf">
+    <meta property="og:title" content="The StickyNotes Inspiration Center" />
+    <meta property="og:description" content="Get inspired with some great, inspirational quotes for the day!" />
+    <meta property="og:image" content="../../utils/favicon.ico" />
+    <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/src/html/quotes.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:site_name" content="The StickyNotes Inspiration Center" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <link rel="icon" type="image/x-icon" href="../../utils/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="manifest" href="../../manifest.json">
+    <style>
+        body.dark-mode {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+        }
+        body.dark-mode .quotes-container {
+            background-color: #263644;
+        }
+    </style>
+</head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5SDFD28LEQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5SDFD28LEQ');
+</script>
+
+<body>
+    <header>
+        <a style="text-decoration: none; cursor: pointer" href="../../index.html">
+            <h1>The <span class="highlight">StickyNotes</span> Inspiration Center</h1>
+        </a>
+        <h4>
+            Get inspired with some great quotes for the day!
+        </h4>
+        <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
+    </header>
+
+    <div class="quick-access-toolbar" title="Quick Access Buttons">
+        <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+    </div>
+
+    <div class="quotes-container">
+        <h2 style="margin-bottom: 20px; color: #ffa24e">Inspirational Quotes</h2>
+        <div id="quote"></div>
+        <button id="new-quote">Get New Quotes</button>
+    </div>
+
+    <div class="weather-container">
+        <div id="weather-display" class="weather-display">
+        </div>
+        <div id="weather-search-container" class="weather-search-container hidden">
+            <input type="text" id="weather-search-input" style="font: inherit; font-size: 11px" placeholder="Enter a location...">
+            <button id="weather-search-btn">Search</button>
+        </div>
+    </div>
+
+    <div id="timeContainer" class="time-display hover-effect"></div>
+
+    <div id="mini-task-list" class="hover-effect" title="A quick reminder of what you want to get done!">
+        <h5>Task List</h5>
+        <input type="text" id="task-input" style="font: inherit; font-size: 12px" placeholder="New task..." maxlength="20">
+        <ul id="task-list"></ul>
+    </div>
+
+    <button class="back-to-home1" onclick="window.location.href = 'calendar.html'">Calendar</button>
+    <button class="back-to-home1" onclick="window.location.href = 'about.html'">About</button>
+    <button class="back-to-home1" onclick="window.location.href = '../../index.html'">Back to Home</button>
+
+    <script src="../js/quotes.js"></script>
+</body>
+</html>

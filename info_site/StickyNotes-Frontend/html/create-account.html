@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account - The StickyNotes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="icon" href="../../utils/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <meta name="description" content="StickyNotes - A versatile and user-friendly app for taking and organizing notes. Keep track of your ideas and tasks easily." />
+    <meta name="keywords" content="StickyNotes, note taking, task management, productivity, note app, reminders" />
+    <meta name="author" content="Son Nguyen Hoang" />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="3 days" />
+    <meta name="rating" content="general" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta name="theme-color" content="#534caf" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+    <meta property="og:title" content="StickyNotes App" />
+    <meta property="og:description" content="Manage your tasks and notes efficiently with StickyNotes. Enhance your productivity and keep your ideas organized." />
+    <meta property="og:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <meta name="twitter:card" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <meta name="twitter:url" content="https://hoangsonww.github.io/The-StickyNotes-App/" />
+    <meta name="twitter:title" content="StickyNotes App" />
+    <meta name="twitter:description" content="Your personal space for ideas, tasks, and creativity. Discover StickyNotes and enhance your note-taking experience." />
+    <meta name="twitter:image" content="https://hoangsonww.github.io/The-StickyNotes-App/utils/image.png" />
+    <link rel="manifest" href="../../manifest.json">
+    <style>
+        .account-creation-form-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        .account-creation-form-container input[type="email"],
+        .account-creation-form-container input[type="password"],
+        .account-creation-form-container input[type="text"],
+        .account-creation-form-container button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font: inherit;
+        }
+        .account-creation-form-container button[type="submit"] {
+            background-color: #534caf;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .account-creation-form-container button:hover {
+            background-color: #22254b;
+            color: white;
+        }
+        .account-creation-form-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .account-creation-form-container h2 {
+            color: black;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5SDFD28LEQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5SDFD28LEQ');
+</script>
+
+<body>
+    <header>
+        <a style="text-decoration: none; cursor: pointer" href="../../index.html">
+            <h1>The <span class="highlight">StickyNotes</span> Account Center</h1>
+        </a>
+        <h4>
+            Create an account to save your notes and access them from anywhere.
+        </h4>
+        <input type="file" id="importNotes" title="JSON Files Only!" accept=".json" style="display: none;">
+    </header>
+
+    <div class="quick-access-toolbar" title="Quick Access Buttons">
+        <button onclick="toggleDarkMode()" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+    </div>
+
+    <div class="weather-container">
+        <div id="weather-display" class="weather-display">
+        </div>
+        <div id="weather-search-container" class="weather-search-container hidden">
+            <input type="text" id="weather-search-input" style="font: inherit; font-size: 11px" placeholder="Enter a location...">
+            <button id="weather-search-btn">Search</button>
+        </div>
+    </div>
+
+    <div id="timeContainer" class="time-display hover-effect"></div>
+
+    <div id="mini-task-list" class="hover-effect" title="A quick reminder of what you want to get done!">
+        <h5>Task List</h5>
+        <input type="text" id="task-input" style="font: inherit; font-size: 12px" placeholder="New task..." maxlength="20">
+        <ul id="task-list"></ul>
+    </div>
+
+    <div class="account-creation-form-container">
+        <form id="createAccountForm">
+            <h2>Create Account</h2>
+            <p style="margin-bottom: 10px; color: black">Become a member of The StickyNotes community and start saving your notes!</p>
+            <input type="email" id="newEmail" placeholder="Email" required>
+            <input type="password" id="newPassword" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Re-type Password" required>
+            <label for="showPassword" style="color: black">
+                <input type="checkbox" id="showPassword" style="margin-top: 10px;">
+                Show Password
+            </label>
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+
+    <button class="back-to-home" onclick="window.location.href = '../../index.html'">Back to Home</button>
+    <button class="back-to-home" onclick="window.location.href = '../html/sign-in.html'">Back to Sign In</button>
+    <script src="../js/create-account.js" type="module"></script>
+
+    <script>
+      document.getElementById('showPassword').addEventListener('change', function() {
+        const passwordInput = document.getElementById('newPassword');
+        const passwordConfirm = document.getElementById('confirmPassword');
+
+        if (this.checked) {
+            passwordInput.type = 'text';
+            passwordConfirm.type = 'text';
+        }
+        else {
+            passwordInput.type = 'password';
+            passwordConfirm.type = 'password';
+        }
+      });
+    </script>
+
+    <script>
+      const themeToggleButton = document.createElement("button");
+      themeToggleButton.innerText = "Toggle Dark Mode";
+      themeToggleButton.id = "themeToggle";
+      themeToggleButton.className = "button";
+      themeToggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark-mode");
+        }
+        else {
+          localStorage.removeItem("theme");
+        }
+      });
+
+      function toggleDarkMode() {
+        const isDarkMode = document.body.classList.toggle('dark-mode');
+        if (isDarkMode) {
+          localStorage.setItem('theme', 'dark-mode');
+        }
+        else {
+          localStorage.removeItem('theme');
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        function updateTime() {
+          const now = new Date();
+          const timeParts = now.toLocaleTimeString().split(" ");
+          const timeString = timeParts[0];
+          const amPm = timeParts[1];
+          document.getElementById("timeContainer").innerHTML = timeString + "<br>" + amPm;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark-mode") {
+          document.body.classList.add("dark-mode");
+        }
+        else {
+          document.body.classList.remove("dark-mode");
+        }
+      });
+
+      const weatherSearchContainer1 = document.getElementById('weather-search-container');
+      const weatherSearchInput1 = document.getElementById('weather-search-input');
+      const weatherSearchBtn1 = document.getElementById('weather-search-btn');
+      const weatherLoc = `${getWeather()}`;
+
+      async function fetchWeather(city) {
+        try {
+          const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherLoc}&units=metric`);
+          const data = await response.json();
+          displayWeather(data);
+        }
+        catch (error) {
+          console.error('Error fetching weather data:', error);
+        }
+      }
+
+      function fetchWeatherByCoords(lat, lon) {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherLoc}&units=metric`)
+          .then(response => response.json())
+          .then(data => displayWeather(data))
+          .catch(error => {
+            console.error('Error fetching weather data:', error);
+            weatherDisplay.innerHTML = '<p>Error loading weather data</p>';
+          });
+      }
+
+      function handleGeoLocation(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        weatherDisplay1.innerHTML = "<p>Loading Weather...</p>";
+        fetchWeatherByCoords(lat, lon);
+      }
+
+      weatherSearchBtn1.addEventListener('click', () => {
+        const city = weatherSearchInput1.value;
+        fetchWeather(city);
+      });
+
+      weatherSearchInput1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const city = weatherSearchInput1.value;
+          fetchWeather(city);
+        }
+      });
+
+      const weatherDisplay1 = document.getElementById('weather-display');
+      weatherDisplay1.innerHTML = "<p>Loading Weather...</p>";
+
+      function displayWeather(data) {
+        if (data.cod !== 200) {
+          weatherDisplay1.innerHTML = '<p>Weather data not found</p>';
+          return;
+        }
+        const temp = data.main.temp.toFixed(0);
+        weatherDisplay1.innerHTML = `
+        <strong style="text-align: center; margin-top: -5px">${data.name}</strong>
+        <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather icon">
+        <span>${temp}°C</span>
+    `;
+      }
+
+      const isMobileDevice1 = window.innerWidth < 768;
+
+      if (!isMobileDevice1 && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(handleGeoLocation, (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            weatherDisplay1.innerHTML = "<p>Location Access Denied.</p>";
+          }
+          weatherSearchContainer1.classList.remove('weather-hidden');
+        });
+      }
+      else {
+        weatherSearchContainer1.classList.remove('weather-hidden');
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadTasksFromLocalStorage();
+      });
+
+      const taskInput1 = document.getElementById("task-input");
+      const taskList1 = document.getElementById("task-list");
+
+      taskInput1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          addTask(taskInput1.value);
+          taskInput1.value = '';
+        }
+      });
+
+      function addTask(task) {
+        if (task.trim() === '') return;
+        const li = document.createElement("li");
+        li.textContent = task;
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "✖";
+        deleteBtn.onclick = function() {
+          this.parentElement.remove();
+          updateLocalStorage();
+        };
+        li.appendChild(deleteBtn);
+        taskList1.appendChild(li);
+        updateLocalStorage();
+      }
+
+      function updateLocalStorage() {
+        const tasks = [];
+        document.querySelectorAll("#task-list li").forEach(li => {
+          tasks.push(li.textContent.replace("✖", "").trim());
+        });
+        localStorage.setItem("quick-tasks", JSON.stringify(tasks));
+      }
+
+      function loadTasksFromLocalStorage() {
+        const tasks = JSON.parse(localStorage.getItem("quick-tasks")) || [];
+        tasks.forEach(task => addTask(task));
+      }
+
+      function getWeather() {
+        const weatherLoc = 'NTkzMzA5Mjg0ZDNlYjA5M2VlOTY2NDdlYjI5NDkwNWI=';
+        const weatherLat = atob(weatherLoc);
+        return weatherLat;
+      }
+    </script>
+</body>
+</html>

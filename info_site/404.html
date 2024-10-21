@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | StickyNotes App</title>
+    <link rel="stylesheet" href="https://hoangsonww.github.io/The-StickyNotes-App/StickyNotes-Frontend/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="https://hoangsonww.github.io/The-StickyNotes-App/utils/favicon.ico">
+    <link rel="manifest" href="https://hoangsonww.github.io/The-StickyNotes-App/manifest.json">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .error-container {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2rem;
+        }
+        .error-container h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .error-container p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .back-to-home {
+            background-color: #534caf;
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .back-to-home:hover {
+            background-color: #403890;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+        body.dark-mode .error-container {
+            color: #ffffff;
+        }
+        body.dark-mode .back-to-home {
+            background-color: #34495e;
+        }
+        body.dark-mode .back-to-home:hover {
+            background-color: #2c3e50;
+        }
+    </style>
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5SDFD28LEQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5SDFD28LEQ');
+</script>
+<body>
+    <div class="error-container">
+        <h1>Oops!</h1>
+        <p>The page you're looking for can't be found.</p>
+        <a href="https://hoangsonww.github.io/The-StickyNotes-App/" class="back-to-home">Back to Home</a>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
